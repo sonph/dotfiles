@@ -1,6 +1,3 @@
-# GNU Screen configuration file
-# Balaji S. Srinivasan <balajis@stanford.edu>
-#
 # Notes
 # -----
 # 1. Modified to work with Emacs: C-t is the action command, not C-a. 
@@ -79,14 +76,14 @@ bind 'b' focus bottom
 #      Set the colors for the "messages" and "text marking"
 #      Example: "+b kG" = blue screen, black text, green background. Change
 #      to "+b kR" and so on to distinguish machines.
-sorendition "+b kG"   
+#sorendition "+b kb"   
 
 # 2.2) hardstatus = navigation bar @ bottom
 hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"  
 
-# 2.3) Autoload two screen tabs for emacs/bash.
-screen -t emacs 0
-screen -t bash 1
+# 2.3) Autoload screen tabs (-t name).
+screen -t zsh 0
+screen -t zsh 1
 
 # 2.4) Description of the keywords used in hardstatus
 # caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f* %t%{-}%+Lw%-0<"

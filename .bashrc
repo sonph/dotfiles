@@ -1,5 +1,5 @@
 # .bashrc file
-# By Balaji S. Srinivasan (balajis@stanford.edu)
+# Original file by Balaji S. Srinivasan (balajis@stanford.edu)
 #
 # Concepts:
 #
@@ -162,19 +162,21 @@ shopt -s histappend
 
 # Make prompt informative
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
-PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
+#PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
+PS1='[\[\e[1;32m\]\h\[\e[0m\]:\w] '
 
 ## -----------------------
 ## -- 2) Set up aliases --
 ## -----------------------
 
 # 2.1) Safety
-alias rm="rm -i"
-alias mv="mv -i"
-alias cp="cp -i"
+alias rm="rm -iv"
+alias mv="mv -iv"
+alias cp="cp -iv"
 set -o noclobber
 
 # 2.2) Listing, directories, and motion
+alias ls='ls --color=auto'
 alias ll="ls -alrtF --color"
 alias la="ls -A"
 alias l="ls -CF"
@@ -183,6 +185,7 @@ alias vdir='ls --color=auto --format=long'
 alias m='less'
 alias ..='cd ..'
 alias ...='cd ..;cd ..'
+alias ~='cd ~'
 alias md='mkdir'
 alias cl='clear'
 alias du='du -ch --max-depth=1'
@@ -191,8 +194,8 @@ alias treeacl='tree -A -C -L 2'
 # 2.3) Text and editor commands
 alias em='emacs -nw'     # No X11 windows
 alias eqq='emacs -nw -Q' # No config and no X11
-export EDITOR='emacs -nw'
-export VISUAL='emacs -nw' 
+export EDITOR='vim'
+#export VISUAL='vim' 
 
 # 2.4) grep options
 export GREP_OPTIONS='--color=auto'
@@ -220,8 +223,40 @@ if [ -s ~/.nvm/nvm.sh ]; then
 fi
 
 ## ------------------------------
-## -- 3) User-customized code  --
+## -- DEFINE SOME COLORS       --
 ## ------------------------------
 
-## Define any user-specific variables you want here.
-source ~/.bashrc_custom
+# Define a few Colours
+BLACK='\e[0;30m'
+BLUE='\e[0;34m'
+GREEN='\e[0;32m'
+CYAN='\e[0;36m'
+RED='\e[0;31m'
+PURPLE='\e[0;35m'
+BROWN='\e[0;33m'
+LIGHTGRAY='\e[0;37m'
+DARKGRAY='\e[1;30m'
+LIGHTBLUE='\e[1;34m'
+LIGHTGREEN='\e[1;32m'
+LIGHTCYAN='\e[1;36m'
+LIGHTRED='\e[1;31m'
+LIGHTPURPLE='\e[1;35m'
+YELLOW='\e[1;33m'
+WHITE='\e[1;37m'
+NC='\e[0m'              # No Color
+
+## ------------------------------
+## -- SOME APT-GET ALIASES     --
+## ------------------------------
+
+# apt
+alias install='sudo apt-get install'
+alias remove='sudo apt-get remove'
+alias purge='sudo apt-get remove --purge'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias upgrade='sudo apt-get upgrade'
+alias clean='sudo apt-get autoclean && sudo apt-get autoremove'
+alias search='apt-cache search'
+alias show='apt-cache show'
+alias sources='(gksudo gedit /etc/apt/sources.list &)'
+
