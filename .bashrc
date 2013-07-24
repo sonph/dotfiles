@@ -261,5 +261,5 @@ alias show='apt-cache show'
 alias sources='(gksudo gedit /etc/apt/sources.list &)'
 
 # environment variables
-export GIT_DIR=$HOME/git
+export GIT_BASE_DIR=$HOME/git
 

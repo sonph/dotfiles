@@ -71,7 +71,7 @@ if [ -s ~/.nvm/nvm.sh ]; then
 fi
 
 # environment variables
-export GIT_DIR=$HOME/git
+export GIT_BASE_DIR=$HOME/git
 
 # apt
 alias install='sudo apt-get install'
