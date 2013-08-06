@@ -1,3 +1,15 @@
 [user]
 	name = Son Pham
 	email = sonpa1993@gmail.com
+[merge]
+	conflictstyle = diff3
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    df = diff
+    lg = log
+	lgraph = log --graph --pretty=format:\"%h - %s\"
+	unstage = reset HEAD --
+    unmodify = git checkout --
