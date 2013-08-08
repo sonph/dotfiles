@@ -1,10 +1,22 @@
-# configurations for X, xterm, urxvt
+! configurations for X, xterm, urxvt
+
+!!!!!!!!!!!! URXVT
+! background
 URxvt*transparent: true
-URxvt*tintcolor: Black
-#URxvt*shading: 40
-URxvt*saveLines: 12000
-URxvt*foreground: Black
-URxvt*font: xft: terminus:pixelsize=15
-URxvt*scrollBar: true
-URxvt*scrollBar_right: true
+!don't use tinting and shading together to avoid using unnecessary resources
+!tinting with gray = shading; use shading instead
+!URxvt*tintcolor: Black
+URxvt*shading: 20
+
+! foreground
+URxvt*foreground: White
+
+! scrollbar
+URxvt*scrollBar: false
+URxvt*scrollBar_right: true 
 URxvt*scrollstyle: rxvt
+
+! font
+URxvt*saveLines: 12000
+URxvt*font: xft: terminus:pixelsize=12
+
