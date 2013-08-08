@@ -78,6 +78,9 @@ bind 'b' focus bottom
 #      to "+b kR" and so on to distinguish machines.
 #sorendition "+b kb"   
 
+# blue screen, white text, black background"
+sorendition "+b wk"
+
 # 2.2) hardstatus = navigation bar @ bottom
 hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"  
 
