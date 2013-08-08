@@ -1,0 +1,10 @@
+# configurations for X, xterm, urxvt
+URxvt*transparent: true
+URxvt*tintcolor: Black
+#URxvt*shading: 40
+URxvt*saveLines: 12000
+URxvt*foreground: Black
+URxvt*font: xft: terminus:pixelsize=15
+URxvt*scrollBar: true
+URxvt*scrollBar_right: true
+URxvt*scrollstyle: rxvt

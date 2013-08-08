@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-CLONE_DIR="$HOME/git"
-echo 'Directory to clone git and store "dotfiles" folder:'
-echo -n "default [$CLONE_DIR]: "
-read INPUT
-if [ -n "$INPUT" ]; then
-	CLONE_DIR="$INPUT"
-
-cd $CLONE_DIR 
-git clone https://github.com/s0nny/dotfiles.git
-ln -sb dotfiles/.screenrc .
-ln -sb dotfiles/.bash_profile .
-ln -sb dotfiles/.bashrc .
-ln -sb dotfiles/.bashrc_custom .
-mv .emacs.d .emacs.d~
-ln -s dotfiles/.emacs.d .
-=======
 #!/bin/bash
 
 # special prompt at beginning of line
@@ -63,4 +46,6 @@ if [ -d .irssi/ ]; then
     mv .irssi .irssi~
 fi
 ln -s $GIT_DIR/dotfiles/.irssi ~
->>>>>>> bfea1f7b84421c1a005f8dab947c3789784b742f
+
+# urxvt
+ln -s $GIT_DIR/dotfiles/.Xdefaults ~
