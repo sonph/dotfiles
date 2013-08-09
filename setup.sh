@@ -51,4 +51,9 @@ ln -s $GIT_BASE_DIR/dotfiles/.irssi ~
 ln -s $GIT_BASE_DIR/dotfiles/.Xdefaults ~
 
 # .gtkrc-2.0
-ln -s $GIT_BASE_DIR/dotfiles/.gtkrc-2.0
+ln -s $GIT_BASE_DIR/dotfiles/.gtkrc-2.0 ~
+
+# mpd & ncmpcpp
+ln -s $GIT_BASE_DIR/dotfiles/.mpd ~/.mpd
+ln -s $GIT_BASE_DIR/dotfiles/.mpd/mpd.conf ~/.mpdconf
+ln -s $GIT_BASE_DIR/dotfiles/.ncmpcpp ~/.ncmpcpp
