@@ -20,3 +20,6 @@ URxvt*scrollstyle: rxvt
 URxvt*saveLines: 12000
 URxvt*font: xft: terminus:pixelsize=12
 
+! misc 
+URxvt*cursorUnderline: true
+URxvt*termName: rxvt-256color
