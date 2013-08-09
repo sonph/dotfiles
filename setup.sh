@@ -57,3 +57,6 @@ ln -s $GIT_BASE_DIR/dotfiles/.gtkrc-2.0 ~
 ln -s $GIT_BASE_DIR/dotfiles/.mpd ~/.mpd
 ln -s $GIT_BASE_DIR/dotfiles/.mpd/mpd.conf ~/.mpdconf
 ln -s $GIT_BASE_DIR/dotfiles/.ncmpcpp ~/.ncmpcpp
+
+# xfce4-terminal
+ln -s $GIT_BASE_DIR/dotfiles/.config/xfce4/terminal ~/.config/xfce4/terminal

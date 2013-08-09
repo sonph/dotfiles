@@ -12,9 +12,17 @@ prompt walters
 # arrow key driven autocomplete interface
 zstyle ':completion:*' menu select
 
+# environment variables
+export GIT_BASE_DIR="$HOME/git"
+export XDG_CONFIG_HOME="$HOME/.config"
+export LC_ALL="POSIX"
+export TERM="rxvt-unicode"
+export LANG="en_US.UTF-8"
+
 # path
 typeset -U path
 path=(/usr/local/heroku/bin $path) # heroku toolbelt
+path=($GIT_BASE_DIR/scripts $path)
 
 # ALIASES
 # 2.1) Safety
@@ -52,7 +60,6 @@ export GREP_COLOR='1;31' # green for matches
 # 2.5) sort options
 # Ensures cross-platform sorting behavior of GNU sort.
 # http://www.gnu.org/software/coreutils/faq/coreutils-faq.html#Sort-does-not-sort-in-normal-order_0021
-unset LANG
 export LC_ALL=POSIX
 
 # 2.6) Install rlwrap if not present
@@ -69,13 +76,6 @@ if [ -s ~/.nvm/nvm.sh ]; then
     source ~/.nvm/nvm.sh
     nvm use v0.10.12 &> /dev/null # silence nvm use; needed for rsync
 fi
-
-# environment variables
-export GIT_BASE_DIR=$HOME/git
-export XDG_CONFIG_HOME=$HOME/.config
-export LANG=en_US.UTF-8
-export LC_ALL=POSIX
-export TERM=rxvt-unicode
 
 # apt
 alias install='sudo apt-get install'

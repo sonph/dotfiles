@@ -12,4 +12,4 @@
     lg = log
 	lgraph = log --graph --pretty=format:\"%h - %s\"
 	unstage = reset HEAD --
-    unmodify = git checkout --
+    unmodify = checkout --
