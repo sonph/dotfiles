@@ -30,11 +30,11 @@ mpd_host = "localhost"
 #
 mpd_port = "6600"
 #
-#mpd_music_dir = ""
+mpd_music_dir = "/media/citan-uzuki/music"
 #
 #mpd_connection_timeout = "5"
 #
-#mpd_crossfade_time = "5"
+mpd_crossfade_time = "5"
 #
 #mpd_communication_mode = "notifications" (polling/notifications)
 #
@@ -46,29 +46,21 @@ mpd_port = "6600"
 ## or 44100:16:2 for stereo visualization. Example
 ## configuration (it has to be put into mpd.conf):
 ##
-## audio_output {
-##        type            "fifo"
-##        name            "My FIFO"
-##        path            "/tmp/mpd.fifo"
-##        format          "44100:16:2"
-## }
-## 
-# Visualizer
-# wiki.archlinux.org/index.php/Ncmpcpp
-#visualizer_fifo_path = "/tmp/mpd.fifo"
-#visualizer_output_name = "my_fifo"
-#visualizer_sync_interval = "1"
-#visualizer_type = "wave"
-#visualizer_type = "spectrum"
-#visualizer_in_stereo = "yes"
+audio_output {
+        type            "fifo"
+        name            "My FIFO"
+        path            "/tmp/mpd.fifo"
+        format          "44100:16:2"
+}
+##
 #
 ##
 ## If you set format to 44100:16:2, make it 'yes'.
 ##
 #
-#visualizer_in_stereo = "no"
+visualizer_in_stereo = "yes"
 #
-#visualizer_fifo_path = ""
+visualizer_fifo_path = "/tmp/mpd.fifo"
 #
 ##
 ## Note: Below parameter is needed for ncmpcpp
@@ -78,7 +70,7 @@ mpd_port = "6600"
 ## are some problems with it.
 ##
 #
-#visualizer_output_name = ""
+visualizer_output_name = "my_fifo"
 #
 ##
 ## Note: Below parameter defines how often ncmpcpp
@@ -88,14 +80,14 @@ mpd_port = "6600"
 ## Keep in mind that sane values start with >=10.
 ##
 #
-#visualizer_sync_interval = "30"
+visualizer_sync_interval = "1"
 #
 ##
 ## Note: To enable spectrum frequency visualization
 ## you need to compile ncmpcpp with fftw3 support.
 ##
 #
-#visualizer_type = "wave" (spectrum/wave)
+visualizer_type = "spectrum" (spectrum/wave)
 #
 #visualizer_look = "◆│"
 #
@@ -120,11 +112,11 @@ mpd_port = "6600"
 #
 ## delay after playlist highlighting will be disabled (0 = don't disable)
 #
-#playlist_disable_highlight_delay = "5"
+playlist_disable_highlight_delay = "0"
 #
 ## defines how long various messages are supposed to be visible
 #
-#message_delay_time = "4"
+message_delay_time = "4"
 #
 ##### song format #####
 ##
@@ -178,9 +170,9 @@ mpd_port = "6600"
 ## Note: colors can be nested.
 ##
 #
-#song_list_format = "{%a - }{%t}|{$8%f$9}$R{$3(%l)$9}"
+song_list_format = "{ $8%a $1>> $5}{%t}$8"
 #
-#song_status_format = "{{%a{ \"%b\"{ (%y)}} - }{%t}}|{%f}"
+song_status_format = "$8%a $1>> $5%t $1>> $1%b$8 (%y)$1"
 #
 #song_library_format = "{%n - }{%t}|{%f}"
 #
@@ -212,11 +204,11 @@ mpd_port = "6600"
 ## text attributes listed above.
 ##
 #
-#now_playing_prefix = "$b"
+now_playing_prefix = "$b"
 #
-#now_playing_suffix = "$/b"
+now_playing_suffix = "$/b"
 #
-#browser_playlist_prefix = "$2playlist$9 "
+#browser_playlist_prefix = "$5playlist$9 "
 #
 #selected_item_prefix = "$6"
 #
@@ -263,6 +255,7 @@ mpd_port = "6600"
 ##
 #
 #song_columns_list_format = "(7f)[green]{l} (25)[cyan]{a} (40)[]{t|f} (30)[red]{b}"
+song_columns_list_format = "(7f)[]{l} (25)[white]{a} (40)[]{t|f} (30)[]{b}"
 #
 ##### various settings #####
 #
@@ -275,13 +268,13 @@ mpd_port = "6600"
 ##
 #execute_on_song_change = ""
 #
-#playlist_show_remaining_time = "no"
+playlist_show_remaining_time = "yes"
 #
 #playlist_shorten_total_times = "no"
 #
 #playlist_separate_albums = "no"
 #
-#playlist_display_mode = "classic" (classic/columns)
+playlist_display_mode = "columns" (classic/columns)
 #
 #browser_display_mode = "classic" (classic/columns)
 #
@@ -289,25 +282,25 @@ mpd_port = "6600"
 #
 #playlist_editor_display_mode = "classic" (classic/columns)
 #
-#discard_colors_if_item_is_selected = "yes"
+discard_colors_if_item_is_selected = "yes"
 #
 #incremental_seeking = "yes"
 #
 #seek_time = "1"
 #
-#autocenter_mode = "no"
+autocenter_mode = "yes"
 #
-#centered_cursor = "no"
+centered_cursor = "yes"
 #
 ##
 ## Note: You can specify third character which will
 ## be used to build 'empty' part of progressbar.
 ##
-#progressbar_look = "=>"
+#progressbar_look = "── "
 #
 #default_place_to_search_in = "database" (database/playlist)
 #
-#user_interface = "classic" (classic/alternative)
+user_interface = "alternative" (classic/alternative)
 #
 #media_library_left_column = "a" (possible values: a,y,g,c,p, legend above)
 #
@@ -319,25 +312,25 @@ mpd_port = "6600"
 #
 #default_tag_editor_pattern = "%n - %t"
 #
-#header_visibility = "yes"
+header_visibility = "no"
 #
-#statusbar_visibility = "yes"
+statusbar_visibility = "yes"
 #
-#titles_visibility = "yes"
+titles_visibility = "no"
 #
 #header_text_scrolling = "yes"
 #
-#fancy_scrolling = "yes"
+fancy_scrolling = "yes"
 #
-#cyclic_scrolling = "no"
+cyclic_scrolling = "yes"
 #
-#lines_scrolled = "2"
+lines_scrolled = "2"
 #
-#follow_now_playing_lyrics = "no"
+follow_now_playing_lyrics = "yes"
 #
-#fetch_lyrics_for_current_song_in_background = "no"
+fetch_lyrics_for_current_song_in_background = "yes"
 #
-#store_lyrics_in_song_dir = "no"
+store_lyrics_in_song_dir = "no"
 #
 ##
 ## Note: If you set this variable, ncmpcpp will try to
@@ -353,7 +346,7 @@ mpd_port = "6600"
 #
 #show_hidden_files_in_local_browser = "no"
 #
-#display_screens_numbers_on_start = "yes"
+display_screens_numbers_on_start = "no"
 #
 ##
 ## How shall key_screen_switcher work?
@@ -396,15 +389,15 @@ mpd_port = "6600"
 #
 #jump_to_now_playing_song_at_start = "yes"
 #
-#ask_before_clearing_main_playlist = "no"
+ask_before_clearing_main_playlist = "yes"
 #
 #clock_display_seconds = "no"
 #
 #display_volume_level = "yes"
 #
-#display_bitrate = "no"
+display_bitrate = "yes"
 #
-#display_remaining_time = "no"
+display_remaining_time = "yes"
 #
 #regular_expressions = "basic" (basic/extended)
 #
@@ -417,7 +410,7 @@ mpd_port = "6600"
 #
 #block_search_constraints_change_if_items_found = "yes"
 #
-#mouse_support = "yes"
+mouse_support = "no"
 #
 #mouse_list_scroll_whole_page = "yes"
 #
@@ -445,7 +438,7 @@ mpd_port = "6600"
 ##       in database and local one for searching in current playlist)
 ##
 #
-#search_engine_default_search_mode = "1"
+search_engine_default_search_mode = "2"
 #
 ##
 ## Note: Below variables can allow you to physically
@@ -453,9 +446,9 @@ mpd_port = "6600"
 ## ncmpcpp's browser screen.
 ##
 #
-#allow_physical_files_deletion = "no"
+allow_physical_files_deletion = "no"
 #
-#allow_physical_directories_deletion = "no"
+allow_physical_directories_deletion = "no"
 #
 #external_editor = ""
 #
@@ -463,37 +456,37 @@ mpd_port = "6600"
 #
 ##### colors definitions #####
 #
-#colors_enabled = "yes"
+colors_enabled = "yes"
 #
 #empty_tag_color = "cyan"
 #
 #header_window_color = "default"
 #
-#volume_color = "default"
+volume_color = "green"
 #
 #state_line_color = "default"
 #
 #state_flags_color = "default"
 #
-#main_window_color = "yellow"
+main_window_color = "white"
 #
-#color1 = "white"
+color1 = "green"
 #
-#color2 = "green"
+color2 = "black"
 #
-#main_window_highlight_color = "yellow"
+main_window_highlight_color = "cyan"
 #
-#progressbar_color = "default"
+progressbar_color = "blue"
 #
-#statusbar_color = "default"
+statusbar_color = "black"
 #
-#alternative_ui_separator_color = "black"
+alternative_ui_separator_color = "red"
 #
-#active_column_color = "red"
+active_column_color = "blue"
 #
 #visualizer_color = "yellow"
 #
-#window_border_color = "green"
+window_border_color = "blue"
 #
-#active_window_border = "red"
+active_window_border = "cyan"
 #
