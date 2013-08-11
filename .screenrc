@@ -86,7 +86,6 @@ hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
 # 2.3) Autoload screen tabs (-t name).
 screen -t zsh 0
-screen -t zsh 1
 
 # 2.4) Description of the keywords used in hardstatus
 # caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f* %t%{-}%+Lw%-0<"
