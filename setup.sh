@@ -83,6 +83,9 @@ printstt () {
 #echo Script name is $SCRIPT_NAME #test
 #
 # --- MAIN --------------------------------------------------------------------
+# --- Parse options
+MODE="local"
+[ "$1" = "server" ] && MODE="server"
 backupdir () {
     if [ -d "$1" ]; then
         mv "$1" "$1\~"
@@ -101,6 +104,9 @@ printmsg "Symlinking shells config files ..."
 ln -sb $GIT_BASE_DIR/dotfiles/.bash_profile ~
 ln -sb $GIT_BASE_DIR/dotfiles/.bashrc ~
 ln -sb $GIT_BASE_DIR/dotfiles/.zshrc ~
+[ $MODE = "local" ] && ln -sb $GIT_BASE_DIR/dotfiles/.zprofile-local ~/.zprofile
+[ $MODE = "server" ] && [ -f $GIT_BASE_DIR/dotfiles.zprofile-server ] && \
+    ln -sb $GIT_BASE_DIR/dotfiles.zprofile-server ~/.zprofile
 printstt ok
 
 # editors

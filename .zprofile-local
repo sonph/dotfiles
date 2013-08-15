@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+sudo ~/git/scripts/vgaoff
+source .zshrc
+echo -n "Loading X ..."
+read -t 3
+[ $? -eq 1 ] && startx
