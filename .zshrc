@@ -1,8 +1,9 @@
 # Created by newuser for 4.3.17
 
-autoload -U compinit promptinit
+autoload -U compinit promptinit colors
 compinit
 promptinit
+colors
 
 # prompt style
 # for list of prompts, run `prompt -l`
@@ -90,3 +91,15 @@ alias sources='(gksudo gedit /etc/apt/sources.list &)'
 
 # misc aliases
 alias uzbl='uzbl-tabbed'
+
+# git prompt
+# wiki.archlinux.org/index.php/Git#Git_Prompt
+export GIT_PS1_SHOWDIRTYSTATE=" " # show */+ for unstaged/staged changes
+export GIT_PS1_SHOWSTASHSTATE=" " # show $ if something is stashed
+export GIT_PS1_SHOWUNTRACKEDFILES=" " # show % if there are untracked files
+export GIT_PS1_SHOWUPSTREAM="auto" # show </>/<> to indicate behind/ahead/diverged w/ upstream
+setopt PROMPT_SUBST # set zsh to evaluate functions/substitutions in prompt PS1
+source ~/.git-prompt.sh
+# wiki.archlinux.org/index.php/Zsh#Colors
+PROMPT='%n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
+RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}' 
