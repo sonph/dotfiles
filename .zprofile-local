@@ -1,6 +1,18 @@
 #!/usr/bin/zsh
+# this file contains commands that will be executed when user is logged in
+#
+#
 sudo ~/git/scripts/vgaoff
 source .zshrc
-echo -n "Loading X ..."
-read -t 3
-[ $? -eq 1 ] && startx
+
+echo -n "Loading X in 3 ... "
+read -t 1
+if [ $? -eq 1 ]; then
+    echo -n "2 ... "
+    read -t 1
+    if [ $? -eq 1 ]; then
+        echo -n "1 ... "
+        read -t 1
+        [ $? -eq 1 ] && startx
+    fi
+fi

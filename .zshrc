@@ -8,7 +8,10 @@ colors
 # prompt style
 # for list of prompts, run `prompt -l`
 # `prompt` requires `autoload -U promptinit && promptinit`
-prompt walters
+#prompt walters
+
+# key bindings style
+bindkey -v  # -v for vim, -e for emacs
 
 # arrow key driven autocomplete interface
 zstyle ':completion:*' menu select

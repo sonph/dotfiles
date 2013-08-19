@@ -84,8 +84,7 @@ printstt () {
 #
 # --- MAIN --------------------------------------------------------------------
 # --- Parse options
-MODE="local"
-[ "$1" = "server" ] && MODE="server"
+MODE="$1"
 backupdir () {
     if [ -d "$1" ]; then
         mv "$1" "$1\~"
@@ -144,3 +143,6 @@ mkdir -p ~/.config/xfce4/terminal
 backupdir "~/.config/xfce4/terminal"
 ln -s $GIT_BASE_DIR/dotfiles/.config/xfce4/terminal ~/.config/xfce4/terminal
 printstt ok
+
+# xbindkeys
+[ $MODE = "local" ] && ln -sb $GIT_BASE_DIR/dotfiles/.xbindkeysrc ~/.xbindkeysrc

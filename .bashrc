@@ -195,6 +195,7 @@ alias treeacl='tree -A -C -L 2'
 alias em='emacs -nw'     # No X11 windows
 alias eqq='emacs -nw -Q' # No config and no X11
 export EDITOR='vim'
+set -o vi # enable vi-like key bindings for bash
 #export VISUAL='vim' 
 
 # 2.4) grep options
