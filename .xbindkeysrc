@@ -65,10 +65,12 @@
 #"rxvt"
 #  Control + b:2 + Release
 
-# NOTE: The following keys work with Asus UL80VT
-# If these keys do not work, recheck the keys with
-# `xev`, and make sure bklt is in $PATH
+# -----------------------------------------------------------
+# NOTE: The following keys are specialized to Asus UL80VT
+# If these keys do not work, recheck the keys with `xev`
+# -----------------------------------------------------------
 
+# --- Screen brightness -------------------------------------------------------
 # turn up brightness
 "bklt +5"
  XF86MonBrightnessUp
@@ -77,10 +79,7 @@
 "bklt -5"
  XF86MonBrightnessDown
 
-# sleep
-"sudo pm-suspend"
- XF86Sleep
-
+# --- Audio keys --------------------------------------------------------------
 # audio fn keys
 "amixer sset Master 3+"
  XF86AudioRaiseVolume
@@ -103,7 +102,70 @@
 
 "ncmpcpp next"
  XF86AudioNext
-#
+
+# --- Hot keys on kensington keyboard -----------------------------------------
+# Music
+"xfce4-terminal -e ncmpcpp"
+ XF86Tools
+
+# Calculator
+# XF86Calculator
+
+# Explorer
+"thunar"
+ XF86Explorer
+
+# internet/home page
+"uzbl"
+XF86HomePage
+
+# mail
+# XF86Mail
+
+# --- Hot keys on laptop keyboard ---------------------------------------------
+# sleep
+"sudo pm-suspend"
+ XF86Sleep
+
+#XF86WebCam # fn + v key
+#XF86Launch1 # fn + c
+#XF86ScreenSaver # fn + space
+
+# --- Fn keypad ---------------------------------------------------------------
+
+# fn keypad on Asus UL80Vt
+# found using `xev`
+# from 0 through 9
+
+# 4-6: sublime text, vim
+# 7-9: uzbl, google-chrome
+
+#KP_Insert  # 0
+#KP_End     # 1
+#KP_Down    # 2
+#KP_Next    # 3
+
+"subl"      # sublime text
+KP_Left    # 4
+
+"xfce4-terminal -e vim"
+KP_Begin   # 5
+#KP_Right   # 6
+
+"uzbl"
+KP_Home     # 7
+
+"google-chrome"
+KP_Up       # 8
+
+#mail
+#KP_Prior   # 9
+
+#KP_Divide
+#KP_Multiply
+#KP_Subtract
+#KP_Add
+
 ##################################
 # End of xbindkeys configuration 
 ##################################
