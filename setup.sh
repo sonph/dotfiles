@@ -103,8 +103,8 @@ printmsg "Symlinking shells config files ..."
 ln -sb $GIT_BASE_DIR/dotfiles/.bash_profile ~
 ln -sb $GIT_BASE_DIR/dotfiles/.bashrc ~
 ln -sb $GIT_BASE_DIR/dotfiles/.zshrc ~
-[ $MODE = "local" ] && ln -sb $GIT_BASE_DIR/dotfiles/.zprofile-local ~/.zprofile
-[ $MODE = "server" ] && [ -f $GIT_BASE_DIR/dotfiles.zprofile-server ] && \
+[ "$MODE" = "local" ] && ln -sb $GIT_BASE_DIR/dotfiles/.zprofile-local ~/.zprofile
+[ "$MODE" = "server" ] && [ -f $GIT_BASE_DIR/dotfiles.zprofile-server ] && \
     ln -sb $GIT_BASE_DIR/dotfiles.zprofile-server ~/.zprofile
 printstt ok
 
@@ -116,11 +116,12 @@ ln -sb $GIT_BASE_DIR/dotfiles/.vimrc ~
 printstt ok
 
 # misc
-printmsg "Symlinking git, screen, irssi config files ..."
+printmsg "Symlinking git, screen, irssi config files, .git-prompt.sh ..."
 ln -sb $GIT_BASE_DIR/dotfiles/.gitconfig ~
 ln -sb $GIT_BASE_DIR/dotfiles/.screenrc ~
 backupdir "~/.irssi"
 ln -s $GIT_BASE_DIR/dotfiles/.irssi ~
+ln -sb $GIT_BASE_DIR/dotfiles/.git-prompt.sh ~
 printstt ok
 
 # X, gtk
@@ -145,4 +146,4 @@ ln -s $GIT_BASE_DIR/dotfiles/.config/xfce4/terminal ~/.config/xfce4/terminal
 printstt ok
 
 # xbindkeys
-[ $MODE = "local" ] && ln -sb $GIT_BASE_DIR/dotfiles/.xbindkeysrc ~/.xbindkeysrc
+[ "$MODE" = "local" ] && ln -sb $GIT_BASE_DIR/dotfiles/.xbindkeysrc ~/.xbindkeysrc

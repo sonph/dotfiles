@@ -73,98 +73,73 @@
 # --- Screen brightness -------------------------------------------------------
 # turn up brightness
 "bklt +5"
- XF86MonBrightnessUp
+XF86MonBrightnessUp
 
 # turn down brightness
 "bklt -5"
- XF86MonBrightnessDown
+XF86MonBrightnessDown
 
 # --- Audio keys --------------------------------------------------------------
 # audio fn keys
 "amixer sset Master 3+"
- XF86AudioRaiseVolume
+XF86AudioRaiseVolume
 
 "amixer sset Master 3-"
- XF86AudioLowerVolume
+XF86AudioLowerVolume
 
 "amixer-mute-toggle"
- XF86AudioMute
+XF86AudioMute
 
 # XF86Audio{Play,Stop,Prev,Next}
 "ncmpcpp toggle"
- XF86AudioPlay
+XF86AudioPlay
 
 "ncmpcpp stop"
- XF86AudioStop
+XF86AudioStop
 
 "ncmpcpp prev"
- XF86AudioPrev
+XF86AudioPrev
 
 "ncmpcpp next"
- XF86AudioNext
+XF86AudioNext
 
 # --- Hot keys on kensington keyboard -----------------------------------------
 # Music
 "xfce4-terminal -e ncmpcpp"
- XF86Tools
+XF86Tools
 
 # Calculator
-# XF86Calculator
+#XF86Calculator
 
 # Explorer
 "thunar"
- XF86Explorer
+XF86Explorer
 
 # internet/home page
 "uzbl"
 XF86HomePage
 
 # mail
-# XF86Mail
+#XF86Mail
 
 # --- Hot keys on laptop keyboard ---------------------------------------------
 # sleep
 "sudo pm-suspend"
- XF86Sleep
+XF86Sleep
 
+#"google-chrome"
 #XF86WebCam # fn + v key
+
+#"uzbl"
 #XF86Launch1 # fn + c
+
+#"subl"
 #XF86ScreenSaver # fn + space
 
-# --- Fn keypad ---------------------------------------------------------------
-
-# fn keypad on Asus UL80Vt
-# found using `xev`
-# from 0 through 9
-
-# 4-6: sublime text, vim
-# 7-9: uzbl, google-chrome
-
-#KP_Insert  # 0
-#KP_End     # 1
-#KP_Down    # 2
-#KP_Next    # 3
-
-"subl"      # sublime text
-KP_Left    # 4
-
-"xfce4-terminal -e vim"
-KP_Begin   # 5
-#KP_Right   # 6
-
-"uzbl"
-KP_Home     # 7
-
-"google-chrome"
-KP_Up       # 8
-
-#mail
-#KP_Prior   # 9
-
-#KP_Divide
-#KP_Multiply
-#KP_Subtract
-#KP_Add
+# --- Extra power button on UL80VT --------------------------------------------
+#"xfce4-terminal"
+"subl"
+c:248 + m:0x10 # code 248, state 0x10 as reported by xev
 
 ##################################
 # End of xbindkeys configuration 
