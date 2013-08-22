@@ -296,7 +296,7 @@ centered_cursor = "yes"
 ## Note: You can specify third character which will
 ## be used to build 'empty' part of progressbar.
 ##
-#progressbar_look = "── "
+progressbar_look = "-  "
 #
 #default_place_to_search_in = "database" (database/playlist)
 #
@@ -462,31 +462,31 @@ colors_enabled = "yes"
 #
 #header_window_color = "default"
 #
-volume_color = "green"
+volume_color = "cyan"
 #
-#state_line_color = "default"
+state_line_color = "white"
 #
-#state_flags_color = "default"
+state_flags_color = "white"
 #
 main_window_color = "white"
 #
-color1 = "green"
+color1 = "white"
 #
-color2 = "black"
+color2 = "white"
 #
 main_window_highlight_color = "cyan"
 #
-progressbar_color = "blue"
+progressbar_color = "cyan"
 #
-statusbar_color = "black"
+statusbar_color = "white"
 #
-alternative_ui_separator_color = "red"
+alternative_ui_separator_color = "cyan"
 #
-active_column_color = "blue"
+active_column_color = "cyan"
 #
 #visualizer_color = "yellow"
 #
-window_border_color = "blue"
+window_border_color = "cyan"
 #
 active_window_border = "cyan"
 #
