@@ -20,13 +20,13 @@ zstyle ':completion:*' menu select
 export GIT_BASE_DIR="$HOME/git"
 export XDG_CONFIG_HOME="$HOME/.config"
 export LC_ALL="POSIX"
-export TERM="rxvt-unicode"
+export TERM="xterm-color"
 export LANG="en_US.UTF-8"
 
 # path
 typeset -U path
 path=(/usr/local/heroku/bin $path) # heroku toolbelt
-path=($GIT_BASE_DIR/scripts $path)
+path=(/home/$USER/bin $path)
 
 # ALIASES
 # 2.1) Safety
