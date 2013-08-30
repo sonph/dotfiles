@@ -3,3 +3,4 @@
 .mpd/pid
 .mpd/database
 .mpd/sticker.sql
+dwb/default/*
