@@ -106,3 +106,6 @@ source ~/.git-prompt.sh
 # wiki.archlinux.org/index.php/Zsh#Colors
 PROMPT='%n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
 RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}' 
+
+# fix broken backspace key on some keyboards
+stty erase ^H
