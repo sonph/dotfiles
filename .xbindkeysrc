@@ -141,6 +141,10 @@ XF86HomePage
 "xfce4-terminal -e vchsh"
 c:248 + m:0x10 # code 248, state 0x10 as reported by xev
 
+# --- Prtsc -------------------------------------------------------------------
+"screenshot"
+c:107 + m:0x0
+
 ##################################
 # End of xbindkeys configuration 
 ##################################
