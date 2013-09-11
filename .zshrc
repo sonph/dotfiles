@@ -19,8 +19,7 @@ zstyle ':completion:*' menu select
 # environment variables
 export GIT_BASE_DIR="$HOME/git"
 export XDG_CONFIG_HOME="$HOME/.config"
-export LC_ALL="POSIX"
-export TERM="xterm-color"
+export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 # path
@@ -60,26 +59,6 @@ export EDITOR='vim'
 # 2.4) grep options
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;31' # green for matches
-
-# 2.5) sort options
-# Ensures cross-platform sorting behavior of GNU sort.
-# http://www.gnu.org/software/coreutils/faq/coreutils-faq.html#Sort-does-not-sort-in-normal-order_0021
-export LC_ALL=POSIX
-
-# 2.6) Install rlwrap if not present
-# http://stackoverflow.com/a/677212
-command -v rlwrap >/dev/null 2>&1 || { echo >&2 "Install rlwrap to use node: sudo apt-get install -y rlwrap";}
-
-# 2.7) node.js and nvm
-# http://nodejs.org/api/repl.html#repl_repl
-alias node="env NODE_NO_READLINE=1 rlwrap node"
-alias node_repl="node -e \"require('repl').start({ignoreUndefined: true})\""
-export NODE_DISABLE_COLORS=1
-if [ -s ~/.nvm/nvm.sh ]; then
-    NVM_DIR=~/.nvm
-    source ~/.nvm/nvm.sh
-    nvm use v0.10.12 &> /dev/null # silence nvm use; needed for rsync
-fi
 
 # apt
 alias install='sudo apt-get install'
