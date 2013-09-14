@@ -1,5 +1,5 @@
 [Configuration]
-FontName=Terminus 9
+FontName=Inconsolata 10
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
@@ -22,6 +22,9 @@ BackgroundImageFile=/home/s0nny/.config/xfce4/terminal/bg.png
 BindingBackspace=TERMINAL_ERASE_BINDING_ASCII_BACKSPACE
 BindingDelete=TERMINAL_ERASE_BINDING_DELETE_SEQUENCE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+Encoding=UTF-8
+ShortcutsNoMenukey=TRUE
+ShortcutsNoMnemonics=TRUE
 ColorForeground=#dcdcdc
 ColorBackground=#2c2c2c
 ColorCursor=#dcdcdc
