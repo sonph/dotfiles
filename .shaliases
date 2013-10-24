@@ -1,0 +1,34 @@
+# apt
+alias install='sudo apt-get install'
+alias remove='sudo apt-get remove'
+alias purge='sudo apt-get remove --purge'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias upgrade='sudo apt-get upgrade'
+alias clean='sudo apt-get autoclean && sudo apt-get autoremove'
+alias search='apt-cache search'
+alias show='apt-cache show'
+alias sources='(gksudo gedit /etc/apt/sources.list &)'
+
+# pacman
+
+# safety
+alias rm="rm -iv"
+alias mv="mv -iv"
+alias cp="cp -iv"
+set -o noclobber    # File redirection > does not overwrite existing file.
+
+# Listing, directories, and motion
+alias ls='ls --color=auto'
+alias ll="ls -alrtF --color"
+alias la="ls -A"
+alias l="ls -CF"
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
+alias m='less'
+alias ..='cd ..'
+alias ...='cd ..;cd ..'
+alias ~='cd ~'
+alias md='mkdir'
+alias cl='clear'
+alias du='du -ch --max-depth=1'
+alias treeacl='tree -A -C -L 2'
