@@ -5,67 +5,67 @@
 #       sorendition "+b +kG"  
 #    Example: blue (+b) highlight with black text (k) on a green background (G)
 #    Example: sorendition "+r +kG"  is red highlighting with black text on a green background
-#
-#  Modification of original files by Sven Guckes, Sarunas Vancevicius, and Mike Perry
-#  Sarunas Vancevicius original: http://www.redbrick.dcu.ie/~svan/configs/screenrc
-#  Mike Perry original:  http://fscked.org/writings/225notes/unix/.screenrc
+# #
+# #  Modification of original files by Sven Guckes, Sarunas Vancevicius, and Mike Perry
+# #  Sarunas Vancevicius original: http://www.redbrick.dcu.ie/~svan/configs/screenrc
+# #  Mike Perry original:  http://fscked.org/writings/225notes/unix/.screenrc
 
-## -----------------------------------------------------------------------------------------
-## -- 1) Set variables and keybindings for emacs compatibility (remapping Ctrl-A to Ctrl-T)
-## -----------------------------------------------------------------------------------------
-markkeys "h=^B:l=^F:$=^E"             # emacs style keybindings during copy mode movement in screen
+# ## -----------------------------------------------------------------------------------------
+# ## -- 1) Set variables and keybindings for emacs compatibility (remapping Ctrl-A to Ctrl-T)
+# ## -----------------------------------------------------------------------------------------
+# #markkeys "h=^B:l=^F:$=^E"             # emacs style keybindings during copy mode movement in screen
 autodetach             on             # default: on
-crlf                  off             # default: off
-#deflogin              off            # default: on
+# crlf                  off             # default: off
+# #deflogin              off            # default: on
 hardcopy_append       on              # default: off
 startup_message       off             # default: on
-vbell                 off             # default: ???
-escape	"^Tt"                         # ctrl-A default interferes with emacs keybindings for terminal
+# vbell                 off             # default: ???
+# #escape	"^Tt"                         # ctrl-A default interferes with emacs keybindings for terminal
 defutf8 on                            # unicode by default
-defscrollback         10000           # default: 100
+# defscrollback         10000           # default: 100
 silencewait           15              # default: 30
 activity              "activity in %n (%t) [%w:%s]~"
 bell                  "bell     in %n (%t) [%w:%s]~"
 
-# Change keybindings for convenience
-bind ^Q mapdefault
-bind q mapdefault 
-bind k
-bind ^k
-bind .
-bind ^\
-bind \\
-bind ^h
-bind h
-bind ''
-bind 'L'
-#bind 'I' login on
-#bind 'O' login off
-bind '}' history
-bind ^a
+# # Change keybindings for convenience
+# bind ^Q mapdefault
+# bind q mapdefault 
+# bind k
+# bind ^k
+# bind .
+# bind ^\
+# bind \\
+# bind ^h
+# bind h
+# bind ''
+# bind 'L'
+# #bind 'I' login on
+# #bind 'O' login off
+# bind '}' history
+# bind ^a
 
-# aterm bindings                                                          
-bindkey "Oc" next
-bindkey "Od" prev
+# # aterm bindings                                                          
+# bindkey "Oc" next
+# bindkey "Od" prev
 
-# Emacs compatibility
-# Easy switching of windows without p/n confusion, as ctrl-p and ctrl-n
-# are frequently used in emacs but u/j are not...
-bind 'u' prev
-bind ^U prev
-bind 'j' next
-bind ^J next
+# # Emacs compatibility
+# # Easy switching of windows without p/n confusion, as ctrl-p and ctrl-n
+# # are frequently used in emacs but u/j are not...
+# bind 'u' prev
+# bind ^U prev
+# bind 'j' next
+# bind ^J next
 
-# Emacs compatibility for screen movement (if you use subscreen regions)
-# Using tab to move around regions gets annoying.  These help.
-bind ^P focus up
-bind 'p' focus up
-bind ^N focus down
-bind 'n' focus down
-bind ^F focus top
-bind 'f' focus top
-bind ^B focus bottom
-bind 'b' focus bottom
+# # Emacs compatibility for screen movement (if you use subscreen regions)
+# # Using tab to move around regions gets annoying.  These help.
+# bind ^P focus up
+# bind 'p' focus up
+# bind ^N focus down
+# bind 'n' focus down
+# bind ^F focus top
+# bind 'f' focus top
+# bind ^B focus bottom
+# bind 'b' focus bottom
 
 ## -------------------------------------------------------------------------------------------------
 ## -- 2) Hardstatus line (aka navigation bar at bottom) 
