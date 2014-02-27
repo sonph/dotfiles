@@ -32,7 +32,7 @@ PROMPT='%n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")
 RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}' 
 
 # fix broken backspace key on some keyboards
-stty erase ^H
+# stty erase ^H
 
 # colored manpage w/ less
 man() {
