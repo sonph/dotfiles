@@ -5,13 +5,19 @@
 # a new window.
 LOCKFILE="/tmp/zprofile.lock"
 if [[ ! -e $LOCKFILE ]]; then
+    # create lock file
     touch $LOCKFILE
+
+    # turn off discrete vga card
     sudo ~/git/scripts/vgaoff
+
+    # change backlight level, load module, run wicd daemon..
     source .zshrc
     bklt 35
     sudo modprobe vboxdrv
     sudo wicd
 
+    # load X
     echo -n "Loading X in 3 ... "
     read -t 1
     if [ $? -eq 1 ]; then
@@ -23,5 +29,7 @@ if [[ ! -e $LOCKFILE ]]; then
             [ $? -eq 1 ] && startx
         fi
     fi
-    [[ -z "$TMUX" ]] && exec tmux
+
+    # quit X? attach tmux
+    tmux attach -t "$TMUX_DEFAULT_SESSION"
 fi
