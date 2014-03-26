@@ -5,6 +5,7 @@
 # a new window.
 LOCKFILE="/tmp/zprofile.lock"
 if [[ ! -e $LOCKFILE ]]; then
+    touch $LOCKFILE
     sudo ~/git/scripts/vgaoff
     source .zshrc
     bklt 35
@@ -22,6 +23,5 @@ if [[ ! -e $LOCKFILE ]]; then
             [ $? -eq 1 ] && startx
         fi
     fi
-    touch $LOCKFILE
     [[ -z "$TMUX" ]] && exec tmux
 fi
