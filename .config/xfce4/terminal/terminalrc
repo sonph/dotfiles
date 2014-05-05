@@ -1,5 +1,5 @@
 [Configuration]
-FontName=Consolas 9
+FontName=Monaco 8
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE

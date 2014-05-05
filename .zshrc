@@ -19,6 +19,7 @@ zstyle ':completion:*' menu select
 typeset -U path
 #path=(/usr/local/heroku/bin $path) # heroku toolbelt
 path=($HOME/bin $path)
+path=($HOME/.gem/ruby/2.1.0/bin $path)
 
 # PROMPT
 # git status

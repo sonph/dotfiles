@@ -16,6 +16,7 @@ if [[ ! -e $LOCKFILE ]]; then
     bklt 35
     sudo modprobe vboxdrv
     sudo wicd
+    ibus-daemon -xdr
 
     # load X
     echo -n "Loading X in 3 ... "
@@ -31,5 +32,5 @@ if [[ ! -e $LOCKFILE ]]; then
     fi
 
     # quit X? attach tmux
-    tmux attach -t "$TMUX_DEFAULT_SESSION"
+    [[ -z "$TMUX" ]] && tmux attach -t "$TMUX_DEFAULT_SESSION"
 fi

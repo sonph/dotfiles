@@ -81,13 +81,13 @@ XF86MonBrightnessDown
 
 # --- Audio keys --------------------------------------------------------------
 # audio fn keys
-"amixer sset Master 3+"
-XF86AudioRaiseVolume
+#"amixer set Master 5%+"
+#XF86AudioRaiseVolume
 
-"amixer sset Master 3-"
-XF86AudioLowerVolume
+#"amixer set Master 5%-"
+#XF86AudioLowerVolume
 
-"amixer-mute-toggle"
+"amixer set Master toggle"
 XF86AudioMute
 
 # XF86Audio{Play,Stop,Prev,Next}
@@ -127,7 +127,7 @@ XF86HomePage
 #"sudo pm-suspend"
 #XF86Sleep
 
-#"google-chrome"
+#"cheese"
 #XF86WebCam # fn + v key
 
 #"uzbl"

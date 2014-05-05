@@ -7,7 +7,6 @@ export EDITOR='vim'
 #export VISUAL='vim' 
 
 # environment variables
-export GIT_BASE_DIR="$HOME/git"
 export XDG_CONFIG_HOME="$HOME/.config"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
@@ -19,4 +18,8 @@ export GIT_PS1_SHOWUNTRACKEDFILES=" "   # show % if there are untracked files
 export GIT_PS1_SHOWUPSTREAM="auto"      # show </>/<> to indicate behind/ahead/diverged w/ upstream
 
 # tmux sessions
-export TMUX_DEFAULT_SESSION='def'
+export TMUX_DEFAULT_SESSION="def"
+
+export GOPATH="$HOME/code/lime:/usr/lib/go/site"
+
+export AMAZONIP="54.187.127.164"
