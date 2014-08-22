@@ -3,6 +3,7 @@
 	email = sonpa1993@gmail.com
 [merge]
 	conflictstyle = diff3
+    tool = meld
 [alias]
     st = status
     ci = commit
