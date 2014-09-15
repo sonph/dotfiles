@@ -25,6 +25,7 @@ RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}'
 # KEY BINDINGS -----------------------------------------------------------------
 # key bindings style
 bindkey -v  # -v for vim, -e for emacs
+bindkey -e
 
 # fix broken backspace key on some keyboards
 # stty erase ^H
