@@ -274,16 +274,16 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-autocmd BufWritePost *.py :TlistUpdate
-autocmd BufWritePost *.c :TlistUpdate
-autocmd BufWritePost *.cpp :TlistUpdate
-autocmd BufWritePost *.h :TlistUpdate
-autocmd BufWritePost *.java :TlistUpdate
-autocmd BufWritePost *.lua :TlistUpdate
-autocmd BufWritePost *.js :TlistUpdate
-autocmd BufWritePost *.hs :TlistUpdate
+" autocmd BufWrite *.py :call DeleteTrailingWS()
+" autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" autocmd BufWritePost *.py :TlistUpdate
+" autocmd BufWritePost *.c :TlistUpdate
+" autocmd BufWritePost *.cpp :TlistUpdate
+" autocmd BufWritePost *.h :TlistUpdate
+" autocmd BufWritePost *.java :TlistUpdate
+" autocmd BufWritePost *.lua :TlistUpdate
+" autocmd BufWritePost *.js :TlistUpdate
+" autocmd BufWritePost *.hs :TlistUpdate
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
@@ -406,3 +406,13 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+
+
+
+" ------------------------------- CUSTOM USER KEYBINDINGS ----------------------
+" F5: execute current file
+nnoremap <F5> :!%:p<Enter>
+
+" jj: return to command mode (same as ESC, ^C)
+map! jj <ESC>
