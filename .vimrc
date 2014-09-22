@@ -416,3 +416,6 @@ nnoremap <F5> :!%:p<Enter>
 
 " jj: return to command mode (same as ESC, ^C)
 map! jj <ESC>
+
+" highlight 80 char col
+set colorcolumn=80
