@@ -32,3 +32,39 @@ alias md='mkdir'
 alias cl='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
+
+if [ "$(uname -s)" = "Darwin" ]; then
+	alias ls='gls --color=auto'
+	alias ll="gls -alrtF --color"
+	alias la="gls -A"
+	alias l="gls -CF"
+	alias dir='gls --color=auto --format=vertical'
+	alias vdir='gls --color=auto --format=long'
+fi
+
+# git
+alias gadd='git add'
+alias gaddu='git add -u'
+alias gbr='git branch'
+alias gcl='git clone'
+alias gclone='git clone'
+alias gco='git checkout'
+alias gcom='git commit'
+alias gcoma='git commit -a'
+alias gdiff='git diff'
+alias ginit='git init'
+alias glog='git log'
+alias gmt='git mergetool'
+alias gmv='git mv'
+alias gpl='git pull'
+alias gplo='git pull origin'
+alias gplom='git pull origin master'
+alias gps='git push'
+alias gpso='git push origin'
+alias gpsom='git push origin master'
+alias grm='git rm'
+alias grs='git reset'
+alias grsh='git reset HEAD'
+alias gshow='git show'
+alias gst='git status'
+alias gtag='git tag'
