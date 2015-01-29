@@ -1,16 +1,3 @@
-# apt
-alias install='sudo apt-get install'
-alias remove='sudo apt-get remove'
-alias purge='sudo apt-get remove --purge'
-alias update='sudo apt-get update && sudo apt-get upgrade'
-alias upgrade='sudo apt-get upgrade'
-alias clean='sudo apt-get autoclean && sudo apt-get autoremove'
-alias search='apt-cache search'
-alias show='apt-cache show'
-alias sources='(gksudo gedit /etc/apt/sources.list &)'
-
-# pacman
-
 # safety
 alias rm="rm -iv"
 alias mv="mv -iv"
@@ -44,6 +31,7 @@ fi
 
 # git
 alias gadd='git add'
+alias gaddp='git add -p'
 alias gaddu='git add -u'
 alias gbr='git branch'
 alias gcl='git clone'
@@ -52,7 +40,9 @@ alias gco='git checkout'
 alias gcom='git commit'
 alias gcoma='git commit -a'
 alias gdiff='git diff'
+alias gdiffc='git diff --cached'
 alias ginit='git init'
+alias glgraph='git lgraph'
 alias glog='git log'
 alias gmt='git mergetool'
 alias gmv='git mv'
@@ -70,3 +60,6 @@ alias grsh='git reset HEAD'
 alias gshow='git show'
 alias gst='git status'
 alias gtag='git tag'
+
+alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
+
