@@ -11,6 +11,6 @@
     br = branch
     df = diff
     lg = log
-	lgraph = log --graph --pretty=format:\"%h - %s\"
+	lgraph = log --graph --pretty=format:\"%Cblue%h%Creset - %s - %Cred%an%Creset - %Cgreen%ar\"
 	unstage = reset HEAD --
     unmodify = checkout --
