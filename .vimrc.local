@@ -7,7 +7,7 @@ map! jj <ESC>
 " highlight 80 char col
 set colorcolumn=80
 
-colorscheme GRB256
+colorscheme grb256
 
 " disable code folding
 set nofoldenable
