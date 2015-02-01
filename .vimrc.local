@@ -1,0 +1,16 @@
+" F5: execute current file
+nnoremap <F5> :!%:p<Enter>
+
+" jj: return to command mode (same as ESC, ^C)
+map! jj <ESC>
+
+" highlight 80 char col
+set colorcolumn=80
+
+colorscheme GRB256
+
+" disable code folding
+set nofoldenable
+
+" disable spell checking
+set nospell
