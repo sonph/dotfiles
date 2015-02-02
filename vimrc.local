@@ -34,4 +34,18 @@ noremap <leader>9 :b9<Enter>
 noremap <leader>w :bd<Enter>
 
 
+" type ; instead of :
+nnoremap ; :
 
+
+" clear search highlight
+nmap ,/ :nohlsearch<Enter>
+
+" w!! to save file with sudo
+cmap w!! w !sudo tee % > /dev/null
+
+" easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
