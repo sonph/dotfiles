@@ -1,0 +1,73 @@
+[
+    // sublimeREPL keybindings
+    { "keys": ["ctrl+f12", "s"], "command": "repl_transfer_current", "args": {"scope": "selection"}},
+    { "keys": ["ctrl+shift+f12", "s"], "command": "repl_transfer_current", "args": {"scope": "selection", "action":"view_write"}},
+    { "keys": ["ctrl+f12", "f"], "command": "repl_transfer_current", "args": {"scope": "file"}},
+    { "keys": ["shift+ctrl+f12", "f"], "command": "repl_transfer_current", "args": {"scope": "file", "action":"view_write"}},
+    { "keys": ["ctrl+f12", "l"], "command": "repl_transfer_current", "args": {"scope": "lines"}},
+    { "keys": ["shift+ctrl+f12", "l"], "command": "repl_transfer_current", "args": {"scope": "lines", "action":"view_write"}},
+    { "keys": ["ctrl+f12", "b"], "command": "repl_transfer_current", "args": {"scope": "block"}},
+    { "keys": ["shift+ctrl+f12", "b"], "command": "repl_transfer_current", "args": {"scope": "block", "action":"view_write"}},
+
+    // tabs
+    { "keys": ["ctrl+1"], "command": "select_by_index", "args": { "index": 0 } },
+    { "keys": ["ctrl+2"], "command": "select_by_index", "args": { "index": 1 } },
+    { "keys": ["ctrl+3"], "command": "select_by_index", "args": { "index": 2 } },
+    { "keys": ["ctrl+4"], "command": "select_by_index", "args": { "index": 3 } },
+    { "keys": ["ctrl+5"], "command": "select_by_index", "args": { "index": 4 } },
+    { "keys": ["ctrl+6"], "command": "select_by_index", "args": { "index": 5 } },
+    { "keys": ["ctrl+7"], "command": "select_by_index", "args": { "index": 6 } },
+    { "keys": ["ctrl+8"], "command": "select_by_index", "args": { "index": 7 } },
+    { "keys": ["ctrl+9"], "command": "select_by_index", "args": { "index": 8 } },
+    { "keys": ["ctrl+0"], "command": "select_by_index", "args": { "index": 9 } },
+
+    // ctrl (shift) tab in sequential order
+    { "keys": ["ctrl+tab"], "command": "next_view"},
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view"},
+
+    // groups of tabs
+    { "keys": ["alt+1"], "command": "focus_group", "args": { "group": 0 } },
+    { "keys": ["alt+2"], "command": "focus_group", "args": { "group": 1 } },
+    { "keys": ["alt+3"], "command": "focus_group", "args": { "group": 2 } },
+    { "keys": ["alt+4"], "command": "focus_group", "args": { "group": 3 } },
+    { "keys": ["alt+5"], "command": "focus_group", "args": { "group": 4 } },
+    { "keys": ["alt+6"], "command": "focus_group", "args": { "group": 5 } },
+    { "keys": ["alt+7"], "command": "focus_group", "args": { "group": 6 } },
+    { "keys": ["alt+8"], "command": "focus_group", "args": { "group": 7 } },
+    { "keys": ["alt+9"], "command": "focus_group", "args": { "group": 8 } },
+    { "keys": ["ctrl+shift+1"], "command": "move_to_group", "args": { "group": 0 } },
+    { "keys": ["ctrl+shift+2"], "command": "move_to_group", "args": { "group": 1 } },
+    { "keys": ["ctrl+shift+3"], "command": "move_to_group", "args": { "group": 2 } },
+    { "keys": ["ctrl+shift+4"], "command": "move_to_group", "args": { "group": 3 } },
+    { "keys": ["ctrl+shift+5"], "command": "move_to_group", "args": { "group": 4 } },
+    { "keys": ["ctrl+shift+6"], "command": "move_to_group", "args": { "group": 5 } },
+    { "keys": ["ctrl+shift+7"], "command": "move_to_group", "args": { "group": 6 } },
+    { "keys": ["ctrl+shift+8"], "command": "move_to_group", "args": { "group": 7 } },
+    { "keys": ["ctrl+shift+9"], "command": "move_to_group", "args": { "group": 8 } },
+    { "keys": ["alt+0"], "command": "focus_side_bar" },
+
+    // build
+    // { "keys": ["f5"], "command": "build" },
+    // { "keys": ["ctrl+f5"], "command": "build" },
+
+    // new tab
+    { "keys": ["ctrl+t"], "command": "new_file" },
+
+    // select next/prev line
+    { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
+    { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
+
+    // find definition and symbols
+    { "keys": ["f12"], "command": "goto_definition" },
+    { "keys": ["ctrl+shift+r"], "command": "goto_symbol_in_project" },
+
+    // vintage mode: jj to return to command mode
+    { "keys": ["j", "j"], "command": "exit_insert_mode",
+    "context":
+    [
+        { "key": "setting.command_mode", "operand": false },
+        { "key": "setting.is_widget", "operand": false }
+    ]
+}
+    
+]

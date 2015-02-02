@@ -1,0 +1,15 @@
+{
+	"color_scheme": "Packages/User/BoxUK custom.tmTheme",
+	"font_family": "Monaco",
+	"font_size": 13,
+	"ignored_packages":
+	[
+	],
+	"rulers":
+	[
+		80,
+		120
+	],
+	"theme": "Spacegray Light.sublime-theme",
+	"vintage_start_in_command_mode": true
+}
