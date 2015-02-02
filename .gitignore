@@ -1,6 +1,0 @@
-.mpd/log
-.mpd/state
-.mpd/pid
-.mpd/database
-.mpd/sticker.sql
-dwb/default/*
