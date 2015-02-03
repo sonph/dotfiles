@@ -20,22 +20,26 @@ set nospell
 noremap <leader><Tab> :bn!<Enter>
 noremap <leader><S-Tab> :bp!<Enter>
 
-noremap <leader>1 :b1<Enter>
-noremap <leader>2 :b2<Enter>
-noremap <leader>3 :b3<Enter>
-noremap <leader>4 :b4<Enter>
-noremap <leader>5 :b5<Enter>
-noremap <leader>6 :b6<Enter>
-noremap <leader>7 :b7<Enter>
-noremap <leader>8 :b8<Enter>
-noremap <leader>9 :b9<Enter>
+noremap <C-w>1 :b1<Enter>
+noremap <C-w>2 :b2<Enter>
+noremap <C-w>3 :b3<Enter>
+noremap <C-w>4 :b4<Enter>
+noremap <C-w>5 :b5<Enter>
+noremap <C-w>6 :b6<Enter>
+noremap <C-w>7 :b7<Enter>
+noremap <C-w>8 :b8<Enter>
+noremap <C-w>9 :b9<Enter>
+
+noremap <C-w>x :bd<Enter>
 
 " leader w to close buffer
 noremap <leader>w :bd<Enter>
 
 
 " type ; instead of :
-nnoremap ; :
+" nnoremap ; :
+
+set nolist
 
 
 " clear search highlight
@@ -49,3 +53,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" open split pane to the right and bottom
+set splitbelow
+set splitright
