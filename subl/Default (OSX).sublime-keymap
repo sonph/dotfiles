@@ -60,6 +60,53 @@
     ]},
 
     // replace: avoid conflict with Spectacle hotkey
-    { "keys": ["super+shift+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false}}
+    { "keys": ["super+shift+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false}},
 
+
+    // VIM CONFIGS -------------------------------------------------------------
+    // switch group of tabs (similar to panes in vim)
+    { "keys": ["ctrl+h"], "command": "focus_neighboring_group", "args": {"forward": false} },
+    { "keys": ["ctrl+l"], "command": "focus_neighboring_group" },
+
+    // split panes
+    // horizontally (2 rows)
+    { "keys": ["ctrl+w", "s"],
+        "command": "set_layout",
+        "args": {
+            "cols": [0.0, 1.0],
+            "rows": [0.0, 0.5, 1.0],
+            "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
+        }
+    },
+    // vertically (2 columns)
+    {
+        "keys": ["ctrl+w", "v"],
+        "command": "set_layout",
+        "args": {
+            "cols": [0.0, 0.5, 1.0],
+            "rows": [0.0, 1.0],
+            "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+        }
+    },
+    { "keys": ["ctrl+w", "c"], "command": "close_pane" },
+
+    { "keys": ["ctrl+w", "1"], "command": "select_by_index", "args": { "index": 0 } },
+    { "keys": ["ctrl+w", "2"], "command": "select_by_index", "args": { "index": 1 } },
+    { "keys": ["ctrl+w", "3"], "command": "select_by_index", "args": { "index": 2 } },
+    { "keys": ["ctrl+w", "4"], "command": "select_by_index", "args": { "index": 3 } },
+    { "keys": ["ctrl+w", "5"], "command": "select_by_index", "args": { "index": 4 } },
+    { "keys": ["ctrl+w", "6"], "command": "select_by_index", "args": { "index": 5 } },
+    { "keys": ["ctrl+w", "7"], "command": "select_by_index", "args": { "index": 6 } },
+    { "keys": ["ctrl+w", "8"], "command": "select_by_index", "args": { "index": 7 } },
+    { "keys": ["ctrl+w", "9"], "command": "select_by_index", "args": { "index": 8 } },
+    { "keys": ["ctrl+w", "0"], "command": "select_by_index", "args": { "index": 9 } },
+    { "keys": ["ctrl+w", "x"], "command": "close"},
+
+    // ctrl+c to exit insert mode (or jj)
+    { "keys": ["ctrl+c"], "command": "exit_insert_mode",
+    "context":
+    [
+        { "key": "setting.command_mode", "operand": false },
+        { "key": "setting.is_widget", "operand": false }
+    ]}
 ]
