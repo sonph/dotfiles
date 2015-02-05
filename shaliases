@@ -55,6 +55,7 @@ alias gps='git push'
 alias gpso='git push origin'
 alias gpsod='git push origin develop'
 alias gpsom='git push origin master'
+alias gpstags='git push --tags'
 alias grm='git rm'
 alias grs='git reset'
 alias grsh='git reset HEAD'
@@ -67,3 +68,4 @@ alias gunmodify='git checkout --'
 
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
 
+alias mvim='mvim --servername VIM --remote'
