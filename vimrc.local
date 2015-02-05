@@ -57,3 +57,9 @@ map <C-l> <C-w>l
 " open split pane to the right and bottom
 set splitbelow
 set splitright
+
+" ctrl+enter to insert a new line
+inoremap <C-CR> <ESC>o
+inoremap <C-S-CR> <ESC>O
+nnoremap <C-CR> o<ESC>
+nnoremap <C-S-CR> O<ESC>
