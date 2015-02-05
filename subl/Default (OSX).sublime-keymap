@@ -64,10 +64,7 @@
 
 
     // VIM CONFIGS -------------------------------------------------------------
-    // switch group of tabs (similar to panes in vim)
-    { "keys": ["ctrl+h"], "command": "focus_neighboring_group", "args": {"forward": false} },
-    { "keys": ["ctrl+l"], "command": "focus_neighboring_group" },
-
+    /*
     // split panes
     // horizontally (2 rows)
     { "keys": ["ctrl+w", "s"],
@@ -88,6 +85,7 @@
             "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
         }
     },
+    */
     { "keys": ["ctrl+w", "c"], "command": "close_pane" },
 
     { "keys": ["ctrl+w", "1"], "command": "select_by_index", "args": { "index": 0 } },
@@ -108,5 +106,49 @@
     [
         { "key": "setting.command_mode", "operand": false },
         { "key": "setting.is_widget", "operand": false }
-    ]}
+    ]},
+
+    { "keys": ["ctrl+alt+k"], "command": "swap_line_up" },
+    { "keys": ["ctrl+alt+j"], "command": "swap_line_down" },
+
+    // multiple cursors
+    { "keys": ["ctrl+n"], "command": "find_under_expand" },
+    { "keys": ["ctrl+p"], "command": "soft_undo" },
+    { "keys": ["ctrl+x"], "command": "find_under_expand_skip" },
+
+    // new line
+    { "keys": ["ctrl+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line.sublime-macro"} },
+    { "keys": ["ctrl+shift+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line Before.sublime-macro"} },
+
+    // Origami Pane mgmt
+    { "keys": ["ctrl+k"], "command": "travel_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+l"], "command": "travel_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+j"], "command": "travel_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+h"], "command": "travel_to_pane", "args": {"direction": "left"} },
+
+    { "keys": ["ctrl+w", "k"], "command": "travel_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "l"], "command": "travel_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "j"], "command": "travel_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "h"], "command": "travel_to_pane", "args": {"direction": "left"} },
+
+    { "keys": ["ctrl+shift+k"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+shift+l"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+shift+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+shift+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+
+    { "keys": ["ctrl+w", "shift+k"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "shift+l"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "shift+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "shift+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+
+    { "keys": ["ctrl+w", "alt+k"], "command": "create_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "alt+l"], "command": "create_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "alt+j"], "command": "create_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "alt+h"], "command": "create_pane", "args": {"direction": "left"} },
+
+    { "keys": ["ctrl+alt+k"], "command": "create_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+alt+l"], "command": "create_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+alt+j"], "command": "create_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+alt+h"], "command": "create_pane", "args": {"direction": "left"} }
+
 ]
