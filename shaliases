@@ -69,3 +69,6 @@ alias gunmodify='git checkout --'
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
 
 alias mvim='mvim --servername VIM --remote'
+
+alias c='clear'
+alias cls='clear'
