@@ -51,14 +51,6 @@
     { "keys": ["f12"], "command": "goto_definition" },
     { "keys": ["super+shift+r"], "command": "goto_symbol_in_project" },
 
-    // vintage mode: jj to return to command mode
-    { "keys": ["j", "j"], "command": "exit_insert_mode",
-    "context":
-    [
-        { "key": "setting.command_mode", "operand": false },
-        { "key": "setting.is_widget", "operand": false }
-    ]},
-
     // replace: avoid conflict with Spectacle hotkey
     { "keys": ["super+shift+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false}},
 
@@ -101,12 +93,29 @@
     { "keys": ["ctrl+w", "x"], "command": "close"},
 
     // ctrl+c to exit insert mode (or jj)
+    /*
     { "keys": ["ctrl+c"], "command": "exit_insert_mode",
     "context":
     [
         { "key": "setting.command_mode", "operand": false },
         { "key": "setting.is_widget", "operand": false }
     ]},
+    // vintage mode: jj to return to command mode
+    { "keys": ["j", "j"], "command": "exit_insert_mode",
+    "context":
+    [
+        { "key": "setting.command_mode", "operand": false },
+        { "key": "setting.is_widget", "operand": false }
+    ]},
+
+    */
+
+    // with `Vintage Escape` installed
+    { "keys": ["ctrl+c"], "command": "exit_auto_complete_and_insert_mode", "context":
+    [
+        { "key": "auto_complete_visible", "operator": "equal", "operand": true }
+    ]
+    },
 
     { "keys": ["ctrl+alt+k"], "command": "swap_line_up" },
     { "keys": ["ctrl+alt+j"], "command": "swap_line_down" },
@@ -136,10 +145,10 @@
     { "keys": ["ctrl+shift+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+shift+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
-    { "keys": ["ctrl+w", "shift+k"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+w", "shift+l"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+w", "shift+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+w", "shift+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "ctrl+k"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "ctrl+l"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "ctrl+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "ctrl+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
     { "keys": ["ctrl+w", "alt+k"], "command": "create_pane", "args": {"direction": "up"} },
     { "keys": ["ctrl+w", "alt+l"], "command": "create_pane", "args": {"direction": "right"} },
@@ -149,6 +158,304 @@
     { "keys": ["ctrl+alt+k"], "command": "create_pane", "args": {"direction": "up"} },
     { "keys": ["ctrl+alt+l"], "command": "create_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+alt+j"], "command": "create_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+alt+h"], "command": "create_pane", "args": {"direction": "left"} }
+    { "keys": ["ctrl+alt+h"], "command": "create_pane", "args": {"direction": "left"} },
 
+
+    // EMMET -------------------------------------------------------------------
+    { "keys": ["ctrl+e", "d"],
+        "args": {
+            "action": "remove_tag"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.remove_tag"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "up"],
+        "args": {
+            "action": "increment_number_by_1"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.increment_number_by_1"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "/"],
+        "args": {
+            "action": "toggle_comment"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "operand": "source.css, source.less, source.scss, text.xml, text.html - source",
+                "operator": "equal",
+                "match_all": true,
+                "key": "selector"
+            },
+            {
+                "match_all": true,
+                "key": "emmet_action_enabled.toggle_comment"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "l"],
+        "args": {
+            "action": "select_next_item"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.select_next_item"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "e"],
+        "command": "expand_as_you_type",
+        "context": [
+            {
+                "operand": false,
+                "operator": "equal",
+                "match_all": true,
+                "key": "setting.is_widget"
+            },
+            {
+                "match_all": true,
+                "key": "emmet_action_enabled.expand_as_you_type"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "down"],
+        "args": {
+            "action": "decrement_number_by_01"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.decrement_number_by_01"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "shift+ctrl+d"],
+        "args": {
+            "action": "encode_decode_data_url"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.encode_decode_data_url"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "i"],
+        "args": {
+            "action": "balance_inward"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.balance_inward"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "o"],
+        "args": {
+            "action": "balance_outward"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.balance_outward"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "ctrl+up"],
+        "args": {
+            "action": "increment_number_by_10"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.increment_number_by_10"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "shift+super+r"],
+        "args": {
+            "action": "reflect_css_value"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.reflect_css_value"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "k"],
+        "args": {
+            "action": "prev_edit_point"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.prev_edit_point"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "h"],
+        "args": {
+            "action": "select_previous_item"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.select_previous_item"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "U"],
+        "args": {
+            "action": "update_image_size"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.update_image_size"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "j"],
+        "args": {
+            "action": "next_edit_point"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.next_edit_point"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "s"],
+        "args": {
+            "action": "split_join_tag"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.split_join_tag"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "ctrl+down"],
+        "args": {
+            "action": "decrement_number_by_10"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.decrement_number_by_10"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "w"],
+        "command": "wrap_as_you_type",
+        "context": [
+            {
+                "operand": false,
+                "operator": "equal",
+                "match_all": true,
+                "key": "setting.is_widget"
+            },
+            {
+                "match_all": true,
+                "key": "emmet_action_enabled.wrap_as_you_type"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "r"],
+        "command": "rename_tag",
+        "context": [
+            {
+                "key": "emmet_action_enabled.rename_tag"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "alt+up"],
+        "args": {
+            "action": "increment_number_by_01"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.increment_number_by_01"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "u"],
+        "command": "update_as_you_type",
+        "context": [
+            {
+                "operand": false,
+                "operator": "equal",
+                "match_all": true,
+                "key": "setting.is_widget"
+            },
+            {
+                "match_all": true,
+                "key": "emmet_action_enabled.update_as_you_type"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "ctrl+shift+t"],
+        "args": {
+            "action": "matching_pair"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.matching_pair"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "alt+down"],
+        "args": {
+            "action": "decrement_number_by_1"
+        },
+        "command": "run_emmet_action",
+        "context": [
+            {
+                "key": "emmet_action_enabled.decrement_number_by_1"
+            }
+        ]
+    },
+    { "keys": ["ctrl+e", "enter"],
+        "args": {
+            "contents": "\n\t${0}\n"
+        },
+        "command": "insert_snippet",
+        "context": [
+            {
+                "operand": "meta.scope.between-tag-pair.html, meta.scope.between-tag-pair.xml",
+                "match_all": true,
+                "key": "selector"
+            },
+            {
+                "operand": false,
+                "match_all": true,
+                "key": "auto_complete_visible"
+            },
+            {
+                "match_all": true,
+                "key": "clear_fields_on_enter_key"
+            },
+            {
+                "operand": false,
+                "match_all": true,
+                "key": "setting.disable_formatted_linebreak"
+            }
+        ]
+    }
 ]
