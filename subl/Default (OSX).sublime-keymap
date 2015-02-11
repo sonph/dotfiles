@@ -155,10 +155,8 @@
     { "keys": ["ctrl+w", "alt+j"], "command": "create_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+w", "alt+h"], "command": "create_pane", "args": {"direction": "left"} },
 
-    { "keys": ["ctrl+alt+k"], "command": "create_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+alt+l"], "command": "create_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+alt+j"], "command": "create_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+alt+h"], "command": "create_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "v"], "command": "create_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "s"], "command": "create_pane", "args": {"direction": "down"} },
 
 
     // EMMET -------------------------------------------------------------------
