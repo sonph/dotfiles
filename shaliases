@@ -20,15 +20,6 @@ alias cl='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
-if [ "$(uname -s)" = "Darwin" ]; then
-	alias ls='gls --color=auto'
-	alias ll="gls -alrtF --color"
-	alias la="gls -A"
-	alias l="gls -CF"
-	alias dir='gls --color=auto --format=vertical'
-	alias vdir='gls --color=auto --format=long'
-fi
-
 # git
 alias gadd='git add'
 alias gaddp='git add -p'
@@ -66,9 +57,24 @@ alias gtag='git tag'
 alias gunstage='git reset HEAD --'
 alias gunmodify='git checkout --'
 
+
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
 
 alias mvim='mvim --servername VIM --remote'
 
 alias c='clear'
 alias cls='clear'
+
+alias pythonserver='python2 -m SimpleHTTPServer'
+
+# Mac OS specific aliases
+if [ "$(uname -s)" = "Darwin" ]; then
+	alias ls='gls --color=auto'
+	alias ll="gls -alrtF --color"
+	alias la="gls -A"
+	alias l="gls -CF"
+	alias dir='gls --color=auto --format=vertical'
+	alias vdir='gls --color=auto --format=long'
+    alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text'
+fi
+
