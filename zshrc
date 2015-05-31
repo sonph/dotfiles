@@ -1,6 +1,7 @@
 # LOAD ZSH COMPONENTS ----------------------------------------------------------
-autoload -U compinit promptinit colors
+autoload -U compinit bashcompinit promptinit colors
 compinit
+bashcompinit
 promptinit
 colors
 
@@ -17,6 +18,9 @@ zstyle ':completion:*' menu select
 # wiki.archlinux.org/index.php/Git#Git_Prompt
 setopt PROMPT_SUBST     # set zsh to evaluate functions/substitutions in prompt PS1
 source ~/.git-prompt.sh
+
+# adb autocomplete
+source ~/.adb_autocomplete.sh
 
 # wiki.archlinux.org/index.php/Zsh#Colors
 PROMPT='%n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
