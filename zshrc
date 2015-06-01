@@ -6,6 +6,7 @@ promptinit
 colors
 
 # arrow key driven autocomplete interface
+# because why not
 zstyle ':completion:*' menu select
 
 # PROMPT -----------------------------------------------------------------------
@@ -21,6 +22,9 @@ source ~/.git-prompt.sh
 
 # adb autocomplete
 source ~/.adb_autocomplete.sh
+
+# chef knife autocomplete
+source ~/.knife_autocomplete.sh
 
 # wiki.archlinux.org/index.php/Zsh#Colors
 PROMPT='%n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
