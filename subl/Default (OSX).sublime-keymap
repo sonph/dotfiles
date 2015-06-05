@@ -55,6 +55,31 @@
     { "keys": ["super+shift+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false}},
 
 
+    // ctrl+a and ctrl+e to go to beginning/end of line while still in insert mode
+    // ctrl+f and ctrl+b to go forward/backward while still in insert mode (similar to emacs mode in shell)
+    // for vintage commands: https://github.com/sublimehq/Vintage/blob/master/Default%20(OSX).sublime-keymap
+    { "keys": ["ctrl+a"], "command": "set_motion", "args": {
+        "motion": "vi_move_to_first_non_white_space_character",
+        "motion_args": {"extend": true }}//,
+        // "context": [{"key": "setting.command_mode"}]
+    },
+    { "keys": ["ctrl+e"], "command": "set_motion", "args": {
+        "motion": "vi_move_to_hard_eol",
+        "motion_args": {"repeat": 1, "extend": true},
+        "inclusive": false }//,
+        // "context": [{"key": "setting.command_mode"}]
+    },
+    { "keys": ["ctrl+b"], "command": "set_motion", "args": {
+        "motion": "vi_move_by_characters_in_line",
+        "motion_args": {"forward": false, "extend": true }},
+        "context": [{"key": "setting.command_mode"}]
+    },
+    { "keys": ["ctrl+f"], "command": "set_motion", "args": {
+        "motion": "vi_move_by_characters_in_line",
+        "motion_args": {"forward": true, "extend": true, "visual": false }},
+        "context": [{"key": "setting.command_mode"}]
+    },
+
     // VIM CONFIGS -------------------------------------------------------------
     /*
     // split panes
@@ -160,7 +185,7 @@
 
 
     // EMMET -------------------------------------------------------------------
-    { "keys": ["ctrl+e", "d"],
+    { "keys": ["ctrl+t", "d"],
         "args": {
             "action": "remove_tag"
         },
@@ -171,7 +196,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "up"],
+    { "keys": ["ctrl+t", "up"],
         "args": {
             "action": "increment_number_by_1"
         },
@@ -182,7 +207,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "/"],
+    { "keys": ["ctrl+t", "/"],
         "args": {
             "action": "toggle_comment"
         },
@@ -200,7 +225,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "l"],
+    { "keys": ["ctrl+t", "l"],
         "args": {
             "action": "select_next_item"
         },
@@ -211,7 +236,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "e"],
+    { "keys": ["ctrl+t", "e"],
         "command": "expand_as_you_type",
         "context": [
             {
@@ -226,7 +251,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "down"],
+    { "keys": ["ctrl+t", "down"],
         "args": {
             "action": "decrement_number_by_01"
         },
@@ -237,7 +262,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "shift+ctrl+d"],
+    { "keys": ["ctrl+t", "shift+ctrl+d"],
         "args": {
             "action": "encode_decode_data_url"
         },
@@ -248,7 +273,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "i"],
+    { "keys": ["ctrl+t", "i"],
         "args": {
             "action": "balance_inward"
         },
@@ -259,7 +284,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "o"],
+    { "keys": ["ctrl+t", "o"],
         "args": {
             "action": "balance_outward"
         },
@@ -270,7 +295,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "ctrl+up"],
+    { "keys": ["ctrl+t", "ctrl+up"],
         "args": {
             "action": "increment_number_by_10"
         },
@@ -281,7 +306,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "shift+super+r"],
+    { "keys": ["ctrl+t", "shift+super+r"],
         "args": {
             "action": "reflect_css_value"
         },
@@ -292,7 +317,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "k"],
+    { "keys": ["ctrl+t", "k"],
         "args": {
             "action": "prev_edit_point"
         },
@@ -303,7 +328,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "h"],
+    { "keys": ["ctrl+t", "h"],
         "args": {
             "action": "select_previous_item"
         },
@@ -314,7 +339,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "U"],
+    { "keys": ["ctrl+t", "U"],
         "args": {
             "action": "update_image_size"
         },
@@ -325,7 +350,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "j"],
+    { "keys": ["ctrl+t", "j"],
         "args": {
             "action": "next_edit_point"
         },
@@ -336,7 +361,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "s"],
+    { "keys": ["ctrl+t", "s"],
         "args": {
             "action": "split_join_tag"
         },
@@ -347,7 +372,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "ctrl+down"],
+    { "keys": ["ctrl+t", "ctrl+down"],
         "args": {
             "action": "decrement_number_by_10"
         },
@@ -358,7 +383,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "w"],
+    { "keys": ["ctrl+t", "w"],
         "command": "wrap_as_you_type",
         "context": [
             {
@@ -373,7 +398,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "r"],
+    { "keys": ["ctrl+t", "r"],
         "command": "rename_tag",
         "context": [
             {
@@ -381,7 +406,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "alt+up"],
+    { "keys": ["ctrl+t", "alt+up"],
         "args": {
             "action": "increment_number_by_01"
         },
@@ -392,7 +417,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "u"],
+    { "keys": ["ctrl+t", "u"],
         "command": "update_as_you_type",
         "context": [
             {
@@ -407,7 +432,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "ctrl+shift+t"],
+    { "keys": ["ctrl+t", "ctrl+shift+t"],
         "args": {
             "action": "matching_pair"
         },
@@ -418,7 +443,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "alt+down"],
+    { "keys": ["ctrl+t", "alt+down"],
         "args": {
             "action": "decrement_number_by_1"
         },
@@ -429,7 +454,7 @@
             }
         ]
     },
-    { "keys": ["ctrl+e", "enter"],
+    { "keys": ["ctrl+t", "enter"],
         "args": {
             "contents": "\n\t${0}\n"
         },
