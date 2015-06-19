@@ -183,6 +183,15 @@
     { "keys": ["ctrl+w", "v"], "command": "create_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+w", "s"], "command": "create_pane", "args": {"direction": "down"} },
 
+    // press jj to exit from insert mode
+    { "keys": ["j", "j"], "command": "exit_insert_mode",
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": false },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+
 
     // EMMET -------------------------------------------------------------------
     { "keys": ["ctrl+t", "d"],
