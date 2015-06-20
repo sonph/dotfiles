@@ -126,7 +126,6 @@ set tm=500
 " Enable syntax highlighting
 syntax enable 
 
-colorscheme desert
 set background=dark
 
 " Set extra options when running in GUI mode
@@ -411,11 +410,79 @@ endfunction
 
 
 " ------------------------------- CUSTOM USER KEYBINDINGS ----------------------
+" colorscheme grb256
+colorscheme sprinkles
+
 " F5: execute current file
 nnoremap <F5> :!%:p<Enter>
 
 " jj: return to command mode (same as ESC, ^C)
 map! jj <ESC>
 
-" highlight 80 char col
-set colorcolumn=80
+" Highlight current cursor line?
+" set cursorline
+" hi CursorLine term=bold           " bold font
+" hi CursorLine cterm=bold          " bold font for terminal
+" hi CursorLine ctermbg=LightGray   " background color for current cursor line
+
+" highlight 120 char column
+set colorcolumn=120
+" set color of ColorColumn. see `:help ctermbg` for list of colors
+hi ColorColumn ctermbg=Gray
+" set color of ColorColumn for gvim. see `:help guibg` in gvim for list of colors
+hi ColorColumn guibg=Black
+
+" disable code folding
+set nofoldenable
+
+" disable spell checking
+set nospell
+
+" leader (spf13 default ,) tab for next buffer
+" leader (spf13 default ,) shift + tab for prev. buffer
+noremap <leader><Tab> :bn!<Enter>
+noremap <leader><S-Tab> :bp!<Enter>
+
+noremap <C-w>1 :b1<Enter>
+noremap <C-w>2 :b2<Enter>
+noremap <C-w>3 :b3<Enter>
+noremap <C-w>4 :b4<Enter>
+noremap <C-w>5 :b5<Enter>
+noremap <C-w>6 :b6<Enter>
+noremap <C-w>7 :b7<Enter>
+noremap <C-w>8 :b8<Enter>
+noremap <C-w>9 :b9<Enter>
+
+noremap <C-w>x :bd<Enter>
+
+" leader w to close buffer
+noremap <leader>w :bd<Enter>
+
+
+" type ; instead of :
+" nnoremap ; :
+
+set nolist
+
+
+" clear search highlight
+nmap ,/ :nohlsearch<Enter>
+
+" w!! to save file with sudo
+cmap w!! w !sudo tee % > /dev/null
+
+" easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" open split pane to the right and bottom
+set splitbelow
+set splitright
+
+" ctrl+enter to insert a new line
+inoremap <C-CR> <ESC>o
+inoremap <C-S-CR> <ESC>O
+nnoremap <C-CR> o<ESC>
+nnoremap <C-S-CR> O<ESC>
