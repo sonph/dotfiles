@@ -1,13 +1,24 @@
+" colorscheme grb256
+colorscheme sprinkles
+
 " F5: execute current file
 nnoremap <F5> :!%:p<Enter>
 
 " jj: return to command mode (same as ESC, ^C)
 map! jj <ESC>
 
-" highlight 80 char col
-" set colorcolumn=80
+" Highlight current cursor line?
+set cursorline
+hi CursorLine term=NONE " `bold` for bold font
+hi CursorLine cterm=NONE          " `bold` for bold font (for terminal)
+hi CursorLine ctermbg=LightGray   " background color for current cursor line
 
-colorscheme grb256
+" highlight 120 char column
+set colorcolumn=120
+" set color of ColorColumn. see `:help ctermbg` for list of colors
+hi ColorColumn ctermbg=Gray
+" set color of ColorColumn for gvim. see `:help guibg` in gvim for list of colors
+hi ColorColumn guibg=Black
 
 " disable code folding
 set nofoldenable
