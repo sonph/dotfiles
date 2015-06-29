@@ -1,3 +1,6 @@
+" Dayle Rees' color schemes bundle
+Bundle "daylerees/colour-schemes", { "rtp": "vim/"  }
+
 " colorscheme grb256
 colorscheme sprinkles
 
@@ -9,9 +12,11 @@ map! jj <ESC>
 
 " Highlight current cursor line?
 set cursorline
-hi CursorLine term=NONE " `bold` for bold font
-hi CursorLine cterm=NONE          " `bold` for bold font (for terminal)
-hi CursorLine ctermbg=LightGray   " background color for current cursor line
+" hi CursorLine term=NONE " `bold` for bold font
+" hi CursorLine cterm=NONE          " `bold` for bold font (for terminal)
+" hi CursorLine ctermbg=Gray " background color for current cursor line
+" highlight clear SignColumn      " SignColumn should match background
+" highlight clear LineNr          " Current line number row will have same background color in relative mode
 
 " highlight 120 char column
 set colorcolumn=120
@@ -45,6 +50,11 @@ noremap <C-w>x :bd<Enter>
 
 " leader w to close buffer
 noremap <leader>w :bd<Enter>
+
+
+" tab and shift-tab in visual mode to indent/unindent
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
 
 " type ; instead of :

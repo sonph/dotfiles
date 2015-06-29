@@ -20,6 +20,3 @@ export GIT_PS1_SHOWUPSTREAM="auto"      # show </>/<> to indicate behind/ahead/d
 # tmux sessions
 export TMUX_DEFAULT_SESSION="def"
 
-export GOPATH="$HOME/code/lime:/usr/lib/go/site"
-
-export AMAZONIP="54.187.127.164"

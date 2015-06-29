@@ -21,6 +21,7 @@ alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
 # git
+alias g='git'
 alias gadd='git add'
 alias gaddp='git add -p'
 alias gaddu='git add -u'
@@ -57,6 +58,20 @@ alias gtag='git tag'
 alias gunstage='git reset HEAD --'
 alias gunmodify='git checkout --'
 
+alias knf='knife'
+alias knfcu='knife cookbook upload'
+alias knfcsd='knife cookbook site download'
+alias knfb='knife bootstrap'
+alias knfnl='knife node list'
+alias knfns='knife node show'
+alias knfssh='knife ssh'
+alias knfrl='knife recipe list'
+alias knfnrla='knife node run_list add'
+
+alias bk='berks'
+alias bki='berks install'
+alias bku='berks upload'
+
 
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
 
@@ -78,3 +93,5 @@ if [ "$(uname -s)" = "Darwin" ]; then
     alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text'
 fi
 
+# brewed python
+alias python3=/usr/local/Cellar/python3/3.4.3/bin

@@ -94,8 +94,12 @@ path=($HOME/.gem/ruby/2.1.0/bin $path)
 path=($HOME/code/go/bin $path)
 path=(/usr/local/bin $path)
 
+# brew python 3
+# path=(/usr/local/Cellar/python3/3.4.3/bin $path)
+
 . $HOME/.shexports
 . $HOME/.shaliases
+. $HOME/work/.shexports
 
 # MISC -------------------------------------------------------------------------
 # colored manpage w/ less

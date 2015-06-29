@@ -1,0 +1,28 @@
+[user]
+	name = Son Pham
+	email = Son_Pham@intuit.com
+[merge]
+	conflictstyle = diff3
+    tool = meld
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    df = diff
+    lg = log
+	lgraph = log --graph --pretty=format:\"%Cblue%h%Creset - %s - %Cred%an%Creset - %Cgreen%ar\"
+	unstage = reset HEAD --
+    unmodify = checkout --
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[core]
+	excludesfile = /Users/spham/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
