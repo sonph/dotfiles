@@ -1,3 +1,3 @@
 #!/bin/bash
-./symlink.sh
-./spf13-vim.sh
+sh ./symlink.sh
+sh ./spf13-vim.sh
