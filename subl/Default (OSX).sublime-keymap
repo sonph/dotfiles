@@ -192,6 +192,19 @@
         ]
     },
 
+    { "keys": ["ctrl+u"], "command": "vi_scroll_lines",
+        "args": {"forward": false},
+        "context": [{"key": "setting.command_mode"}, {"key": "setting.vintage_ctrl_keys"}]
+    },
+
+    { "keys": ["ctrl+d"], "command": "vi_scroll_lines",
+        "args": {"forward": true},
+        "context": [{"key": "setting.command_mode"}, {"key": "setting.vintage_ctrl_keys"}]
+    },
+
+    { "keys": ["ctrl+o"], "command": "navigation_history_back"},
+    { "keys": ["ctrl+i"], "command": "navigation_history_forward"},
+
 
     // EMMET -------------------------------------------------------------------
     { "keys": ["ctrl+t", "d"],
