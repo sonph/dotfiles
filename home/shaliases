@@ -94,4 +94,4 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 # brewed python
-alias python3=/usr/local/Cellar/python3/3.4.3/bin
+alias python3=/usr/local/Cellar/python3/3.4.3/bin/python3
