@@ -34,8 +34,8 @@ alias gcoma='git commit -a'
 alias gdiff='git diff'
 alias gdiffc='git diff --cached'
 alias ginit='git init'
-alias glgraph='git log --graph --pretty=format:"%Cblue%h%Creset - %s - %Cred%an%Creset - %Cgreen%ar"'
-alias glgraphlong='git log --graph --pretty=format:"%Cblue%h%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD"'
+alias glgraph='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an%Creset - %Cgreen%ar"'
+alias glgraphlong='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD"'
 alias glog='git log'
 alias gmt='git mergetool'
 alias gmv='git mv'
@@ -75,7 +75,7 @@ alias bku='berks upload'
 
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
 
-alias mvim='mvim --servername VIM --remote'
+alias mvim='mvim --servername VIM'
 
 alias c='clear'
 alias cls='clear'
@@ -90,7 +90,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 	alias l="gls -CF"
 	alias dir='gls --color=auto --format=vertical'
 	alias vdir='gls --color=auto --format=long'
-    alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text'
+    alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text --new-window --add .'
 fi
 
 # brewed python
