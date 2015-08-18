@@ -69,19 +69,17 @@ alias knfssh='knife ssh'
 alias knfrl='knife recipe list'
 alias knfnrla='knife node run_list add'
 
-alias bk='berks'
-alias bki='berks install'
-alias bku='berks upload'
-
 # docker-machine
 alias dm="docker-machine"
-alias dmcfgdefault="eval \"$(docker-machine env default)\""
-alias dmcfgdev="eval \"$(docker-machine env dev)\""
+
+function dmenv {
+	eval "$(docker-machine env $1)"
+	echo "Updated environment variables for machine $1"
+}
 
 alias dmactive="docker-machine active"
 alias dmconfig="docker-machine config"
 alias dmcreate="docker-machine create"
-alias dmenv="docker-machine env"
 alias dminspect="docker-machine inspect"
 alias dmip="docker-machine ip"
 alias dmkill="docker-machine kill"
