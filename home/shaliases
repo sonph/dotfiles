@@ -58,6 +58,7 @@ alias gtag='git tag'
 alias gunstage='git reset HEAD --'
 alias gunmodify='git checkout --'
 
+# chef
 alias knf='knife'
 alias knfcu='knife cookbook upload'
 alias knfcsd='knife cookbook site download'
@@ -95,3 +96,7 @@ fi
 
 # brewed python
 alias python3=/usr/local/Cellar/python3/3.4.3/bin/python3
+
+# custom scripts
+alias refenv=". refenv"
+alias putenv=". putenv"
