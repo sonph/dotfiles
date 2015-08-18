@@ -73,6 +73,31 @@ alias bk='berks'
 alias bki='berks install'
 alias bku='berks upload'
 
+# docker-machine
+alias dm="docker-machine"
+alias dmcfgdefault="eval \"$(docker-machine env default)\""
+alias dmcfgdev="eval \"$(docker-machine env dev)\""
+
+alias dmactive="docker-machine active"
+alias dmconfig="docker-machine config"
+alias dmcreate="docker-machine create"
+alias dmenv="docker-machine env"
+alias dminspect="docker-machine inspect"
+alias dmip="docker-machine ip"
+alias dmkill="docker-machine kill"
+alias dmls="docker-machine ls"
+alias dmrestart="docker-machine restart"
+alias dmrm="docker-machine rm"
+alias dmssh="docker-machine ssh"
+alias dmscp="docker-machine scp"
+alias dmstart="docker-machine start"
+alias dmstatus="docker-machine status"
+alias dmstop="docker-machine stop"
+alias dmupgrade="docker-machine upgrade"
+alias dmurl="docker-machine url"
+alias dmhelp="docker-machine help"
+
+
 
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
 
