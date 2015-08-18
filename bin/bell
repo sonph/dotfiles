@@ -1,2 +1,3 @@
 #!/bin/bash
+# Put a terminal bell/alarm.
 tput bel

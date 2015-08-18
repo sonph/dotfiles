@@ -1,2 +1,7 @@
 #!/bin/bash
-afplay $HOME/bin/Americano.wav &
+# Play a notification sound (not a bell).
+
+SOUND_FILE="$HOME/bin/Americano.wav"
+# SOUND_FILE="$HOME/bin/Spirit.mp3"
+
+afplay $SOUND_FILE &
