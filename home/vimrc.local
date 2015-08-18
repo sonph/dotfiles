@@ -84,3 +84,8 @@ inoremap <C-CR> <ESC>o
 inoremap <C-S-CR> <ESC>O
 nnoremap <C-CR> o<ESC>
 nnoremap <C-S-CR> O<ESC>
+
+" Plugin to help navigate between vim and tmux.
+" See https://github.com/christoomey/vim-tmux-navigator
+" Run :PluginInstall to install the plugin
+Plugin 'christoomey/vim-tmux-navigator'
