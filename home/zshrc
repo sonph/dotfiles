@@ -1,5 +1,11 @@
 # LOAD ZSH COMPONENTS ----------------------------------------------------------
 autoload -U compinit bashcompinit promptinit colors
+
+# Directory containing zsh completion scripts
+# For more scripts see https://github.com/zsh-users/zsh-completions/tree/master/src
+# This line must be before compinit
+fpath=($fpath ~/.zshcomp)
+
 compinit
 bashcompinit
 promptinit
@@ -19,9 +25,6 @@ zstyle ':completion:*' menu select
 # wiki.archlinux.org/index.php/Git#Git_Prompt
 setopt PROMPT_SUBST     # set zsh to evaluate functions/substitutions in prompt PS1
 source ~/.git-prompt.sh
-
-# adb autocomplete
-source ~/.adb_autocomplete.sh
 
 # wiki.archlinux.org/index.php/Zsh#Colors
 # left prompt
