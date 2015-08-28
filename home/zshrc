@@ -4,7 +4,7 @@ autoload -U compinit bashcompinit promptinit colors
 # Directory containing zsh completion scripts
 # For more scripts see https://github.com/zsh-users/zsh-completions/tree/master/src
 # This line must be before compinit
-fpath=($fpath ~/.zshcomp)
+fpath=($fpath ~/.zsh/autocomplete)
 
 compinit
 bashcompinit
