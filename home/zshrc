@@ -115,3 +115,5 @@ man() {
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# zsh-bd
+source $HOME/.zsh/bd.zsh
