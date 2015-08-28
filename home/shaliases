@@ -35,7 +35,9 @@ alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
 # git
-function galias { show_alias 'git' }
+function galias {
+    if [ $1 ]; then show_alias 'git' | grep $1; else; show_alias 'git'; fi
+}
 alias g='git'
 alias gadd='git add'
 alias gaddp='git add -p'
@@ -75,7 +77,7 @@ alias gunmodify='git checkout --'
 
 # chef
 function knalias {
-    show_alias 'knife'
+    if [ $1 ]; then show_alias 'knife' | grep $1; else; show_alias 'knife'; fi
 }
 alias knf='knife'
 alias knfcu='knife cookbook upload'
@@ -89,7 +91,7 @@ alias knfnrla='knife node run_list add'
 
 # docker
 function dalias {
-    show_alias 'docker'
+    if [ $1 ]; then show_alias 'docker' | grep $1; else; show_alias 'docker'; fi
 }
 alias dinfo="docker info"
 
