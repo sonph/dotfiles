@@ -1,3 +1,17 @@
+function show_alias {
+    alias | grep $1 | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\'']//g" | sort;
+}
+
+# alias git to hub
+which hub 2>&1 > /dev/null
+if [[ $? -eq 0 ]]; then
+    alias git="hub"
+    alias gfork="git fork"
+    alias gcreate="git create"
+    alias gbrowse="git browse"
+    alias gissues="git browse -- issues"
+fi
+
 # safety
 alias rm="rm -iv"
 alias mv="mv -iv"
@@ -21,6 +35,7 @@ alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
 # git
+function galias { show_alias 'git' }
 alias g='git'
 alias gadd='git add'
 alias gaddp='git add -p'
@@ -59,6 +74,9 @@ alias gunstage='git reset HEAD --'
 alias gunmodify='git checkout --'
 
 # chef
+function knalias {
+    show_alias 'knife'
+}
 alias knf='knife'
 alias knfcu='knife cookbook upload'
 alias knfcsd='knife cookbook site download'
@@ -69,32 +87,51 @@ alias knfssh='knife ssh'
 alias knfrl='knife recipe list'
 alias knfnrla='knife node run_list add'
 
-# docker-machine
-alias dm="docker-machine"
-
-function dmenv {
-	eval "$(docker-machine env $1)"
-	echo "Updated environment variables for machine $1"
+# docker
+function dalias {
+    show_alias 'docker'
 }
+alias dinfo="docker info"
 
-alias dmactive="docker-machine active"
-alias dmconfig="docker-machine config"
-alias dmcreate="docker-machine create"
-alias dminspect="docker-machine inspect"
-alias dmip="docker-machine ip"
-alias dmkill="docker-machine kill"
-alias dmls="docker-machine ls"
-alias dmrestart="docker-machine restart"
-alias dmrm="docker-machine rm"
-alias dmssh="docker-machine ssh"
-alias dmscp="docker-machine scp"
-alias dmstart="docker-machine start"
-alias dmstatus="docker-machine status"
-alias dmstop="docker-machine stop"
-alias dmupgrade="docker-machine upgrade"
-alias dmurl="docker-machine url"
-alias dmhelp="docker-machine help"
+# docker container
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias dls="docker ps"
+alias dlsa="docker ps -a"
+alias drun="docker run"
+alias drund="docker run -d"
+alias drunit="docker run -it"
+alias dstart="docker start"
+alias datt="docker attach"
+alias dex="docker exec"
+alias dexd="docker exec -d"
+alias dexit="docker exec -it"
+alias dlg="docker logs"
+alias dlgf="docker logs -tf"
+alias dtop="docker top"
+alias dstats="docker stats"
+alias dstop="docker stop"
+alias dkill="docker kill"
+alias dinsp="docker inspect"
+function drma { docker rm $(docker ps -a -q); }     # remove all containers
+function dstopa { docker stop $(docker ps -a -q); } # stop all containers
+function drm {
+    echo -n "Stopping..."
+    echo $(docker stop $1)
+    echo -n "Removing..."
+    echo $(docker rm $1)
+}
+alias drestart="docker restart"
 
+# docker images
+alias dimgs="docker images"
+alias dhist="docker history"
+alias drmi="docker rmi"
+alias dsearch="docker search"
+alias dpl="docker pull"
+function dbuild {
+    docker build -t=$1 --rm=true $PWD;
+}   # $ dbuild USER/REPO[:TAG]
 
 
 alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
@@ -108,13 +145,37 @@ alias pythonserver='python2 -m SimpleHTTPServer'
 
 # Mac OS specific aliases
 if [ "$(uname -s)" = "Darwin" ]; then
-	alias ls='gls --color=auto'
-	alias ll="gls -alrtF --color"
-	alias la="gls -A"
-	alias l="gls -CF"
-	alias dir='gls --color=auto --format=vertical'
-	alias vdir='gls --color=auto --format=long'
+    alias ls='gls --color=auto'
+    alias ll="gls -alrtF --color"
+    alias la="gls -A"
+    alias l="gls -CF"
+    alias dir='gls --color=auto --format=vertical'
+    alias vdir='gls --color=auto --format=long'
+    alias du='gdu'
     alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text --new-window --add .'
+
+    # docker-machine
+    alias dm="docker-machine"
+    function dmenv {
+        eval "$(docker-machine env $1)"
+    }
+    alias dmactive="docker-machine active"
+    alias dmconfig="docker-machine config"
+    alias dmcreate="docker-machine create"
+    alias dminspect="docker-machine inspect"
+    alias dmip="docker-machine ip"
+    alias dmkill="docker-machine kill"
+    alias dmls="docker-machine ls"
+    alias dmrestart="docker-machine restart"
+    alias dmrm="docker-machine rm"
+    alias dmssh="docker-machine ssh"
+    alias dmscp="docker-machine scp"
+    alias dmstart="docker-machine start"
+    alias dmstatus="docker-machine status"
+    alias dmstop="docker-machine stop"
+    alias dmupgrade="docker-machine upgrade"
+    alias dmurl="docker-machine url"
+    alias dmhelp="docker-machine help"
 fi
 
 # brewed python
