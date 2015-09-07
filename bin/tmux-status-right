@@ -1,0 +1,43 @@
+function battery_status {
+    local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
+    local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
+
+    if [[ $BATTERY_PERC -lt 20 ]]; then
+        local BATTERY_STR="#[fg=red]$BATTERY_PERC%#[fg=default]"
+    elif [[ $BATTERY_PERC -lt 70 ]]; then
+        local BATTERY_STR="#[fg=yellow]$BATTERY_PERC%#[fg=default]"
+    else
+        local BATTERY_STR="#[fg=green]$BATTERY_PERC%#[fg=default]"
+    fi
+
+    if [[ $AC_POWER = "AC Power" ]]; then
+        local AC_STR="#[fg=green]AC#[default]"
+    else
+        local AC_STR="#[fg=red]AC#[default]"
+    fi
+
+    echo -n "$AC_STR $BATTERY_STR"
+}
+
+function datetime {
+    echo -n $(date +"%H:%M %a %m/%d")
+}
+
+function disk_space {
+    local DISK_FREE=$(df -h | awk '/disk1/ {print $5, $4}')
+    echo -n "#[fg=magenta]$DISK_FREE#[default]"
+}
+
+function load_avg {
+    local LOAD_AVG=$(uptime | awk -F'load averages: ' '{print $2}')
+    echo -n "#[fg=cyan]$LOAD_AVG#[default]"
+}
+
+
+disk_space
+echo -n " | "
+load_avg
+echo -n " | "
+battery_status
+echo -n " | "
+datetime
