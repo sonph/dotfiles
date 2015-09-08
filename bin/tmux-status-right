@@ -49,4 +49,4 @@ function separator {
 }
 
 
-disk_space; separator; load_avg; separator; battery_status; separator; datetime
+disk_space; separator; load_avg; separator; which pmset 2>&1 > /dev/null && battery_status && separator; datetime
