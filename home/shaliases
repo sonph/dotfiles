@@ -117,18 +117,14 @@ alias dkill="docker kill"
 alias dinsp="docker inspect"
 function drma { docker rm $(docker ps -a -q); }     # remove all containers
 function dstopa { docker stop $(docker ps -a -q); } # stop all containers
-function drm {
-    echo -n "Stopping..."
-    echo $(docker stop $1)
-    echo -n "Removing..."
-    echo $(docker rm $1)
-}
+alias drm="docker rm"
 alias drestart="docker restart"
 
 # docker images
 alias dimgs="docker images"
 alias dhist="docker history"
 alias drmi="docker rmi"
+alias drmif="docker rmi -f"
 alias dsearch="docker search"
 alias dpl="docker pull"
 function dbuild {
