@@ -1,11 +1,11 @@
-POWER_AC_ON_STYLE='#[fg=brightgreen,reverse]'
-POWER_AC_OFF_STYLE='#[fg=brightred,reverse]'
+POWER_AC_ON_STYLE='#[fg=black,bg=brightgreen]'
+POWER_AC_OFF_STYLE='#[fg=black,bg=brightred]'
 
-POWER_BATTERY_HIGH_STYLE='#[fg=brightgreen,reverse]'
-POWER_BATTERY_MED_STYLE='#[fg=brightyellow,reverse]'
-POWER_BATTERY_LOW_STYLE='#[fg=brightred,reverse]'
+POWER_BATTERY_HIGH_STYLE='#[fg=black,bg=brightgreen]'
+POWER_BATTERY_MED_STYLE='#[fg=black,bg=brightyellow]'
+POWER_BATTERY_LOW_STYLE='#[fg=black,bg=brightred]'
 
-DATETIME_STYLE='#[default]'
+DATETIME_STYLE='#[fg=black,bg=brightblue]'
 DISKSPACE_STYLE='#[fg=brightmagenta]'
 LOAD_AVG_STYLE='#[fg=brightcyan]'
 
@@ -14,12 +14,20 @@ function battery_status {
     local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
     local TIME_REMAINING=$(pmset -g ps | tail -n1 | cut -d ';' -f 3 | cut -d ' ' -f 2)
 
-    if [[ $BATTERY_PERC -lt 20 ]]; then
-        local BATTERY_STR="$POWER_BATTERY_LOW_STYLE $BATTERY_PERC% | $TIME_REMAINING #[default]"
-    elif [[ $BATTERY_PERC -lt 70 ]]; then
-        local BATTERY_STR="$POWER_BATTERY_MED_STYLE $BATTERY_PERC% | $TIME_REMAINING #[default]"
+    # Don't show time remaining when there's no estimate or it's 0:00 (laptop is charged)
+    if [[ $TIME_REMAINING = '(no' || $TIME_REMAINING = '0:00' ]]; then
+        TIME_REMAINING=""
     else
-        local BATTERY_STR="$POWER_BATTERY_HIGH_STYLE $BATTERY_PERC% | $TIME_REMAINING #[default]"
+        TIME_REMAINING=" | $TIME_REMAINING"
+    fi
+    
+
+    if [[ $BATTERY_PERC -lt 20 ]]; then
+        local BATTERY_STR="$POWER_BATTERY_LOW_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+    elif [[ $BATTERY_PERC -lt 70 ]]; then
+        local BATTERY_STR="$POWER_BATTERY_MED_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+    else
+        local BATTERY_STR="$POWER_BATTERY_HIGH_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
     fi
 
     if [[ $AC_POWER = "AC Power" ]]; then
@@ -32,15 +40,16 @@ function battery_status {
 }
 
 function datetime {
-    echo -n "$DATETIME_STYLE$(date +"%H:%M %a %m/%d")#[default]"
+    echo -n "$DATETIME_STYLE $(date +"%H:%M %a %m/%d") #[default]"
 }
 
 function disk_space {
-    local DISK_FREE=$(df -h | awk '/disk1/ {print $5, $4}')
+    local DISK_FREE=$(df -h | grep "/dev" | head -n1 | awk '{print $5, $4}')
     echo -n "$DISKSPACE_STYLE$DISK_FREE#[default]"
 }
 
 function load_avg {
+    local LOAD_AVG=$(python -c "import sys; print ' '.join(s.strip(',') for s in sys.argv[-3:])" $(uptime))
     local LOAD_AVG=$(uptime | awk -F'load averages: ' '{print $2}')
     echo -n "$LOAD_AVG_STYLE$LOAD_AVG#[default]"
 }
@@ -50,4 +59,4 @@ function separator {
 }
 
 
-disk_space; separator; load_avg; separator; which pmset 2>&1 > /dev/null && battery_status && separator; datetime
+disk_space; separator; load_avg; separator; which pmset 2>&1 > /dev/null && battery_status; datetime
