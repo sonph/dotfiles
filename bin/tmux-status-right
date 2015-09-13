@@ -51,7 +51,6 @@ function disk_space {
 
 function load_avg {
     local LOAD_AVG=$(python -c "import sys; print ' '.join(s.strip(',') for s in sys.argv[-3:])" $(uptime))
-    local LOAD_AVG=$(uptime | awk -F'load averages: ' '{print $2}')
     echo -n "$LOAD_AVG_STYLE$LOAD_AVG#[default]"
 }
 
