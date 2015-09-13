@@ -1,3 +1,4 @@
+#!/bin/bash
 POWER_AC_ON_STYLE='#[fg=black,bg=brightgreen]'
 POWER_AC_OFF_STYLE='#[fg=black,bg=brightred]'
 
