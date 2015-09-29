@@ -31,10 +31,10 @@ set nofoldenable
 " disable spell checking
 set nospell
 
-" leader (spf13 default ,) tab for next buffer
-" leader (spf13 default ,) shift + tab for prev. buffer
-noremap <leader><Tab> :bn!<Enter>
-noremap <leader><S-Tab> :bp!<Enter>
+" ^w Tab for next buffer
+" ^w +Tab for previous buffer
+noremap <C-w><Tab> :bn!<Enter>
+noremap <C-w><S-Tab> :bp!<Enter>
 
 noremap <C-w>1 :b1<Enter>
 noremap <C-w>2 :b2<Enter>
@@ -48,9 +48,8 @@ noremap <C-w>9 :b9<Enter>
 
 noremap <C-w>x :bd<Enter>
 
-" leader w to close buffer
-noremap <leader>w :bd<Enter>
-
+" create new buffer with ^w n
+noremap <C-w>n :new<Enter>
 
 " tab and shift-tab in visual mode to indent/unindent
 vnoremap <Tab> >gv
