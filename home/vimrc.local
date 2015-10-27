@@ -1,5 +1,11 @@
 " Dayle Rees' color schemes bundle
 Bundle "daylerees/colour-schemes", { "rtp": "vim/"  }
+UnBundle 'nathanaelkane/vim-indent-guides'
+
+" Plugin to help navigate between vim and tmux.
+" See https://github.com/christoomey/vim-tmux-navigator
+" Run :PluginInstall to install the plugin
+Plugin 'christoomey/vim-tmux-navigator'
 
 " colorscheme grb256
 colorscheme sprinkles
@@ -84,7 +90,3 @@ inoremap <C-S-CR> <ESC>O
 nnoremap <C-CR> o<ESC>
 nnoremap <C-S-CR> O<ESC>
 
-" Plugin to help navigate between vim and tmux.
-" See https://github.com/christoomey/vim-tmux-navigator
-" Run :PluginInstall to install the plugin
-Plugin 'christoomey/vim-tmux-navigator'
