@@ -19,8 +19,8 @@ _tmux_pane_words() {
 
 zle -C tmux-pane-words-prefix   complete-word _generic
 zle -C tmux-pane-words-anywhere complete-word _generic
-bindkey '^i' tmux-pane-words-prefix
-bindkey '^i^i' tmux-pane-words-anywhere
+bindkey '^V' tmux-pane-words-prefix
+bindkey '^V^V' tmux-pane-words-anywhere
 zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' completer _tmux_pane_words
 zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' ignore-line current
 # display the (interactive) menu on first execution of the hotkey
