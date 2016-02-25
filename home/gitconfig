@@ -1,6 +1,6 @@
 [user]
 	name = Son Pham
-	email = sonpa1993@gmail.com
+	email = sp@sonpham.me
 [merge]
 	conflictstyle = diff3
     tool = meld
