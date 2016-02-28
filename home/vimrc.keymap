@@ -92,6 +92,8 @@ nnoremap <leader>q :q<CR>
 inoremap <leader>q <Esc>:q<CR>
 nnoremap <leader>Q :q!<CR>
 
+nnoremap <leader>w :w<CR>
+
 " clear search highlight
 nmap <leader>/ :nohlsearch<CR>
 

@@ -52,10 +52,6 @@ call vundle#end()
 " }
 
 " Plugin settings {
-" solarized colorscheme
-" colorscheme solarized
-" set background=light
-" set background=dark
 
 " vim-airline
 " let g:airline_theme='solarized'
@@ -121,9 +117,4 @@ let g:multi_cursor_quit_key='<C-c>'
 "nnoremap <leader>c :call multiple_cursors#quit()<CR>
 let g:multi_cursor_exit_from_insert_mode=0
 " }
-
-" Google plugins
-if filereadable(expand('~/.vimrc.plugins.google'))
-  source ~/.vimrc.plugins.google
-endif
 
