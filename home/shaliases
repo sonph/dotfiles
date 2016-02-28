@@ -176,8 +176,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
     alias dmhelp="docker-machine help"
 fi
 
-# brewed python
-alias python3=/usr/local/Cellar/python3/3.4.3/bin/python3
 
 # custom scripts
 alias refenv=". refenv"
