@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/s0nny/django/mysite'
-let g:netrw_dirhist_2='/home/s0nny/django/mysite/mysite'
-let g:netrw_dirhist_3='/home/s0nny/django/mysite'
-let g:netrw_dirhist_4='/home/s0nny/django'
-let g:netrw_dirhist_5='/mnt/data/Dropbox/utd/cs4365/asg3'
-let g:netrw_dirhist_6='/home/s0nny/.mpd'
