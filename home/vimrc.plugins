@@ -1,0 +1,129 @@
+" Vundle {
+call vundle#begin()
+  " all vundle plugins here
+  " plugin formats: user/repo for GitHub
+  "                 name for plugin from vim-scripts.org/vim/scripts.html
+  "                 git://host/repo.git for repos not on github
+  " Dependencies:
+  "   vimproc: cd ~/.vim/bundle/vimproc && make
+  "   YouCompleteMe: cd ~/.vim/bundle/YouCompleteMe && ./install.py
+  "   ctags: brew install ctags or apt-get install ctags
+  "   ack: make ack in dotfiles/bin/ack available in the path
+  Plugin 'VundleVim/Vundle.vim'                       " the package manager
+
+  " colors pls
+  Bundle 'daylerees/colour-schemes', {'rtp': 'vim/'}
+  Bundle 'altercation/vim-colors-solarized'
+
+  " airline status bar
+  Plugin 'vim-airline/vim-airline'                    " the modern status bar; thanks for flying vim!
+  Plugin 'vim-airline/vim-airline-themes'             " airline themes; solarized included
+
+  " navigate
+  Plugin 'christoomey/vim-tmux-navigator'             " navigate tmux panes and vim windows using the same key combs
+  Plugin 'scrooloose/nerdtree'                        " file browser sidebar
+  " Plugin 'jistr/vim-nerdtree-tabs'                    " sync nerdtrees between tabs
+  Plugin 'airblade/vim-gitgutter'                     " show git changes in the gutter (besides line numbers)
+  Plugin 'luochen1990/rainbow'                        " different colors for parentheses at different nested levels
+  if executable('ctags')
+    Plugin 'majutsushi/tagbar'                        " outline/tags sidebar
+  endif
+
+  " search & autocomplete
+  " Plugin 'ctrlpvim/ctrlp.vim'                         " file fuzzy search; unite does it just fine so no need
+  Plugin 'Shougo/unite.vim'                           " fuzzy search for files, buffers, commands, etc.
+  Plugin 'Shougo/neomru.vim'                          " unite plugin: most recently used files (enable file_mru source)
+  Plugin 'Shougo/vimproc.vim'                         " unite plugin: index files asynchronously (enable file_rec/async)
+  Plugin 'terryma/vim-multiple-cursors'               " sublime-style multiple cursors
+  Plugin 'sonph/auto-pairs'                           " auto-pairs fork; automatically pair parentheses, quotes, etc.
+  Plugin 'Valloric/YouCompleteMe'                     " lightweight autocomplete engine
+  " Fix YCM load errors due to Python:
+  " https://github.com/Valloric/YouCompleteMe/issues/18
+  " https://github.com/Valloric/YouCompleteMe/issues/1605
+  if executable('ack-grep')                           " ack code search; better version of grep
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+    Bundle 'mileszs/ack.vim'
+  elseif executable('ack')
+    Bundle 'mileszs/ack.vim'
+  endif
+
+" all vundle plugins must be before this line
+call vundle#end()
+" }
+
+" Plugin settings {
+" solarized colorscheme
+" colorscheme solarized
+" set background=light
+" set background=dark
+
+" vim-airline
+" let g:airline_theme='solarized'
+let g:airline_theme='bubblegum'                   " see https://github.com/vim-airline/vim-airline/wiki/Screenshots
+set laststatus=2                                  " load airline even on a single split
+set noshowmode                                    " disable default mode indicator, use airline's instead
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='|'
+let g:airline_left_sep='›'
+let g:airline_right_sep='‹'
+
+" NERDTree
+nmap <leader>nt :NERDTreeFocus<CR>                     " ^w 0 to focus the nerdtree sidebar (like sublime)
+let NERDTreeShowHidden=1                          " show hidden dot files
+if has('autocmd')
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+                                                  " automatically close vim if the only tab open is nerdtree
+  autocmd StdinReadPre * let s:std_in=1           " open nerdtree automatically if no file is specified
+  autocmd VimEnter * if (argc() == 0 && !exists("s:std_in")) | NERDTree | wincmd l | endif
+endif
+
+" Tagbar
+nmap <leader>tb :TagbarToggle<CR>
+
+" Rainbow
+let g:rainbow_active = 1                          " enable by default (can also use :RainbowToggle)
+" change ctermfgs to set colors; original colors are bright
+let g:rainbow_conf = {
+    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    \   'ctermfgs': ['black', 'red', 'blue', 'magenta'],
+    \   'operators': '_,_',
+    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \   'separately': {
+    \       '*': {},
+    \       'tex': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    \       },
+    \       'lisp': {
+    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \       },
+    \       'vim': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    \       },
+    \       'html': {
+    \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    \       },
+    \       'css': 0,
+    \   }
+    \}
+
+" Unite
+nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async command<CR>
+nnoremap <leader>P :Unite -start-insert line<CR>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+autocmd FileType unite call s:unite_user_settings()
+function! s:unite_user_settings()"{{{
+  imap <buffer> <leader>p <Plug>(unite_exit)
+  nmap <buffer> <leader>p <Plug>(unite_exit)
+endfunction"}}}
+
+let g:multi_cursor_quit_key='<C-c>'
+"nnoremap <leader>m :call multiple_cursors#quit()<CR>
+"nnoremap <leader>c :call multiple_cursors#quit()<CR>
+let g:multi_cursor_exit_from_insert_mode=0
+" }
+
+" Google plugins
+if filereadable(expand('~/.vimrc.plugins.google'))
+  source ~/.vimrc.plugins.google
+endif
+
