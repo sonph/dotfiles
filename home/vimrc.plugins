@@ -34,8 +34,6 @@ call vundle#begin()
   Plugin 'Shougo/unite.vim'                           " fuzzy search for files, buffers, commands, etc.
   Plugin 'Shougo/neomru.vim'                          " unite plugin: most recently used files (enable file_mru source)
   Plugin 'Shougo/vimproc.vim'                         " unite plugin: index files asynchronously (enable file_rec/async)
-  Plugin 'terryma/vim-multiple-cursors'               " sublime-style multiple cursors
-  Plugin 'sonph/auto-pairs'                           " auto-pairs fork; automatically pair parentheses, quotes, etc.
   Plugin 'Valloric/YouCompleteMe'                     " lightweight autocomplete engine
   " Fix YCM load errors due to Python:
   " https://github.com/Valloric/YouCompleteMe/issues/18
@@ -46,6 +44,12 @@ call vundle#begin()
   elseif executable('ack')
     Bundle 'mileszs/ack.vim'
   endif
+
+  " editing
+  Plugin 'sjl/gundo.vim'
+  Plugin 'mattn/emmet-vim'
+  Plugin 'terryma/vim-multiple-cursors'               " sublime-style multiple cursors
+  Plugin 'sonph/auto-pairs'                           " auto-pairs fork; automatically pair parentheses, quotes, etc.
 
 " all vundle plugins must be before this line
 call vundle#end()
@@ -103,8 +107,9 @@ let g:rainbow_conf = {
     \}
 
 " Unite
-nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async command<CR>
-nnoremap <leader>P :Unite -start-insert line<CR>
+nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async<CR>
+nnoremap <leader>P :Unite -start-insert command<CR>
+nnoremap <leader>/ :Unite -start-insert line<CR>
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 autocmd FileType unite call s:unite_user_settings()
 function! s:unite_user_settings()"{{{
@@ -116,5 +121,21 @@ let g:multi_cursor_quit_key='<C-c>'
 "nnoremap <leader>m :call multiple_cursors#quit()<CR>
 "nnoremap <leader>c :call multiple_cursors#quit()<CR>
 let g:multi_cursor_exit_from_insert_mode=0
+
+
+" Gundo
+nnoremap <leader>gd :GundoToggle<CR>
+" for configuration options, see http://sjl.bitbucket.org/gundo.vim/
+" open gundo on the right side instead of the left
+let g:gundo_right=1
+" automatically close gundo on reverting
+let g:gundo_close_on_revert=1
+
+" Emmet
+" enable only for html/css
+let g:user_emmet_install_global=0
+autocmd FileType html,css EmmetInstall
+" use <Tab> to trigger expanding abbreviation
+let g:user_emmet_expandabbr_key='<Tab>'
 " }
 

@@ -171,6 +171,8 @@ function! DeleteTrailingWs_()
   exe "normal `z"
 endfunction
 command! DeleteTrailingWs call DeleteTrailingWs_()
+command! SetSyntaxPlainText set syntax=off
+command! SetSyntaxHTML set syntax=html
 
 " }
 
