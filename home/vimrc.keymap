@@ -32,7 +32,6 @@ vnoremap ( c()<Esc>P
 vnoremap [ c[]<Esc>P
 vnoremap ' c''<Esc>P
 vnoremap " c""<Esc>P
-vnoremap < c<><Esc>P
 " }
 
 " movement {
