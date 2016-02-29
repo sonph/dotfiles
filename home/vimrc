@@ -173,6 +173,7 @@ endfunction
 command! DeleteTrailingWs call DeleteTrailingWs_()
 command! SetSyntaxPlainText set syntax=off
 command! SetSyntaxHTML set syntax=html
+command! OpenURL call feedkeys('gx')
 
 " }
 

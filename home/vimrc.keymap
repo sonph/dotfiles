@@ -99,6 +99,10 @@ nmap <leader>? :nohlsearch<CR>
 " resource vimrc
 nmap <leader>r :source ~/.vimrc<CR>
 
+if executable('pbcopy')
+  vnoremap <leader>c :w !pbcopy
+end
+
 " set fold levels
 nnoremap <leader>f0 :set foldlevel=0<CR>
 nnoremap <leader>f1 :set foldlevel=1<CR>
