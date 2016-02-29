@@ -25,7 +25,8 @@ alias la="ls -A"
 alias l="ls -CF"
 alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
-alias m='less'
+alias m='less -N'
+alias less='less -N'
 alias ..='cd ..'
 alias ...='cd ..;cd ..'
 alias ~='cd ~'
