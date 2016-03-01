@@ -69,7 +69,7 @@ augroup END
 syntax on                                         " syntax highlighting pls
 set showmatch                                     " show matching parentheses
 set list                                          " highlight trailing spaces
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set listchars=tab:›·,trail:·,extends:›,precedes:‹
 
 " Cursor and mouse
 set ttyfast                                       " enable mouse support
