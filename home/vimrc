@@ -124,7 +124,10 @@ endif
 
 " Language specific settings {
 if has('autocmd')
-  autocmd filetype html,xml set listchars-=tab:>.
+  " don't show tabs in html and xml files
+  autocmd filetype html,xml set listchars-=tab:›·
+  " in python use 4 spaces indentation
+  autocmd filetype python set shiftwidth=4 tabstop=4 softtabstop=4
 endif
 " }
 
