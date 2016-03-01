@@ -109,6 +109,7 @@ let g:rainbow_conf = {
 " Unite
 nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async<CR>
 nnoremap <leader>P :Unite -start-insert command<CR>
+vnoremap <leader>P :Unite -start-insert command<CR>
 nnoremap <leader>/ :Unite -start-insert line<CR>
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 autocmd FileType unite call s:unite_user_settings()
