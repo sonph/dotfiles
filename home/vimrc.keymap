@@ -11,10 +11,6 @@ inoremap jk <ESC>
 inoremap <C-a> <C-o>^
 " ctrl+o puts you in command mode for one key only
 inoremap <C-e> <C-o>$
-
-inoremap II <Esc>I
-inoremap AA <Esc>A
-inoremap OO <Esc>O
 " }
 
 " visual mode {
@@ -88,7 +84,6 @@ nnoremap <leader>9 9gt<CR>
 
 " stuffs with leader key {
 nnoremap <leader>q :q<CR>
-inoremap <leader>q <Esc>:q<CR>
 nnoremap <leader>Q :q!<CR>
 
 nnoremap <leader>w :w<CR>
