@@ -28,6 +28,7 @@ call vundle#begin()
   if executable('ctags')
     Plugin 'majutsushi/tagbar'                        " outline/tags sidebar
   endif
+  Plugin 'kshenoy/vim-signature'
 
   " search & autocomplete
   " Plugin 'ctrlpvim/ctrlp.vim'                         " file fuzzy search; unite does it just fine so no need
@@ -105,6 +106,21 @@ let g:rainbow_conf = {
     \       'css': 0,
     \   }
     \}
+
+" Vim-signature
+" change the bookmark color to indicate git-gutter state
+let g:SignatureMarkTextHLDynamic=1
+
+" for some reason the bookmarks don't immediately appear, call SignatureRefresh
+let bookmark_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let i = 0
+while i < len(bookmark_keys)
+  execute 'nnoremap m' . bookmark_keys[i] . ' :mark ' . bookmark_keys[i]. ' \| SignatureRefresh<CR>'
+  let i = i + 1
+endwhile
+
+nnoremap m/ :SignatureListMarks<CR>
+nnoremap m<Space> call signature#mark#Purge('all')
 
 " Unite
 nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async<CR>
