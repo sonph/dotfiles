@@ -122,6 +122,52 @@ if has("autocmd")
 endif
 " }
 
+" autoload sessions
+" see http://vim.wikia.com/wiki/Go_away_and_come_back
+" Creates a session
+let g:sessionfile_name = "session.vim"
+function! MakeSession()
+  let g:sessionfile = getcwd() . "/" . g:sessionfile_name
+  exec 'mksession! ' . fnameescape(g:sessionfile)
+  echo 'Wrote session ' . g:sessionfile
+endfunction
+
+" Updates a session, only if it exists
+function! UpdateSession()
+  if (filereadable(g:sessionfile))
+    exec 'mksession! ' . fnameescape(g:sessionfile)
+    echo 'Updating session ' . g:sessionfile
+  endif
+endfunction
+
+" Loads a session if it exists
+function! LoadSession()
+  " only load session if vim is not invoked with any arguments
+  if (argc() == 0)
+    " try to load directory session
+    let g:sessionfile = getcwd() . "/" . g:sessionfile_name
+    if (filereadable(g:sessionfile))
+      exec 'source ' . fnameescape(g:sessionfile)
+      echo 'Loaded ' . g:sessionfile
+    else
+      " try to load default session in ~
+      let g:sessionfile = $HOME . "/" . g:sessionfile_name
+      if (filereadable(g:sessionfile))
+        exec 'source ' . fnameescape(g:sessionfile)
+        echo 'Loaded ' . g:sessionfile
+      else
+        echo 'No session loaded.'
+      endif
+    endif
+  else
+    let g:sessionfile = ""
+    let g:sessiondir = ""
+  endif
+endfunction
+au VimEnter * nested :call LoadSession()
+au VimLeave * :call UpdateSession() | NERDTreeClose
+command! MakeSession call MakeSession()
+
 " Language specific settings {
 if has('autocmd')
   " don't show tabs in html and xml files

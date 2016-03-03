@@ -114,6 +114,5 @@ nnoremap <leader>f9 :set foldlevel=9<CR>
 " <C-q> is default 'unfreeze', so execute this command to allow <C-q> to reach vim via the terminal
 " see http://stackoverflow.com/questions/7883803/why-doesnt-map-c-q-q-cr-work-in-vim
 silent !stty -ixon 2>&1 > /dev/null
-nnoremap <C-q> :q<CR>
-inoremap <C-q> <Esc>:q<CR>
+nnoremap <C-q> :qall<CR>
 

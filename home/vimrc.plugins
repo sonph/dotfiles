@@ -70,13 +70,13 @@ let g:airline_right_sep='‹'
 
 " NERDTree
 nmap <leader>nt :NERDTreeFocus<CR>                     " ^w 0 to focus the nerdtree sidebar (like sublime)
-let NERDTreeShowHidden=1                          " show hidden dot files
-if has('autocmd')
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-                                                  " automatically close vim if the only tab open is nerdtree
-  autocmd StdinReadPre * let s:std_in=1           " open nerdtree automatically if no file is specified
-  autocmd VimEnter * if (argc() == 0 && !exists("s:std_in")) | NERDTree | wincmd l | endif
-endif
+"let NERDTreeShowHidden=1                          " show hidden dot files
+"if has('autocmd')
+"  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"                                                  " automatically close vim if the only tab open is nerdtree
+"  autocmd StdinReadPre * let s:std_in=1           " open nerdtree automatically if no file is specified
+"  autocmd VimEnter * if (argc() == 0 && !exists("s:std_in")) | NERDTree | wincmd l | endif
+"endif
 
 " Tagbar
 nmap <leader>tb :TagbarToggle<CR>
