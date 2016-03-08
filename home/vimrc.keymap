@@ -17,6 +17,8 @@ inoremap <C-e> <C-o>$
 " tab and shift-tab in visual mode to indent/unindent
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+nnoremap <Tab> >>
+noremap <S-Tab> <<
 
 " indent/unindent in visual mode without exiting
 vnoremap > >gv
