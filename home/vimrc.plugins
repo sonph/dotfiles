@@ -29,6 +29,7 @@ call vundle#begin()
     Plugin 'majutsushi/tagbar'                        " outline/tags sidebar
   endif
   Plugin 'kshenoy/vim-signature'
+  Plugin 'rargo/vim-tab'
 
   " search & autocomplete
   " Plugin 'ctrlpvim/ctrlp.vim'                         " file fuzzy search; unite does it just fine so no need
@@ -119,8 +120,12 @@ while i < len(bookmark_keys)
   let i = i + 1
 endwhile
 
+" vim-signature
 nnoremap m/ :SignatureListMarks<CR>
 nnoremap m<Space> call signature#mark#Purge('all')
+
+" vim-tab
+let g:TabTrigger = []
 
 " Unite
 nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async<CR>
