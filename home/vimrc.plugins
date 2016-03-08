@@ -69,7 +69,7 @@ let g:airline_left_sep='›'
 let g:airline_right_sep='‹'
 
 " NERDTree
-nmap <leader>nt :NERDTreeFocus<CR>                     " ^w 0 to focus the nerdtree sidebar (like sublime)
+nmap <leader>nt :NERDTreeToggle<CR>                     " ^w 0 to focus the nerdtree sidebar (like sublime)
 "let NERDTreeShowHidden=1                          " show hidden dot files
 "if has('autocmd')
 "  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

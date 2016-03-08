@@ -172,8 +172,6 @@ command! MakeSession call MakeSession()
 if has('autocmd')
   " don't show tabs in html and xml files
   autocmd filetype html,xml set listchars-=tab:›·
-  " in python use 4 spaces indentation
-  autocmd filetype python set shiftwidth=4 tabstop=4 softtabstop=4
 endif
 " }
 
@@ -223,6 +221,8 @@ command! DeleteTrailingWs call DeleteTrailingWs_()
 command! SetSyntaxPlainText set syntax=off
 command! SetSyntaxHTML set syntax=html
 command! OpenURL call feedkeys('gx')
+command! SetIndent4Spaces set shiftwidth=4 tabstop=4 softtabstop=4
+command! SetIndent2Spaces set shiftwidth=2 tabstop=2 softtabstop=2
 
 " }
 
