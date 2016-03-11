@@ -42,10 +42,11 @@ nnoremap k gk
 noremap <C-w>n :new<Enter>
 
 " easy window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" commented out because we use vim-tmux-navigator instead
+" noremap <C-h> <C-w>h
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-l> <C-w>l
 " }
 
 " tabs {
