@@ -18,7 +18,7 @@ ln -s $PWD/bin $HOME/bin
 # check binaries {
 echo '  >>  Checking for binaries...'
 echo "$ANYKEY"; read
-BINARIES=('tmux' 'ctags' 'vim' 'zsh' 'curl' 'wget' 'python' 'make')
+BINARIES=('tmux' 'ctags' 'vim' 'zsh' 'curl' 'wget' 'python' 'nvim' 'pip')
 for BIN in ${BINARIES[@]}; do
   which $BIN 2>&1 > /dev/null || echo "$BIN not found"
 done
@@ -46,4 +46,20 @@ which make 2>&1 > /dev/null && make || '  >>  make is not installed. Please inst
 # setup YouCompleteMe (completion engine)
 which python 2>&1 > /dev/null && python $HOME/.vim/bundle/YouCompleteMe/install.py || \
   echo '  >>  python is not installed. Please install python and python $HOME/.vim/bundle/YouCompleteMe/install.py or disable YouCompleteMe in $HOME/.vimrc.plugins'
+# }
+
+# setup neovim configs {
+# See https://neovim.io/doc/user/nvim_from_vim.html
+mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+ln -s $PWD/home/vim $XDG_CONFIG_HOME/nvim
+ln -s $PWD/home/vimrc $XDG_CONFIG_HOME/nvim/init.vim
+
+which pip 2>&1 > /dev/null && sudo pip install neovim || \
+  cat <<END
+  >>  pip is not installed. Please install pip by
+        \`sudo apt-get install python-pip\` or
+        \`wget https://bootstrap.pypa.io/get-pip.py && sudo python ./get-pip.py\`
+      then
+        \`pip install neovim\`
+END
 # }
