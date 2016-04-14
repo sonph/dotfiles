@@ -74,8 +74,11 @@ set listchars=tab:›·,trail:·,extends:›,precedes:‹
 " Cursor and mouse
 set ttyfast                                       " enable mouse support
 set mouse=a                                       " see http://usevim.com/2012/05/16/mouse/
-set ttymouse=xterm2                               " set this to name of your terminal that supports mouse codes:
-                                                  " xterm, xterm2, netterm, dec, jsbterm, pterm
+
+if !has('nvim')                                   " nvim doesn't have ttymouse. Mouse support is enabled by default
+  set ttymouse=xterm2                             " set this to name of your terminal that supports mouse codes:
+endif                                             " xterm, xterm2, netterm, dec, jsbterm, pterm
+
 " change cursor shapes according to current mode
 " only works in iTerm. tmux optional.
 " see http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
@@ -260,6 +263,12 @@ command! ColorDark call ColorDark_()
 
 " default colors
 ColorLight
+" }
+
+" Neovim {
+if filereadable(expand('~/.vimrc.neovim')) && has('nvim')
+  source ~/.vimrc.neovim
+endif
 " }
 
 " make sure this is the last line
