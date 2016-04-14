@@ -233,7 +233,7 @@ command! SetIndent2Spaces set shiftwidth=2 tabstop=2 softtabstop=2
 set t_Co=256                                      " enable 256 colors
 
 function! ColorLight_()
-  colorscheme default
+  colorscheme spacegrayish
   let g:airline_theme='bubblegum'
   set background=light
   hi ColorColumn ctermbg=LightGray
