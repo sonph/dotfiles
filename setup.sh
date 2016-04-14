@@ -10,11 +10,13 @@ echo "$ANYKEY"; read
 
 DIR="home"
 
-for file in $(ls $DIR); do
+# List files for symlinking only.
+# See http://askubuntu.com/questions/289321/listing-files-in-a-directory-without-listing-subdirectories-and-their-contents-i
+for file in $(ls -p $DIR | grep -v /); do
   ln -s $PWD/$DIR/$file $HOME/.${file}
 done
 
-ln -s $PWD/bin $HOME/bin
+[[ ! -e $HOME/bin ]] && ln -s $PWD/bin $HOME/bin
 # }
 
 # check binaries {
