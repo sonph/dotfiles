@@ -22,6 +22,10 @@ BINARIES=('tmux' 'ctags' 'vim' 'zsh' 'curl' 'wget' 'python' 'nvim' 'pip')
 for BIN in ${BINARIES[@]}; do
   which $BIN 2>&1 > /dev/null || echo "$BIN not found"
 done
+
+if which tmux 2>&1 > /dev/null && [[ "$(tmux -V)" < "tmux 2.2" ]]; then
+  echo "  >>  Tmux version is $(tmux -V); need at least tmux 2.2 for true color support."
+fi
 # }
 
 # setup vim {
