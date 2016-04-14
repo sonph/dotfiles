@@ -2,6 +2,8 @@
 
 ANYKEY='  >>  Press any key to continue or C-c to cancel...'
 
+DOTFILESDIR="$PWD"
+
 # symlink files {
 echo '  >>  Symlinking files...'
 echo "$ANYKEY"; read
@@ -46,6 +48,7 @@ which vim 2>&1 > /dev/null && vim $HOME/.vimrc.plugins -c "PluginInstall" -c "qa
 # setup vimproc.vim (plugin for unite.vim)
 cd $HOME/.vim/bundle/vimproc.vim
 which make 2>&1 > /dev/null && make || '  >>  make is not installed. Please install make and make $HOME/.vim/bundle/vimproc.vim'
+cd $DOTFILESDIR
 
 # setup YouCompleteMe (completion engine)
 which python 2>&1 > /dev/null && python $HOME/.vim/bundle/YouCompleteMe/install.py || \
@@ -56,7 +59,7 @@ which python 2>&1 > /dev/null && python $HOME/.vim/bundle/YouCompleteMe/install.
 # See https://neovim.io/doc/user/nvim_from_vim.html
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s $PWD/home/vim $XDG_CONFIG_HOME/nvim
-ln -s $PWD/home/vimrc $XDG_CONFIG_HOME/nvim/init.vim
+ln -s $PWD/home/vimrc $PWD/home/vim/init.vim
 
 which pip 2>&1 > /dev/null && sudo pip install neovim || \
   cat <<END
@@ -64,6 +67,6 @@ which pip 2>&1 > /dev/null && sudo pip install neovim || \
         \`sudo apt-get install python-pip\` or
         \`wget https://bootstrap.pypa.io/get-pip.py && sudo python ./get-pip.py\`
       then
-        \`pip install neovim\`
+        \`sudo pip install neovim\`
 END
 # }
