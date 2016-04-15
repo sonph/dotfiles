@@ -128,11 +128,19 @@ nnoremap m<Space> call signature#mark#Purge('all')
 let g:TabTrigger = []
 
 " Unite
-nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async<CR>
-nnoremap <leader>P :Unite -start-insert command<CR>
-vnoremap <leader>P :Unite -start-insert command<CR>
-nnoremap <leader>/ :Unite -start-insert line<CR>
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" nnoremap <leader>p :Unite -start-insert file_mru file file_rec/async<CR>
+nnoremap <leader>p :Unite -start-insert -smartcase file_rec/async<CR>
+" if has("nvim")
+"   nnoremap <leader>p :Unite -start-insert -smartcase file_rec/neovim<CR>
+" endif
+nnoremap <leader>P :Unite -start-insert -smartcase command<CR>
+vnoremap <leader>P :Unite -start-insert -smartcase command<CR>
+nnoremap <leader>/ :Unite -start-insert -smartcase line<CR>
+
+" the default command is find -L, which follows symbolic links
+let g:unite_source_rec_async_command = ['find']
+
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
 autocmd FileType unite call s:unite_user_settings()
 function! s:unite_user_settings()"{{{
   imap <buffer> <leader>p <Plug>(unite_exit)
