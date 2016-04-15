@@ -181,3 +181,7 @@ fi
 # custom scripts
 alias refenv=". refenv"
 alias putenv=". putenv"
+
+which nvim 2>&1 > /dev/null && alias vim="nvim"
+
+[[ -e $HOME/.shaliases.google ]] && source $HOME/.shaliases.google
