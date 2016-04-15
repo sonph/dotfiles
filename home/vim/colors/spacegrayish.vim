@@ -52,7 +52,7 @@ hi StatusLineNC     guifg=#666666   guibg=#afb2ba   guisp=#e6e9f0   gui=None    
 hi Label            guifg=#017b9d   guibg=None      guisp=None      gui=None        ctermfg=1       ctermbg=None    cterm=None
 hi PMenuSel         guifg=#333333   guibg=#dfe1e8   guisp=#dfe1e8   gui=None        ctermfg=236     ctermbg=254     cterm=None
 hi Search           guifg=#333333   guibg=#f7e8ac   guisp=#f7e8ac   gui=None        ctermfg=236     ctermbg=229     cterm=None
-hi Delimiter        guifg=#017b9d   guibg=None      guisp=None      gui=None        ctermfg=1       ctermbg=None    cterm=None
+hi Delimiter        guifg=#017b9d   guibg=None      guisp=None      gui=None        ctermfg=3       ctermbg=None    cterm=None
 hi Statement        guifg=#017b9d   guibg=None      guisp=None      gui=None        ctermfg=31      ctermbg=None    cterm=None
 hi SpellRare        guifg=#F9F9FF   guibg=#192224   guisp=#192224   gui=underline   ctermfg=189     ctermbg=235     cterm=underline
 hi Comment          guifg=#b8b8b8   guibg=None      guisp=None      gui=None        ctermfg=250     ctermbg=None    cterm=None
@@ -66,7 +66,7 @@ hi Define           guifg=#017b9d   guibg=None      guisp=None      gui=None    
 hi Function         guifg=#536991   guibg=None      guisp=None      gui=None        ctermfg=60      ctermbg=None    cterm=None
 hi FoldColumn       guifg=#192224   guibg=#A1A6A8   guisp=#A1A6A8   gui=None        ctermfg=235     ctermbg=248     cterm=None
 hi PreProc          guifg=#017b9d   guibg=None      guisp=None      gui=None        ctermfg=31      ctermbg=None    cterm=None
-hi Visual           guifg=#192224   guibg=#F9F9FF   guisp=#F9F9FF   gui=None        ctermfg=235     ctermbg=189     cterm=None
+hi Visual           guifg=None      guibg=#e4e4e4   guisp=None      gui=None        ctermfg=None    ctermbg=254     cterm=None
 hi SpellCap         guifg=#F9F9FF   guibg=#192224   guisp=#192224   gui=underline   ctermfg=189     ctermbg=235     cterm=underline
 hi VertSplit        guifg=#e6e9f0   guibg=#e6e9f0   guisp=#e6e9f0   gui=None        ctermfg=255     ctermbg=255     cterm=None
 hi Exception        guifg=#017b9d   guibg=None      guisp=None      gui=None        ctermfg=31      ctermbg=None    cterm=None
