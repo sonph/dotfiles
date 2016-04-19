@@ -30,6 +30,7 @@ call vundle#begin()
   endif
   Plugin 'kshenoy/vim-signature'
   Plugin 'rargo/vim-tab'
+  Plugin 'easymotion/vim-easymotion'
 
   " search & autocomplete
   " Plugin 'ctrlpvim/ctrlp.vim'                         " file fuzzy search; unite does it just fine so no need

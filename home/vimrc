@@ -9,7 +9,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " General settings {
 
 " File encoding: utf-8
-set encoding=utf-8
+if !has('nvim')
+  set encoding=utf-8
+endif
 set fileencoding=utf-8
 set ffs=unix,dos,mac
 
@@ -323,24 +325,19 @@ command! SetIndent2Spaces set shiftwidth=2 tabstop=2 softtabstop=2
 set t_Co=256                                      " enable 256 colors
 
 function! ColorLight_()
-  colorscheme spacegrayish
-  let g:airline_theme='bubblegum'
+  colorscheme onelight
+  let g:airline_theme='onedark'
   set background=light
-  hi ColorColumn ctermbg=LightGray
-  hi CursorLine cterm=none ctermbg=LightGray
-  hi CursorLineNr ctermbg=LightGray
 endfunction
 function! ColorDark_()
-  call ColorLight_()
+  colorscheme onedark
+  let g:airline_theme='onedark'
   set background=dark
 endfunction
 function! ColorSolarized_()
   colorscheme solarized
   set background=light
   let g:airline_theme='solarized'
-  hi ColorColumn ctermbg=LightGray
-  hi CursorLine cterm=none ctermbg=LightGray
-  hi CursorLineNr ctermbg=LightGray
 endfunction
 function! ColorSolarizedDark_()
   call ColorSolarized_()
