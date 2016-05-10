@@ -179,9 +179,12 @@ fi
 
 
 # custom scripts
-alias refenv=". refenv"
-alias putenv=". putenv"
-
 which nvim 2>&1 > /dev/null && alias vim="nvim"
+
+alias shaliases="vim $HOME/.shaliases && source $HOME/.shaliases"
+alias shaliases.google="vim $HOME/.shaliases.google && source $HOME/.shaliases.google"
+alias vimrc="vim $HOME/.vimrc"
+alias vimrc.keymap="vim $HOME/.vimrc.keymap"
+alias vimrc.plugins="vim $HOME/.vimrc.plugins"
 
 [[ -e $HOME/.shaliases.google ]] && source $HOME/.shaliases.google
