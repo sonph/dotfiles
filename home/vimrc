@@ -177,6 +177,7 @@ command! MakeSession call MakeSession()
 if has('autocmd')
   " don't show tabs in html and xml files
   autocmd filetype html,xml set listchars-=tab:›·
+  autocmd filetype python set shiftwidth=2 tabstop=2
 endif
 " }
 
@@ -325,7 +326,7 @@ command! SetIndent2Spaces set shiftwidth=2 tabstop=2 softtabstop=2
 set t_Co=256                                      " enable 256 colors
 
 function! ColorLight_()
-  colorscheme onelight
+  colorscheme onehalflight
   let g:airline_theme='onedark'
   set background=light
 endfunction
@@ -348,15 +349,16 @@ command! ColorSolarizedDark call ColorSolarizedDark_()
 command! ColorLight call ColorLight_()
 command! ColorDark call ColorDark_()
 
-" default colors
-ColorLight
-" }
-
 " Neovim {
 if filereadable(expand('~/.vimrc.neovim')) && has('nvim')
   source ~/.vimrc.neovim
 endif
 " }
+
+" default colors
+ColorLight
+" }
+
 
 " make sure this is the last line
 filetype plugin indent on

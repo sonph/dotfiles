@@ -14,6 +14,7 @@ call vundle#begin()
   " colors pls
   Bundle 'daylerees/colour-schemes', {'rtp': 'vim/'}
   Bundle 'altercation/vim-colors-solarized'
+  Bundle 'sonph/onehalf', {'rtp': 'vim/'}
 
   " airline status bar
   Plugin 'vim-airline/vim-airline'                    " the modern status bar; thanks for flying vim!
