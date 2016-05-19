@@ -1,10 +1,19 @@
 {
+	"bold_folder_labels": true,
 	"color_scheme": "Packages/User/BoxUK custom.tmTheme",
-	"font_family": "Monaco",
-	"font_size": 13,
+	"fade_fold_buttons": false,
+	"font_face": "Menlo",
+	"font_family": "Menlo",
+	"font_size": 12,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"match_brackets": true,
+	"match_tags": true,
 	"rulers":
 	[
 		80,

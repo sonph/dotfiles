@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AutoFileName",
+		"BracketHighlighter",
+		"Color Highlighter",
+		"Emmet",
+		"GitGutter",
+		"HexViewer",
+		"Origami",
+		"Package Control",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeREPL",
+		"Theme - Spacegray",
+		"Themr",
+		"Vintage Escape"
+	]
+}
