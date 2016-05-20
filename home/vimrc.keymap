@@ -50,8 +50,10 @@ noremap <C-w>n :new<Enter>
 " }
 
 " tabs {
-nnoremap <C-w><Tab> :tabn<CR>                         " next tab
-nnoremap <C-w><S-Tab> :tabp<CR>                       " prev tab
+nnoremap <C-w><Tab> :tabn<CR>
+nnoremap <C-w><S-Tab> :tabp<CR>
+nnoremap <leader><Tab> :tabn<CR>
+nnoremap <leader><S-Tab> :tabp<CR>
 nnoremap <C-w>t :tabnew<CR>
 
 noremap <C-w>1 1gt<CR>
@@ -121,3 +123,9 @@ nnoremap <C-q> :qall<CR>
 
 " <leader>ex to execute current file
 nnoremap <leader>ex :!%:p<CR>
+
+nnoremap <leader>spdb o__import__('pdb').set_trace()<CR><Esc>
+vnoremap <leader>r y:%s/<C-R>*/
+
+nnoremap <leader>ggn :GitGutterNextHunk<CR>
+nnoremap <leader>ggp :GitGutterPrevHunk<CR>
