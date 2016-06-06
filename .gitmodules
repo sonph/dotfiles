@@ -4,3 +4,6 @@
 [submodule "home/vim/bundle/Vundle.vim"]
 	path = home/vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim
+[submodule "home/zsh/z"]
+	path = home/zsh/z
+	url = https://github.com/rupa/z
