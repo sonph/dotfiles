@@ -7,3 +7,6 @@
 [submodule "home/zsh/z"]
 	path = home/zsh/z
 	url = https://github.com/rupa/z
+[submodule "home/tmux/tmux-sessionist"]
+	path = home/tmux/tmux-sessionist
+	url = https://github.com/tmux-plugins/tmux-sessionist
