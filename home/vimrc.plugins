@@ -12,9 +12,10 @@ call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'                       " the package manager
 
   " colors pls
-  Bundle 'daylerees/colour-schemes', {'rtp': 'vim/'}
-  Bundle 'altercation/vim-colors-solarized'
-  Bundle 'sonph/onehalf', {'rtp': 'vim/'}
+  Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
+  Plugin 'altercation/vim-colors-solarized'
+  Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+  Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 
   " airline status bar
   Plugin 'vim-airline/vim-airline'                    " the modern status bar; thanks for flying vim!
@@ -44,9 +45,9 @@ call vundle#begin()
   " https://github.com/Valloric/YouCompleteMe/issues/1605
   if executable('ack-grep')                           " ack code search; better version of grep
     let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-    Bundle 'mileszs/ack.vim'
+    Plugin 'mileszs/ack.vim'
   elseif executable('ack')
-    Bundle 'mileszs/ack.vim'
+    Plugin 'mileszs/ack.vim'
   endif
 
   " editing
