@@ -55,6 +55,7 @@ call vundle#begin()
   Plugin 'mattn/emmet-vim'
   Plugin 'terryma/vim-multiple-cursors'               " sublime-style multiple cursors
   Plugin 'sonph/auto-pairs'                           " auto-pairs fork; automatically pair parentheses, quotes, etc.
+  Plugin 'scrooloose/nerdcommenter'                   " plugin for commenting
 
 " all vundle plugins must be before this line
 call vundle#end()

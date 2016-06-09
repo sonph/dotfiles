@@ -191,8 +191,11 @@ endif
 if filereadable(expand('~/.vimrc.plugins'))
   source ~/.vimrc.plugins
 endif
-if filereadable(expand('~/.vimrc.plugins.google'))
-  source ~/.vimrc.plugins.google
+" }
+
+" Google specific rc {
+if filereadable(expand('~/.vimrc.google'))
+  source ~/.vimrc.google
 endif
 " }
 

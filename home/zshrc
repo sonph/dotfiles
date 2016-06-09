@@ -31,7 +31,7 @@ source ~/.git-prompt.sh
 PROMPT='
 %n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
 # right prompt
-RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}' 
+RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}'
 
 # KEY BINDINGS -----------------------------------------------------------------
 # key bindings style
@@ -120,3 +120,6 @@ source $HOME/.zsh/bd.zsh
 
 # autocomplete words from tmux panes
 source $HOME/.zsh/_tmux_pane_words.zsh
+
+# z.sh
+source $HOME/.zsh/z/z.sh
