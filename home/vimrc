@@ -51,9 +51,9 @@ set backspace=indent,eol,start                    " allow backspace to also dele
 " Line numbering and highlight
 set number                                        " show line numbers
 try                                               " set color columns to mark 80 and 120 character limits
-  set colorcolumn=80,120
+  set colorcolumn=81,121
 catch
-  set colorcolumn=120                             " if 2 color columns are not supported
+  set colorcolumn=121                             " if 2 color columns are not supported
 endtry
 
 set cursorline                                    " highlight current line
