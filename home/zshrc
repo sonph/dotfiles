@@ -6,6 +6,8 @@ autoload -U compinit bashcompinit promptinit colors
 # This line must be before compinit
 fpath=($fpath ~/.zsh/autocomplete)
 
+setopt interactivecomments
+
 compinit
 bashcompinit
 promptinit
