@@ -1,8 +1,66 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#
+# Bootstrap links files and invoke install scripts.
 
-ANYKEY='  >>  Press any key to continue or C-c to cancel...'
+set -e
 
-DOTFILESDIR="$PWD"
+TIME_FORMAT="+%T"
+
+info() {
+  echo -e "$(date $TIME_FORMAT)  [ \033[00;34m..\033[0m ] $1"
+}
+
+prompt() {
+  echo -ne "$(date $TIME_FORMAT)  [ \033[0;33m??\033[0m ] $1: "
+}
+
+success() {
+  echo -e "$(date $TIME_FORMAT)\033[2K  [ \033[00;32mOK\033[0m ] $1"
+}
+
+fail() {
+  echo -e "$(date $TIME_FORMAT)\033[2K  [\033[0;31mFAIL\033[0m] $1"
+  exit 1
+}
+
+get_platform() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    echo "Darwin"
+  elif [[ "$(expr substr $(uname -s) 1 5)" = "Linux" ]]; then
+    echo "Linux"
+  else
+    echo "Windows"
+  fi
+}
+
+link() {
+  ln -s "$1" "$2" 2> /dev/null
+}
+
+PLATFORM="$(get_platform)"
+
+cd "$(dirname "$0")/.."
+DOTFILES_DIR="$(pwd -P)"
+
+
+# Check binaries:
+vim
+tmux
+make
+pip
+node/npm
+
+
+
+
+
+source /tmp/test.sh
+
+exit
+
+
+
+
 
 # symlink files {
 echo '  >>  Symlinking files...'
@@ -50,7 +108,6 @@ which vim 2>&1 > /dev/null && vim $HOME/.vimrc.plugins -c "PluginInstall" -c "qa
 # setup vimproc.vim (plugin for unite.vim)
 cd $HOME/.vim/bundle/vimproc.vim
 which make 2>&1 > /dev/null && make || '  >>  make is not installed. Please install make and make $HOME/.vim/bundle/vimproc.vim'
-cd $DOTFILESDIR
 
 # setup YouCompleteMe (completion engine)
 which python 2>&1 > /dev/null && python $HOME/.vim/bundle/YouCompleteMe/install.py || \
