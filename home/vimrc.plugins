@@ -21,6 +21,8 @@ call vundle#begin()
   Plugin 'vim-airline/vim-airline'                    " the modern status bar; thanks for flying vim!
   Plugin 'vim-airline/vim-airline-themes'             " airline themes; solarized included
 
+  Plugin 'vim-scripts/Tabmerge'
+
   " navigate
   Plugin 'christoomey/vim-tmux-navigator'             " navigate tmux panes and vim windows using the same key combs
   Plugin 'scrooloose/nerdtree'                        " file browser sidebar
@@ -70,8 +72,8 @@ set laststatus=2                                  " load airline even on a singl
 set noshowmode                                    " disable default mode indicator, use airline's instead
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|'
-let g:airline_left_sep='›'
-let g:airline_right_sep='‹'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>                     " ^w 0 to focus the nerdtree sidebar (like sublime)
