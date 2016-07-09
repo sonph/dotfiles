@@ -145,7 +145,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
 fi
 
 if [[ "$PLATFORM" == "Linux" ]]; then
-  STEP1='sudo apt-get install build-essential curl git python-setuptools ruby'
+  STEP1="$SUDO apt-get install build-essential curl git python-setuptools ruby"
   STEP2='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
   execute 'Installing linuxbrew' \
     "$STEP1 && $STEP2" \

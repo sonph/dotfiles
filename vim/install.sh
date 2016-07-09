@@ -61,7 +61,7 @@ if [[ "$CONFIG_INSTALL_NEOVIM" == "yes" ]]; then
   mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
   link "$VIM_DIR/vimrc" "$VIM_DIR/vim/init.vim"
   link "$VIM_DIR/vim" "$XDG_CONFIG_HOME/nvim"
-  sudo pip install neovim \
+  $SUDO pip install neovim \
     && successln "$INFO" \
     || failln 'Make sure pip is installed (on macOS: brew install python) and pip install neovim'
 fi
