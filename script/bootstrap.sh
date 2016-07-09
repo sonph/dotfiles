@@ -116,7 +116,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     'Follow guide on https://caskroom.github.io to install Brew cask...'
 
   for FORMULA in ${CONFIG_BREW_FORMULAS[@]}; do
-    execute "Installing $FORMULA" \
+    execute "Installing homebrew $FORMULA" \
       "brew install $FORMULA" \
       "Pls manually install $FORMULA with \`brew install\` and resolve any issues..."
   done
@@ -127,43 +127,32 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
       'Follow guide on https://github.com/neovim/homebrew-neovim to install neovim...'
   fi
 
-  CASK_FORMULAS="google-chrome iterm2 sublime-text dash flux macs-fan-control jumpcut spectacle franz dropbox vlc atom licecap skype"
+  for FORMULA in ${CONFIG_CASK_FORMULAS[@]}; do
+    execute "Installing cask $FORMULA" \
+      "brew cask install $FORMULA" \
+      "Pls manually install $FORMULA with \`brew cask install\` and resolve any issues..."
+  done
 fi
 
 if [[ "$PLATFORM" == "Linux" ]]; then
-  # TODO: linuxbrew
-  # TODO: neovim
-  # TODO: binaries (tmux, zsh, curl, wget, vim, git, etc.)
+  STEP1='sudo apt-get install build-essential curl git python-setuptools ruby'
+  STEP2='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
+  execute 'Installing linuxbrew' \
+    "$STEP1 && $STEP2" \
+    'Please follow guide on https://github.com/Linuxbrew/brew to install linuxbrew...'
 
-# Check binaries:
-linuxbrew 
-  # https://github.com/Linuxbrew/brew
-  # debian/ubuntu
-  sudo apt-get install build-essential curl git python-setuptools ruby
-  # fedora, centos, redhat
-  sudo yum groupinstall 'Development Tools' && sudo yum install curl git irb python-setuptools ruby
-
-  # install
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-vim
-tmux
-make
-pip
-node/npm
-
-# Mac
-# brew
-# cask: iterm, google-chrome, 
-
-
-
-
+  for FORMULA in ${CONFIG_LINUXBREW_FORMULAS[@]}; do
+    execute "Installing $FORMULA" \
+      "linuxbrew install $FORMULA" \
+      "Please manually install $FORMULA with \`linuxbrew install\` and resolve any issues..."
+  done
+fi
 
 
 for DIR in $(ls -d */); do
   if [[ -f "$DIR/install.sh" ]]; then
     echo
-    info "Running $DIR/install.sh..."
+    infoln "Running $DIR/install.sh..."
     source $DIR/install.sh
     cd "$DOTFILES_DIR"
   fi
