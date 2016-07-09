@@ -6,24 +6,24 @@ TIME_FORMAT="+%T"
 info() {
   # Print '  [ .. ] $1'
   # Follow this with 'success' or 'fail'.
-  echo -ne "$(date $TIME_FORMAT)  [ \033[00;34m..\033[0m ] $1"
+  echo -ne "$(date $TIME_FORMAT) [ \033[00;34m..\033[0m ] $1"
 }
 
 success() {
   # Replace the '[ .. ]' of the info line with '[ OK ]'.
   # Optionally overwrite the message.
-  echo -e "\r$(date $TIME_FORMAT)  [ \033[00;32mOK\033[0m ] $1"
+  echo -e "\r$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] $1"
 }
 
 fail() {
   # Replace the '[ .. ]' of the info line with '[FAIL]'.
   # Optionally overwrite the message.
-  echo -e "\r$(date $TIME_FORMAT)  [\033[0;31mFAIL\033[0m] $1"
+  echo -e "\r$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] $1"
 }
 
 prompt() {
   # Print '  [ ?? ] $1'. Follow this with 'read SOMETHING'.
-  echo -ne "$(date $TIME_FORMAT)  [ \033[0;33m??\033[0m ] $1"
+  echo -ne "$(date $TIME_FORMAT) [ \033[0;33m??\033[0m ] $1"
 }
 
 infoln() {
@@ -35,12 +35,12 @@ successln() {
   # Print a success line. Use this if the command is expected to spew out some
   # output that we can't just replace the last line '[ .. ]' with '[ OK ]'.
   # Generally $1 should be the same as infoln.
-  echo -e "$(date $TIME_FORMAT)  [ \033[00;32mOK\033[0m ] $1"
+  echo -e "$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] $1"
 }
 
 failln() {
   # Same as successln.
-  echo -e "$(date $TIME_FORMAT)  [\033[0;31mFAIL\033[0m] $1"
+  echo -e "$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] $1"
 }
 
 
