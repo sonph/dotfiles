@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
+# Install vim-related stuffs.
 
-info 'Setting up vim...'
-
-VIM_DIR="vim"
+cd "$(dirname "$0")"
+VIM_DIR="$(pwd -P)"
 
 
 # Symlink vim files.
 VIM_SYMLINK_DST="$HOME"
-for FILE in $(ls "$VIM_DIR"/*.symlink); do
-  ln -s "$DOTFILES_DIR/$VIM_DIR/$FILE" "$VIM_SYMLINK_DST/.$FILE"
+
+for FILE in $(ls); do
+  link "$VIM_DIR/$FILE" "$VIM_SYMLINK_DST/.$FILE"
 done
 success 'Setting up vim: symlink vim files'
 
@@ -18,7 +19,7 @@ mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 link "$VIM_DIR/vimrc" "$VIM_DIR/vim/init.vim"
 link "$VIM_DIR/vim" "$XDG_CONFIG_HOME/nvim"
 sudo pip install neovim
-success 'Setting up vim: neovim'
+success 'Setting up vim: symlink neovim files'
 
 
 # Setup Vundle.vim.
@@ -30,6 +31,7 @@ if [[ ! -d  "$VIM_VUNDLE_DIR" ]]; then
 fi
 success 'Setting up vim: Vundle.vim'
 
+
 # Setup plugins.
 vim $HOME/.vimrc.plugins -c "PluginInstall" -c "qall!"
 success 'Setting up vim: install plugins with Vundle'
@@ -40,8 +42,9 @@ make
 cd "$DOTFILES_DIR"
 success 'Setting up vim: compile vimproc.vim'
 
+
 # Setup YouCompleteMe
 python "$VIM_DIR/vim/bundle/YouCompleteMe/install.py"
 success 'Setting up vim: compile YouCompleteMe'
 
-
+cd $DOTFILES_DIR

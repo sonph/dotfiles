@@ -1,26 +1,53 @@
 #!/usr/bin/env bash
-#
-# Bootstrap links files and invoke install scripts.
-
-set -e
+# Do common stuffs and invoke install scripts.
 
 TIME_FORMAT="+%T"
 
 info() {
-  echo -e "$(date $TIME_FORMAT)  [ \033[00;34m..\033[0m ] $1"
-}
-
-prompt() {
-  echo -ne "$(date $TIME_FORMAT)  [ \033[0;33m??\033[0m ] $1: "
+  # Print '  [ .. ] $1'
+  # Follow this with 'success' or 'fail'.
+  echo -ne "$(date $TIME_FORMAT)  [ \033[00;34m..\033[0m ] $1"
 }
 
 success() {
-  echo -e "$(date $TIME_FORMAT)\033[2K  [ \033[00;32mOK\033[0m ] $1"
+  # Replace the '[ .. ]' of the info line with '[ OK ]'.
+  # Optionally overwrite the message.
+  echo -e "\r$(date $TIME_FORMAT)  [ \033[00;32mOK\033[0m ]$1"
 }
 
 fail() {
-  echo -e "$(date $TIME_FORMAT)\033[2K  [\033[0;31mFAIL\033[0m] $1"
-  exit 1
+  # Replace the '[ .. ]' of the info line with '[FAIL]'.
+  # Optionally overwrite the message.
+  echo -e "\r$(date $TIME_FORMAT)  [\033[0;31mFAIL\033[0m]$1"
+}
+
+prompt() {
+  # Print '  [ ?? ] $1'. Follow this with 'read SOMETHING'.
+  echo -ne "$(date $TIME_FORMAT)  [ \033[0;33m??\033[0m ] $1"
+}
+
+infoln() {
+  # Print an info line.
+  info "$1\n"
+}
+
+successln() {
+  # Print a success line. Use this if the command is expected to spew out some
+  # output that we can't just replace the last line '[ .. ]' with '[ OK ]'.
+  # Generally $1 should be the same as infoln.
+  echo -e "$(date $TIME_FORMAT)  [ \033[00;32mOK\033[0m ]$1"
+}
+
+failln() {
+  # Same as successln.
+  echo -e "$(date $TIME_FORMAT)  [\033[0;31mFAIL\033[0m]$1"
+}
+
+
+succeeded() {
+  # Return the last command's status.
+  # if succeeded; then; success; else; fail; fi
+  return $?
 }
 
 get_platform() {
@@ -34,39 +61,118 @@ get_platform() {
 }
 
 link() {
-  ln -s "$1" "$2" 2> /dev/null
+  SRC="$1"
+  DST="$2"
+  if [[ -e "$DST" ]]; then
+    mv "$DST" "${DST}.orig"
+    info "Moved $DST -> ${DST}.orig"
+  fi
+  ln -s "$1" "$2"
+}
+
+binary_exists() {
+  which "$1" 2>&1 > /dev/null
+  return $?
+}
+
+execute() {
+  # Print some info, execute, report and show what to do next.
+  # Usage: execute "info" "command" "to do".
+  infoln "$1"
+  eval "$2"
+  if [[ $? -eq 0 ]]; then
+    successln "$1"
+  else
+    failln "$1"
+    prompt "$3"
+    read
+  fi
 }
 
 PLATFORM="$(get_platform)"
+successln "Platform: $PLATFORM"
 
 cd "$(dirname "$0")/.."
 DOTFILES_DIR="$(pwd -P)"
+successln "Dotfiles directory: $DOTFILES_DIR"
 
+# Config.sh
+prompt "Launching editor for script/config.sh..."
+read
+$EDITOR script/config.sh
+infoln "Checking for syntax errors with \`bash -n script/config.sh\`"
+prompt "If there are errors, please correct them and check again with \`bash -n\`..."
+read
+
+source script/config.sh
+
+if [[ "$PLATFORM" == "Darwin" ]]; then
+  execute 'Installing homebrew' \
+    '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"' \
+    'Follow guide on http://brew.sh to install Homebrew...'
+
+  execute 'Installing brew cask' \
+    'brew tap caskroom/cask' \
+    'Follow guide on https://caskroom.github.io to install Brew cask...'
+
+  for FORMULA in ${CONFIG_BREW_FORMULAS[@]}; do
+    execute "Installing $FORMULA" \
+      "brew install $FORMULA" \
+      "Pls manually install $FORMULA with \`brew install\` and resolve any issues..."
+  done
+
+  if [[ $CONFIG_INSTALL_NEOVIM == "yes" ]]; then
+    execute 'Installing neovim' \
+      'brew install neovim/neovim/neovim' \
+      'Follow guide on https://github.com/neovim/homebrew-neovim to install neovim...'
+  fi
+
+  CASK_FORMULAS="google-chrome iterm2 sublime-text dash flux macs-fan-control jumpcut spectacle franz dropbox vlc atom licecap skype"
+fi
+
+if [[ "$PLATFORM" == "Linux" ]]; then
+  # TODO: linuxbrew
+  # TODO: neovim
+  # TODO: binaries (tmux, zsh, curl, wget, vim, git, etc.)
 
 # Check binaries:
+linuxbrew 
+  # https://github.com/Linuxbrew/brew
+  # debian/ubuntu
+  sudo apt-get install build-essential curl git python-setuptools ruby
+  # fedora, centos, redhat
+  sudo yum groupinstall 'Development Tools' && sudo yum install curl git irb python-setuptools ruby
+
+  # install
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
 vim
 tmux
 make
 pip
 node/npm
 
+# Mac
+# brew
+# cask: iterm, google-chrome, 
 
 
 
 
-source /tmp/test.sh
+
+
+for DIR in $(ls -d */); do
+  if [[ -f "$DIR/install.sh" ]]; then
+    echo
+    info "Running $DIR/install.sh..."
+    source $DIR/install.sh
+    cd "$DOTFILES_DIR"
+  fi
+done
 
 exit
 
 
 
-
-
-# symlink files {
-echo '  >>  Symlinking files...'
-echo "$ANYKEY"; read
-
-DIR="home"
 
 # List files for symlinking only.
 # See http://askubuntu.com/questions/289321/listing-files-in-a-directory-without-listing-subdirectories-and-their-contents-i
