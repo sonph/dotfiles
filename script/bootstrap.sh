@@ -96,10 +96,20 @@ cd "$(dirname "$0")/.."
 DOTFILES_DIR="$(pwd -P)"
 successln "Dotfiles directory: $DOTFILES_DIR"
 
+successln "User: $(whoami)"
+if [[ "$(whoami)" == "root" ]]; then
+  SUDO=""
+else
+  SUDO="sudo"
+  binary_exists 'sudo' \
+    && successln 'sudo is installed' \
+    || infoln 'sudo is NOT installed'
+fi
+
 # Config.sh
 prompt "Launching editor for script/config.sh..."
 read
-$EDITOR script/config.sh
+${EDITOR:=vim} script/config.sh
 infoln "Checking for syntax errors with \`bash -n script/config.sh\`"
 prompt "If there are errors, please correct them and check again with \`bash -n\`..."
 read
