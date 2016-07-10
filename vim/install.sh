@@ -4,6 +4,8 @@
 cd "$(dirname "$0")"
 VIM_DIR="$(pwd -P)"
 
+infoln "VIM_DIR: $VIM_DIR"
+
 infoln 'Setting up vim'
 
 

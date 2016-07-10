@@ -145,7 +145,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
 fi
 
 if [[ "$PLATFORM" == "Linux" ]]; then
-  STEP1="$SUDO apt-get install build-essential curl git python-setuptools ruby"
+  STEP1="$SUDO apt-get install -y build-essential curl git python-setuptools ruby"
   STEP2='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
   execute 'Installing linuxbrew' \
     "$STEP1 && $STEP2" \
@@ -158,11 +158,15 @@ if [[ "$PLATFORM" == "Linux" ]]; then
   done
 fi
 
+# TODO: npm
+# TODO: pip
+
+
 
 for DIR in $(ls -d */); do
   if [[ -f "$DIR/install.sh" ]]; then
     echo
-    infoln "Running $DIR/install.sh..."
+    prompt "Running ${DIR}install.sh..." && read
     source $DIR/install.sh
     cd "$DOTFILES_DIR"
   fi
