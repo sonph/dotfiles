@@ -3,23 +3,21 @@
 cd "$(dirname "$0")"
 GITCONFIG_DIR="$(pwd -P)"
 
-infoln 'Setting up gitconfig'
+info 'Setting up gitconfig'
 
 # Setup gitconfig.
 if [[ ! -f gitconfig.local ]]; then
-  echo
   info 'Setup gitconfig'
-  prompt 'Gitconfig full name'
-  read GITCONFIG_NAME
-  prompt 'Gitconfig email'
-  read GITCONFIG_EMAIL
-
-  sed -e "s/{AUTHORNAME}/${GITCONFIG_NAME}/g" \
-    -e "s/{AUTHOREMAIL}/${GITCONFIG_EMAIL}/g" \
-    git/gitconfig.local.example > git/gitconfig.local
-
-  success 'gitconfig'
+  sed -e "s/{AUTHORNAME}/${CONFIG_GITCONFIG_NAME}/g" \
+    -e "s/{AUTHOREMAIL}/${CONFIG_GITCONFIG_EMAIL}/g" \
+    gitconfig.local.example > gitconfig.local
+  success
 fi
 
 # Symlink files
+info 'Setting up gitconfig: symlink files'
+for FILE in $(ls); do
+  link "$GITCONFIG_DIR/$FILE" "$HOME/.$FILE"
+done
+success
 

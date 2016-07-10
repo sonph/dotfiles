@@ -2,52 +2,24 @@
 # Do common stuffs and invoke install scripts.
 
 TIME_FORMAT="+%T"
+MESSAGE=""
+
+prompt() {
+  echo -ne "$(date $TIME_FORMAT) [ \033[0;33m??\033[0m ] $@"
+}
 
 info() {
-  # Print '  [ .. ] $1'
-  # Follow this with 'success' or 'fail'.
-  echo -ne "$(date $TIME_FORMAT) [ \033[00;34m..\033[0m ] $1"
+  echo -e "$(date $TIME_FORMAT) [ \033[00;34m..\033[0m ] $@"
+  MESSAGE="$@"
 }
 
 success() {
-  # Replace the '[ .. ]' of the info line with '[ OK ]'.
-  # Optionally overwrite the message.
-  echo -e "\r$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] $1"
+  echo -e "$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] $MESSAGE"
 }
 
 fail() {
-  # Replace the '[ .. ]' of the info line with '[FAIL]'.
-  # Optionally overwrite the message.
-  echo -e "\r$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] $1"
-}
-
-prompt() {
-  # Print '  [ ?? ] $1'. Follow this with 'read SOMETHING'.
-  echo -ne "$(date $TIME_FORMAT) [ \033[0;33m??\033[0m ] $1"
-}
-
-infoln() {
-  # Print an info line.
-  info "$1\n"
-}
-
-successln() {
-  # Print a success line. Use this if the command is expected to spew out some
-  # output that we can't just replace the last line '[ .. ]' with '[ OK ]'.
-  # Generally $1 should be the same as infoln.
-  echo -e "$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] $1"
-}
-
-failln() {
-  # Same as successln.
-  echo -e "$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] $1"
-}
-
-
-succeeded() {
-  # Return the last command's status.
-  # if succeeded; then; success; else; fail; fi
-  return $?
+  echo -e "$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] $MESSAGE"
+  read
 }
 
 get_platform() {
@@ -75,92 +47,90 @@ binary_exists() {
   return $?
 }
 
-execute() {
-  # Print some info, execute, report and show what to do next.
-  # Usage: execute "info" "command" "to do".
-  infoln "$1"
-  eval "$2"
-  if [[ $? -eq 0 ]]; then
-    successln "$1"
-  else
-    failln "$1"
-    prompt "$3"
-    read
-  fi
-}
-
 PLATFORM="$(get_platform)"
-successln "Platform: $PLATFORM"
+success "Platform: $PLATFORM"
 
 cd "$(dirname "$0")/.."
 DOTFILES_DIR="$(pwd -P)"
-successln "Dotfiles directory: $DOTFILES_DIR"
+success "Dotfiles directory: $DOTFILES_DIR"
 
-successln "User: $(whoami)"
+success "User: $(whoami)"
 if [[ "$(whoami)" == "root" ]]; then
   SUDO=""
 else
   SUDO="sudo"
   binary_exists 'sudo' \
-    && successln 'sudo is installed' \
-    || infoln 'sudo is NOT installed'
+    && success 'sudo is installed' \
+    || info 'sudo is NOT installed'
 fi
 
 # Config.sh
 prompt "Launching editor for script/config.sh..."
 read
+
 ${EDITOR:=vim} script/config.sh
-infoln "Checking for syntax errors with \`bash -n script/config.sh\`"
+info "Checking for syntax errors with \`bash -n script/config.sh\`"
 prompt "If there are errors, please correct them and check again with \`bash -n\`..."
 read
 
 source script/config.sh
 
+# Install necessary binaries.
 if [[ "$PLATFORM" == "Darwin" ]]; then
-  execute 'Installing homebrew' \
-    '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"' \
-    'Follow guide on http://brew.sh to install Homebrew...'
-
-  execute 'Installing brew cask' \
-    'brew tap caskroom/cask' \
-    'Follow guide on https://caskroom.github.io to install Brew cask...'
+  # Homebrew
+  info 'Installing homebrew'
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" \
+    && success \
+    || fail 'Follow guide on http://brew.sh to install Homebrew'
 
   for FORMULA in ${CONFIG_BREW_FORMULAS[@]}; do
-    execute "Installing homebrew $FORMULA" \
-      "brew install $FORMULA" \
-      "Pls manually install $FORMULA with \`brew install\` and resolve any issues..."
+    info "Installing homebrew $FORMULA"
+    brew install $FORMULA \
+      && success \
+      || fail "Pls manually install $FORMULA with \`brew install\`"
   done
 
   if [[ $CONFIG_INSTALL_NEOVIM == "yes" ]]; then
-    execute 'Installing neovim' \
-      'brew install neovim/neovim/neovim' \
-      'Follow guide on https://github.com/neovim/homebrew-neovim to install neovim...'
+    info 'Installing neovim'
+    brew install neovim/neovim/neovim \
+      && success \
+      || fail 'Follow guide on https://github.com/neovim/homebrew-neovim' \
+              'to install neovim'
   fi
 
+  # Brew cask
+  info 'Installing brew cask'
+  brew tap caskroom/cask \
+    && success \
+    || fail 'Follow guide on https://caskroom.github.io to install Brew cask'
+
   for FORMULA in ${CONFIG_CASK_FORMULAS[@]}; do
-    execute "Installing cask $FORMULA" \
-      "brew cask install $FORMULA" \
-      "Pls manually install $FORMULA with \`brew cask install\` and resolve any issues..."
+    info "Installing cask $FORMULA"
+    brew cask install $FORMULA \
+      && success \
+      || fail "Pls manually install $FORMULA with \`brew cask install\`"
   done
 fi
 
 if [[ "$PLATFORM" == "Linux" ]]; then
-  STEP1="$SUDO apt-get install -y build-essential curl git python-setuptools ruby"
-  STEP2='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"'
-  execute 'Installing linuxbrew' \
-    "$STEP1 && $STEP2" \
-    'Please follow guide on https://github.com/Linuxbrew/brew to install linuxbrew...'
+  # Install Linuxbrew.
+  info 'Installing linuxbrew'
+  $SUDO apt-get install -y build-essential curl git python-setuptools ruby \
+    && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)" \
+    && success \
+    || fail 'Please follow guide on https://github.com/Linuxbrew/brew' \
+            'to install linuxbrew'
 
   for FORMULA in ${CONFIG_LINUXBREW_FORMULAS[@]}; do
-    execute "Installing $FORMULA" \
-      "linuxbrew install $FORMULA" \
-      "Please manually install $FORMULA with \`linuxbrew install\` and resolve any issues..."
+    info "Installing $FORMULA"
+    linuxbrew install $FORMULA \
+      && sucess \
+      || fail "Please manually install $FORMULA with \`linuxbrew install\`"
   done
 fi
 
 # TODO: npm
 # TODO: pip
-
 
 
 for DIR in $(ls -d */); do
