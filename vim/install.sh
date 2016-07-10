@@ -2,6 +2,8 @@
 # Install vim-related stuffs.
 
 cd "$DOTFILES_DIR/vim"
+VIM_DIR="$(pwd -P)"
+
 info 'Setting up vim'
 
 # Symlink vim files.
