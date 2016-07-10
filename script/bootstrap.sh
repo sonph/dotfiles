@@ -8,8 +8,12 @@ prompt() {
   echo -ne "$(date $TIME_FORMAT) [ \033[0;33m??\033[0m ] $@"
 }
 
-info() {
+log() {
   echo -e "$(date $TIME_FORMAT) [ \033[00;34m..\033[0m ] $@"
+}
+
+info() {
+  log "$@"
   MESSAGE="$@"
 }
 
@@ -39,7 +43,7 @@ link() {
   DST="$2"
   if [[ -e "$DST" ]]; then
     mv "$DST" "${DST}.orig"
-    info "Moved $DST -> ${DST}.orig"
+    log "Moved $DST -> ${DST}.orig"
   fi
   ln -s "$1" "$2"
 }

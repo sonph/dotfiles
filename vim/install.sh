@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 # Install vim-related stuffs.
 
-cd "$(dirname "$0")"
-VIM_DIR="$(pwd -P)"
-
-info "VIM_DIR: $VIM_DIR"
-
+cd 'vim'
 info 'Setting up vim'
-
 
 # Symlink vim files.
 info 'Setting up vim: symlink files'

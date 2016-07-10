@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "$0")"
-GITCONFIG_DIR="$(pwd -P)"
-
-info "GITCONFIG_DIR: $GITCONFIG_DIR"
-
+cd 'git'
 info 'Setting up gitconfig'
 
 # Setup gitconfig.
