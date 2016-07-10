@@ -14,11 +14,13 @@ info() {
 }
 
 success() {
-  echo -e "$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] $MESSAGE"
+  echo -ne "$(date $TIME_FORMAT) [ \033[00;32mOK\033[0m ] "
+  [[ $# -eq 0 ]] && echo "$MESSAGE" || echo "$@"
 }
 
 fail() {
-  echo -e "$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] $MESSAGE"
+  echo -ne "$(date $TIME_FORMAT) [\033[0;31mFAIL\033[0m] "
+  [[ $# -eq 0 ]] && echo "$MESSAGE" || echo "$@"
   read
 }
 
