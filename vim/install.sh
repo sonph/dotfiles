@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install vim-related stuffs.
 
-cd 'vim'
+cd "$DOTFILES_DIR/vim"
 info 'Setting up vim'
 
 # Symlink vim files.

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd 'git'
+cd "$DOTFILES_DIR/git"
 info 'Setting up gitconfig'
 
 # Setup gitconfig.
