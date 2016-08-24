@@ -5,7 +5,7 @@
       "exception-reporting"
     ]
     themes: [
-      "one-light-ui"
+      "spacegray-light-ui"
       "one-light-syntax"
     ]
   editor:

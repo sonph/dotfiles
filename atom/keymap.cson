@@ -55,6 +55,8 @@
   'ctrl-w t': 'application:new-file'
   'space n t': 'tree-view:toggle'
   'ctrl-n': 'editor:select-word'
+  'space shift-p': 'command-palette:toggle'
+  'space p': 'fuzzy-finder:toggle-file-finder'
 
 'atom-text-editor.vim-mode.insert-mode':
   'cmd-shift-up': 'editor:add-selection-above'
