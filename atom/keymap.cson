@@ -33,8 +33,11 @@
 
 # The <space> key corresponds to the <leader> key in vim.
 'atom-text-editor':
-  'ctrl-tab': 'pane:show-next-item'
   'cmd-t': 'application:new-file'
+  'ctrl-tab ^ctrl': 'unset!'
+  'ctrl-tab': 'pane:show-next-item'
+  'ctrl-shift-tab ^ctrl': 'unset!'
+  'ctrl-shift-tab': 'pane:show-previous-item'
 
 'atom-text-editor.vim-mode.normal-mode':
   'space 1': 'pane:show-item-1'
@@ -70,6 +73,7 @@
   'ctrl-n': 'find-and-replace:select-next'
   'ctrl-p': 'find-and-replace:select-undo'
   'ctrl-x': 'find-and-replace:select-skip'
+  'space c space': 'editor:toggle-line-comments'
 
 'atom-text-editor.vim-mode:not(.insert-mode)':
   'ctrl-h': 'window:focus-pane-on-left'
@@ -80,3 +84,7 @@
 '.tree-view':
   'ctrl-l': 'window:focus-next-pane'
   'space n t': 'tree-view:toggle'
+
+'.results-view':
+  'j': 'core:move-down'
+  'k': 'core:move-up'
