@@ -5,12 +5,13 @@
       "exception-reporting"
     ]
     themes: [
-      "spacegray-light-ui"
+      "spacegray-light-neue-ui"
       "one-light-syntax"
     ]
   editor:
     fontSize: 12
     invisibles: {}
+    lineHeight: 1.7
     scrollPastEnd: true
     showIndentGuide: true
   welcome:
