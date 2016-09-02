@@ -60,6 +60,8 @@
   'ctrl-n': 'editor:select-word'
   'space shift-p': 'command-palette:toggle'
   'space p': 'fuzzy-finder:toggle-file-finder'
+  'space space w': 'lazy-motion:forward'
+  'space space b': 'lazy-motion:backward'
 
 'atom-text-editor.vim-mode.insert-mode':
   'cmd-shift-up': 'editor:add-selection-above'
@@ -88,3 +90,7 @@
 '.results-view':
   'j': 'core:move-down'
   'k': 'core:move-up'
+
+'atom-text-editor.lazy-motion':
+  'ctrl-n': 'lazy-motion:forward'
+  'ctrl-p': 'lazy-motion:backward'
