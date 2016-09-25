@@ -329,12 +329,12 @@ set t_Co=256                                      " enable 256 colors
 
 function! ColorLight_()
   colorscheme onehalflight
-  let g:airline_theme='onedark'
+  let g:airline_theme='onehalfdark'
   set background=light
 endfunction
 function! ColorDark_()
   colorscheme onedark
-  let g:airline_theme='onedark'
+  let g:airline_theme='onehalfdark'
   set background=dark
 endfunction
 function! ColorSolarized_()
