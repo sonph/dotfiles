@@ -1,0 +1,18 @@
+"*":
+  core:
+    disabledPackages: [
+      "metrics"
+      "exception-reporting"
+    ]
+    themes: [
+      "spacegray-light-neue-ui"
+      "one-light-syntax"
+    ]
+  editor:
+    fontSize: 12
+    invisibles: {}
+    lineHeight: 1.7
+    scrollPastEnd: true
+    showIndentGuide: true
+  welcome:
+    showOnStartup: false

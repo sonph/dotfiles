@@ -1,0 +1,96 @@
+# Your keymap
+#
+# Atom keymaps work similarly to style sheets. Just as style sheets use
+# selectors to apply styles to elements, Atom keymaps use selectors to associate
+# keystrokes with events in specific contexts. Unlike style sheets however,
+# each selector can only be declared once.
+#
+# You can create a new keybinding in this file by typing "key" and then hitting
+# tab.
+#
+# Here's an example taken from Atom's built-in keymap:
+#
+# 'atom-text-editor':
+#   'enter': 'editor:newline'
+#
+# 'atom-workspace':
+#   'ctrl-shift-p': 'core:move-up'
+#   'ctrl-p': 'core:move-down'
+#
+# You can find more information about keymaps in these guides:
+# * https://atom.io/docs/latest/using-atom-basic-customization#customizing-key-bindings
+# * https://atom.io/docs/latest/behind-atom-keymaps-in-depth
+#
+# If you're having trouble with your keybindings not working, try the
+# Keybinding Resolver: `Cmd+.` on OS X and `Ctrl+.` on other platforms. See the
+# Debugging Guide for more information:
+# * https://atom.io/docs/latest/hacking-atom-debugging#check-the-keybindings
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# https://atom.io/docs/latest/using-atom-basic-customization#cson
+
+# The <space> key corresponds to the <leader> key in vim.
+'atom-text-editor':
+  'cmd-t': 'application:new-file'
+  'ctrl-tab ^ctrl': 'unset!'
+  'ctrl-tab': 'pane:show-next-item'
+  'ctrl-shift-tab ^ctrl': 'unset!'
+  'ctrl-shift-tab': 'pane:show-previous-item'
+
+'atom-text-editor.vim-mode.normal-mode':
+  'space 1': 'pane:show-item-1'
+  'space 2': 'pane:show-item-2'
+  'space 3': 'pane:show-item-3'
+  'space 4': 'pane:show-item-4'
+  'space 5': 'pane:show-item-5'
+  'space 6': 'pane:show-item-6'
+  'space 7': 'pane:show-item-7'
+  'space 8': 'pane:show-item-8'
+  'space 9': 'pane:show-item-9'
+  'space q': 'core:close'
+  'space n': 'application:new-file'
+  'space tab': 'pane:show-next-item'
+  'space shift-tab': 'pane:show-previous-item'
+  'space w': 'core:save'
+  'space r': 'window:reload'
+  'ctrl-w t': 'application:new-file'
+  'space n t': 'tree-view:toggle'
+  'ctrl-n': 'editor:select-word'
+  'space shift-p': 'command-palette:toggle'
+  'space p': 'fuzzy-finder:toggle-file-finder'
+  'space space w': 'lazy-motion:forward'
+  'space space b': 'lazy-motion:backward'
+
+'atom-text-editor.vim-mode.insert-mode':
+  'cmd-shift-up': 'editor:add-selection-above'
+  'cmd-shift-down': 'editor:add-selection-below'
+
+'atom-text-editor.vim-mode.operator-pending-mode, atom-text-editor.vim-mode.visual-mode':
+  '[': 'user-vim-visual:wrap-square-brackets'
+  '(': 'user-vim-visual:wrap-parentheses'
+  '\'': 'user-vim-visual:wrap-single-quotes'
+  '"': 'user-vim-visual:wrap-double-quotes'
+  'ctrl-n': 'find-and-replace:select-next'
+  'ctrl-p': 'find-and-replace:select-undo'
+  'ctrl-x': 'find-and-replace:select-skip'
+  'space c space': 'editor:toggle-line-comments'
+
+'atom-text-editor.vim-mode:not(.insert-mode)':
+  'ctrl-h': 'window:focus-pane-on-left'
+  'ctrl-l': 'window:focus-pane-on-right'
+  'ctrl-j': 'window:focus-pane-below'
+  'ctrl-k': 'window:focus-pane-above'
+
+'.tree-view':
+  'ctrl-l': 'window:focus-next-pane'
+  'space n t': 'tree-view:toggle'
+
+'.results-view':
+  'j': 'core:move-down'
+  'k': 'core:move-up'
+
+'atom-text-editor.lazy-motion':
+  'ctrl-n': 'lazy-motion:forward'
+  'ctrl-p': 'lazy-motion:backward'
