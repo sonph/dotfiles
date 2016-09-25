@@ -1,16 +1,6 @@
 function show_alias {
-    alias | grep $1 | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\'']//g" | sort;
+  alias | grep $1 | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\'']//g" | sort;
 }
-
-# alias git to hub
-which hub 2>&1 > /dev/null
-if [[ $? -eq 0 ]]; then
-    alias git="hub"
-    alias gfork="git fork"
-    alias gcreate="git create"
-    alias gbrowse="git browse"
-    alias gissues="git browse -- issues"
-fi
 
 # safety
 alias rm="rm -iv"
@@ -32,11 +22,12 @@ alias ...='cd ..;cd ..'
 alias ~='cd ~'
 alias md='mkdir'
 alias cl='clear'
+alias cls='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
 # git
-function galias {
+function git_aliases {
   if [ $1 ]; then
     show_alias 'git' | grep $1
   else
@@ -53,14 +44,13 @@ alias gclone='git clone'
 alias gco='git checkout'
 alias gcom='git commit'
 alias gcoma='git commit -a'
-alias gdiff='git diff'
+which diff-so-fancy 2>&1 > /dev/null \
+    && alias gdiff='git diff --color | diff-so-fancy | less --tabs=4 -RFX' \
+    || alias gdiff='git diff'
 alias gdiffc='git diff --cached'
-alias ginit='git init'
 alias glgraph='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an%Creset - %Cgreen%ar"'
 alias glgraphlong='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD"'
 alias glog='git log'
-alias gmt='git mergetool'
-alias gmv='git mv'
 alias gpl='git pull'
 alias gplo='git pull origin'
 alias gplod='git pull origin develop'
@@ -69,8 +59,6 @@ alias gps='git push'
 alias gpso='git push origin'
 alias gpsod='git push origin develop'
 alias gpsom='git push origin master'
-alias gpstags='git push --tags'
-alias grm='git rm'
 alias grs='git reset'
 alias grsh='git reset HEAD'
 alias gshow='git show'
@@ -80,26 +68,8 @@ alias gtag='git tag'
 alias gunstage='git reset HEAD --'
 alias gunmodify='git checkout --'
 
-# chef
-function knalias {
-  if [ $1 ]; then
-    show_alias 'knife' | grep $1
-  else
-    show_alias 'knife'
-  fi
-}
-alias knf='knife'
-alias knfcu='knife cookbook upload'
-alias knfcsd='knife cookbook site download'
-alias knfb='knife bootstrap'
-alias knfnl='knife node list'
-alias knfns='knife node show'
-alias knfssh='knife ssh'
-alias knfrl='knife recipe list'
-alias knfnrla='knife node run_list add'
-
 # docker
-function dalias {
+function docker_aliases {
   if [ $1 ]; then
     show_alias 'docker' | grep $1
   else
@@ -141,62 +111,52 @@ alias drmif="docker rmi -f"
 alias dsearch="docker search"
 alias dpl="docker pull"
 function dbuild {
-    docker build -t=$1 --rm=true $PWD;
+  docker build -t=$1 --rm=true $PWD;
 }   # $ dbuild USER/REPO[:TAG]
-
-
-alias mc='bash /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh'
-
-alias mvim='mvim --servername VIM'
-
-alias c='clear'
-alias cls='clear'
-
-alias pythonserver='python2 -m SimpleHTTPServer'
 
 # Mac OS specific aliases
 if [ "$(uname -s)" = "Darwin" ]; then
-    alias ls='gls --color=auto'
-    alias ll="gls -alrtF --color"
-    alias la="gls -A"
-    alias l="gls -CF"
-    alias dir='gls --color=auto --format=vertical'
-    alias vdir='gls --color=auto --format=long'
-    alias du='gdu'
-    alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text --new-window --add .'
+  alias ls='gls --color=auto'
+  alias ll="gls -alrtF --color"
+  alias la="gls -A"
+  alias l="gls -CF"
+  alias dir='gls --color=auto --format=vertical'
+  alias vdir='gls --color=auto --format=long'
+  alias du='gdu'
+  alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text --new-window --add .'
 
-    # docker-machine
-    alias dm="docker-machine"
-    function dmenv {
-        eval "$(docker-machine env $1)"
-    }
-    alias dmactive="docker-machine active"
-    alias dmconfig="docker-machine config"
-    alias dmcreate="docker-machine create"
-    alias dminspect="docker-machine inspect"
-    alias dmip="docker-machine ip"
-    alias dmkill="docker-machine kill"
-    alias dmls="docker-machine ls"
-    alias dmrestart="docker-machine restart"
-    alias dmrm="docker-machine rm"
-    alias dmssh="docker-machine ssh"
-    alias dmscp="docker-machine scp"
-    alias dmstart="docker-machine start"
-    alias dmstatus="docker-machine status"
-    alias dmstop="docker-machine stop"
-    alias dmupgrade="docker-machine upgrade"
-    alias dmurl="docker-machine url"
-    alias dmhelp="docker-machine help"
+  # docker-machine
+  alias dm="docker-machine"
+  function dmenv {
+      eval "$(docker-machine env $1)"
+  }
+  alias dmactive="docker-machine active"
+  alias dmconfig="docker-machine config"
+  alias dmcreate="docker-machine create"
+  alias dminspect="docker-machine inspect"
+  alias dmip="docker-machine ip"
+  alias dmkill="docker-machine kill"
+  alias dmls="docker-machine ls"
+  alias dmrestart="docker-machine restart"
+  alias dmrm="docker-machine rm"
+  alias dmssh="docker-machine ssh"
+  alias dmscp="docker-machine scp"
+  alias dmstart="docker-machine start"
+  alias dmstatus="docker-machine status"
+  alias dmstop="docker-machine stop"
+  alias dmupgrade="docker-machine upgrade"
+  alias dmurl="docker-machine url"
+  alias dmhelp="docker-machine help"
 fi
 
-
-# custom scripts
-which nvim 2>&1 > /dev/null && alias vim="nvim"
-
 alias shaliases="vim $HOME/.shaliases && source $HOME/.shaliases"
-alias shaliases.google="vim $HOME/.shaliases.google && source $HOME/.shaliases.google"
 alias vimrc="vim $HOME/.vimrc"
 alias vimrc.keymap="vim $HOME/.vimrc.keymap"
 alias vimrc.plugins="vim $HOME/.vimrc.plugins"
 
-[[ -e $HOME/.shaliases.google ]] && source $HOME/.shaliases.google
+which nvim 2>&1 > /dev/null && alias vim="nvim"
+alias pythonserver='python2 -m SimpleHTTPServer'
+
+[[ -e $HOME/.shaliases.google ]] && \
+  source $HOME/.shaliases.google && \
+  alias shaliases.google="vim $HOME/.shaliases.google && source $HOME/.shaliases.google"
