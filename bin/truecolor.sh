@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# https://gist.github.com/XVilka/8346728
+# Use this script to test if you have true color support in your terminal.
+# Usage: ./truecolor.sh
+# If the color ramp is perfectly smooth, true color is supported.
+#
+# Source: https://gist.github.com/XVilka/8346728
 #
 awk 'BEGIN{
     s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
