@@ -44,9 +44,7 @@ alias gclone='git clone'
 alias gco='git checkout'
 alias gcom='git commit'
 alias gcoma='git commit -a'
-which diff-so-fancy 2>&1 > /dev/null \
-    && alias gdiff='git diff --color | diff-so-fancy | less --tabs=4 -RFX' \
-    || alias gdiff='git diff'
+alias gdiff='git diff'
 alias gdiffc='git diff --cached'
 alias glgraph='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an%Creset - %Cgreen%ar"'
 alias glgraphlong='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD"'
