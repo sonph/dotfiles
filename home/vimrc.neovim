@@ -1,2 +1,4 @@
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" True colors support
+set termguicolors
+
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1

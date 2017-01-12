@@ -66,8 +66,8 @@ call vundle#end()
 " Plugin settings {
 
 " vim-airline
-" let g:airline_theme='solarized'
-let g:airline_theme='bubblegum'                   " see https://github.com/vim-airline/vim-airline/wiki/Screenshots
+let g:airline_theme='onehalfdark'                 " for other built in themes see
+                                                  "   https://github.com/vim-airline/vim-airline/wiki/Screenshots
 set laststatus=2                                  " load airline even on a single split
 set noshowmode                                    " disable default mode indicator, use airline's instead
 let g:airline#extensions#tabline#left_sep=' '
@@ -133,6 +133,8 @@ autocmd FileType unite call s:unite_user_settings()
 function! s:unite_user_settings()"{{{
   nmap <buffer> <leader>p <Plug>(unite_exit)
   nmap <buffer> <leader>q <Plug>(unite_exit)
+  nmap <buffer> <Esc> <Plug>(unite_exit)
+  nmap <buffer> <C-c> <Plug>(unite_exit)
 endfunction"}}}
 
 let g:multi_cursor_quit_key='<C-c>'
