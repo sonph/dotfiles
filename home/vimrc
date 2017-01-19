@@ -333,7 +333,7 @@ function! ColorLight_()
   set background=light
 endfunction
 function! ColorDark_()
-  colorscheme onedark
+  colorscheme onehalfdark
   let g:airline_theme='onehalfdark'
   set background=dark
 endfunction

@@ -13,6 +13,15 @@ inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 " }
 
+" command mode {
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+" }
+
 " visual mode {
 " tab and shift-tab in visual mode to indent/unindent
 vnoremap <Tab> >gv
