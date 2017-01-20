@@ -1,62 +1,71 @@
 #!/bin/bash
-POWER_AC_ON_STYLE='#[fg=black,bg=brightgreen]'
-POWER_AC_OFF_STYLE='#[fg=black,bg=brightred]'
-
-POWER_BATTERY_HIGH_STYLE='#[fg=black,bg=brightgreen]'
-POWER_BATTERY_MED_STYLE='#[fg=black,bg=brightyellow]'
-POWER_BATTERY_LOW_STYLE='#[fg=black,bg=brightred]'
-
-DATETIME_STYLE='#[fg=black,bg=brightblue]'
-DISKSPACE_STYLE='#[fg=brightmagenta]'
-LOAD_AVG_STYLE='#[fg=brightcyan]'
-
+# TODO: refactor this monstrosity.
 function battery_status {
-    local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
-    local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
-    local TIME_REMAINING=$(pmset -g ps | tail -n1 | cut -d ';' -f 3 | cut -d ' ' -f 2)
+  local POWER_AC_ON_STYLE='#[fg=black,bg=brightgreen]'
+  local POWER_AC_OFF_STYLE='#[fg=black,bg=brightred]'
+  local POWER_BATTERY_HIGH_STYLE='#[fg=black,bg=brightgreen]'
+  local POWER_BATTERY_MED_STYLE='#[fg=black,bg=brightyellow]'
+  local POWER_BATTERY_LOW_STYLE='#[fg=black,bg=brightred]'
 
-    # Don't show time remaining when there's no estimate or it's 0:00 (laptop is charged)
-    if [[ $TIME_REMAINING = '(no' || $TIME_REMAINING = '0:00' ]]; then
-        TIME_REMAINING=""
-    else
-        TIME_REMAINING=" | $TIME_REMAINING"
-    fi
-    
+  local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
+  local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
+  local TIME_REMAINING=$(pmset -g ps | tail -n1 | cut -d ';' -f 3 | cut -d ' ' -f 2)
 
-    if [[ $BATTERY_PERC -lt 20 ]]; then
-        local BATTERY_STR="$POWER_BATTERY_LOW_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
-    elif [[ $BATTERY_PERC -lt 70 ]]; then
-        local BATTERY_STR="$POWER_BATTERY_MED_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
-    else
-        local BATTERY_STR="$POWER_BATTERY_HIGH_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
-    fi
+  # Don't show time remaining when there's no estimate or it's 0:00 (laptop is charged)
+  if [[ $TIME_REMAINING = '(no' || $TIME_REMAINING = '0:00' ]]; then
+    TIME_REMAINING=""
+  else
+    TIME_REMAINING=" | $TIME_REMAINING"
+  fi
 
-    if [[ $AC_POWER = "AC Power" ]]; then
-        local AC_STR="${POWER_AC_ON_STYLE} AC #[default]"
-    else
-        local AC_STR="${POWER_AC_OFF_STYLE} AC #[default]"
-    fi
 
-    echo -n "$AC_STR$BATTERY_STR"
+  if [[ $BATTERY_PERC -lt 20 ]]; then
+    local BATTERY_STR="$POWER_BATTERY_LOW_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+  elif [[ $BATTERY_PERC -lt 70 ]]; then
+    local BATTERY_STR="$POWER_BATTERY_MED_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+  else
+    local BATTERY_STR="$POWER_BATTERY_HIGH_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+  fi
+
+  if [[ $AC_POWER = "AC Power" ]]; then
+    local AC_STR="${POWER_AC_ON_STYLE} AC #[default]"
+  else
+    local AC_STR="${POWER_AC_OFF_STYLE} AC #[default]"
+  fi
+
+  echo -n "$AC_STR$BATTERY_STR"
 }
 
 function datetime {
-    echo -n "$DATETIME_STYLE $(date +"%H:%M %a %m/%d") #[default]"
+  local COLOR="brightcyan"
+  echo -n "#[fg=black,bg=$COLOR] dt #[fg=$COLOR,bg=black] $(date +"%H:%M %a %m/%d") #[default]"
 }
 
 function disk_space {
-    local DISK_FREE=$(df -h | grep "/dev" | head -n1 | awk '{print $5, $4}')
-    echo -n "$DISKSPACE_STYLE$DISK_FREE#[default]"
+  local COLOR="brightmagenta"
+  local DISK_FREE=$(df -h | grep "/dev" | head -n1 | awk '{print $5, $4}')
+  echo -n "#[fg=black,bg=$COLOR] ds #[fg=$COLOR,bg=black] $DISK_FREE#[default]"
 }
 
 function load_avg {
-    local LOAD_AVG=$(python -c "import sys; print ' '.join(s.strip(',') for s in sys.argv[-3:])" $(uptime))
-    echo -n "$LOAD_AVG_STYLE$LOAD_AVG#[default]"
+  local COLOR="brightgreen"
+  local LOAD_AVG=$(python -c "import sys; print ' '.join(s.strip(',') for s in sys.argv[-3:])" $(uptime))
+  echo -n "#[fg=black,bg=$COLOR] lo #[fg=$COLOR,bg=black] $LOAD_AVG#[default]"
 }
 
 function separator {
-    echo -n "  "
+  echo -n "  "
+}
+
+function default {
+  echo -n "#[default]"
 }
 
 
-disk_space; separator; load_avg; separator; which pmset 2>&1 > /dev/null && battery_status; datetime
+default
+load_avg
+separator
+disk_space
+separator
+which pmset 2>&1 > /dev/null && battery_status
+datetime
