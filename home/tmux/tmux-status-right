@@ -1,43 +1,36 @@
 #!/bin/bash
 # TODO: refactor this monstrosity.
 function battery_status {
-  local POWER_AC_ON_STYLE='#[fg=black,bg=brightgreen]'
-  local POWER_AC_OFF_STYLE='#[fg=black,bg=brightred]'
-  local POWER_BATTERY_HIGH_STYLE='#[fg=black,bg=brightgreen]'
-  local POWER_BATTERY_MED_STYLE='#[fg=black,bg=brightyellow]'
-  local POWER_BATTERY_LOW_STYLE='#[fg=black,bg=brightred]'
-
   local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
   local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
   local TIME_REMAINING=$(pmset -g ps | tail -n1 | cut -d ';' -f 3 | cut -d ' ' -f 2)
 
-  # Don't show time remaining when there's no estimate or it's 0:00 (laptop is charged)
+  # Don't show time remaining when there's no estimate or it's 0:00 (laptop is charged).
   if [[ $TIME_REMAINING = '(no' || $TIME_REMAINING = '0:00' ]]; then
     TIME_REMAINING=""
   else
     TIME_REMAINING=" | $TIME_REMAINING"
   fi
 
-
   if [[ $BATTERY_PERC -lt 20 ]]; then
-    local BATTERY_STR="$POWER_BATTERY_LOW_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+    local COLOR='brightred'
   elif [[ $BATTERY_PERC -lt 70 ]]; then
-    local BATTERY_STR="$POWER_BATTERY_MED_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+    local COLOR='brightyellow'
   else
-    local BATTERY_STR="$POWER_BATTERY_HIGH_STYLE $BATTERY_PERC%$TIME_REMAINING #[default]"
+    local COLOR='brightgreen'
   fi
 
   if [[ $AC_POWER = "AC Power" ]]; then
-    local AC_STR="${POWER_AC_ON_STYLE} AC #[default]"
+    local AC_OR_BT='ac'
   else
-    local AC_STR="${POWER_AC_OFF_STYLE} AC #[default]"
+    local AC_OR_BT='bt'
   fi
 
-  echo -n "$AC_STR$BATTERY_STR"
+  echo -n "#[fg=black,bg=$COLOR] $AC_OR_BT #[fg=$COLOR,bg=black] $BATTERY_PERC%$TIME_REMAINING#[default]"
 }
 
 function datetime {
-  local COLOR="brightcyan"
+  local COLOR="brightblue"
   echo -n "#[fg=black,bg=$COLOR] dt #[fg=$COLOR,bg=black] $(date +"%H:%M %a %m/%d") #[default]"
 }
 
@@ -48,7 +41,7 @@ function disk_space {
 }
 
 function load_avg {
-  local COLOR="brightgreen"
+  local COLOR="brightcyan"
   local LOAD_AVG=$(python -c "import sys; print ' '.join(s.strip(',') for s in sys.argv[-3:])" $(uptime))
   echo -n "#[fg=black,bg=$COLOR] lo #[fg=$COLOR,bg=black] $LOAD_AVG#[default]"
 }
@@ -63,9 +56,9 @@ function default {
 
 
 default
-load_avg
-separator
+which pmset 2>&1 > /dev/null && battery_status && separator
 disk_space
 separator
-which pmset 2>&1 > /dev/null && battery_status
+load_avg
+separator
 datetime
