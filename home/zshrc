@@ -114,5 +114,8 @@ source $HOME/.zsh/_tmux_pane_words.zsh
 # z to jump around quickly. See github.com/rupa/z
 source $HOME/.zsh/z/z.sh
 
+# Press Enter on an empty buffer (no command) triggers the clear command.
+source $HOME/.zsh/enter-to-clear.zsh
+
 source $HOME/.shexports
 source $HOME/.shaliases
