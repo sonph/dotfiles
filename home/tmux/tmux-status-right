@@ -1,5 +1,4 @@
 #!/bin/bash
-# TODO: refactor this monstrosity.
 function battery_status {
   local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
   local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
