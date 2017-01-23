@@ -40,6 +40,7 @@ call vundle#begin()
   if has("nvim")
     " Denite requires neovim or vim8 with python3 support (echo has("python3") == 1).
     " Install python3 dep: apt-get install python3-pip && pip3 install neovim && nvim -c \":UpdateRemotePlugins\"
+    " Or `brew install python3` for macOS.
     Plugin 'Shougo/denite.nvim'
   else
     Plugin 'Shougo/unite.vim'
