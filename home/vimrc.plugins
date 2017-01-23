@@ -132,13 +132,24 @@ let g:TabTrigger = []
 " Unite & Denite
 if has("nvim")
   " TODO: use -no-split when it becomes available.
-  " TODO: fix search highlight color.
   " TODO: enable & test for vim8.
   " if v:version >= 800
-  " TODO: enable arrow keys (move_to_next_line/move_to_previous_line)
   nnoremap <leader>p :Denite file_rec buffer<CR>
   nnoremap <leader>P :Denite command<CR>
   nnoremap <leader>/ :Denite line<CR>
+
+  " Key mappings.
+  call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-a>', '<denite:move_caret_to_head>', 'noremap')
+  call denite#custom#map('insert', '<C-e>', '<denite:move_caret_to_tail>', 'noremap')
+  call denite#custom#map('insert', '<C-b>', '<denite:move_caret_to_left>', 'noremap')
+  call denite#custom#map('insert', '<C-f>', '<denite:move_caret_to_right>', 'noremap')
+
+  " Highlight groups.
+  hi! link deniteMatchedChar Constant
 else
   nnoremap <leader>p :Unite -start-insert -no-split -smartcase file_rec/async<CR>
   nnoremap <leader>P :Unite -start-insert -no-split -smartcase command<CR>
