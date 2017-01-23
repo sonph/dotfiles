@@ -130,7 +130,7 @@ let g:TabTrigger = []
 
 
 " Unite & Denite
-if has("nvim")
+if has("nvim") && has("python3")
   " TODO: use -no-split when it becomes available.
   " TODO: enable & test for vim8.
   " if v:version >= 800
