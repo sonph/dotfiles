@@ -29,6 +29,10 @@ vnoremap <S-Tab> <gv
 nnoremap <Tab> >>
 noremap <S-Tab> <<
 
+" C-f to replace visually selected text
+" See http://stackoverflow.com/a/15934899/2522725
+vnoremap <C-f> y<ESC>/<C-r>"<CR>:%s//
+
 " indent/unindent in visual mode without exiting
 vnoremap > >gv
 vnoremap < <gv
