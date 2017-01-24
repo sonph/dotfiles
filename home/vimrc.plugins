@@ -1,3 +1,6 @@
+" TODO: switch to dein.vim (Shougo/dein.vim) and experiment with shallow copy
+" or limited depth (max 200?) git cloning to save space.
+
 " Vundle {
 call vundle#begin()
   " Plugin formats: user/repo for GitHub
