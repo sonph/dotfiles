@@ -1,13 +1,13 @@
-" disable backward compatibility with vi
+" Disable backward compatibility with vi.
 set nocompatible
 
 filetype off
 
-" set the runtime path to include Vundle and initialize
+" Set runtime path to include Vundle and initialize.
 set rtp+=~/.vim/bundle/Vundle.vim
 
-" General settings {
 
+" General settings {
 " File encoding: utf-8
 if !has('nvim')
   set encoding=utf-8
@@ -16,7 +16,6 @@ set fileencoding=utf-8
 set ffs=unix,dos,mac
 
 " Line wrapping
-
 " disable automatic hard line wrapping
 " see http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 set textwidth=0
@@ -43,6 +42,7 @@ set noswapfile
 set expandtab
 set shiftwidth=2
 set tabstop=2
+set softtabstop=2
 set smarttab                                      " insert tabs on the start of a line according to shiftwidth,
                                                   " not tabstop
 set smartindent                                   " smart indent (does the right thing, most of the time)
@@ -64,7 +64,6 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
-
 
 " Highlighting
 syntax on                                         " syntax highlighting pls
@@ -126,171 +125,18 @@ if has("autocmd")
 endif
 " }
 
-" autoload sessions
-" see http://vim.wikia.com/wiki/Go_away_and_come_back
-" Creates a session
-let g:sessionfile_name = "session.vim"
-function! MakeSession()
-  let g:sessionfile = getcwd() . "/" . g:sessionfile_name
-  exec 'mksession! ' . fnameescape(g:sessionfile)
-  echo 'Wrote session ' . g:sessionfile
-endfunction
-
-" Updates a session, only if it exists
-function! UpdateSession()
-  if (filereadable(g:sessionfile))
-    exec 'mksession! ' . fnameescape(g:sessionfile)
-    echo 'Updating session ' . g:sessionfile
-  endif
-endfunction
-
-" Loads a session if it exists
-function! LoadSession()
-  " only load session if vim is not invoked with any arguments
-  if (argc() == 0)
-    " try to load directory session
-    let g:sessionfile = getcwd() . "/" . g:sessionfile_name
-    if (filereadable(g:sessionfile))
-      exec 'source ' . fnameescape(g:sessionfile)
-      echo 'Loaded ' . g:sessionfile
-    else
-      " try to load default session in ~
-      let g:sessionfile = $HOME . "/" . g:sessionfile_name
-      if (filereadable(g:sessionfile))
-        exec 'source ' . fnameescape(g:sessionfile)
-        echo 'Loaded ' . g:sessionfile
-      else
-        echo 'No session loaded.'
-      endif
-    endif
-  else
-    let g:sessionfile = ""
-    let g:sessiondir = ""
-  endif
-endfunction
-au VimEnter * nested :call LoadSession()
-au VimLeave * :call UpdateSession() | NERDTreeClose
-command! MakeSession call MakeSession()
-
 " Language specific settings {
-if has('autocmd')
-  " don't show tabs in html and xml files
-  autocmd filetype html,xml set listchars-=tab:›·
-  autocmd filetype python set shiftwidth=2 tabstop=2
-endif
+" autocmd filetype python set shiftwidth=2 tabstop=2
 " }
 
-" Keymap {
-if filereadable(expand('~/.vimrc.keymap'))
-  source ~/.vimrc.keymap
-endif
-" }
-
-" Plugins {
-if filereadable(expand('~/.vimrc.plugins'))
-  source ~/.vimrc.plugins
-endif
-" }
-
-" Google specific rc {
-if filereadable(expand('~/.vimrc.google'))
-  source ~/.vimrc.google
-endif
-" }
+if filereadable(expand('~/.vim/keymap.vim')) | source ~/.vim/keymap.vim | endif
+if filereadable(expand('~/.vim/plugins.vim')) | source ~/.vim/plugins.vim | endif
+if filereadable(expand('~/.vim/google.vim')) | source ~/.vim/google.vim | endif
+if filereadable(expand('~/.vim/neovim.vim')) && has('nvim') | source ~/.vim/neovim.vim | endif
 
 " Gvim {
 if has('gui_running') && has('macunix')
 endif
-" }
-
-" Tabline {
-if exists("+showtabline")
-" Rename tabs to show tab number.
-" (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
-function! MyTabLine()
-  let s = '  '
-  let t = tabpagenr()
-  let i = 1
-  while i <= tabpagenr('$')
-    let buflist = tabpagebuflist(i)
-    let winnr = tabpagewinnr(i)
-    let s .= '%' . i . 'T'
-    let s .= (i == t ? '%1*' : '%2*')
-
-    " let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-    " let s .= ' '
-    let s .= (i == t ? '%#TabNumSel#' : '%#TabNum#')
-    "let s .= ' ' . i . ' '
-    let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-
-    let bufnr = buflist[winnr - 1]
-    let file = bufname(bufnr)
-    let buftype = getbufvar(bufnr, '&buftype')
-
-    if buftype == 'help'
-      let file = 'help:' . fnamemodify(file, ':t:r')
-
-    elseif buftype == 'quickfix'
-      let file = 'quickfix'
-
-    elseif buftype == 'nofile'
-      if file =~ '\/.'
-        let file = substitute(file, '.*\/\ze.', '', '')
-      endif
-
-    else
-      let file = pathshorten(fnamemodify(file, ':p:~:.'))
-      if getbufvar(bufnr, '&modified')
-        let file = '+' . file
-      endif
-
-    endif
-
-    if file == ''
-      let file = '[No Name]'
-    endif
-
-    let s .= '  ' . file
-
-    let nwins = tabpagewinnr(i, '$')
-    if nwins > 1
-      let modified = ''
-      for b in buflist
-        if getbufvar(b, '&modified') && b != bufnr
-          let modified = '*'
-          break
-        endif
-      endfor
-      let hl = (i == t ? '%#WinNumSel#' : '%#WinNum#')
-      let nohl = (i == t ? '%#TabLineSel#' : '%#TabLine#')
-      "let s .= ' ' . modified . '(' . hl . winnr . nohl . '/' . nwins . ')'
-      let s .= ' ' . modified . '(' . winnr . '/' . nwins . ')'
-    endif
-
-    let s .= '  '
-
-    if i < tabpagenr('$')
-      let s .= ' %#TabLine#  '
-    else
-      let s .= '  '
-    endif
-
-    let i = i + 1
-
-  endwhile
-
-  let s .= '%T%#TabLineFill#%='
-  let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
-  return s
-
-endfunction
-" set showtabline=1
-"hi TabNum term=None cterm=None ctermfg=1 ctermbg=7 gui=None guibg=LightGrey
-"hi TabNumSel term=None cterm=None ctermfg=1 ctermbg=7 gui=None
-"hi WinNum term=None cterm=None ctermfg=11 ctermbg=7 guifg=DarkBlue guibg=LightGrey
-"hi WinNumSel term=None cterm=None ctermfg=7 ctermbg=14 guifg=DarkBlue guibg=LightGrey
-set tabline=%!MyTabLine()
-endif " exists("+showtabline")
 " }
 
 " Custom commands {
@@ -321,7 +167,6 @@ command! SetSyntaxHTML set syntax=html
 command! OpenURL call feedkeys('gx')
 command! SetIndent4Spaces set shiftwidth=4 tabstop=4 softtabstop=4
 command! SetIndent2Spaces set shiftwidth=2 tabstop=2 softtabstop=2
-
 " }
 
 " Colors {
@@ -351,16 +196,11 @@ command! ColorSolarizedDark call ColorSolarizedDark_()
 command! ColorLight call ColorLight_()
 command! ColorDark call ColorDark_()
 
-" Neovim {
-if filereadable(expand('~/.vimrc.neovim')) && has('nvim')
-  source ~/.vimrc.neovim
-endif
-" }
-
 " default colors
 ColorLight
 " }
 
+if filereadable(expand('~/.vim/tabline.vim')) | source ~/.vim/tabline.vim | endif
 
 " make sure this is the last line
 filetype plugin indent on
