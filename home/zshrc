@@ -1,12 +1,22 @@
-# ZSH COMPONENTS -----------------------------------------------------
+# ------------------------------------------------
+# General
+# ------------------------------------------------
+ZSH_DIR="$HOME/.zsh"
+
 autoload -U compinit bashcompinit promptinit colors
 
 # Directory containing zsh completion scripts.
 # See https://github.com/zsh-users/zsh-completions/tree/master/src
 # This line must be before compinit.
-fpath=($fpath ~/.zsh/autocomplete)
+fpath=($fpath "$ZSH_DIR/autocomplete")
+
+# Paths.
+typeset -U path
+path=($HOME/bin $path)
+path=(/usr/local/bin $path)
 
 # Enable hash-comments at end of line while in REPL mode.
+# This enables us to "tag" a command then later do a reverse search (^R) for it.
 setopt interactivecomments
 
 compinit
@@ -14,15 +24,14 @@ bashcompinit
 promptinit
 colors
 
-## Command history configuration
+# History file.
 if [ -z "$HISTFILE" ]; then
-    HISTFILE="$HOME/.zsh/history"
+    HISTFILE="$ZSH_DIR/history"
 fi
 
 HISTSIZE=100000
 SAVEHIST=100000
 
-# Show history
 case $HIST_STAMPS in
   "mm/dd/yyyy") alias history='fc -fl 1' ;;
   "dd.mm.yyyy") alias history='fc -El 1' ;;
@@ -42,31 +51,28 @@ setopt share_history
 # Enable arrow keys in autocomplete menu.
 zstyle ':completion:*' menu select
 
-# PROMPT -------------------------------------------------------------
-# For list of built in prompt styles, exec `prompt -l`
-# `prompt` requires `autoload -U promptinit && promptinit`
-#prompt walters
+# Use a built in prompt.
+# For list of built in prompt styles, run `prompt -l`.
+# Note `prompt` requires `autoload -U promptinit && promptinit`.
+# prompt walters
 
-# Enable git status indicator. See wiki.archlinux.org/index.php/Git#Git_Prompt.
-setopt PROMPT_SUBST  # Enable evaluation of functions/substitutions in prompt.
-source ~/.zsh/git-prompt.sh
-
-# Left prompt has a leading newline.
+# Left and right prompts (left prompt has a leading newline).
 PROMPT='
 %n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
 RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}'
 
-# KEY BINDINGS -------------------------------------------------------
+
+# ------------------------------------------------
+# Key mappings
+# ------------------------------------------------
 # -e for emacs, -v for vim.
 bindkey -e
 
 # Fix broken backspace key on some keyboards.
 # stty erase ^H
 
-# ^P/^N to go up/down in local history
-# ^R still searches in the global history
-bindkey "^P" up-line-or-local-history
-bindkey "^N" down-line-or-local-history
+# ^P/^N to go up/down in local history.
+# ^R searches in the global shared history.
 up-line-or-local-history() {
   zle set-local-history 1
   zle up-line-or-history
@@ -79,12 +85,13 @@ down-line-or-local-history() {
   zle set-local-history 0
 }
 zle -N down-line-or-local-history
+bindkey '^P' up-line-or-local-history
+bindkey '^N' down-line-or-local-history
 
-# ENVIRONMENT --------------------------------------------------------
-# Paths.
-typeset -U path
-path=($HOME/bin $path)
-path=(/usr/local/bin $path)
+
+# ------------------------------------------------
+# Misc
+# ------------------------------------------------
 
 # Colored man pages with less.
 man() {
@@ -98,26 +105,34 @@ man() {
   man "$@"
 }
 
+
+# ------------------------------------------------
 # Plugins
+# ------------------------------------------------
 # Syntax highlighting for interactive commands.
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # `bd` to go back to a specific parent directory instead of `cd ../../../..`.
 # See github.com/Tarrasch/zsh-bd
-source $HOME/.zsh/bd.zsh
+source $ZSH_DIR/bd.zsh
 
 # Autocomplete words from other tmux panes.
 # See https://blog.plenz.com/2012-01/zsh-complete-words-from-tmux-pane.html
 # Usage: ^V for prefix completion and ^V^V for fuzzy completion.
-source $HOME/.zsh/_tmux_pane_words.zsh
+source $ZSH_DIR/tmux_pane_words.zsh
 
 # z to jump around quickly. See github.com/rupa/z
-source $HOME/.zsh/z/z.sh
+source $ZSH_DIR/z/z.sh
 
 # Press Enter on an empty buffer (no command) triggers the clear command.
-source $HOME/.zsh/enter-to-clear.zsh
+source $ZSH_DIR/enter-to-clear.zsh
 
-source $HOME/.zsh/bell.zsh
+source $ZSH_DIR/bell.zsh
+
+# Git status indicator in prompt.
+# See wiki.archlinux.org/index.php/Git#Git_Prompt.
+setopt PROMPT_SUBST  # Enable substitution in prompt.
+source $ZSH_DIR/git-prompt.zsh
 
 source $HOME/.shexports
 source $HOME/.shaliases
