@@ -11,6 +11,8 @@ inoremap jk <ESC>
 inoremap <C-a> <C-o>^
 " ctrl+o puts you in command mode for one key only
 inoremap <C-e> <C-o>$
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
 " }
 
 " command mode {
