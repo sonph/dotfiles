@@ -142,6 +142,13 @@ if has("nvim") && has("python3")
   nnoremap <leader>P :Denite command<CR>
   nnoremap <leader>/ :Denite line<CR>
 
+  " If we're in a git repo, use `git ls-files`. See doc for example.
+  " git ls-files ignores files in .gitignore, symlinks, etc.
+  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+  call denite#custom#var('file_rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
+  nnoremap <leader>p :Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'` buffer<CR>
+
   " Key mappings.
   call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
   call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
