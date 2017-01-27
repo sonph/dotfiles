@@ -50,6 +50,7 @@ set backspace=indent,eol,start                    " allow backspace to also dele
 
 " Line numbering and highlight
 set number                                        " show line numbers
+set relativenumber
 try                                               " set color columns to mark 80 and 120 character limits
   set colorcolumn=81,121
 catch
