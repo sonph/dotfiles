@@ -28,9 +28,8 @@ call vundle#begin()
   " Navigation.
   Plugin 'christoomey/vim-tmux-navigator'
   Plugin 'scrooloose/nerdtree'
-  " Plugin 'jistr/vim-nerdtree-tabs'              " Sync nerdtrees between tabs.
   Plugin 'airblade/vim-gitgutter'
-  Plugin 'luochen1990/rainbow'                    " Different colors for parentheses at different nested levels.
+  Plugin 'luochen1990/rainbow'          " Different colors for parentheses at different nested levels.
   if executable('ctags')
     Plugin 'majutsushi/tagbar'
   endif
@@ -47,15 +46,15 @@ call vundle#begin()
     Plugin 'Shougo/denite.nvim'
   else
     Plugin 'Shougo/unite.vim'
-    Plugin 'Shougo/neomru.vim'                    " Most recently used files source (file_mru) for Unite.
-    Plugin 'Shougo/vimproc.vim'                   " Async indexing (file_rec/async) for Unite.
+    Plugin 'Shougo/neomru.vim'          " Most recently used files source (file_mru) for Unite.
+    Plugin 'Shougo/vimproc.vim'         " Async indexing (file_rec/async) for Unite.
   endif
 
   Plugin 'Valloric/YouCompleteMe'
   " Fix YCM load errors due to Python:
   " https://github.com/Valloric/YouCompleteMe/issues/18
   " https://github.com/Valloric/YouCompleteMe/issues/1605
-  if executable('ack-grep')                       " Ack code search; better version of grep.
+  if executable('ack-grep')             " Ack code search; better version of grep.
     let g:ackprg="ack-grep -H --nocolor --nogroup --column"
     Plugin 'mileszs/ack.vim'
   elseif executable('ack')
@@ -65,9 +64,9 @@ call vundle#begin()
   " Editing.
   Plugin 'sjl/gundo.vim'
   Plugin 'mattn/emmet-vim'
-  Plugin 'terryma/vim-multiple-cursors'           " Sublime text style multiple cursors.
-  Plugin 'sonph/auto-pairs'                       " Fork of auto-pairs.
-  Plugin 'scrooloose/nerdcommenter'               " For comments.
+  Plugin 'terryma/vim-multiple-cursors' " Sublime text style multiple cursors.
+  Plugin 'sonph/auto-pairs'             " Fork of auto-pairs.
+  Plugin 'scrooloose/nerdcommenter'     " For comments.
 
 " All vundle plugins must be before this line.
 call vundle#end()
@@ -76,10 +75,10 @@ call vundle#end()
 " Plugin settings {
 
 " vim-airline
-let g:airline_theme='onehalfdark'                 " for other built in themes see
-                                                  "   https://github.com/vim-airline/vim-airline/wiki/Screenshots
-set laststatus=2                                  " load airline even on a single split
-set noshowmode                                    " disable default mode indicator, use airline's instead
+let g:airline_theme='onehalfdark'       " For other built in themes see
+                                        "   https://github.com/vim-airline/vim-airline/wiki/Screenshots
+set laststatus=2                        " Load airline even on a single split.
+set noshowmode                          " Disable vim's default mode indicator.
 let g:airline_inactive_collapse=1
 let g:airline#extensions#tabline#fnamemod=':p:.'
 let g:airline#extensions#tabline#fnamecollapse=1
@@ -90,14 +89,8 @@ let g:airline_right_sep=''
 
 
 " NERDTree
-nmap <leader>nt :NERDTreeToggle<CR>                     " ^w 0 to focus the nerdtree sidebar (like sublime)
-"let NERDTreeShowHidden=1                          " show hidden dot files
-"if has('autocmd')
-"  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"                                                  " automatically close vim if the only tab open is nerdtree
-"  autocmd StdinReadPre * let s:std_in=1           " open nerdtree automatically if no file is specified
-"  autocmd VimEnter * if (argc() == 0 && !exists("s:std_in")) | NERDTree | wincmd l | endif
-"endif
+" <C-w>0 to focus nerdtree (like sublime)
+nmap <leader>nt :NERDTreeToggle<CR>
 
 
 " Tagbar
@@ -105,8 +98,7 @@ nmap <leader>tb :TagbarToggle<CR>
 
 
 " Rainbow
-" let g:rainbow_active = 1                          " enable by default (can also use :RainbowToggle)
-" change ctermfgs to set colors; original colors are bright
+" Change ctermfgs to set colors; original colors are bright.
 let g:rainbow_conf = {
     \   'guifgs': ['black', 'blue', 'red', 'green'],
     \   'ctermfgs': ['black', 'blue', 'red', 'green'],
@@ -114,8 +106,10 @@ let g:rainbow_conf = {
 
 
 " Vim-signature
-" change the bookmark color to indicate git-gutter state
+" Change the bookmark color to indicate git-gutter state (since we only have
+" one column for both bookmarks and git-gutter indicators).
 let g:SignatureMarkTextHLDynamic=1
+
 
 " for some reason the bookmarks don't immediately appear, call SignatureRefresh
 let bookmark_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -124,8 +118,9 @@ while i < len(bookmark_keys)
   execute 'nnoremap m' . bookmark_keys[i] . ' :mark ' . bookmark_keys[i]. ' \| SignatureRefresh<CR>'
   let i = i + 1
 endwhile
-
-nnoremap m/ :SignatureListMarks<CR>
+" List all bookmarks.
+nnoremap m/ :SignatureListBufferMarks<CR>
+" Remove all bookmarks.
 nnoremap m<Space> call signature#mark#Purge('all')
 
 
@@ -158,9 +153,13 @@ if has("nvim") && has("python3")
         \ ['Indentation: 4-space hard tabs', 'set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4'],
         \ ['Indentation: Convert tabs to spaces', 'retab'],
         \ ['Indentation: Toggle paste mode', 'set paste!'],
-        \ ['Misc: Shell', 'shell'],
+        \ ['Misc: Shell terminal', 'terminal'],
+        \ ['Nav: Clear vim-signature bookmarks (m_)', 'call signature#mark#Purge(' . shellescape('all') . ')'],
         \ ['Nav: Next git hunk (_ggn)', 'GitGutterNextHunk'],
         \ ['Nav: Previous git hunk (_ggp)', 'GitGutterPrevHunk'],
+        \ ['Nav: Show vim-signature bookmarks (m/)', 'SignatureListBufferMarks'],
+        \ ['View: Toggle gundo (_gd)', 'GundoToggle'],
+        \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
         \ ['Preferences: Edit vimrc configs', 'Denite menu:vimrc'],
         \ ['Preferences: Keymap', 'new ~/.vim/keymap.vim'],
         \ ['Preferences: Plugins', 'new ~/.vim/plugins.vim'],
