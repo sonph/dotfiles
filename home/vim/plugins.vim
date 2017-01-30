@@ -149,8 +149,11 @@ if has("nvim") && has("python3")
         \ }
   let s:menus.user_commands.command_candidates = [
         \ ['Build: Run file (_ex)', ':!%:p'],
-        \ ['Indentation: Convert tabs to spaces', ''],
-        \ ['Indentation: Set 4 spaces', ''],
+        \ ['Indentation: Convert tabs to spaces', 'retab'],
+        \ ['Indentation: 2 spaces soft tab', 'set expandtab tabstop=2 softtabstop=2 shiftwidth=2'],
+        \ ['Indentation: 4 spaces soft tab', 'set expandtab tabstop=4 softtabstop=4 shiftwidth=4'],
+        \ ['Indentation: 2-space hard tabs', 'set noexpandtab tabstop=2 softtabstop=2 shiftwidth=2'],
+        \ ['Indentation: 4-space hard tabs', 'set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4'],
         \ ['Misc: Shell', 'shell'],
         \ ['Nav: Next git hunk (_ggn)', 'GitGutterNextHunk'],
         \ ['Nav: Previous git hunk (_ggp)', 'GitGutterPrevHunk'],
