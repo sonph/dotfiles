@@ -141,21 +141,6 @@ endif
 " }
 
 " Custom commands {
-function! ToggleBackground_()
-  let s:tbg = &background
-  if s:tbg == 'dark'
-    set background=light
-  else
-    set background=dark
-  endif
-endfunction
-command! ToggleBackground call ToggleBackground_()
-command! ToggleSpellCheck set spell!
-command! TogglePaste set paste!
-command! ToggleWordWrap set wrap!
-command! ToggleLineNumber set number!
-command! Resource source ~/.vimrc
-command! TabsToSpaces retab
 
 function! DeleteTrailingWs_()
   exe "normal mz"
@@ -163,42 +148,12 @@ function! DeleteTrailingWs_()
   exe "normal `z"
 endfunction
 command! DeleteTrailingWs call DeleteTrailingWs_()
-command! SetSyntaxPlainText set syntax=off
-command! SetSyntaxHTML set syntax=html
-command! OpenURL call feedkeys('gx')
-command! SetIndent4Spaces set shiftwidth=4 tabstop=4 softtabstop=4
-command! SetIndent2Spaces set shiftwidth=2 tabstop=2 softtabstop=2
 " }
 
 " Colors {
 set t_Co=256                                      " enable 256 colors
-
-function! ColorLight_()
-  colorscheme onehalflight
-  let g:airline_theme='onehalfdark'
-  set background=light
-endfunction
-function! ColorDark_()
-  colorscheme onehalfdark
-  let g:airline_theme='onehalfdark'
-  set background=dark
-endfunction
-function! ColorSolarized_()
-  colorscheme solarized
-  set background=light
-  let g:airline_theme='solarized'
-endfunction
-function! ColorSolarizedDark_()
-  call ColorSolarized_()
-  set background=dark
-endfunction
-command! ColorSolarized call ColorSolarized_()
-command! ColorSolarizedDark call ColorSolarizedDark_()
-command! ColorLight call ColorLight_()
-command! ColorDark call ColorDark_()
-
-" default colors
-ColorLight
+colorscheme onehalflight
+let g:airline_theme='onehalfdark'
 " }
 
 if filereadable(expand('~/.vim/tabline.vim')) | source ~/.vim/tabline.vim | endif
