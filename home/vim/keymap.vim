@@ -65,13 +65,10 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <leader>w :w<CR>
 " Clear search highlight.
 nnoremap <leader>? :nohlsearch<CR>
-" Re-source vimrc.
-nnoremap <leader>r :source ~/.vimrc<CR>
+nnoremap <leader>r :source ~/.vim/init.vim<CR>
 
-" <leader>ex to execute current file
+" Execute current file.
 nnoremap <leader>ex :!%:p<CR>
-
-nnoremap <leader>spdb o__import__('pdb').set_trace()<CR><Esc>
 
 vnoremap <leader>r y:%s/<C-R>*/
 " C-f to replace visually selected text.
@@ -84,7 +81,6 @@ nnoremap <leader>ggp :GitGutterPrevHunk<CR>
 " <leader>c to copy to system clipboard.
 if executable('pbcopy') | vnoremap <leader>c :w !pbcopy | endif
 
-" Set fold levels.
 for i in range(1, 9)
   execute 'nnoremap <leader>f' . i . ' :set foldlevel=' . i . '<CR>'
 endfor

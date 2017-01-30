@@ -139,8 +139,60 @@ if has("nvim") && has("python3")
   " TODO: enable & test for vim8.
   " if v:version >= 800
   nnoremap <leader>p :Denite file_rec buffer<CR>
-  nnoremap <leader>P :Denite command<CR>
+  nnoremap <leader>P :Denite menu:user_commands command<CR>
+  vnoremap <leader>P :Denite menu:user_commands command<CR>
   nnoremap <leader>/ :Denite line<CR>
+
+  let s:menus = {}
+  let s:menus.user_commands = {
+        \ 'description': 'User commands'
+        \ }
+  let s:menus.user_commands.command_candidates = [
+        \ ['Build: Run file (_ex)', ':!%:p'],
+        \ ['Indentation: Convert tabs to spaces', ''],
+        \ ['Indentation: Set 4 spaces', ''],
+        \ ['Misc: Shell', 'shell'],
+        \ ['Nav: Next git hunk (_ggn)', 'GitGutterNextHunk'],
+        \ ['Nav: Previous git hunk (_ggp)', 'GitGutterPrevHunk'],
+        \ ['Preferences: Edit vimrc configs', 'Denite menu:vimrc'],
+        \ ['Preferences: Keymap', 'new ~/.vim/keymap.vim'],
+        \ ['Preferences: Plugins', 'new ~/.vim/plugins.vim'],
+        \ ['Preferences: Reload init.vim (_r)', 'source ~/.vim/init.vim'],
+        \ ['Preferences: Settings init.vim', 'new ~/.vim/init.vim'],
+        \ ['Preferences: User commands', 'new ~/.vim/commands.vim'],
+        \ ['Tabs: Merge (_tm)', 'Tabmerge'],
+        \ ['Tabs: New (<C-w>t)', 'tabnew'],
+        \ ['Tabs: Split (_ts <C-w>T)', 'call feedkeys("\<C-w>T")'],
+        \ ['Tabs: Resize equal (<C-w>=)', 'call feedkeys("\<C-w>=")'],
+        \ ['View: Toggle relative line number', 'set relativenumber!'],
+        \ ['View: Toggle word wrap', 'set wrap!'],
+        \ ['View: Fold level 0 (_f0)', 'set foldlevel=0'],
+        \ ['View: Fold level 3 (_f3)', 'set foldlevel=3'],
+        \ ['View: Fold level 6 (_f6)', 'set foldlevel=6'],
+        \ ['View: Fold level 9 (_f9)', 'set foldlevel=9'],
+        \ ['View: No fold', 'set foldlevel=99'],
+        \ ['View: Hex (readonly)', 'set readonly | setlocal binary | %!xxd'],
+        \ ['View: Hex (disable)', 'set noreadonly | setlocal nobinary | %!xxd -r'],
+        \ ['View: Toggle Nerdtree (_nt)', 'NERDTreeToggle'],
+        \ ['View: Toggle Tagbar (_tb)', 'TagbarToggle'],
+        \ ['Visual: Apply line-macro <a> to selection (norm! @a)', 'norm! @a'],
+        \ ['Visual: Copy to system clipboard (_c)', 'w !pbcopy'],
+        \ ['Visual: Replace <C-f>', 'call feedkeys("\<C-f>")'],
+        \ ]
+  let s:menus.vimrc = {
+        \ 'description': 'Vim config files'
+        \ }
+  let s:menus.vimrc.file_candidates = [
+        \ ['commands.vim', '~/.vim/commands.vim'],
+        \ ['google.vim', '~/.vim/google.vim'],
+        \ ['init.vim', '~/.vim/init.vim'],
+        \ ['keymap.vim', '~/.vim/keymap.vim'],
+        \ ['neovim.vim', '~/.vim/neovim.vim'],
+        \ ['plugins.vim', '~/.vim/plugins.vim'],
+        \ ]
+  call denite#custom#var('menu', 'menus', s:menus)
+
+  call denite#custom#option('default', 'prompt', 'λ:')
 
   " If we're in a git repo, use `git ls-files`. See doc for example.
   " git ls-files ignores files in .gitignore, symlinks, etc.
