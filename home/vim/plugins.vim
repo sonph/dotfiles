@@ -151,6 +151,7 @@ if has("nvim") && has("python3")
         \ ['Build: Run file (_ex)', ':!%:p'],
         \ ['Colorscheme: One Half Dark', 'colorscheme onehalfdark | let g:airline_theme=' . shellescape('onehalfdark')],
         \ ['Colorscheme: One Half Light', 'colorscheme onehalflight | let g:airline_theme=' . shellescape('onehalfdark')],
+        \ ['Edit: Remove trailing whitespaces', '%s/\s\+$//e'],
         \ ['Indentation: 2 spaces soft tab', 'set expandtab tabstop=2 softtabstop=2 shiftwidth=2'],
         \ ['Indentation: 2-space hard tabs', 'set noexpandtab tabstop=2 softtabstop=2 shiftwidth=2'],
         \ ['Indentation: 4 spaces soft tab', 'set expandtab tabstop=4 softtabstop=4 shiftwidth=4'],
@@ -165,7 +166,6 @@ if has("nvim") && has("python3")
         \ ['Preferences: Plugins', 'new ~/.vim/plugins.vim'],
         \ ['Preferences: Reload init.vim (_r)', 'source ~/.vim/init.vim'],
         \ ['Preferences: Settings init.vim', 'new ~/.vim/init.vim'],
-        \ ['Preferences: User commands', 'new ~/.vim/commands.vim'],
         \ ['Tabs: Merge (_tm)', 'Tabmerge'],
         \ ['Tabs: New (<C-w>t)', 'tabnew'],
         \ ['Tabs: Resize equal (<C-w>=)', 'call feedkeys("\<C-w>=")'],
@@ -191,7 +191,6 @@ if has("nvim") && has("python3")
         \ 'description': 'Vim config files'
         \ }
   let s:menus.vimrc.file_candidates = [
-        \ ['commands.vim', '~/.vim/commands.vim'],
         \ ['google.vim', '~/.vim/google.vim'],
         \ ['init.vim', '~/.vim/init.vim'],
         \ ['keymap.vim', '~/.vim/keymap.vim'],
