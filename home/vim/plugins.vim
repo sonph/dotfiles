@@ -1,75 +1,81 @@
-" TODO: switch to dein.vim (Shougo/dein.vim) and experiment with shallow copy
-" or limited depth (max 200?) git cloning to save space.
+" TODO: experiment with shallow copy or limited depth (max 200?) git cloning to save space.
 
-" Vundle {
-call vundle#begin()
+" Dein.vim {
+if dein#load_state('~/.vim/bundle')
+  call dein#begin('~/.vim/bundle')
   " Plugin formats: user/repo for GitHub
   "                 name for plugin from vim-scripts.org/vim/scripts.html
   "                 git://host/repo.git for repos not on github
   " Dependencies:
-  "   vimproc: cd ~/.vim/bundle/vimproc && make
-  "   YouCompleteMe: cd ~/.vim/bundle/YouCompleteMe && ./install.py
+  "   vimproc (does not apply for neovim/dein):
+  "     cd ~/.vim/bundle/repos/github.com/Shougo/vimproc && make
+  "   YouCompleteMe:
+  "     cd ~/.vim/bundle/repos/github.com/Valloric/YouCompleteMe && ./install.py
   "   ctags: brew install ctags or apt-get install ctags
   "   ack: make ack in dotfiles/bin/ack available in the path
-  Plugin 'VundleVim/Vundle.vim'
 
   " Colorschemes.
-  Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
-  Plugin 'altercation/vim-colors-solarized'
-  Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-  Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+  call dein#add('daylerees/colour-schemes', {'rtp': 'vim/'})
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('chriskempson/tomorrow-theme', {'rtp': 'vim/'})
+  call dein#add('sonph/onehalf', {'rtp': 'vim/'})
 
   " Status bar.
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
 
-  Plugin 'vim-scripts/Tabmerge'
+  call dein#add('vim-scripts/Tabmerge')
 
   " Navigation.
-  Plugin 'christoomey/vim-tmux-navigator'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'luochen1990/rainbow'          " Different colors for parentheses at different nested levels.
+  call dein#add('christoomey/vim-tmux-navigator')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('luochen1990/rainbow')
   if executable('ctags')
-    Plugin 'majutsushi/tagbar'
+    call dein#add('majutsushi/tagbar')
   endif
-  Plugin 'kshenoy/vim-signature'
-  Plugin 'rargo/vim-tab'
-  Plugin 'easymotion/vim-easymotion'
+  call dein#add('kshenoy/vim-signature')
+  call dein#add('rargo/vim-tab')
+  call dein#add('easymotion/vim-easymotion')
 
   " Search & autocomplete.
-  " Plugin 'ctrlpvim/ctrlp.vim'
   if has("nvim")
     " Denite requires neovim or vim8 with python3 support (echo has("python3") == 1).
-    " Install python3 dep: apt-get install python3-pip && pip3 install neovim && nvim -c \":UpdateRemotePlugins\"
-    " Or `brew install python3` for macOS.
-    Plugin 'Shougo/denite.nvim'
+    " Install python3 dep:
+    " brew install python3 && pip3 install neovim && nvim -c \":UpdateRemotePlugins\"
+    " apt-get install python3-pip && pip3 install neovim && nvim -c \":UpdateRemotePlugins\"
+    call dein#add('Shougo/denite.nvim')
   else
-    Plugin 'Shougo/unite.vim'
-    Plugin 'Shougo/neomru.vim'          " Most recently used files source (file_mru) for Unite.
-    Plugin 'Shougo/vimproc.vim'         " Async indexing (file_rec/async) for Unite.
+    call dein#add('Shougo/unite.vim')
+    " Most recently used file source (file_mru for Unite).
+    call dein#add('Shougo/neomru.vim')
+    " Async stuffs (enable file_rec/async for Unite).
+    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
   endif
 
-  Plugin 'Valloric/YouCompleteMe'
+  call dein#add('Valloric/YouCompleteMe', {'build': './install.py'})
   " Fix YCM load errors due to Python:
   " https://github.com/Valloric/YouCompleteMe/issues/18
   " https://github.com/Valloric/YouCompleteMe/issues/1605
   if executable('ack-grep')             " Ack code search; better version of grep.
     let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-    Plugin 'mileszs/ack.vim'
+    call dein#add('mileszs/ack.vim')
   elseif executable('ack')
-    Plugin 'mileszs/ack.vim'
+    call dein#add('mileszs/ack.vim')
   endif
 
   " Editing.
-  Plugin 'sjl/gundo.vim'
-  Plugin 'mattn/emmet-vim'
-  Plugin 'terryma/vim-multiple-cursors' " Sublime text style multiple cursors.
-  Plugin 'sonph/auto-pairs'             " Fork of auto-pairs.
-  Plugin 'scrooloose/nerdcommenter'     " For comments.
+  call dein#add('sjl/gundo.vim')
+  call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'xml', 'css']})
+  " Sublime text style multiple cursors.
+  call dein#add('terryma/vim-multiple-cursors')
+  " Fork of auto pairs (auto closing parentheses).
+  call dein#add('sonph/auto-pairs')
+  call dein#add('scrooloose/nerdcommenter')
 
-" All vundle plugins must be before this line.
-call vundle#end()
+  call dein#end()
+  call dein#save_state()
+endif
 " }
 
 " Plugin settings {
@@ -160,6 +166,9 @@ if has("nvim") && has("python3")
         \ ['Nav: Show vim-signature bookmarks (m/)', 'SignatureListBufferMarks'],
         \ ['View: Toggle gundo (_gd)', 'GundoToggle'],
         \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
+        \ ['Plugins: Git garbage collect (git gc)', 'call dein#each(' . shellescape('gitgc') . ')'],
+        \ ['Plugins: Load remote plugins (neovim only)', 'call dein#remote_plugins()'],
+        \ ['Plugins: Update', 'call dein#update()'],
         \ ['Preferences: Edit vimrc configs', 'Denite menu:vimrc'],
         \ ['Preferences: Keymap', 'new ~/.vim/keymap.vim'],
         \ ['Preferences: Plugins', 'new ~/.vim/plugins.vim'],

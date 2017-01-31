@@ -4,7 +4,7 @@ set nocompatible
 filetype off
 
 " Set runtime path to include Vundle and initialize.
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 
 " General settings {
 if !has('nvim') | set encoding=utf-8 | endif    " Neovim sets utf8 by default.
