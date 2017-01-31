@@ -37,6 +37,8 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('kshenoy/vim-signature')
   call dein#add('rargo/vim-tab')
   call dein#add('easymotion/vim-easymotion')
+  " Vim sugar for the UNIX shell commands e.g. Remove, Rename, Mkdir, SudoWrite, etc.
+  call dein#add('tpope/vim-eunuch')
 
   " Search & autocomplete.
   if has("nvim")
