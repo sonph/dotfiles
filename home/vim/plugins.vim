@@ -166,7 +166,7 @@ if has("nvim") && has("python3")
         \ ['Nav: Show vim-signature bookmarks (m/)', 'SignatureListBufferMarks'],
         \ ['View: Toggle gundo (_gd)', 'GundoToggle'],
         \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
-        \ ['Plugins: Git garbage collect (git gc)', 'call dein#each(' . shellescape('gitgc') . ')'],
+        \ ['Plugins: Git garbage collect (git gc)', 'call dein#each(' . shellescape('git gc') . ')'],
         \ ['Plugins: Load remote plugins (neovim only)', 'call dein#remote_plugins()'],
         \ ['Plugins: Update', 'call dein#update()'],
         \ ['Preferences: Edit vimrc configs', 'Denite menu:vimrc'],
