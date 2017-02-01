@@ -81,6 +81,51 @@ if dein#load_state('~/.vim/bundle')
 endif
 " }
 
+
+function! s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is_cmd)
+  " leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
+  " leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
+  if a:is_cmd
+    " If a:value is a complete command e.g. :Gblame<CR>
+    let l:value = ':' . a:value . '<CR>'
+    let l:denite_name = a:denite_name . ' (_' . a:key . a:key2 . a:key3 . ')'
+    let l:denite_cmd = a:value
+    let l:guide_name = a:guide_name
+  else
+    " If a:value is not a complete command e.g. :Gmove<Space> that needs the
+    " user to finish the command, we'll append (nop) to indicate that
+    " selecting the menu item either in denite or leader-guide does nothing,
+    " because incomplete commands are not supported.
+    " a:value in this case should contain a leading ':' and trailing '<Space>'.
+    " TODO: figure out a way to use incomplete commands.
+    let l:value = a:value
+    let l:denite_name = a:denite_name . ' (_' . a:key . a:key2 . ') (nop)'
+    let l:denite_cmd = ''
+    let l:guide_name = a:guide_name . ' (nop)'
+  endif
+  execute a:map . ' <leader>' . a:key . a:key2 . a:key3 . ' ' . l:value
+  call add(s:menus.user_commands.command_candidates, [l:denite_name, l:denite_cmd])
+  if strlen(a:key3)
+    let l:key = '[' . shellescape(a:key) . ']'
+          \ . '[' . shellescape(a:key2) . ']'
+          \ . '[' . shellescape(a:key3) . ']'
+  else
+    if strlen(a:key2)
+      let l:key = '[' . shellescape(a:key) . ']'
+            \ . '[' . shellescape(a:key2) . ']'
+    else
+      let l:key = '[' . shellescape(a:key) . ']'
+    endif
+  endif
+  execute 'let g:lmap' . l:key . ' = '
+        \ . '[' . shellescape(l:denite_cmd) . ',' . shellescape(l:guide_name) . ']'
+endfunction
+
+function! s:denite_add_user_command(item, cmd)
+  call add(s:menus.user_commands.command_candidates, [a:item, a:cmd])
+endfunction
+
+
 " Plugin settings {
 
 " hecal3/vim-leader-guide
@@ -97,73 +142,11 @@ vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 " call dein#set_hook('vim-leader-guide', 'hook_add', function('s:vim_leader_guide_setup'))
 
 
-" vim-airline
-let g:airline_theme='onehalfdark'       " For other built in themes see
-                                        "   https://github.com/vim-airline/vim-airline/wiki/Screenshots
-set laststatus=2                        " Load airline even on a single split.
-set noshowmode                          " Disable vim's default mode indicator.
-let g:airline_inactive_collapse=1
-let g:airline#extensions#tabline#fnamemod=':p:.'
-let g:airline#extensions#tabline#fnamecollapse=1
-let g:airline#extensions#tabline#left_sep=' '
-let g:airline#extensions#tabline#left_alt_sep='|'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
-
-" onehalf
-colorscheme onehalflight
-
-
-" NERDTree
-" <C-w>0 to focus nerdtree (like sublime)
-nmap <leader>nt :NERDTreeToggle<CR>
-
-
-" Tagbar
-nmap <leader>tb :TagbarToggle<CR>
-
-
-" Rainbow
-" Change ctermfgs to set colors; original colors are bright.
-let g:rainbow_conf = {
-    \   'guifgs': ['black', 'blue', 'red', 'green'],
-    \   'ctermfgs': ['black', 'blue', 'red', 'green'],
-    \}
-
-
-" Vim-signature
-" Change the bookmark color to indicate git-gutter state (since we only have
-" one column for both bookmarks and git-gutter indicators).
-let g:SignatureMarkTextHLDynamic=1
-
-
-" for some reason the bookmarks don't immediately appear, call SignatureRefresh
-let bookmark_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-let i = 0
-while i < len(bookmark_keys)
-  execute 'nnoremap m' . bookmark_keys[i] . ' :mark ' . bookmark_keys[i]. ' \| SignatureRefresh<CR>'
-  let i = i + 1
-endwhile
-" List all bookmarks.
-nnoremap m/ :SignatureListBufferMarks<CR>
-" Remove all bookmarks.
-nnoremap m<Space> call signature#mark#Purge('all')
-
-
-" vim-tab
-let g:TabTrigger = []
-
-
 " Unite & Denite
 if has("nvim") && has("python3")
   " TODO: use -no-split when it becomes available.
   " TODO: enable & test for vim8.
   " if v:version >= 800
-  nnoremap <leader>p :Denite file_rec buffer<CR>
-  nnoremap <leader>P :Denite menu:user_commands command<CR>
-  vnoremap <leader>P :Denite menu:user_commands command<CR>
-  nnoremap <leader>/ :Denite line<CR>
 
   let s:menus = {}
   let s:menus.user_commands = {
@@ -234,6 +217,12 @@ if has("nvim") && has("python3")
   call denite#custom#var('file_rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
   nnoremap <leader>p :Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'` buffer<CR>
+  let g:lmap.p = ['', 'finder-file (nop) (_p)']
+  call s:leader_bind('nnoremap', 'P', '', '',
+        \ 'Denite menu:user_commands command', 'Finder: Commands', 'finder-command', 1)
+  vnoremap <leader>P :Denite menu:user_commands command<CR>
+  call s:leader_bind('nnoremap', '/', '', '',
+        \ 'Denite line', 'Finder: Line', 'finder-line', 1)
 
   " Key mappings.
   call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
@@ -272,6 +261,64 @@ else
 endif
 
 
+" sonph/onehalf
+colorscheme onehalflight
+
+
+" vim-airline/vim-airline
+let g:airline_theme='onehalfdark'       " For other built in themes see
+                                        "   https://github.com/vim-airline/vim-airline/wiki/Screenshots
+set laststatus=2                        " Load airline even on a single split.
+set noshowmode                          " Disable vim's default mode indicator.
+let g:airline_inactive_collapse=1
+let g:airline#extensions#tabline#fnamemod=':p:.'
+let g:airline#extensions#tabline#fnamecollapse=1
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='|'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+
+" scrooloose/nerdtree
+" <C-w>0 to focus nerdtree (like sublime)
+nmap <leader>nt :NERDTreeToggle<CR>
+
+
+" Tagbar
+nmap <leader>tb :TagbarToggle<CR>
+
+
+" Rainbow
+" Change ctermfgs to set colors; original colors are bright.
+let g:rainbow_conf = {
+    \   'guifgs': ['black', 'blue', 'red', 'green'],
+    \   'ctermfgs': ['black', 'blue', 'red', 'green'],
+    \}
+
+
+" Vim-signature
+" Change the bookmark color to indicate git-gutter state (since we only have
+" one column for both bookmarks and git-gutter indicators).
+let g:SignatureMarkTextHLDynamic=1
+
+
+" for some reason the bookmarks don't immediately appear, call SignatureRefresh
+let bookmark_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let i = 0
+while i < len(bookmark_keys)
+  execute 'nnoremap m' . bookmark_keys[i] . ' :mark ' . bookmark_keys[i]. ' \| SignatureRefresh<CR>'
+  let i = i + 1
+endwhile
+" List all bookmarks.
+nnoremap m/ :SignatureListBufferMarks<CR>
+" Remove all bookmarks.
+nnoremap m<Space> call signature#mark#Purge('all')
+
+
+" vim-tab
+let g:TabTrigger = []
+
+
 " Gundo
 nnoremap <leader>gd :GundoToggle<CR>
 " for configuration options, see http://sjl.bitbucket.org/gundo.vim/
@@ -295,38 +342,6 @@ let g:user_emmet_expandabbr_key='<Tab>'
 let NERDSpaceDelims=1
 
 
-function! s:leader_bind(map, layer, key, key2, value, denite_name, guide_name, is_cmd)
-  " leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
-  " leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
-  if a:is_cmd
-    " If a:value is a complete command e.g. :Gblame<CR>
-    let l:value = ':' . a:value . '<CR>'
-    let l:denite_name = a:denite_name . ' (_' . a:layer . a:key . a:key2 . ')'
-    let l:denite_cmd = a:value
-    let l:guide_name = a:guide_name
-  else
-    " If a:value is not a complete command e.g. :Gmove<Space> that needs the
-    " user to finish the command, we'll append (nop) to indicate that
-    " selecting the menu item either in denite or leader-guide does nothing,
-    " because incomplete commands are not supported.
-    " a:value in this case should contain a leading ':' and trailing '<Space>'.
-    " TODO: figure out a way to use incomplete commands.
-    let l:value = a:value
-    let l:denite_name = a:denite_name . ' (_' . a:layer . a:key . a:key2 . ') (nop)'
-    let l:denite_cmd = ''
-    let l:guide_name = a:guide_name . ' (nop)'
-  endif
-  execute a:map . ' <leader>' . a:layer . a:key . a:key2 . ' ' . l:value
-  call add(s:menus.user_commands.command_candidates, [l:denite_name, l:denite_cmd])
-  if strlen(a:key2)
-    execute 'let g:lmap.' . a:layer . '.' . a:key . '.' . a:key2 ' = '
-          \ . '[' . shellescape(l:denite_cmd) . ',' . shellescape(l:guide_name) . ']'
-  else
-    execute 'let g:lmap.' . a:layer . '.' . a:key . ' = '
-          \ . '[' . shellescape(l:denite_cmd) . ',' . shellescape(l:guide_name) . ']'
-  endif
-endfunction
-
 " tpope/vim-fugitive
 let g:lmap.g = {'name': 'Git/'}
 call s:leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
@@ -349,4 +364,5 @@ call s:leader_bind('nnoremap', 'g', 'g', 'S', 'GitGutterStageHunk', 'Git: Stage 
 call s:leader_bind('nnoremap', 'g', 'g', 'R', 'GitGutterRevertHunk', 'Git: Revert Hunk', 'revert-hunk', 1)
 call s:leader_bind('nnoremap', 'g', 'g', 't', 'GitGutterSignsToggle', 'Git: Toggle Gutter', 'toggle-gutter', 1)
 
-call sort(s:menus.user_commands.command_candidates)
+" Sort Denite user commands.
+call sort(s:menus.user_commands.command_candidates, 'i')
