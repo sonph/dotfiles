@@ -174,8 +174,6 @@ if has("nvim") && has("python3")
         \ ['Colorscheme: One Half Dark', 'colorscheme onehalfdark | let g:airline_theme=' . shellescape('onehalfdark')],
         \ ['Colorscheme: One Half Light', 'colorscheme onehalflight | let g:airline_theme=' . shellescape('onehalfdark')],
         \ ['Edit: Remove trailing whitespaces', '%s/\s\+$//e'],
-        \ ['Git: Next git hunk (_ggn)', 'GitGutterNextHunk'],
-        \ ['Git: Previous git hunk (_ggp)', 'GitGutterPrevHunk'],
         \ ['Indentation: 2 spaces soft tab', 'set expandtab tabstop=2 softtabstop=2 shiftwidth=2'],
         \ ['Indentation: 2-space hard tabs', 'set noexpandtab tabstop=2 softtabstop=2 shiftwidth=2'],
         \ ['Indentation: 4 spaces soft tab', 'set expandtab tabstop=4 softtabstop=4 shiftwidth=4'],
@@ -295,3 +293,60 @@ let g:user_emmet_expandabbr_key='<Tab>'
 " NERDCommenter
 " Add an extra space after the comment sign.
 let NERDSpaceDelims=1
+
+
+function! s:leader_bind(map, layer, key, key2, value, denite_name, guide_name, is_cmd)
+  " leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
+  " leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
+  if a:is_cmd
+    " If a:value is a complete command e.g. :Gblame<CR>
+    let l:value = ':' . a:value . '<CR>'
+    let l:denite_name = a:denite_name . ' (_' . a:layer . a:key . a:key2 . ')'
+    let l:denite_cmd = a:value
+    let l:guide_name = a:guide_name
+  else
+    " If a:value is not a complete command e.g. :Gmove<Space> that needs the
+    " user to finish the command, we'll append (nop) to indicate that
+    " selecting the menu item either in denite or leader-guide does nothing,
+    " because incomplete commands are not supported.
+    " a:value in this case should contain a leading ':' and trailing '<Space>'.
+    " TODO: figure out a way to use incomplete commands.
+    let l:value = a:value
+    let l:denite_name = a:denite_name . ' (_' . a:layer . a:key . a:key2 . ') (nop)'
+    let l:denite_cmd = ''
+    let l:guide_name = a:guide_name . ' (nop)'
+  endif
+  execute a:map . ' <leader>' . a:layer . a:key . a:key2 . ' ' . l:value
+  call add(s:menus.user_commands.command_candidates, [l:denite_name, l:denite_cmd])
+  if strlen(a:key2)
+    execute 'let g:lmap.' . a:layer . '.' . a:key . '.' . a:key2 ' = '
+          \ . '[' . shellescape(l:denite_cmd) . ',' . shellescape(l:guide_name) . ']'
+  else
+    execute 'let g:lmap.' . a:layer . '.' . a:key . ' = '
+          \ . '[' . shellescape(l:denite_cmd) . ',' . shellescape(l:guide_name) . ']'
+  endif
+endfunction
+
+" tpope/vim-fugitive
+let g:lmap.g = {'name': 'Git/'}
+call s:leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
+call s:leader_bind('nnoremap', 'g', 'B', '', 'Gbrowse', 'Git: Status', 'status', 1)
+call s:leader_bind('nnoremap', 'g', 'c', '', ':Gcommit<Space>', 'Git: Commit', 'commit', 0)
+call s:leader_bind('nnoremap', 'g', 'C', '', 'Gcheckout', 'Git: Checkout', 'checkout', 1)
+call s:leader_bind('nnoremap', 'g', 'D', '', 'Gdiff HEAD', 'Git: Diff HEAD', 'diff HEAD', 1)
+call s:leader_bind('nnoremap', 'g', 'd', '', 'Gdiff', 'Git: Diff', 'diff', 1)
+call s:leader_bind('nnoremap', 'g', 'm', '', ':Gmove<Space>', 'Git: Move', 'move', 0)
+call s:leader_bind('nnoremap', 'g', 'p', '', 'Gpull', 'Git: Pull', 'pull', 1)
+call s:leader_bind('nnoremap', 'g', 'P', '', 'Gpush', 'Git: Push', 'push', 1)
+call s:leader_bind('nnoremap', 'g', 'r', '', 'Gread', 'Git: Checkout current file', 'checkout-current-file', 1)
+call s:leader_bind('nnoremap', 'g', 's', '', 'Gstatus', 'Git: Status', 'status', 1)
+
+" airblade/vim-gitgutter
+let g:lmap.g.g = {'name': 'Gutter/'}
+call s:leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
+call s:leader_bind('nnoremap', 'g', 'g', 'p', 'GitGutterPrevHunk', 'Git: Prev Hunk', 'prev-hunk', 1)
+call s:leader_bind('nnoremap', 'g', 'g', 'S', 'GitGutterStageHunk', 'Git: Stage Hunk', 'stage-hunk', 1)
+call s:leader_bind('nnoremap', 'g', 'g', 'R', 'GitGutterRevertHunk', 'Git: Revert Hunk', 'revert-hunk', 1)
+call s:leader_bind('nnoremap', 'g', 'g', 't', 'GitGutterSignsToggle', 'Git: Toggle Gutter', 'toggle-gutter', 1)
+
+call sort(s:menus.user_commands.command_candidates)

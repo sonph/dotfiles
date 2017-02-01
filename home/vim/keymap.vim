@@ -75,9 +75,6 @@ vnoremap <leader>r y:%s/<C-R>*/
 " See http://stackoverflow.com/a/15934899/2522725
 vnoremap <C-f> y<ESC>/<C-r>"<CR>:%s//
 
-nnoremap <leader>ggn :GitGutterNextHunk<CR>
-nnoremap <leader>ggp :GitGutterPrevHunk<CR>
-
 " <leader>c to copy to system clipboard.
 if executable('pbcopy') | vnoremap <leader>c :w !pbcopy | endif
 
