@@ -104,7 +104,9 @@ function! s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is
     let l:guide_name = a:guide_name . ' (nop)'
   endif
   execute a:map . ' <leader>' . a:key . a:key2 . a:key3 . ' ' . l:value
-  call add(s:menus.user_commands.command_candidates, [l:denite_name, l:denite_cmd])
+  if exists('s:menus')
+    call add(s:menus.user_commands.command_candidates, [l:denite_name, l:denite_cmd])
+  endif
   if strlen(a:key3)
     let l:key = '[' . shellescape(a:key) . ']'
           \ . '[' . shellescape(a:key2) . ']'
@@ -368,4 +370,6 @@ call s:leader_bind('nnoremap', 'g', 'g', 't', 'GitGutterSignsToggle', 'Git: Togg
 " }
 
 " Sort Denite user commands.
-call sort(s:menus.user_commands.command_candidates, 'i')
+if exists('s:menus')
+  call sort(s:menus.user_commands.command_candidates, 'i')
+endif
