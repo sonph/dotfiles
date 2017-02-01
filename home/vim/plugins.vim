@@ -30,6 +30,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('christoomey/vim-tmux-navigator')
   call dein#add('scrooloose/nerdtree')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
   call dein#add('luochen1990/rainbow')
   if executable('ctags')
     call dein#add('majutsushi/tagbar')
@@ -173,6 +174,8 @@ if has("nvim") && has("python3")
         \ ['Colorscheme: One Half Dark', 'colorscheme onehalfdark | let g:airline_theme=' . shellescape('onehalfdark')],
         \ ['Colorscheme: One Half Light', 'colorscheme onehalflight | let g:airline_theme=' . shellescape('onehalfdark')],
         \ ['Edit: Remove trailing whitespaces', '%s/\s\+$//e'],
+        \ ['Git: Next git hunk (_ggn)', 'GitGutterNextHunk'],
+        \ ['Git: Previous git hunk (_ggp)', 'GitGutterPrevHunk'],
         \ ['Indentation: 2 spaces soft tab', 'set expandtab tabstop=2 softtabstop=2 shiftwidth=2'],
         \ ['Indentation: 2-space hard tabs', 'set noexpandtab tabstop=2 softtabstop=2 shiftwidth=2'],
         \ ['Indentation: 4 spaces soft tab', 'set expandtab tabstop=4 softtabstop=4 shiftwidth=4'],
@@ -181,8 +184,6 @@ if has("nvim") && has("python3")
         \ ['Indentation: Toggle paste mode', 'set paste!'],
         \ ['Misc: Shell terminal', 'terminal'],
         \ ['Nav: Clear vim-signature bookmarks (m_)', 'call signature#mark#Purge(' . shellescape('all') . ')'],
-        \ ['Nav: Next git hunk (_ggn)', 'GitGutterNextHunk'],
-        \ ['Nav: Previous git hunk (_ggp)', 'GitGutterPrevHunk'],
         \ ['Nav: Show vim-signature bookmarks (m/)', 'SignatureListBufferMarks'],
         \ ['View: Toggle gundo (_gd)', 'GundoToggle'],
         \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
@@ -196,8 +197,8 @@ if has("nvim") && has("python3")
         \ ['Preferences: Settings init.vim', 'new ~/.vim/init.vim'],
         \ ['Tabs: Merge (_tm)', 'Tabmerge'],
         \ ['Tabs: New (<C-w>t)', 'tabnew'],
-        \ ['Tabs: Resize equal (<C-w>=)', 'call feedkeys("\<C-w>=")'],
-        \ ['Tabs: Split to new tab (_ts <C-w>T)', 'call feedkeys("\<C-w>T")'],
+        \ ['Tabs: Resize equal (<C-w>=)', 'wincmd ='],
+        \ ['Tabs: Split to new tab (_ts <C-w>T)', 'wincmd T'],
         \ ['View: Fold level 0 (_f0)', 'set foldlevel=0'],
         \ ['View: Fold level 3 (_f3)', 'set foldlevel=3'],
         \ ['View: Fold level 6 (_f6)', 'set foldlevel=6'],
@@ -213,7 +214,7 @@ if has("nvim") && has("python3")
         \ ['View: Toggle word wrap', 'set wrap!'],
         \ ['Visual: Apply line-macro <a> to selection (norm! @a)', 'norm! @a'],
         \ ['Visual: Copy to system clipboard (_c)', 'w !pbcopy'],
-        \ ['Visual: Replace <C-f>', 'call feedkeys("\<C-f>")'],
+        \ ['Visual: Replace (<C-f>) (nop)', ''],
         \ ]
   let s:menus.vimrc = {
         \ 'description': 'Vim config files'
