@@ -1,14 +1,8 @@
-function show_alias {
-  alias | grep $1 | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\'']//g" | sort;
-}
-
-# safety
 alias rm="rm -iv"
 alias mv="mv -iv"
 alias cp="cp -iv"
 set -o noclobber    # File redirection > does not overwrite existing file.
 
-# Listing, directories, and motion
 alias ls='ls --color=auto'
 alias ll="ls -alrtF --color"
 alias la="ls -A"
@@ -26,91 +20,24 @@ alias cls='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
-# git
-function git_aliases {
-  if [ $1 ]; then
-    show_alias 'git' | grep $1
-  else
-    show_alias 'git'
-  fi
-}
 alias g='git'
-alias gadd='git add'
-alias gaddp='git add -p'
-alias gaddu='git add -u'
+alias ga='git add'
+alias gap='git add -p'
 alias gbr='git branch'
 alias gcl='git clone'
-alias gclone='git clone'
-alias gco='git checkout'
-alias gcom='git commit'
-alias gcoma='git commit -a'
-alias gdiff='git diff'
-alias gdiffc='git diff --cached'
+alias gC='git checkout'
+alias gc='git commit'
+alias gd='git diff'
+alias gdc='git diff --cached'
 alias glgraph='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an%Creset - %Cgreen%ar"'
 alias glgraphlong='git log --graph --pretty=format:"%Cblue%h %d%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD"'
-alias glog='git log'
-alias gpl='git pull'
-alias gplo='git pull origin'
-alias gplod='git pull origin develop'
-alias gplom='git pull origin master'
-alias gps='git push'
-alias gpso='git push origin'
-alias gpsod='git push origin develop'
-alias gpsom='git push origin master'
+alias gl='git log'
+alias gp='git pull origin master'
+alias gP='git push origin master'
 alias grs='git reset'
 alias grsh='git reset HEAD'
-alias gshow='git show'
-alias gst='git status'
+alias gs='git status'
 alias gstash='git stash'
-alias gtag='git tag'
-alias gunstage='git reset HEAD --'
-alias gunmodify='git checkout --'
-
-# docker
-function docker_aliases {
-  if [ $1 ]; then
-    show_alias 'docker' | grep $1
-  else
-    show_alias 'docker'
-  fi
-}
-alias dinfo="docker info"
-
-# docker container
-alias dps="docker ps"
-alias dpsa="docker ps -a"
-alias dls="docker ps"
-alias dlsa="docker ps -a"
-alias drun="docker run"
-alias drund="docker run -d"
-alias drunit="docker run -it"
-alias dstart="docker start"
-alias datt="docker attach"
-alias dex="docker exec"
-alias dexd="docker exec -d"
-alias dexit="docker exec -it"
-alias dlg="docker logs"
-alias dlgf="docker logs -tf"
-alias dtop="docker top"
-alias dstats="docker stats"
-alias dstop="docker stop"
-alias dkill="docker kill"
-alias dinsp="docker inspect"
-function drma { docker rm $(docker ps -a -q); }     # remove all containers
-function dstopa { docker stop $(docker ps -a -q); } # stop all containers
-alias drm="docker rm"
-alias drestart="docker restart"
-
-# docker images
-alias dimgs="docker images"
-alias dhist="docker history"
-alias drmi="docker rmi"
-alias drmif="docker rmi -f"
-alias dsearch="docker search"
-alias dpl="docker pull"
-function dbuild {
-  docker build -t=$1 --rm=true $PWD;
-}   # $ dbuild USER/REPO[:TAG]
 
 # Mac OS specific aliases
 if [ "$(uname -s)" = "Darwin" ]; then
@@ -122,39 +49,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
   alias vdir='gls --color=auto --format=long'
   alias du='gdu'
   alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text --new-window --add .'
-
-  # docker-machine
-  alias dm="docker-machine"
-  function dmenv {
-      eval "$(docker-machine env $1)"
-  }
-  alias dmactive="docker-machine active"
-  alias dmconfig="docker-machine config"
-  alias dmcreate="docker-machine create"
-  alias dminspect="docker-machine inspect"
-  alias dmip="docker-machine ip"
-  alias dmkill="docker-machine kill"
-  alias dmls="docker-machine ls"
-  alias dmrestart="docker-machine restart"
-  alias dmrm="docker-machine rm"
-  alias dmssh="docker-machine ssh"
-  alias dmscp="docker-machine scp"
-  alias dmstart="docker-machine start"
-  alias dmstatus="docker-machine status"
-  alias dmstop="docker-machine stop"
-  alias dmupgrade="docker-machine upgrade"
-  alias dmurl="docker-machine url"
-  alias dmhelp="docker-machine help"
 fi
-
-alias shaliases="vim $HOME/.shaliases && source $HOME/.shaliases"
-alias vimrc="vim $HOME/.vimrc"
-alias vimrc.keymap="vim $HOME/.vimrc.keymap"
-alias vimrc.plugins="vim $HOME/.vimrc.plugins"
 
 which nvim 2>&1 > /dev/null && alias vim="nvim"
 alias pythonserver='python2 -m SimpleHTTPServer'
-
-[[ -e $HOME/.shaliases.google ]] && \
-  source $HOME/.shaliases.google && \
-  alias shaliases.google="vim $HOME/.shaliases.google && source $HOME/.shaliases.google"

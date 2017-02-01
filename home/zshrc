@@ -48,6 +48,8 @@ setopt hist_verify
 setopt inc_append_history
 setopt share_history
 
+setopt noclobber
+
 # Enable arrow keys in autocomplete menu.
 zstyle ':completion:*' menu select
 
