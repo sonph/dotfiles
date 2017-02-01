@@ -166,7 +166,6 @@ if has("nvim") && has("python3")
         \ ['Misc: Shell terminal', 'terminal'],
         \ ['Nav: Clear vim-signature bookmarks (m_)', 'call signature#mark#Purge(' . shellescape('all') . ')'],
         \ ['Nav: Show vim-signature bookmarks (m/)', 'SignatureListBufferMarks'],
-        \ ['View: Toggle gundo (_gd)', 'GundoToggle'],
         \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
         \ ['Plugins: Git garbage collect (git gc)', 'call dein#each(' . shellescape('git gc') . ')'],
         \ ['Plugins: Load remote plugins (neovim only)', 'call dein#remote_plugins()'],
@@ -188,10 +187,8 @@ if has("nvim") && has("python3")
         \ ['View: Hex (readonly)', 'set readonly | setlocal binary | %!xxd'],
         \ ['View: No fold', 'set foldlevel=99'],
         \ ['View: Plain text filetype', 'set syntax=off filetype=plaintext'],
-        \ ['View: Toggle Nerdtree (_nt)', 'NERDTreeToggle'],
         \ ['View: Toggle relative line number', 'set relativenumber!'],
         \ ['View: Toggle spellcheck', 'set spell!'],
-        \ ['View: Toggle Tagbar (_tb)', 'TagbarToggle'],
         \ ['View: Toggle word wrap', 'set wrap!'],
         \ ['Visual: Apply line-macro <a> to selection (norm! @a)', 'norm! @a'],
         \ ['Visual: Copy to system clipboard (_c)', 'w !pbcopy'],
@@ -279,13 +276,26 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 
+" View layer {
+let g:lmap.v = {'name': 'View/'}
+
 " scrooloose/nerdtree
 " <C-w>0 to focus nerdtree (like sublime)
-nmap <leader>nt :NERDTreeToggle<CR>
+nnoremap <C-w>0 :NERDTreeFocus
+call s:leader_bind('nnoremap', 'v', 'n', '', 'NERDTreeToggle', 'View: Nerdtree', 'nerdtree', 1)
 
 
-" Tagbar
-nmap <leader>tb :TagbarToggle<CR>
+" majutsushi/tagbar
+call s:leader_bind('nnoremap', 'v', 't', '', 'TagbarToggle', 'View: Tagbar', 'tagbar', 1)
+
+
+" sjl/gundo.vim
+call s:leader_bind('nnoremap', 'v', 'g', '', 'GundoToggle', 'View: Gundo', 'gundo', 1)
+" open gundo on the right side instead of the left
+let g:gundo_right=1
+" automatically close gundo on reverting
+let g:gundo_close_on_revert=1
+" }
 
 
 " Rainbow
@@ -297,10 +307,10 @@ let g:rainbow_conf = {
 
 
 " Vim-signature
+let g:lmap.m = {'name': 'Bookmarks/'}
 " Change the bookmark color to indicate git-gutter state (since we only have
 " one column for both bookmarks and git-gutter indicators).
 let g:SignatureMarkTextHLDynamic=1
-
 
 " for some reason the bookmarks don't immediately appear, call SignatureRefresh
 let bookmark_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -319,22 +329,12 @@ nnoremap m<Space> call signature#mark#Purge('all')
 let g:TabTrigger = []
 
 
-" Gundo
-nnoremap <leader>gd :GundoToggle<CR>
-" for configuration options, see http://sjl.bitbucket.org/gundo.vim/
-" open gundo on the right side instead of the left
-let g:gundo_right=1
-" automatically close gundo on reverting
-let g:gundo_close_on_revert=1
-
-
 " Emmet
 " enable only for html/css
 let g:user_emmet_install_global=0
 autocmd FileType html,css EmmetInstall
 " use <Tab> to trigger expanding abbreviation
 let g:user_emmet_expandabbr_key='<Tab>'
-" }
 
 
 " NERDCommenter
@@ -342,6 +342,7 @@ let g:user_emmet_expandabbr_key='<Tab>'
 let NERDSpaceDelims=1
 
 
+" Git layer {
 " tpope/vim-fugitive
 let g:lmap.g = {'name': 'Git/'}
 call s:leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
@@ -356,6 +357,7 @@ call s:leader_bind('nnoremap', 'g', 'P', '', 'Gpush', 'Git: Push', 'push', 1)
 call s:leader_bind('nnoremap', 'g', 'r', '', 'Gread', 'Git: Checkout current file', 'checkout-current-file', 1)
 call s:leader_bind('nnoremap', 'g', 's', '', 'Gstatus', 'Git: Status', 'status', 1)
 
+
 " airblade/vim-gitgutter
 let g:lmap.g.g = {'name': 'Gutter/'}
 call s:leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
@@ -363,6 +365,7 @@ call s:leader_bind('nnoremap', 'g', 'g', 'p', 'GitGutterPrevHunk', 'Git: Prev Hu
 call s:leader_bind('nnoremap', 'g', 'g', 'S', 'GitGutterStageHunk', 'Git: Stage Hunk', 'stage-hunk', 1)
 call s:leader_bind('nnoremap', 'g', 'g', 'R', 'GitGutterRevertHunk', 'Git: Revert Hunk', 'revert-hunk', 1)
 call s:leader_bind('nnoremap', 'g', 'g', 't', 'GitGutterSignsToggle', 'Git: Toggle Gutter', 'toggle-gutter', 1)
+" }
 
 " Sort Denite user commands.
 call sort(s:menus.user_commands.command_candidates, 'i')
