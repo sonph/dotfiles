@@ -23,8 +23,8 @@ if dein#load_state('~/.vim/bundle')
   " Status bar.
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-
   call dein#add('vim-scripts/Tabmerge')
+  call dein#add('hecal3/vim-leader-guide')
 
   " Navigation.
   call dein#add('christoomey/vim-tmux-navigator')
@@ -82,6 +82,20 @@ endif
 
 " Plugin settings {
 
+" hecal3/vim-leader-guide
+" function! s:vim_leader_guide_setup()
+let g:lmap = {}
+let g:leaderGuide_vertical = 1
+let g:leaderGuide_position = 'botright'
+let g:leaderGuide_max_size = 30
+
+call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
+nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
+" endfunction
+" call dein#set_hook('vim-leader-guide', 'hook_add', function('s:vim_leader_guide_setup'))
+
+
 " vim-airline
 let g:airline_theme='onehalfdark'       " For other built in themes see
                                         "   https://github.com/vim-airline/vim-airline/wiki/Screenshots
@@ -94,6 +108,10 @@ let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+
+" onehalf
+colorscheme onehalflight
 
 
 " NERDTree

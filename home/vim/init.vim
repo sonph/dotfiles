@@ -112,8 +112,7 @@ endif
 
 " Colors {
 set t_Co=256                                      " enable 256 colors
-colorscheme onehalflight
-let g:airline_theme='onehalfdark'
+" Colorscheme and g:airline_theme are set in plugins.vim
 " }
 
 if filereadable(expand('~/.vim/tabline.vim')) | source ~/.vim/tabline.vim | endif
