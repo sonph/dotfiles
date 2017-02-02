@@ -1,4 +1,6 @@
+" Leader key mappings are in plugins.vim
 let mapleader=' '
+
 nnoremap ; :
 
 noremap <C-c> <Esc>
@@ -9,20 +11,19 @@ inoremap jk <ESC>
 nnoremap j gj
 nnoremap k gk
 
-" C-a/C-e to go to beginning/end of line in insert mode.
-" (C-o puts you in command mode for one key only)
-inoremap <C-a> <C-o>^
-inoremap <C-e> <C-o>$
-" C-f/C-b for moving right/left.
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
-
+" Emacs-like keybindings in insert and command mode.
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
 
 " Tab and S-Tab to indent/unindent in visual mode.
 vnoremap <Tab> >gv
@@ -34,52 +35,16 @@ noremap <S-Tab> <<
 vnoremap > >gv
 vnoremap < <gv
 
-" Press ( [ ' " < to wrap visual selection in pairs.
-vnoremap ( c()<Esc>P
-vnoremap [ c[]<Esc>P
-vnoremap ' c''<Esc>P
-vnoremap " c""<Esc>P
-
 " Create new buffer with ^w n
 noremap <C-w>n :new<Enter>
 
 " Tabs
 nnoremap <C-w><Tab> :tabn<CR>
 nnoremap <C-w><S-Tab> :tabp<CR>
-nnoremap <leader><Tab> :tabn<CR>
-nnoremap <leader><S-Tab> :tabp<CR>
 nnoremap <C-w>t :tabnew<CR>
 for i in range(1, 9)
-  " use <C-w>1 or <leader>1 to switch to tab 1
+  " Use <C-w>i to switch to tab i.
   execute 'nnoremap <C-w>' . i . ' ' . i . 'gt<CR>'
-  execute 'nnoremap <leader>' . i . ' ' . i . 'gt<CR>'
-endfor
-
-" Merge this tab and next tab (tab merge).
-if exists(':Tabmerge') | nnoremap <leader>tm :Tabmerge<CR> | endif
-
-" Make this split into a new tab (tab split).
-nnoremap <leader>ts <C-w>T
-nnoremap <leader>q :q<CR>
-nnoremap <leader>Q :q!<CR>
-nnoremap <leader>w :w<CR>
-" Clear search highlight.
-nnoremap <leader>? :nohlsearch<CR>
-nnoremap <leader>r :source ~/.vim/init.vim<CR>
-
-" Execute current file.
-nnoremap <leader>ex :!%:p<CR>
-
-vnoremap <leader>r y:%s/<C-R>*/
-" C-f to replace visually selected text.
-" See http://stackoverflow.com/a/15934899/2522725
-vnoremap <C-f> y<ESC>/<C-r>"<CR>:%s//
-
-" <leader>c to copy to system clipboard.
-if executable('pbcopy') | vnoremap <leader>c :w !pbcopy | endif
-
-for i in range(1, 9)
-  execute 'nnoremap <leader>f' . i . ' :set foldlevel=' . i . '<CR>'
 endfor
 
 " By default C-q is 'unfreeze', so we tells the terminal to forward it to vim

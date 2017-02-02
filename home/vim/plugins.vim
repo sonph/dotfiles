@@ -82,6 +82,19 @@ endif
 " }
 
 
+function! s:maybe_add_denite_item(name, cmd)
+  if exists('s:menus')
+    call add(s:menus.user_commands.command_candidates, [a:name, a:cmd])
+  endif
+endfunction
+
+function! s:maybe_add_leader_guide_item(key, name, cmd)
+  if exists('g:lmap')
+    execute 'let g:lmap' . a:key . ' = '
+          \ . '[' . shellescape(a:cmd) . ',' . shellescape(a:name) . ']'
+  endif
+endfunction
+
 function! s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is_cmd)
   " leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
   " leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
@@ -104,9 +117,7 @@ function! s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is
     let l:guide_name = a:guide_name . ' (nop)'
   endif
   execute a:map . ' <leader>' . a:key . a:key2 . a:key3 . ' ' . l:value
-  if exists('s:menus')
-    call add(s:menus.user_commands.command_candidates, [l:denite_name, l:denite_cmd])
-  endif
+  call s:maybe_add_denite_item(l:denite_name, l:denite_cmd)
   if strlen(a:key3)
     let l:key = '[' . shellescape(a:key) . ']'
           \ . '[' . shellescape(a:key2) . ']'
@@ -119,8 +130,7 @@ function! s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is
       let l:key = '[' . shellescape(a:key) . ']'
     endif
   endif
-  execute 'let g:lmap' . l:key . ' = '
-        \ . '[' . shellescape(l:denite_cmd) . ',' . shellescape(l:guide_name) . ']'
+  call s:maybe_add_leader_guide_item(l:key, l:guide_name, l:denite_cmd)
 endfunction
 
 function! s:denite_add_user_command(item, cmd)
@@ -145,7 +155,7 @@ vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
 
 " Unite & Denite
-if has("nvim") && has("python3")
+if has("python3")
   " TODO: use -no-split when it becomes available.
   " TODO: enable & test for vim8.
   " if v:version >= 800
@@ -165,22 +175,13 @@ if has("nvim") && has("python3")
         \ ['Indentation: 4-space hard tabs', 'set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4'],
         \ ['Indentation: Convert tabs to spaces', 'retab'],
         \ ['Indentation: Toggle paste mode', 'set paste!'],
-        \ ['Misc: Shell terminal', 'terminal'],
         \ ['Nav: Clear vim-signature bookmarks (m_)', 'call signature#mark#Purge(' . shellescape('all') . ')'],
         \ ['Nav: Show vim-signature bookmarks (m/)', 'SignatureListBufferMarks'],
-        \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
         \ ['Plugins: Git garbage collect (git gc)', 'call dein#each(' . shellescape('git gc') . ')'],
         \ ['Plugins: Load remote plugins (neovim only)', 'call dein#remote_plugins()'],
         \ ['Plugins: Update', 'call dein#update()'],
-        \ ['Preferences: Edit vimrc configs', 'Denite menu:vimrc'],
-        \ ['Preferences: Keymap', 'new ~/.vim/keymap.vim'],
-        \ ['Preferences: Plugins', 'new ~/.vim/plugins.vim'],
-        \ ['Preferences: Reload init.vim (_r)', 'source ~/.vim/init.vim'],
-        \ ['Preferences: Settings init.vim', 'new ~/.vim/init.vim'],
-        \ ['Tabs: Merge (_tm)', 'Tabmerge'],
         \ ['Tabs: New (<C-w>t)', 'tabnew'],
         \ ['Tabs: Resize equal (<C-w>=)', 'wincmd ='],
-        \ ['Tabs: Split to new tab (_ts <C-w>T)', 'wincmd T'],
         \ ['View: Fold level 0 (_f0)', 'set foldlevel=0'],
         \ ['View: Fold level 3 (_f3)', 'set foldlevel=3'],
         \ ['View: Fold level 6 (_f6)', 'set foldlevel=6'],
@@ -189,12 +190,16 @@ if has("nvim") && has("python3")
         \ ['View: Hex (readonly)', 'set readonly | setlocal binary | %!xxd'],
         \ ['View: No fold', 'set foldlevel=99'],
         \ ['View: Plain text filetype', 'set syntax=off filetype=plaintext'],
+        \ ['View: Toggle rainbow parentheses', 'RainbowToggle'],
         \ ['View: Toggle relative line number', 'set relativenumber!'],
         \ ['View: Toggle spellcheck', 'set spell!'],
         \ ['View: Toggle word wrap', 'set wrap!'],
+        \ ['Vim: Edit vimrc configs', 'Denite menu:vimrc'],
+        \ ['Vim: Keymap', 'new ~/.vim/keymap.vim'],
+        \ ['Vim: Plugins', 'new ~/.vim/plugins.vim'],
+        \ ['Vim: Settings init.vim', 'new ~/.vim/init.vim'],
+        \ ['Vim: Shell terminal', 'terminal'],
         \ ['Visual: Apply line-macro <a> to selection (norm! @a)', 'norm! @a'],
-        \ ['Visual: Copy to system clipboard (_c)', 'w !pbcopy'],
-        \ ['Visual: Replace (<C-f>) (nop)', ''],
         \ ]
   let s:menus.vimrc = {
         \ 'description': 'Vim config files'
@@ -367,6 +372,64 @@ call s:leader_bind('nnoremap', 'g', 'g', 'p', 'GitGutterPrevHunk', 'Git: Prev Hu
 call s:leader_bind('nnoremap', 'g', 'g', 'S', 'GitGutterStageHunk', 'Git: Stage Hunk', 'stage-hunk', 1)
 call s:leader_bind('nnoremap', 'g', 'g', 'R', 'GitGutterRevertHunk', 'Git: Revert Hunk', 'revert-hunk', 1)
 call s:leader_bind('nnoremap', 'g', 'g', 't', 'GitGutterSignsToggle', 'Git: Toggle Gutter', 'toggle-gutter', 1)
+" }
+
+
+" Leader key mappings {
+
+" Wrap visual selection in parentheses/quotes.
+call s:leader_bind('vnoremap', '(', '', '', 'c()<Esc>P', 'Visual: Wrap ()', 'wrap-()', 0)
+call s:leader_bind('vnoremap', '[', '', '', 'c[]<Esc>P', 'Visual: Wrap []', 'wrap-[]', 0)
+" TODO: figure out how to escape a single quote.
+vnoremap <leader>' c''<Esc>P
+call s:maybe_add_denite_item('Visual: Wrap ' . shellescape('') . '(nop)', '')
+call s:leader_bind('vnoremap', '"', '', '', 'c""<Esc>P', 'Visual: Wrap ""', 'wrap-""', 0)
+call s:leader_bind('vnoremap', '<', '', '', 'c<><Esc>P', 'Visual: Wrap <>', 'wrap-<>', 0)
+
+" Tabs.
+" call s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is_cmd)
+call s:leader_bind('nnoremap', '<Tab>', '', '', 'tabn', 'Tab: Next', 'tab-next', 1)
+call s:leader_bind('nnoremap', '<S-Tab>', '', '', 'tabp', 'Tab: Prev', 'tab-prev', 1)
+for i in range(1, 9)
+  execute 'nnoremap <leader>' . i . ' ' . i . 'gt<CR>'
+endfor
+" Merge this tab and next tab.
+let g:lmap.t = {'name': 'Tab/'}
+if exists(':Tabmerge')
+  call s:leader_bind('nnoremap', 't', 'm', '', 'Tabmerge', 'Tabs: Merge with next tab', 'tab-merge-next', 1)
+endif
+" Make this split into a new tab.
+call s:leader_bind('nnoremap', 't', 's', '', 'wincmd T', 'Tabs: Split into tab', 'tab-split', 1)
+
+call s:leader_bind('nnoremap', 'q', '', '', 'q', 'Vim: Quit', 'quit', 1)
+call s:leader_bind('nnoremap', 'Q', '', '', 'q!', 'Vim: Quit unsaved', 'quit-unsaved', 1)
+call s:leader_bind('nnoremap', 'w', '', '', 'w', 'File: Write', 'file-write', 1)
+
+" Clear search highlight.
+call s:leader_bind('nnoremap', '?', '', '', 'nohlsearch', 'Visual: Clear search highlight', 'nohlsearch', 1)
+call s:leader_bind('nnoremap', 'r', '', '', 'source ~/.vim/init.vim', 'Vim: Re-source init.vim', 'resource-init.vim', 1)
+
+" Execute current file.
+call s:leader_bind('nnoremap', 'x', '', '', '!%:p', 'File: Execute', 'file-execute', 1)
+
+" C-f to replace visually selected text.
+" See http://stackoverflow.com/a/15934899/2522725
+vnoremap <leader>r y<ESC>/<C-r>"<CR>:%s//
+call s:maybe_add_denite_item('Visual: Replace selection (_r) (nop)', '')
+call s:maybe_add_leader_guide_item('r', 'v-selection-replace (nop)', '')
+" TODO: resolve message on startup when we issue the following function call
+" call s:leader_bind('vnoremap', 'r', '', '', '', 'Visual: Replace selection', 'v-selection-replace', 0)
+
+" <leader>c to copy to system clipboard.
+if executable('pbcopy')
+  call s:leader_bind('vnoremap', 'c', '', '', 'w !pbcopy', 'Visual: Copy to system clipboard', 'v-selection-pbcopy', 1)
+endif
+
+" Set fold level.
+for i in range(1, 9)
+  execute 'nnoremap <leader>f' . i . ' :set foldlevel=' . i . '<CR>'
+endfor
+
 " }
 
 " Sort Denite user commands.
