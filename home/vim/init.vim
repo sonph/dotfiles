@@ -113,6 +113,7 @@ endif
 " Colors {
 set t_Co=256                                      " enable 256 colors
 " Colorscheme and g:airline_theme are set in plugins.vim
+hi MatchParen gui=inverse cterm=inverse
 " }
 
 if filereadable(expand('~/.vim/tabline.vim')) | source ~/.vim/tabline.vim | endif
