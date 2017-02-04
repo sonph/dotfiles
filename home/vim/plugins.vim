@@ -297,6 +297,7 @@ call s:leader_bind('nnoremap', 'v', 't', '', 'TagbarToggle', 'View: Tagbar', 'ta
 
 
 " sjl/gundo.vim
+let g:gundo_prefer_python3=1
 call s:leader_bind('nnoremap', 'v', 'g', '', 'GundoToggle', 'View: Gundo', 'gundo', 1)
 " open gundo on the right side instead of the left
 let g:gundo_right=1
