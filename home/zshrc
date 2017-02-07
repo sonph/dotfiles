@@ -113,6 +113,9 @@ man() {
 # ------------------------------------------------
 # Syntax highlighting for interactive commands.
 source $ZSH_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export ZSH_HIGHLIGHT_STYLES[path]="fg=blue"
+export ZSH_HIGHLIGHT_STYLES[path_prefix]="fg=blue"
+export ZSH_HIGHLIGHT_STYLES[path_approx]="fg=blue"
 
 # `bd` to go back to a specific parent directory instead of `cd ../../../..`.
 # See github.com/Tarrasch/zsh-bd
@@ -135,6 +138,10 @@ source $ZSH_DIR/bell.zsh
 # See wiki.archlinux.org/index.php/Git#Git_Prompt.
 setopt PROMPT_SUBST  # Enable substitution in prompt.
 source $ZSH_DIR/git-prompt.zsh
+export GIT_PS1_SHOWDIRTYSTATE=" "       # show */+ for unstaged/staged changes
+export GIT_PS1_SHOWSTASHSTATE=" "       # show $ if something is stashed
+export GIT_PS1_SHOWUNTRACKEDFILES=" "   # show % if there are untracked files
+export GIT_PS1_SHOWUPSTREAM="auto"      # show </>/<> to indicate behind/ahead/diverged w/ upstream
 
 source $HOME/.shexports
 source $HOME/.shaliases
