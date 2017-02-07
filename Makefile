@@ -1,4 +1,5 @@
-DOTFILES=$(HOME)/.files
+# Assuming user is running `make` from the dotfiles directory.
+DOTFILES_DIR=$(shell pwd)
 
 install-dotfiles:
 	echo 'nop'
@@ -7,7 +8,7 @@ vim-install: dein-install
 	echo 'nop'
 
 dein-install:
-	$(eval VIM_DIR=$(DOTFILES)/home/vim)
+	$(eval VIM_DIR=$(DOTFILES_DIR)/home/vim)
 	$(eval VIM_DEIN_REPOS_DIR=$(VIM_DIR)/bundle/repos)
 	mkdir -p $(VIM_DEIN_REPOS_DIR)/github.com/Shougo/dein.vim
 	git clone https://github.com/Shougo/dein.vim $(VIM_DEIN_REPOS_DIR)/github.com/Shougo/dein.vim
