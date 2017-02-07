@@ -113,9 +113,21 @@ man() {
 # ------------------------------------------------
 # Syntax highlighting for interactive commands.
 source $ZSH_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export ZSH_HIGHLIGHT_STYLES[path]="fg=blue"
-export ZSH_HIGHLIGHT_STYLES[path_prefix]="fg=blue"
-export ZSH_HIGHLIGHT_STYLES[path_approx]="fg=blue"
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
+# for documentation.
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]="fg=blue"
+ZSH_HIGHLIGHT_STYLES[path_prefix]="fg=blue"
+ZSH_HIGHLIGHT_STYLES[path_approx]="fg=blue"
+ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=magenta"
+ZSH_HIGHLIGHT_STYLES[command]="fg=green"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=yellow"
+ZSH_HIGHLIGHT_STYLES[precommand]="fg=yellow"
+ZSH_HIGHLIGHT_STYLES[alias]="fg=yellow"
+ZSH_HIGHLIGHT_STYLES[function]="fg=yellow"
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=green"
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=green"
 
 # `bd` to go back to a specific parent directory instead of `cd ../../../..`.
 # See github.com/Tarrasch/zsh-bd
