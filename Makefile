@@ -4,6 +4,12 @@ DOTFILES_DIR=$(shell pwd)
 install-dotfiles:
 	echo 'nop'
 
+mac-neovim-install:
+	brew update
+	brew install neovim/neovim/neovim
+	which pip3 2>&1 > /dev/null || brew install python3
+	pip3 install neovim
+
 vim-install: dein-install
 	echo 'nop'
 
