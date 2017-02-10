@@ -1,7 +1,5 @@
 home/vim/bundle
-home/vim/init.vim
+home/vim/local.vim
 home/vim/.netrwhist
-home/vim/google.vim
 home/zsh/history
 home/*.local
-home/vim/*.local
