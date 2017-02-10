@@ -97,7 +97,8 @@ endif
 " }
 
 " Language specific settings {
-" autocmd filetype python set shiftwidth=2 tabstop=2
+autocmd filetype python set shiftwidth=2 tabstop=2
+autocmd filetype markdown set wrap
 " }
 
 if filereadable(expand('~/.vim/keymap.vim')) | source ~/.vim/keymap.vim | endif
