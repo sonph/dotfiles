@@ -10,6 +10,21 @@ mac-neovim-install:
 	which pip3 2>&1 > /dev/null || brew install python3
 	pip3 install neovim
 
+python-pipenv-install:
+	@# https://github.com/kennethreitz/pipenv
+	pip install pipenv
+
+mac-diff-so-fancy-install:
+	@# https://github.com/so-fancy/diff-so-fancy
+	@# Alternatively, npm install -g diff-so-fancy
+	brew update && brew install diff-so-fancy
+
+mac-zsh-install:
+	@# https://github.com/herrbischoff/awesome-osx-command-line
+	brew install zsh && \
+	sudo sh -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells' && \
+	chsh -s $(brew --prefix)/bin/zsh
+
 vim-install: dein-install
 	echo 'nop'
 

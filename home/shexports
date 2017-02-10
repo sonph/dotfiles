@@ -11,14 +11,5 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-# git prompt
-export GIT_PS1_SHOWDIRTYSTATE=" "       # show */+ for unstaged/staged changes
-export GIT_PS1_SHOWSTASHSTATE=" "       # show $ if something is stashed
-export GIT_PS1_SHOWUNTRACKEDFILES=" "   # show % if there are untracked files
-export GIT_PS1_SHOWUPSTREAM="auto"      # show </>/<> to indicate behind/ahead/diverged w/ upstream
-
-# tmux sessions
-export TMUX_DEFAULT_SESSION="def"
-
 [[ -e $HOME/.shexports.local ]] && source $HOME/.shexports.local
 
