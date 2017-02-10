@@ -7,7 +7,7 @@ install-dotfiles:
 mac-neovim-install:
 	brew update
 	brew install neovim/neovim/neovim
-	which pip3 2>&1 > /dev/null || brew install python3
+	command -v pip3 2>&1 > /dev/null || brew install python3
 	pip3 install neovim
 
 python-pipenv-install:
@@ -33,7 +33,7 @@ dein-install:
 	$(eval VIM_DEIN_REPOS_DIR=$(VIM_DIR)/bundle/repos)
 	mkdir -p $(VIM_DEIN_REPOS_DIR)/github.com/Shougo/dein.vim
 	git clone https://github.com/Shougo/dein.vim $(VIM_DEIN_REPOS_DIR)/github.com/Shougo/dein.vim
-	$(eval VIM=$(shell which nvim 2>&1 > /dev/null && echo 'nvim' || echo 'vim'))
+	$(eval VIM=$(shell command -v nvim 2>&1 > /dev/null && echo 'nvim' || echo 'vim'))
 	$(VIM) -c ":call dein#install()"
 
 

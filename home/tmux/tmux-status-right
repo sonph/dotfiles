@@ -55,7 +55,7 @@ function default {
 
 
 default
-which pmset 2>&1 > /dev/null && battery_status && separator
+command -v pmset 2>&1 > /dev/null && battery_status && separator
 disk_space
 separator
 load_avg

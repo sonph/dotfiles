@@ -24,10 +24,10 @@ echo '  >>  Checking for binaries...'
 echo "$ANYKEY"; read
 BINARIES=('tmux' 'ctags' 'vim' 'zsh' 'curl' 'wget' 'python' 'nvim' 'pip')
 for BIN in ${BINARIES[@]}; do
-  which $BIN 2>&1 > /dev/null || echo "$BIN not found"
+  command -v $BIN 2>&1 > /dev/null || echo "$BIN not found"
 done
 
-if which tmux 2>&1 > /dev/null && [[ "$(tmux -V)" < "tmux 2.2" ]]; then
+if command -v tmux 2>&1 > /dev/null && [[ "$(tmux -V)" < "tmux 2.2" ]]; then
   echo "  >>  Tmux version is $(tmux -V); need at least tmux 2.2 for true color support."
 fi
 # }
@@ -45,15 +45,15 @@ if [ -z "$(ls -A $HOME/.vim/bundle/Vundle.vim)" ]; then
 fi
 
 # setup plugins
-which vim 2>&1 > /dev/null && vim $HOME/.vimrc.plugins -c "PluginInstall" -c "qall!" || echo "  >>  vim is not installed"
+command -v vim 2>&1 > /dev/null && vim $HOME/.vimrc.plugins -c "PluginInstall" -c "qall!" || echo "  >>  vim is not installed"
 
 # setup vimproc.vim (plugin for unite.vim)
 cd $HOME/.vim/bundle/vimproc.vim
-which make 2>&1 > /dev/null && make || '  >>  make is not installed. Please install make and make $HOME/.vim/bundle/vimproc.vim'
+command -v make 2>&1 > /dev/null && make || '  >>  make is not installed. Please install make and make $HOME/.vim/bundle/vimproc.vim'
 cd $DOTFILESDIR
 
 # setup YouCompleteMe (completion engine)
-which python 2>&1 > /dev/null && python $HOME/.vim/bundle/YouCompleteMe/install.py || \
+command -v python 2>&1 > /dev/null && python $HOME/.vim/bundle/YouCompleteMe/install.py || \
   echo '  >>  python is not installed. Please install python and python $HOME/.vim/bundle/YouCompleteMe/install.py or disable YouCompleteMe in $HOME/.vimrc.plugins'
 # }
 
@@ -63,7 +63,7 @@ mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s $PWD/home/vim $XDG_CONFIG_HOME/nvim
 ln -s $PWD/home/vimrc $PWD/home/vim/init.vim
 
-which pip 2>&1 > /dev/null && sudo pip install neovim || \
+command -v pip 2>&1 > /dev/null && sudo pip install neovim || \
   cat <<END
   >>  pip is not installed. Please install pip by
         \`sudo apt-get install python-pip\` or
