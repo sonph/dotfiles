@@ -20,7 +20,5 @@ export GIT_PS1_SHOWUPSTREAM="auto"      # show </>/<> to indicate behind/ahead/d
 # tmux sessions
 export TMUX_DEFAULT_SESSION="def"
 
-if [ -e $HOME/.shexports.google ]; then
-  source $HOME/.shexports.google
-fi
+[[ -e $HOME/.shexports.local ]] && source $HOME/.shexports.local
 

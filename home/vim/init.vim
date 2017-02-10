@@ -103,7 +103,7 @@ autocmd filetype markdown set wrap
 
 if filereadable(expand('~/.vim/keymap.vim')) | source ~/.vim/keymap.vim | endif
 if filereadable(expand('~/.vim/plugins.vim')) | source ~/.vim/plugins.vim | endif
-if filereadable(expand('~/.vim/google.vim')) | source ~/.vim/google.vim | endif
+if filereadable(expand('~/.vim/local.vim')) | source ~/.vim/local.vim | endif
 if filereadable(expand('~/.vim/neovim.vim')) && has('nvim') | source ~/.vim/neovim.vim | endif
 
 " Gvim {

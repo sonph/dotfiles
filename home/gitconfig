@@ -1,13 +1,10 @@
 [user]
-	name = Son A. Pham
-	email = sp@sonpham.me
-[merge]
-  conflictstyle = diff3
-  tool = meld
-[alias]
-  lgraph = log --graph --pretty=format:\"%Cblue%h%Creset - %s - %Cred%an%Creset - %Cgreen%ar\"
-  unstage = reset HEAD --
-  unmodify = checkout --
+  name = Son A. Pham
+  email = sp@sonpham.me
+[push]
+  default = current
+[color]
+  ui = auto
 [filter "lfs"]
   clean = git lfs clean %f
   smudge = git lfs smudge %f
@@ -18,4 +15,7 @@
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path =
 [core]
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = diff-so-fancy | less --tabs=2 -RFX
+  autocrlf = input
+[include]
+  path = ~/.gitconfig.local

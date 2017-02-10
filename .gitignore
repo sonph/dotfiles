@@ -3,3 +3,5 @@ home/vim/init.vim
 home/vim/.netrwhist
 home/vim/google.vim
 home/zsh/history
+home/*.local
+home/vim/*.local
