@@ -3,8 +3,13 @@ export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;31' # green for matches
 
 # editor
-export EDITOR='vim'
-#export VISUAL='vim' 
+if command -v nvim 2>&1 > /dev/null; then
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+else
+  export EDITOR='vim'
+  export VISUAL='vim'
+fi
 
 # environment variables
 export XDG_CONFIG_HOME="$HOME/.config"
