@@ -76,6 +76,8 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('sonph/auto-pairs')
   call dein#add('scrooloose/nerdcommenter')
 
+  call dein#add('ap/vim-css-color')
+
   call dein#end()
   call dein#save_state()
 endif
