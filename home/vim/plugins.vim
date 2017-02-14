@@ -435,6 +435,11 @@ endfor
 
 " }
 
+" christoomey/vim-tmux-navigator
+" Workaround for neovim#2048 <C-h> mapping not working because it's
+" interpreted as <BS>
+nnoremap <BS> :TmuxNavigateLeft<CR>
+
 " Sort Denite user commands.
 if exists('s:menus')
   call sort(s:menus.user_commands.command_candidates, 'i')
