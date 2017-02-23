@@ -59,8 +59,13 @@ zstyle ':completion:*' menu select
 # prompt walters
 
 # Left and right prompts (left prompt has a leading newline).
-PROMPT='
+if [[ "$(whoami)" = 'root' ]]; then
+  PROMPT='
+%{$fg[red]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %{$fg[red]%}%#%{$reset_color%} '
+else
+  PROMPT='
 %n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
+fi
 RPROMPT='%{$fg[green]%}[%?] %d%{$reset_color%}'
 
 
@@ -159,3 +164,6 @@ source $HOME/.shexports
 source $HOME/.shaliases
 [[ -e $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
