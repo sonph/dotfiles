@@ -1,7 +1,3 @@
-# grep options
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;31' # green for matches
-
 # editor
 if command -v nvim 2>&1 > /dev/null; then
   export EDITOR='nvim'
