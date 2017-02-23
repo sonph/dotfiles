@@ -51,6 +51,8 @@ if [ "$(uname -s)" = "Darwin" ]; then
   alias subl='/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text --new-window --add .'
 fi
 
+alias grep='grep --color=auto'
+
 command -v nvim 2>&1 > /dev/null && alias vim="nvim"
 alias pythonserver='python2 -m SimpleHTTPServer'
 
