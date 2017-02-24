@@ -56,4 +56,42 @@ alias grep='grep --color=auto'
 command -v nvim 2>&1 > /dev/null && alias vim="nvim"
 alias pythonserver='python2 -m SimpleHTTPServer'
 
+set_env() {
+  if [[ $# -eq 0 ]]; then
+    echo 'Set persistent environment variables across shell instances in a tmux session.'
+    echo "Usage: $0 NAME VALUE"
+    echo "Example: $0 BSSID 01:23:34:56:78:9A"
+  else
+    TMUX_SESSION=$(tmux display-message -p '#S')
+    FILE="$HOME/.shexports.$TMUX_SESSION"
+    [[ ! -e "$FILE" ]] && touch "$FILE"
+    echo "export $1=\"$2\"" >> "$FILE"
+    get_env
+  fi
+}
+
+get_env() {
+  if [[ "$1" = '-h' || "$1" = '--help' ]]; then
+    echo 'Re-source persistent environment variables'
+    echo "Usage: $0" else TMUX_SESSION=$(tmux display-message -p '#S')
+    FILE="$HOME/.shexports.$TMUX_SESSION"
+    DEFAULT_FILE="$HOME/.shexports.default"
+    [[ -e "$DEFAULT_FILE" ]] && source "$DEFAULT_FILE"
+    [[ -e "$FILE" ]] && source "$FILE"
+  fi
+}
+
+show_env() {
+  if [[ "$1" = '-h' || "$1" = '--help' ]]; then
+    echo 'Show tmux session persistent environment variables'
+    echo "Usage: $0"
+  else
+    TMUX_SESSION=$(tmux display-message -p '#S')
+    FILE="$HOME/.shexports.$TMUX_SESSION"
+    less "$FILE"
+  fi
+}
+
+get_env
+
 [[ -e  "$HOME/.shaliases.local" ]] && source "$HOME/.shaliases.local"
