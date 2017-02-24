@@ -222,7 +222,7 @@ if has("python3")
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
-  nnoremap <leader>p :Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'` buffer<CR>
+  nnoremap <leader>p :Denite buffer `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
   let g:lmap.p = ['', 'finder-file (nop) (_p)']
   call s:leader_bind('nnoremap', 'P', '', '',
         \ 'Denite menu:user_commands command', 'Finder: Commands', 'finder-command', 1)
