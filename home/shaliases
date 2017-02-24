@@ -57,3 +57,5 @@ command -v nvim 2>&1 > /dev/null && alias vim="nvim"
 alias pythonserver='python2 -m SimpleHTTPServer'
 
 [[ -e  "$HOME/.shaliases.local" ]] && source "$HOME/.shaliases.local"
+
+source $HOME/.shaliases.*
