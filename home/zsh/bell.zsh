@@ -56,6 +56,7 @@ zbell_end() {
 
   if (( ! $has_ignored_cmd )) && (( ran_long )); then
     print -n "\a"
+    print "zsh: long running command took $(( $EPOCHSECONDS - $zbell_timestamp)) secs to finish" >&2
   fi
 }
 
