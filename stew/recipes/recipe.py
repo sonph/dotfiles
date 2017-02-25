@@ -12,6 +12,11 @@ import sh
 import config
 
 class Recipe(object):
+  """Base recipe class containing helper methods and props.
+
+  User defined recipes should subclass this class, define properties, install()
+  and test() methods.
+  """
   def __init__(self, desc:str, url:str, deps:List[str], skip_test:bool=False):
     """Create a recipe with metadata."""
     self.desc = desc or 'Recipe template'
@@ -58,8 +63,8 @@ class Recipe(object):
       return self.__class__.__name__
 
   def install_deps(self):
-    """Install all dependencies by finding the module, create the Recipe subclass
-    object then invoke the install method.
+    """Install all dependencies listed in self.deps by finding the modules,
+    create the Recipe subclass objects then invoke the install methods.
     """
     for recipe in self.deps:
       module = importlib.import_module('.'.join(['recipes', recipe]))
@@ -73,6 +78,8 @@ class Recipe(object):
 
   def install(self):
     """Perform the actual install steps.
+
+    We can import and reuse functions defined in commands.py.
     """
     raise NotImplementedError('Method is not defined.')
 
