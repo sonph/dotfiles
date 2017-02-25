@@ -214,6 +214,21 @@ flux-install() {
   # fi
 }
 
+mac-fonts-install() {
+  local MAC_FONTS_DIR='/usr/share/fonts/macfonts'
+  # test
+  [[ -d "$MAC_FONTS_DIR" && -e "$MAC_FONTS_DIR/Monaco_Linux.ttf" ]] && return
+  # install
+  common_bin_exists 'fc-cache' || common_install_pkg 'fontconfig'
+  pushd "$DOTFILES_DIR/fonts" 2>&1 > /dev/null
+  tar zxvf mac_fonts.tar.gz
+  sudo mv fonts "$MAC_FONTS_DIR"
+  sudo cp Menlo-Regular.ttf "$MAC_FONTS_DIR"
+  sudo fc-cache -f -v
+  popd 2>&1 > /dev/null
+
+}
+
 user-setup() {
   common_bin_exists 'zsh' && chsh -s $(command -v zsh) root
 }
