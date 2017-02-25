@@ -1,5 +1,5 @@
 from recipes import recipe
-import logging
+import sh
 
 class Mac(recipe.Recipe):
   def __init__(self):

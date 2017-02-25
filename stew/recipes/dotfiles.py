@@ -1,5 +1,4 @@
 from recipes import recipe
-import logging
 
 class Dotfiles(recipe.Recipe):
   def __init__(self):
