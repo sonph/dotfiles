@@ -15,10 +15,14 @@ class Recipe(object):
   """Base recipe class containing helper methods and props.
 
   User defined recipes should subclass this class, define properties, install()
-  and test() methods.
+  and test() methods. Create a new recipe by making a copy of the base.py file.
   """
   def __init__(self, desc:str, url:str, deps:List[str], skip_test:bool=False):
-    """Create a recipe with metadata."""
+    """Create a recipe with metadata.
+
+    The skip_test arg indicates whether we want to invoke the test() method or
+    not. Simply implement a pass test() method won't work, as it doesn't
+    indicate whether the recipe is installed or not."""
     self.desc = desc or 'Recipe template'
     self.url = url or ''
     self.deps = deps or []
