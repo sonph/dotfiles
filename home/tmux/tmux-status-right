@@ -1,8 +1,39 @@
 #!/bin/bash
+function parse_upower_output {
+  # Parse time to full/empty output from upower.
+  # The format is %.1f (minutes|hours) e.g. 27.8 minutes, 3.5 hours.
+  # The output format is a %d:%d format e.g. 0:27, 1:55.
+  python << EOF
+from __future__ import print_function
+line = "$TIME_REMAINING"
+time = line.split(':')[1].strip()
+amt, unit = time.split()
+amt = float(amt)
+if unit == 'minutes':
+  print('0:%d' % int(amt))
+else:
+  hours = int(amt)
+  mins = int((amt - hours) * 60)
+  print('%d:%d' % (hours, mins))
+EOF
+}
+
 function battery_status {
-  local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
-  local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
-  local TIME_REMAINING=$(pmset -g ps | tail -n1 | cut -d ';' -f 3 | cut -d ' ' -f 2)
+  if command -v pmset 2>&1 > /dev/null; then
+    local AC_POWER=$(pmset -g ps | head -n1 | cut -d "'" -f 2)
+    local BATTERY_PERC=$(pmset -g ps | tail -n1 | cut -d "%" -f 1 | cut -f 2)
+    local TIME_REMAINING=$(pmset -g ps | tail -n1 | cut -d ';' -f 3 | cut -d ' ' -f 2)
+  elif command -v upower 2>&1 > /dev/null; then
+    local BAT_PATH='/org/freedesktop/UPower/devices/battery_BAT0'
+    local AC_POWER=$(upower -i "$BAT_PATH" | grep state | awk '{print $2}')
+    local BATTERY_PERC=$(upower -i "$BAT_PATH" | grep percentage | awk '{print $2}' | cut -d'%' -f1)
+    local TIME_REMAINING="$(upower -i "$BAT_PATH" | grep 'time to')"
+    if [[ -z "$TIME_REMAINING" ]]; then
+      TIME_REMAINING='0:00'
+    else
+      TIME_REMAINING=$(parse_upower_output "$TIME_REMAINING")
+    fi
+  fi
 
   # Don't show time remaining when there's no estimate or it's 0:00 (laptop is charged).
   if [[ $TIME_REMAINING = '(no' || $TIME_REMAINING = '0:00' ]]; then
@@ -19,7 +50,9 @@ function battery_status {
     local COLOR='brightgreen'
   fi
 
-  if [[ $AC_POWER = "AC Power" ]]; then
+  if [[ "$AC_POWER" = 'AC Power' \
+      || "$AC_POWER" = 'charging' \
+      || "$AC_POWER" = 'fully-charged' ]]; then
     local AC_OR_BT='ac'
   else
     local AC_OR_BT='bt'
@@ -55,7 +88,8 @@ function default {
 
 
 default
-command -v pmset 2>&1 > /dev/null && battery_status && separator
+battery_status
+separator
 disk_space
 separator
 load_avg

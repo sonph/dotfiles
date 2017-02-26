@@ -95,3 +95,5 @@ show_env() {
 get_env
 
 [[ -e  "$HOME/.shaliases.local" ]] && source "$HOME/.shaliases.local"
+
+source $HOME/.shaliases.*
