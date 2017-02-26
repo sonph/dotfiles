@@ -11,6 +11,27 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 CODE_DIR='/code'
 [[ ! -d "$CODE_DIR" ]] && mkdir -p "$CODE_DIR"
 
+group-cli-install() {
+  essential-install
+  curl-install
+  diff-so-fancy-install
+  git-install
+  python3-install
+  pip3-install
+  neovim-install
+  tor-install
+  user-setup
+}
+
+group-gui-install() {
+  gnome-terminal-install
+  tor-browser-install
+  arc-theme-install
+  chromium-install
+  fonts-install
+  flux-install
+}
+
 common_bin_exists() {
   command -v "$1" 2>&1 > /dev/null
   # By default return code is from the last command.
@@ -29,7 +50,7 @@ common_install_pkg() {
   fi
 }
 
-misc-install() {
+essential-install() {
   common_install_pkg ttyrec apt-file software-properties-common lm-sensors
   common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
   common_install_pkg ctags cmake autoconf
@@ -98,7 +119,7 @@ pip3-install() {
   common_install_pkg 'python3-pip'
 }
 
-neovim() {
+neovim-install() {
   local URL='https://neovim.io/doc/'
   # test
   command -v nvim 2>&1 > /dev/null && return
@@ -119,7 +140,7 @@ neovim() {
   nvim -c ":call dein#install()"
 }
 
-gnome-terminal() {
+gnome-terminal-install() {
   if common_bin_exists; then
   else
     common_install_pkg 'gnome-terminal'
@@ -134,6 +155,16 @@ gnome-terminal() {
 searchsploit-update() {
   # update
   searchsploit -u
+}
+
+searchsploit-install() {
+  # deps
+  # xmllint for reading nmap xml output
+  common_bin_exists 'xmllint' || common_install_pkg 'libxml2-utils'
+}
+
+nmap-update() {
+  nmap --script-updatedb
 }
 
 tor-browser-install() {
