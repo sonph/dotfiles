@@ -143,8 +143,11 @@ gnome-terminal-install() {
   fi
   pushd "$CODE_DIR" 2>&1 > /dev/null
   git clone 'https://github.com/sonph/onehalf'
-  source onehalf/gnome-terminal/onehalfdark.sh
-  source onehalf/gnome-terminal/onehalflight.sh
+  # TODO: resolve shell exits problem on sourcing
+  echo "Run 'source onehalf/gnome-terminal/onehalfdark.sh' in another shell"
+  echo "Run 'source onehalf/gnome-terminal/onehalflight.sh' in another shell"
+  # source onehalf/gnome-terminal/onehalfdark.sh
+  # source onehalf/gnome-terminal/onehalflight.sh
   popd 2>&1 > /dev/null
 }
 
