@@ -137,10 +137,7 @@ neovim-install() {
 }
 
 gnome-terminal-install() {
-  if common_bin_exists; then
-  else
-    common_install_pkg 'gnome-terminal'
-  fi
+  common_bin_exists || common_install_pkg 'gnome-terminal'
   pushd "$CODE_DIR" 2>&1 > /dev/null
   git clone 'https://github.com/sonph/onehalf'
   # TODO: resolve shell exits problem on sourcing
