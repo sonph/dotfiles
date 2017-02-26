@@ -9,7 +9,7 @@ DOTFILES_FONT_DIR="$DOTFILES_DIR/fonts"
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 [[ ! -d "$XDG_CONFIG_HOME" ]] && mkdir -p "$XDG_CONFIG_HOME"
 CODE_DIR='/code'
-[[ ! -d "$CODE_DIR" ]] && mkdir -p "$CODE_DIR"
+[[ ! -d "$CODE_DIR" ]] && sudo mkdir -p "$CODE_DIR"
 
 group-cli-install() {
   common_install_pkg ttyrec apt-file software-properties-common lm-sensors
@@ -60,8 +60,7 @@ err() {
 
 
 curl-install() {
-  common_bin_exists 'curl' && return
-  common_install_pkg 'curl'
+  common_bin_exists 'curl' || common_install_pkg 'curl'
 }
 
 nvm-install() {
@@ -122,8 +121,8 @@ neovim-install() {
   # deps
   pip3-install; git-install
   # install
-  apt-get install -y neovim
-  pip3 install neovim
+  common_install_pkg 'neovim'
+  sudo pip3 install neovim
   # cmake needed for compiling YouCompleteMe
   common_bin_exists 'make' || common_install_pkg 'cmake'
 
@@ -177,8 +176,8 @@ tor-install() {
   if ! common_bin_exists 'tor'; then
     common_install_pkg 'tor'
   fi
-  systemctl start tor
-  systemctl enable tor
+  sudo systemctl start tor
+  sudo systemctl enable tor
   tor-browser-install
 }
 
