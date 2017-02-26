@@ -5,6 +5,7 @@
 # ------------------------------------------------
 
 DOTFILES_DIR="$HOME/.files"
+DOTFILES_FONT_DIR="$DOTFILES_DIR/fonts"
 # TODO: set if not set
 XDG_CONFIG_HOME="$HOME/.config"
 [[ ! -d "$XDG_CONFIG_HOME" ]] && mkdir -p "$XDG_CONFIG_HOME"
@@ -217,22 +218,25 @@ flux-install() {
   # fi
 }
 
-mac-fonts-install() {
-  local MAC_FONTS_DIR='/usr/share/fonts/macfonts'
+
+fonts-install() {
+  local USR_FONTS_DIR='/usr/share/fonts/usrfonts'
   # test
-  [[ -d "$MAC_FONTS_DIR" && -e "$MAC_FONTS_DIR/Monaco_Linux.ttf" ]] && return
+  [[ -d "$USR_FONTS_DIR" && -e "$USR_FONTS_DIR/Monaco_Linux.ttf" ]] && return
   # install
   common_bin_exists 'fc-cache' || common_install_pkg 'fontconfig'
-  pushd "$DOTFILES_DIR/fonts" 2>&1 > /dev/null
+  pushd "$DOTFILES_FONT_DIR" 2>&1 > /dev/null
   tar zxvf mac_fonts.tar.gz
-  sudo mv fonts "$MAC_FONTS_DIR"
-  sudo cp Menlo-Regular.ttf "$MAC_FONTS_DIR"
+  sudo mv fonts "$USR_FONTS_DIR"
+
+  sudo cp Menlo-Regular.ttf "$USR_FONTS_DIR"
+  sudo cp source-code-pro/*.ttf "$USR_FONTS_DIR"
+
   sudo fc-cache -f -v
   popd 2>&1 > /dev/null
-
 }
 
 user-setup() {
-  common_bin_exists 'zsh' && chsh -s $(command -v zsh) root
+common_bin_exists 'zsh' && chsh -s $(command -v zsh) $(whoami)
 }
 
