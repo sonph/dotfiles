@@ -174,9 +174,8 @@ tor-browser-install() {
 
 tor-install() {
   common_bin_exists 'tor' || common_install_pkg 'tor'
-  sudo systemctl enable tor
   sudo systemctl start tor
-  tor-browser-install
+  sudo systemctl enable tor
 }
 
 arc-theme-install() {
