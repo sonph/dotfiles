@@ -173,11 +173,9 @@ tor-browser-install() {
 }
 
 tor-install() {
-  if ! common_bin_exists 'tor'; then
-    common_install_pkg 'tor'
-  fi
-  sudo systemctl start tor
+  common_bin_exists 'tor' || common_install_pkg 'tor'
   sudo systemctl enable tor
+  sudo systemctl start tor
   tor-browser-install
 }
 
