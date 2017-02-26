@@ -12,7 +12,7 @@ CODE_DIR='/code'
 [[ ! -d "$CODE_DIR" ]] && mkdir -p "$CODE_DIR"
 
 group-cli-install() {
-  essential-install
+  dotfiles-install
   curl-install
   diff-so-fancy-install
   git-install
@@ -21,6 +21,10 @@ group-cli-install() {
   neovim-install
   tor-install
   user-setup
+  common_install_pkg ttyrec apt-file software-properties-common lm-sensors
+  common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
+  common_install_pkg ctags cmake autoconf
+  common_install_pkg lynx
 }
 
 group-gui-install() {
@@ -41,21 +45,13 @@ common_bin_exists 'apt-get' && apt-get update
 
 common_install_pkg() {
   if common_bin_exists 'apt-get'; then
-    apt-get install -y $@
+    sudo apt-get install -y $@
   elif common_bin_exists 'yum'; then
-    yum install $@
+    sudo yum install $@
   else
     err 'Either apt-get or yum not found.'
     return 1
   fi
-}
-
-essential-install() {
-  common_install_pkg ttyrec apt-file software-properties-common lm-sensors
-  common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
-  common_install_pkg ctags cmake autoconf
-  common_install_pkg lynx
-  common_bin_exists 'apt-get' && apt autoremove
 }
 
 err() {
@@ -230,8 +226,8 @@ flux-install() {
   # deps
   git-install
   # install
-  common_install_pkg python-appindicator python-xdg python-pexpect python-gconf \
-      python-gtk2 python-glade2 libxxf86vm1
+  common_install_pkg python-appindicator python-xdg python-pexpect \
+      python-gconf python-gtk2 python-glade2 libxxf86vm1
   pushd /tmp 2>&1 > /dev/null
   git clone "$URL"
   cd xflux-gui
@@ -268,6 +264,17 @@ fonts-install() {
 
   sudo fc-cache -f -v
   popd 2>&1 > /dev/null
+}
+
+dotfiles-install() {
+  if [[ ! -e "$HOME/bin" ]]; then
+    ln -s "$DOTFILES_DIR/bin" "$HOME/bin"
+  fi
+  if [[ ! -e "$HOME/.tmux" ]]; then
+    for FILE in $(ls "$DOTFILES_DIR/home"); do
+      ln -s "$DOTFILES_DIR/home/$FILE" "$HOME/.$FILE"
+    done
+  fi
 }
 
 user-setup() {
