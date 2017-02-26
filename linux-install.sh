@@ -12,6 +12,10 @@ CODE_DIR='/code'
 [[ ! -d "$CODE_DIR" ]] && mkdir -p "$CODE_DIR"
 
 group-cli-install() {
+  common_install_pkg ttyrec apt-file software-properties-common lm-sensors
+  common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
+  common_install_pkg ctags cmake autoconf
+  common_install_pkg lynx
   dotfiles-install
   curl-install
   diff-so-fancy-install
@@ -21,10 +25,6 @@ group-cli-install() {
   neovim-install
   tor-install
   user-setup
-  common_install_pkg ttyrec apt-file software-properties-common lm-sensors
-  common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
-  common_install_pkg ctags cmake autoconf
-  common_install_pkg lynx
 }
 
 group-gui-install() {
@@ -124,6 +124,8 @@ neovim-install() {
   # install
   apt-get install -y neovim
   pip3 install neovim
+  # cmake needed for compiling YouCompleteMe
+  common_bin_exists 'make' || common_install_pkg 'cmake'
 
   local VIM_DIR="$DOTFILES_DIR/home/vim"
   local NVIM_CONFIG_DIR="$XDG_CONFIG_HOME/nvim"
