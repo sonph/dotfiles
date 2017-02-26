@@ -180,7 +180,10 @@ arc-theme-install() {
 }
 
 chromium-install() {
-  
+  # test
+  common_bin_exists 'chromium' && return
+  # install
+  common_install_pkg 'chromium'
 }
 
 # reaver
