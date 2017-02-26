@@ -41,8 +41,6 @@ common_bin_exists() {
   # By default return code is from the last command.
 }
 
-common_bin_exists 'apt-get' && apt-get update
-
 common_install_pkg() {
   if common_bin_exists 'apt-get'; then
     sudo apt-get install -y $@
@@ -77,6 +75,7 @@ nvm-install() {
 
 npm-install() {
   common_bin_exists 'npm' && return
+  nvm-install
   nvm install --lts
 }
 
