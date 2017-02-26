@@ -185,6 +185,10 @@ chromium-install() {
   common_bin_exists 'chromium' && return
   # install
   common_install_pkg 'chromium'
+  [[ "$(whoami)" = 'root' ]] && \
+      echo 'export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --no-sandbox --user-data-dir"' \
+      >> /etc/chromium.d/default-flags
+  # To do web security testing, run `chromium --disable-web-security`
 }
 
 # reaver
@@ -237,6 +241,6 @@ fonts-install() {
 }
 
 user-setup() {
-common_bin_exists 'zsh' && chsh -s $(command -v zsh) $(whoami)
+  common_bin_exists 'zsh' && chsh -s $(command -v zsh) $(whoami)
 }
 
