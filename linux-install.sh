@@ -270,6 +270,9 @@ fonts-install() {
 }
 
 dotfiles-install() {
+  pushd "$DOTFILES_DIR" 2>&1 > /dev/null
+  git submodule init && git submodule update
+  popd 2>&1 > /dev/null
   if [[ ! -e "$HOME/bin" ]]; then
     ln -s "$DOTFILES_DIR/bin" "$HOME/bin"
   fi
