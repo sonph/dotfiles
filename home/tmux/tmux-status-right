@@ -91,7 +91,7 @@ default
 command -v pmset 2>&1 > /dev/null \
     && battery_status && separator  # assume we're on a macbook
 command -v upower 2>&1 > /dev/null \
-    && [[ "$(upower --dump | grep 'on-battery' | awk '{print $2}')" = "yes" ]] \
+    && [[ $(upower --dump | grep 'devices/battery' | wc -l) -ge 1 ]] \
     && battery_status && separator  # if we're on a laptop running linux
 disk_space
 separator
