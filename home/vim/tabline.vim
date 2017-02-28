@@ -1,91 +1,73 @@
-
-" Tabline {
-if exists("+showtabline")
-" Rename tabs to show tab number.
-" (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
 function! MyTabLine()
-  let s = '  '
-  let t = tabpagenr()
-  let i = 1
-  while i <= tabpagenr('$')
-    let buflist = tabpagebuflist(i)
-    let winnr = tabpagewinnr(i)
-    let s .= '%' . i . 'T'
-    let s .= (i == t ? '%1*' : '%2*')
-
-    " let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-    " let s .= ' '
-    let s .= (i == t ? '%#TabNumSel#' : '%#TabNum#')
-    "let s .= ' ' . i . ' '
-    let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-
-    let bufnr = buflist[winnr - 1]
-    let file = bufname(bufnr)
-    let buftype = getbufvar(bufnr, '&buftype')
-
-    if buftype == 'help'
-      let file = 'help:' . fnamemodify(file, ':t:r')
-
-    elseif buftype == 'quickfix'
-      let file = 'quickfix'
-
-    elseif buftype == 'nofile'
-      if file =~ '\/.'
-        let file = substitute(file, '.*\/\ze.', '', '')
-      endif
-
+  let s = '' " complete tabline goes here
+  " loop through each tab page
+  for t in range(tabpagenr('$'))
+    " set highlight
+    if t + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
     else
-      let file = pathshorten(fnamemodify(file, ':p:~:.'))
-      if getbufvar(bufnr, '&modified')
-        let file = '+' . file
+      let s .= '%#TabLine#'
+    endif
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (t + 1) . 'T'
+    let s .= ' '
+    " set page number string
+    let s .= t + 1 . ' '
+    " get buffer names and statuses
+    let n = ''  "temp string for buffer names while we loop and check buftype
+    let m = 0  " &modified counter
+    let bc = len(tabpagebuflist(t + 1))     "counter to avoid last ' '
+    " loop through each buffer in a tab
+    for b in tabpagebuflist(t + 1)
+      " buffer types: quickfix gets a [Q], help gets [H]{base fname}
+      " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
+      if getbufvar( b, "&buftype" ) == 'help'
+        let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
+      elseif getbufvar( b, "&buftype" ) == 'quickfix'
+        let n .= '[Q]'
+      else
+        " shorten 1dir/2dir/3dir/fname to fname
+        let n .= fnamemodify(bufname(b), ':t')
+        " shorten 1dir/2dir/3dir/fname to 1/2/3/fname
+        " let n .= pathshorten(bufname(b), ':t')
       endif
-
+      " check and ++ tab's &modified count
+      if getbufvar( b, "&modified" )
+        let m += 1
+      endif
+      " no final ' ' added...formatting looks better done later
+      if bc > 1
+        let n .= ' '
+      endif
+      let bc -= 1
+    endfor
+    " add modified label [n+] where n pages in tab are modified
+    if m > 0
+      let s .= '[' . m . '+]'
     endif
-
-    if file == ''
-      let file = '[No Name]'
-    endif
-
-    let s .= '  ' . file
-
-    let nwins = tabpagewinnr(i, '$')
-    if nwins > 1
-      let modified = ''
-      for b in buflist
-        if getbufvar(b, '&modified') && b != bufnr
-          let modified = '*'
-          break
-        endif
-      endfor
-      let hl = (i == t ? '%#WinNumSel#' : '%#WinNum#')
-      let nohl = (i == t ? '%#TabLineSel#' : '%#TabLine#')
-      "let s .= ' ' . modified . '(' . hl . winnr . nohl . '/' . nwins . ')'
-      let s .= ' ' . modified . '(' . winnr . '/' . nwins . ')'
-    endif
-
-    let s .= '  '
-
-    if i < tabpagenr('$')
-      let s .= ' %#TabLine#  '
+    " select the highlighting for the buffer names
+    " my default highlighting only underlines the active tab
+    " buffer names.
+    if t + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
     else
-      let s .= '  '
+      let s .= '%#TabLine#'
     endif
-
-    let i = i + 1
-
-  endwhile
-
-  let s .= '%T%#TabLineFill#%='
-  let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+    " add buffer names
+    if n == ''
+      let s.= '[New]'
+    else
+      let s .= n
+    endif
+    " switch to no underlining and add final space to buffer list
+    let s .= ' '
+  endfor
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s .= '%=%#TabLineFill#%999X[X]'
+  endif
   return s
-
 endfunction
-" set showtabline=1
-"hi TabNum term=None cterm=None ctermfg=1 ctermbg=7 gui=None guibg=LightGrey
-"hi TabNumSel term=None cterm=None ctermfg=1 ctermbg=7 gui=None
-"hi WinNum term=None cterm=None ctermfg=11 ctermbg=7 guifg=DarkBlue guibg=LightGrey
-"hi WinNumSel term=None cterm=None ctermfg=7 ctermbg=14 guifg=DarkBlue guibg=LightGrey
-set tabline=%!MyTabLine()
-endif " exists("+showtabline")
-" }
-
+set tabline=%!MyTabLine()  " custom tab pages line
