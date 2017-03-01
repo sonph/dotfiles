@@ -10,6 +10,10 @@ enter-to-clear() {
     # This is sonph's specific setup only.
     command -v get_env 2>&1 > /dev/null && get_env
 
+    # Unset ZBELL_DURATION and redraw prompt. See home/zsh/bell.zsh.
+    export ZBELL_DURATION=''
+    zle reset-prompt
+
   else
     zle accept-line
   fi
