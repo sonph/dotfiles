@@ -59,14 +59,17 @@ zstyle ':completion:*' menu select
 # prompt walters
 
 # Left and right prompts (left prompt has a leading newline).
+local RED='%{$fg[red]%}'
+local GREEN='%{$fg[green]%}'
+local RESET='%{$reset_color%}'
 if [[ "$(whoami)" = 'root' ]]; then
-  PROMPT='
-%{$fg[red]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %{$fg[red]%}%#%{$reset_color%} '
+  PROMPT="
+$RED%n$RESET %2d $RED%#$RESET "
 else
-  PROMPT='
-%n@%{$fg[green]%}%m%{$reset_color%} %1d%{$fg[cyan]%}$(__git_ps1 " [%s]")%{$reset_color%} %# '
+  PROMPT="
+%2d $GREEN%#$RESET "
 fi
-RPROMPT='%{$fg[green]%}%(?..[%?] )$(echo -n $ZBELL_DURATION) %d%{$reset_color%}'
+RPROMPT="$GREEN\$(echo -n $ZBELL_DURATION)$RESET $RED%(?..[%?] )$RESET$GREEN\$(__git_ps1 '[%s]')$RESET"
 
 
 # ------------------------------------------------
