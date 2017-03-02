@@ -70,4 +70,7 @@ function! MyTabLine()
   endif
   return s
 endfunction
-set tabline=%!MyTabLine()  " custom tab pages line
+
+set tabline=%!MyTabLine()
+" Always show tabline, even when there is one tab.
+set showtabline=2
