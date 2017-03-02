@@ -64,10 +64,10 @@ local GREEN='%{$fg[green]%}'
 local RESET='%{$reset_color%}'
 if [[ "$(whoami)" = 'root' ]]; then
   PROMPT="
-$RED%n$RESET %2d $RED%#$RESET "
+$RED%n$RESET %2~ $RED%#$RESET "
 else
   PROMPT="
-%2d $GREEN%#$RESET "
+%2~ $GREEN%#$RESET "
 fi
 RPROMPT="$GREEN\$(echo -n $ZBELL_DURATION)$RESET $RED%(?..[%?] )$RESET$GREEN\$(__git_ps1 '[%s]')$RESET"
 
