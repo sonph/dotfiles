@@ -36,7 +36,6 @@ if dein#load_state('~/.vim/bundle')
     call dein#add('majutsushi/tagbar')
   endif
   call dein#add('kshenoy/vim-signature')
-  call dein#add('rargo/vim-tab')
   call dein#add('easymotion/vim-easymotion')
   " Vim sugar for the UNIX shell commands e.g. Remove, Rename, Mkdir, SudoWrite, etc.
   call dein#add('tpope/vim-eunuch')
@@ -333,10 +332,6 @@ endwhile
 nnoremap m/ :SignatureListBufferMarks<CR>
 " Remove all bookmarks.
 nnoremap m<Space> call signature#mark#Purge('all')
-
-
-" vim-tab
-let g:TabTrigger = []
 
 
 " Emmet
