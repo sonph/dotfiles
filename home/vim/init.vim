@@ -118,7 +118,13 @@ set t_Co=256                                      " enable 256 colors
 hi MatchParen gui=inverse cterm=inverse
 " }
 
-if filereadable(expand('~/.vim/tabline.vim')) | source ~/.vim/tabline.vim | endif
+" TODO(sonph): convert this into a vim plugin.
+set showtabline=2
+function! PyTabline()
+  py3file ~/.vim/tabline.py
+  return g:pytabline
+endfunction
+set tabline=%!PyTabline()
 
 " make sure this is the last line
 filetype plugin indent on
