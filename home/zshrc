@@ -1,6 +1,11 @@
 # ------------------------------------------------
 # General
 # ------------------------------------------------
+
+# Profiling utils. Set to 'true' to enable.
+local ENABLE_PROFILING=''
+[ $ENABLE_PROFILING ] && local START_TIME=$(($(date +%s%N) / 1000000))
+
 ZSH_DIR="$HOME/.zsh"
 
 autoload -U compinit bashcompinit promptinit colors
@@ -172,4 +177,9 @@ source $HOME/.shaliases
 
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+
+if [ $ENABLE_PROFILING ]; then
+  local END_TIME=$(($(date +%s%N) / 1000000))
+  echo $(($END_TIME - $START_TIME))
+fi
