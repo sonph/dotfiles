@@ -16,18 +16,18 @@ airmon() {
       airmon-ng check $IFACE_MON
       airmon-ng check kill $IFACE_MON
       ifconfig $IFACE_MON down
-      macchanger --another $IFACE_MON | ack --passthru "New MAC"
+      macchanger --another $IFACE_MON | ack --passthru "New MAC:.*$"
       ifconfig $IFACE_MON up
-      iwconfig $IFACE_MON | ack --passthru Mode
+      iwconfig $IFACE_MON | ack --passthru 'Mode:[^\s]+'
       ;;
     'stop' )
       airmon-ng $@ $IFACE_MON
       service network-manager start
       service network-manager status
       ifconfig $IFACE down
-      macchanger --permanent $IFACE | ack --passthru "New MAC"
+      macchanger --permanent $IFACE | ack --passthru "New MAC:.*$"
       ifconfig $IFACE up
-      iwconfig $IFACE | ack --passthru Mode
+      iwconfig $IFACE | ack --passthru 'Mode:[^\s]+'
       ;;
     *)
       airmon-ng $@ $IFACE_MON
