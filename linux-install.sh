@@ -248,6 +248,14 @@ flux-install() {
   # fi
 }
 
+gcloud-install() {
+  local URL='https://cloud.google.com/sdk/downloads'
+  # test
+  common_bin_exists 'gcloud' && return
+  # install
+  curl https://sdk.cloud.google.com | bash
+}
+
 
 fonts-install() {
   local USR_FONTS_DIR='/usr/share/fonts/usrfonts'
