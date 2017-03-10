@@ -20,8 +20,8 @@ group-cli-install() {
   curl-install
   diff-so-fancy-install
   git-install
-  python3-install
-  pip3-install
+  python23-install
+  pip23-install
   neovim-install
   tor-install
   user-setup
@@ -97,20 +97,21 @@ git-install() {
   common_install_pkg 'git'
 }
 
-python3-install() {
+python23-install() {
   # test
-  common_bin_exists 'python3' && return
+  common_bin_exists 'python' && common_bin_exists 'python3' && return
   # install
-  common_install_pkg 'python3'
+  # For yum: python*-devel
+  common_install_pkg 'python' 'python3' 'python-dev' 'python3-dev'
 }
 
-pip3-install() {
+pip23-install() {
   # test
-  common_bin_exists 'pip3' && return
+  common_bin_exists 'pip' && common_bin_exists 'pip3' && return
   # deps
-  python3-install
+  python23-install
   # install
-  common_install_pkg 'python3-pip'
+  common_install_pkg 'python-pip' 'python3-pip'
 }
 
 neovim-install() {
@@ -118,9 +119,10 @@ neovim-install() {
   # test
   command -v nvim 2>&1 > /dev/null && return
   # deps
-  pip3-install; git-install
+  pip23-install; git-install
   # install
   common_install_pkg 'neovim'
+  sudo pip install neovim
   sudo pip3 install neovim
   # cmake needed for compiling YouCompleteMe
   common_bin_exists 'make' || common_install_pkg 'cmake'
