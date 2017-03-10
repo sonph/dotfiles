@@ -77,7 +77,7 @@ else
   PROMPT="
 $BLUE%2~$RESET $GREEN%#$RESET "
 fi
-RPROMPT="$GREEN\$(echo -n $ZBELL_DURATION)$RESET $RED%(?..[%?])$RESET$MAGENTA\$(__git_ps1 ' [%s]')$RESET"
+RPROMPT="$GREEN\$(echo -n \$ZBELL_DURATION)$RESET $RED%(?..[%?])$RESET$MAGENTA\$(__git_ps1 ' [%s]')$RESET"
 
 
 # ------------------------------------------------

@@ -136,6 +136,7 @@ neovim-install() {
   mkdir -p "$VIM_DEIN_DIR"
   git clone https://github.com/Shougo/dein.vim "$VIM_DEIN_DIR"
   nvim -c ":call dein#install()"
+  nvim -c ":call dein#recache_runtimepath()"
 }
 
 gnome-terminal-install() {

@@ -2,7 +2,7 @@
 # Source: https://gist.github.com/jpouellet/5278239
 
 # This script prints a bell character when a command finishes
-# if it has been running for longer than $zbell_duration seconds.
+# if it has been running for longer than $zbell_min_duration seconds.
 # If there are programs that you know run long that you don't
 # want to bell after, then add them to $zbell_ignore.
 #
@@ -21,8 +21,8 @@ zmodload zsh/datetime || return
 # make sure we can register hooks
 autoload -Uz add-zsh-hook || return
 
-# initialize zbell_duration if not set
-(( ${+zbell_duration} )) || zbell_duration=10
+# initialize zbell_min_duration if not set
+(( ${+zbell_min_duration} )) || zbell_min_duration=15
 
 # initialize zbell_ignore if not set
 (( ${+zbell_ignore} )) || zbell_ignore=($EDITOR $PAGER)
@@ -41,10 +41,10 @@ zbell_begin() {
   export ZBELL_DURATION=''
 }
 
-# when it finishes, if it's been running longer than $zbell_duration,
+# when it finishes, if it's been running longer than $zbell_min_duration,
 # and we dont have an ignored command in the line, then print a bell.
 zbell_end() {
-  ran_long=$(( $EPOCHSECONDS - $zbell_timestamp >= $zbell_duration ))
+  ran_long=$(( $EPOCHSECONDS - $zbell_timestamp >= $zbell_min_duration ))
 
   has_ignored_cmd=0
   for cmd in ${(s:;:)zbell_lastcmd//|/;}; do
