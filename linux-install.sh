@@ -9,7 +9,7 @@ DOTFILES_FONT_DIR="$DOTFILES_DIR/fonts"
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 [[ ! -d "$XDG_CONFIG_HOME" ]] && mkdir -p "$XDG_CONFIG_HOME"
 CODE_DIR='/code'
-[[ ! -d "$CODE_DIR" ]] && sudo mkdir -p "$CODE_DIR"
+[[ ! -d "$CODE_DIR" ]] && sudo mkdir -p "$CODE_DIR" && sudo chown $(whoami) "$CODE_DIR"
 BIN_DIR="$HOME/bin"
 
 group-cli-install() {
