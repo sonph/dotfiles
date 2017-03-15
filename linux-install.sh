@@ -10,6 +10,7 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 [[ ! -d "$XDG_CONFIG_HOME" ]] && mkdir -p "$XDG_CONFIG_HOME"
 CODE_DIR='/code'
 [[ ! -d "$CODE_DIR" ]] && sudo mkdir -p "$CODE_DIR"
+BIN_DIR="$HOME/bin"
 
 group-cli-install() {
   common_install_pkg ttyrec apt-file software-properties-common lm-sensors
@@ -36,6 +37,11 @@ group-gui-install() {
   flux-install
 }
 
+group-security-install() {
+  common_install_pkg nmap tor proxychains
+  exploitdb-install
+}
+
 common_bin_exists() {
   command -v "$1" 2>&1 > /dev/null
   # By default return code is from the last command.
@@ -56,6 +62,18 @@ err() {
   >&2 echo $@
 }
 
+exploitdb-install() {
+  local URL='https://github.com/offensive-security/exploit-database'
+  # test
+  common_bin_exists searchsploit && return
+  # deps
+  git-install
+  # install
+  pushd $CODE_DIR 2>&1 > /dev/null
+  git clone "$URL" exploitdb
+  ln -s "$CODE_DIR/exploitdb/searchsploit" "$BIN_DIR/searchsploit"
+  popd 2>&1 > /dev/null
+}
 
 curl-install() {
   common_bin_exists 'curl' || common_install_pkg 'curl'
