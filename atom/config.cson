@@ -3,13 +3,15 @@
     disabledPackages: [
       "metrics"
       "exception-reporting"
+      "whitespace"
     ]
+    telemetryConsent: "no"
     themes: [
       "spacegray-light-neue-ui"
       "one-light-syntax"
     ]
   editor:
-    fontSize: 12
+    fontFamily: "Menlo"
     invisibles: {}
     lineHeight: 1.7
     scrollPastEnd: true

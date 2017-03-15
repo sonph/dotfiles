@@ -38,6 +38,8 @@
   'ctrl-tab': 'pane:show-next-item'
   'ctrl-shift-tab ^ctrl': 'unset!'
   'ctrl-shift-tab': 'pane:show-previous-item'
+  'ctrl-d': 'core:page-down'
+  'ctrl-u': 'core:page-up'
 
 'atom-text-editor.vim-mode.normal-mode':
   'space 1': 'pane:show-item-1'
@@ -56,7 +58,9 @@
   'space w': 'core:save'
   'space r': 'window:reload'
   'ctrl-w t': 'application:new-file'
-  'space n t': 'tree-view:toggle'
+  'ctrl-w s': 'pane:split-down'
+  'ctrl-w v': 'pane:split-right'
+  'space v n': 'tree-view:toggle'
   'ctrl-n': 'editor:select-word'
   'space shift-p': 'command-palette:toggle'
   'space p': 'fuzzy-finder:toggle-file-finder'
@@ -68,10 +72,10 @@
   'cmd-shift-down': 'editor:add-selection-below'
 
 'atom-text-editor.vim-mode.operator-pending-mode, atom-text-editor.vim-mode.visual-mode':
-  '[': 'user-vim-visual:wrap-square-brackets'
-  '(': 'user-vim-visual:wrap-parentheses'
-  '\'': 'user-vim-visual:wrap-single-quotes'
-  '"': 'user-vim-visual:wrap-double-quotes'
+  'space [': 'user-vim-visual:wrap-square-brackets'
+  'space (': 'user-vim-visual:wrap-parentheses'
+  'space \'': 'user-vim-visual:wrap-single-quotes'
+  'space "': 'user-vim-visual:wrap-double-quotes'
   'ctrl-n': 'find-and-replace:select-next'
   'ctrl-p': 'find-and-replace:select-undo'
   'ctrl-x': 'find-and-replace:select-skip'
@@ -85,7 +89,7 @@
 
 '.tree-view':
   'ctrl-l': 'window:focus-next-pane'
-  'space n t': 'tree-view:toggle'
+  'space v n': 'tree-view:toggle'
 
 '.results-view':
   'j': 'core:move-down'
