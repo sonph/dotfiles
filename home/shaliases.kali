@@ -66,3 +66,11 @@ changemac() {
   ifconfig $INTERFACE up
 }
 
+
+ifconfig.me() {
+  curl ifconfig.me/all
+}
+
+ifconfig.co() {
+  curl ifconfig.co/json
+}
