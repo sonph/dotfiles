@@ -67,10 +67,20 @@ changemac() {
 }
 
 
-ifconfig.me() {
+ipcheck() {
+  echo '---- ifconfig.me'
   curl ifconfig.me/all
+  echo '---- ifconfig.co'
+  curl ifconfig.co/json
 }
 
-ifconfig.co() {
-  curl ifconfig.co/json
+iplookup() {
+  echo "---- ipinfo.io/$1/json"
+  OUT=$(curl ipinfo.io/$1/json)
+  echo $OUT
+  echo $OUT | python -c 'print("Google Maps: https://maps.google.com/maps/@%s,10z" % __import__("json").loads(__import__("sys").stdin.read())["loc"])'
+  echo "---- host $1"
+  host $1
+  echo "---- dig -x $1"
+  dig -x $1
 }
