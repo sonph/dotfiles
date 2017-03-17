@@ -12,6 +12,8 @@ CODE_DIR='/code'
 [[ ! -d "$CODE_DIR" ]] && sudo mkdir -p "$CODE_DIR" && sudo chown $(whoami) "$CODE_DIR"
 BIN_DIR="$HOME/bin"
 
+# TODO: sort all this stuff into sections.
+
 group-cli-install() {
   common_install_pkg ttyrec apt-file software-properties-common lm-sensors
   common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
@@ -26,6 +28,7 @@ group-cli-install() {
   neovim-install
   tor-install
   user-setup
+  pipenv-install
 }
 
 group-gui-install() {
@@ -130,6 +133,16 @@ pip23-install() {
   python23-install
   # install
   common_install_pkg 'python-pip' 'python3-pip'
+}
+
+pipenv-install() {
+  local URL='https://github.com/kennethreitz/pipenv'
+  # test
+  common_bin_exists 'pipenv' && return
+  # deps
+  pip23-install
+  # install
+  pip install 'pipenv'
 }
 
 neovim-install() {
