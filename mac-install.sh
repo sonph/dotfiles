@@ -14,12 +14,53 @@ common_bin_exists 'brew' && brew update
 
 group-cli-install() {
   brew-install
-  brew install autoconf automake binutils cmake coreutils ctags curl \
-      diff-so-fancy ffmpeg git imagemagick perl python \
-      reattach-to-user-namespace ruby ttyrec tmux vim wget youtube-dl zsh
-  brew-cask-install
-  # brew cask install
+  brew install \
+      autoconf \
+      automake \
+      binutils \
+      cmake \
+      coreutils \
+      ctags \
+      curl \
+      diff-so-fancy \
+      git \
+      perl \
+      python \
+      reattach-to-user-namespace \
+      ruby \
+      tmux \
+      ttyrec \
+      vim \
+      wget \
+      zsh
+      # ffmpeg \
+      # imagemagick \
+      # youtube-dl \
   dotfiles-install
+}
+
+group-gui-install() {
+  brew-cask-install
+  brew cask install \
+      android-file-transfer \
+      atom \
+      colorpicker \
+      dash \
+      flux \
+      franz \
+      google-chrome \
+      google-drive \
+      iterm2 \
+      jumpcut \
+      keycastr \
+      licecap \
+      macs-fan-control \
+      omnidisksweeper \
+      spectacle \
+      torbrowser \
+      veracrypt \
+      virtualbox \
+      vlc
 }
 
 brew-install() {
@@ -32,7 +73,13 @@ brew-install() {
 }
 
 brew-cask-install() {
-
+  local URL='https://caskroom.github.io/'
+  # test
+  brew cask --version 2>&1 > /dev/null && return
+  # deps
+  brew-install
+  # install
+  brew tap caskroom/cask
 }
 
 neovim-install() {
