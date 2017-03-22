@@ -6,10 +6,14 @@
 
 DOTFILES_DIR="$HOME/.files"
 DOTFILES_FONT_DIR="$DOTFILES_DIR/fonts"
+
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 [[ ! -d "$XDG_CONFIG_HOME" ]] && mkdir -p "$XDG_CONFIG_HOME"
-CODE_DIR='/code'
-[[ ! -d "$CODE_DIR" ]] && sudo mkdir -p "$CODE_DIR" && sudo chown $(whoami) "$CODE_DIR"
+
+CODE_DIR="$HOME/code"
+[[ ! -d "$CODE_DIR" ]] && mkdir -p "$CODE_DIR"
+[[ ! -e '/code' ]] && sudo ln -s "$CODE_DIR" '/code'
+
 BIN_DIR="$HOME/bin"
 
 # TODO: sort all this stuff into sections.
