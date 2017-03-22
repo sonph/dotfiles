@@ -1,0 +1,16 @@
+language: bash
+
+os:
+- linux
+- osx
+
+dist: trusty
+sudo: false
+
+before_install:
+  - git submodule init
+  - git submodule update
+
+script:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then source linux-install.sh; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then source mac-install.sh; fi
