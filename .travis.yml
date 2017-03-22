@@ -5,7 +5,7 @@ os:
 - osx
 
 dist: trusty
-sudo: false
+sudo: required
 
 script:
 - ./travis-test.sh

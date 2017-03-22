@@ -19,7 +19,7 @@ wrapper() {
     fail "Begin stderr --------------------------------------"
     cat "stderr.$1"
     fail "End stderr ----------------------------------------"
-    false
+    exit 1
   fi
 }
 
