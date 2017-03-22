@@ -7,5 +7,10 @@ os:
 dist: trusty
 sudo: required
 
+install:
+- cd ..
+- mv dotfiles ~/.files
+- cd ~/.files
+
 script:
 - ./travis-test.sh
