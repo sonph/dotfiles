@@ -9,7 +9,6 @@ fail() { echo "[${RED}FAIL${RESET}] $@"; }
 ok() { echo "[ ${GREEN}OK${RESET} ] $@"; }
 
 wrapper() {
-  set +e
   # Run command and check stderr. Stderr is redirected to tee so we can check
   # the size while also be able to see it in the logs.
   $@ 2> >(tee -a stderr.${1})
@@ -22,10 +21,7 @@ wrapper() {
     fail "End stderr.$1"
     exit 1
   fi
-  set -e
 }
-
-set -e
 
 info "Sourcing install script"
 if [ "$TRAVIS_OS_NAME" == "linux" ]; then wrapper source linux-install.sh; fi
