@@ -33,7 +33,7 @@ if [ "$TRAVIS_OS_NAME" == "osx" ]; then wrapper source mac-install.sh; fi
 info "Call dotfiles-install"
 dotfiles-install
 test_file_exists_and_not_empty() {
-  if [[ -s "$1" ]]; then
+  if [[ ! -s "$1" ]]; then
     fail "${1} does not exist or is empty"
     exit 1
   fi
@@ -45,6 +45,5 @@ test_file_exists_and_not_empty "$HOME/.tmux/tmux-status-right"
 test_file_exists_and_not_empty "$HOME/.zshrc"
 test_file_exists_and_not_empty "$HOME/.zsh/git-prompt.zsh"
 test_file_exists_and_not_empty "$HOME/.vim/init.vim"
-test_file_exists_and_not_empty "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
 test_file_exists_and_not_empty "$HOME/bin/ack"
 

@@ -22,7 +22,8 @@ if [ "$IN_DOCKER" ]; then
   echo "Inside docker"
   ln -s /files $HOME/.files
   pushd $HOME/.files
-  ./testing/travis-test.sh || /bin/bash
+  # Run test script and drop into bash for debugging if it fails.
+  ./testing/travis-test.sh || exec /bin/bash
 else
   # We're still in the host. Create a new docker container, link volume and 
   # call this script.
@@ -41,6 +42,8 @@ else
       --volume "$HOME/.files:/files" \
       --env IN_DOCKER=docker \
       --env TRAVIS_OS_NAME=linux \
+      --interactive \
+      --tty \
       $DOCKER_IMAGE_NAME:latest \
-      /files/testing/docker.sh
+      bash -c '/files/testing/docker.sh'
 fi
