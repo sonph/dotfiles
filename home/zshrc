@@ -189,3 +189,20 @@ if [ -f "$HOME/.files/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/.file
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/.files/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/.files/google-cloud-sdk/completion.zsh.inc"; fi
+
+# Docker-machine: if there is one active running docker-machine, then set the
+# environment variables for docker. Docker-machine commands are pretty slow
+# so we cache the content in a /tmp file.
+if [ "$(uname)" == "Darwin" ]; then
+  ZSHRC_DOCKER_MACHINE_ENV_CACHE='/tmp/ZSHRC_DOCKER_MACHINE_ENV_CACHE'
+  if [ -e "$ZSHRC_DOCKER_MACHINE_ENV_CACHE" ]; then
+    eval "$(cat $ZSHRC_DOCKER_MACHINE_ENV_CACHE)"
+  elif command -v docker-machine 2>&1 > /dev/null \
+      && [ "$(docker-machine ls | grep -i 'Running' | wc -l)" -ge 1 ]; then
+        docker-machine env > "$ZSHRC_DOCKER_MACHINE_ENV_CACHE"
+        eval "$(cat $ZSHRC_DOCKER_MACHINE_ENV_CACHE)"
+  fi
+fi
+
+# Added by travis gem
+[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"

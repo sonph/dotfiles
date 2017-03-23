@@ -291,6 +291,15 @@ gcloud-install() {
   curl https://sdk.cloud.google.com | bash
 }
 
+travis-install() {
+  local URL='https://github.com/travis-ci/travis.rb'
+  # test
+  common_bin_exists 'travis' && return
+  # install
+  # TODO: verify if we need gem dependency and sudo?
+  gem install travis --no-rdoc --no-ri
+}
+
 
 fonts-install() {
   local USR_FONTS_DIR='/usr/share/fonts/usrfonts'
