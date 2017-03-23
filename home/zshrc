@@ -13,7 +13,7 @@ autoload -U compinit bashcompinit promptinit colors
 # Directory containing zsh completion scripts.
 # See https://github.com/zsh-users/zsh-completions/tree/master/src
 # This line must be before compinit.
-fpath=($fpath "$ZSH_DIR/autocomplete")
+fpath=($fpath "$ZSH_DIR/completion")
 
 # Paths.
 typeset -U path
