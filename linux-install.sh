@@ -4,6 +4,17 @@
 # Assume Debian-based and XFCE.
 # ------------------------------------------------
 
+if [ $(whoami) == 'root' ]; then
+  SUDO=''
+else
+  if command -v 2>&1 > /dev/null 'sudo'; then
+    SUDO='sudo'
+  else
+    err 'User is not root, yet sudo is not available'
+  fi
+fi
+
+
 DOTFILES_DIR="$HOME/.files"
 DOTFILES_FONT_DIR="$DOTFILES_DIR/fonts"
 
@@ -12,7 +23,7 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 
 CODE_DIR="$HOME/code"
 [[ ! -d "$CODE_DIR" ]] && mkdir -p "$CODE_DIR"
-[[ ! -e '/code' ]] && sudo ln -s "$CODE_DIR" '/code'
+[[ ! -e '/code' ]] && $SUDO ln -s "$CODE_DIR" '/code'
 
 BIN_DIR="$HOME/bin"
 
@@ -56,9 +67,9 @@ common_bin_exists() {
 
 common_install_pkg() {
   if common_bin_exists 'apt-get'; then
-    sudo apt-get install -y $@
+    $SUDO apt-get install -y $@
   elif common_bin_exists 'yum'; then
-    sudo yum install $@
+    $SUDO yum install $@
   else
     err 'Either apt-get or yum not found.'
     return 1
@@ -156,22 +167,41 @@ neovim-install() {
   # deps
   pip23-install; git-install
   # install
+  if common_bin_exists 'apt-get'; then
+    if [ $(apt-cache search '^neovim$' | wc -l) -lt 1 ]; then
+      add-apt-repository-install
+      $SUDO add-apt-repository ppa:neovim-ppa/stable
+      $SUDO apt-get update
+    fi
+  else
+    err 'Pkg manager other than apt-get is not yet supported'
+    return 1
+  fi
   common_install_pkg 'neovim'
-  sudo pip install neovim
-  sudo pip3 install neovim
+  $SUDO pip install neovim
+  $SUDO pip3 install neovim
   # cmake needed for compiling YouCompleteMe
-  common_bin_exists 'make' || common_install_pkg 'cmake'
+  common_bin_exists 'make' || common_install_pkg 'make'
 
   local VIM_DIR="$DOTFILES_DIR/home/vim"
   local NVIM_CONFIG_DIR="$XDG_CONFIG_HOME/nvim"
     [[ ! -e "$NVIM_CONFIG_DIR" ]] && ln -s "$VIM_DIR" "$NVIM_CONFIG_DIR"
 
   local VIM_DEIN_REPOS_DIR="$VIM_DIR/bundle/repos"
-  local VIM_DEIN_DIR="$VIM_DEIN_REPOS_DIR/github.com/Shougo/dein.vim"
-  mkdir -p "$VIM_DEIN_DIR"
-  git clone https://github.com/Shougo/dein.vim "$VIM_DEIN_DIR"
+  local VIM_SHOUGO_DIR="$VIM_DEIN_REPOS_DIR/github.com/Shougo"
+  mkdir -p "$VIM_SHOUGO_DIR"
+  pushd 2>&1 > /dev/null "$VIM_SHOUGO_DIR"
+  git clone https://github.com/Shougo/dein.vim
+  popd 2>&1 > /dev/null
   nvim -c ":call dein#install()"
   nvim -c ":call dein#recache_runtimepath()"
+}
+
+add-apt-repository-install() {
+  # test
+  common_bin_exists 'add-apt-repository' && return
+  # install
+  common_install_pkg 'software-properties-common'
 }
 
 gnome-terminal-install() {
@@ -211,8 +241,8 @@ tor-browser-install() {
 
 tor-install() {
   common_bin_exists 'tor' || common_install_pkg 'tor'
-  sudo systemctl start tor
-  sudo systemctl enable tor
+  $SUDO systemctl start tor
+  $SUDO systemctl enable tor
 }
 
 arc-theme-install() {
@@ -232,7 +262,7 @@ arc-theme-install() {
     git clone "$URL"
     pushd "$CODE/arc-theme" 2>&1 > /dev/null
     ./autogen.sh --prefix=/usr --disable-transparency $@
-    sudo make install
+    $SUDO make install
     popd 2>&1 > /dev/null
     popd 2>&1 > /dev/null
   fi
@@ -267,7 +297,7 @@ flux-install() {
   git clone "$URL"
   cd xflux-gui
   python download-xflux.py
-  sudo python setup.py install
+  $SUDO python setup.py install
   popd 2>&1 > /dev/null
   echo 'To start flux, run `fluxgui`'
 
@@ -275,9 +305,9 @@ flux-install() {
   # if common_bin_exists 'apt-get'; then
     # common_bin_exists 'add-apt-repository' || common_install_pkg 'software-properties-common'
     # # TODO: not working!
-    # sudo add-apt-repository ppa:nathan-renniewaldock/flux
-    # sudo apt-get update
-    # sudo apt-get install fluxgui
+    # $SUDO add-apt-repository ppa:nathan-renniewaldock/flux
+    # $SUDO apt-get update
+    # $SUDO apt-get install fluxgui
   # else
     # err 'flux-install: Yum not supported'
   # fi
@@ -296,7 +326,7 @@ travis-install() {
   # test
   common_bin_exists 'travis' && return
   # install
-  # TODO: verify if we need gem dependency and sudo?
+  # TODO: verify if we need gem dependency and $SUDO?
   gem install travis --no-rdoc --no-ri
 }
 
@@ -309,12 +339,12 @@ fonts-install() {
   common_bin_exists 'fc-cache' || common_install_pkg 'fontconfig'
   pushd "$DOTFILES_FONT_DIR" 2>&1 > /dev/null
   tar zxvf mac_fonts.tar.gz
-  sudo mv fonts "$USR_FONTS_DIR"
+  $SUDO mv fonts "$USR_FONTS_DIR"
 
-  sudo cp Menlo-Regular.ttf "$USR_FONTS_DIR"
-  sudo cp source-code-pro/*.ttf "$USR_FONTS_DIR"
+  $SUDO cp Menlo-Regular.ttf "$USR_FONTS_DIR"
+  $SUDO cp source-code-pro/*.ttf "$USR_FONTS_DIR"
 
-  sudo fc-cache -f -v
+  $SUDO fc-cache -f -v
   popd 2>&1 > /dev/null
 }
 
