@@ -23,7 +23,10 @@ wrapper() {
   fi
 }
 
+# set -x
+
 info "Sourcing install script"
+info "Travis os: $TRAVIS_OS_NAME"
 if [ "$TRAVIS_OS_NAME" == "linux" ]; then wrapper source linux-install.sh; fi
 if [ "$TRAVIS_OS_NAME" == "osx" ]; then wrapper source mac-install.sh; fi
 
