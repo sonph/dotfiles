@@ -1,6 +1,11 @@
 #!/bin/bash
 # Run the tests in a local docker container, which runs the same travis test script.
-# This script assumes that
+# This script does the following:
+#   - create a new test image with necessary software installed e.g. git
+#   - remove existing containers, and create a new one for each test run
+#   - mount the dotfiles directory and execute the travis test script
+#   - if the test fails, drop into bash for debugging
+# with these assumptions:
 #   - docker is properly installed and running
 #   - dotfiles is cloned to ~/.files
 #   - script is invoked from .files
