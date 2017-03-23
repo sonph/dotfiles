@@ -13,4 +13,4 @@ install:
 - cd ~/.files
 
 script:
-- ./travis-test.sh
+- ./testing/travis-test.sh
