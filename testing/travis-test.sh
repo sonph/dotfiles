@@ -1,12 +1,6 @@
 #!/bin/bash
-
-RED="$(tput setaf 1)"
-GREEN="$(tput setaf 2)"
-BLUE="$(tput setaf 4)"
-RESET="$(tput sgr0)"
-info() { echo "[${BLUE}INFO${RESET}] $@"; }
-fail() { echo "[${RED}FAIL${RESET}] $@"; }
-ok() { echo "[ ${GREEN}OK${RESET} ] $@"; }
+TESTING_DIR=$(dirname $0)
+source "$TESTING_DIR/common.sh"
 
 wrapper() {
   # Run command and check stderr. Stderr is redirected to tee so we can check
@@ -47,3 +41,6 @@ test_file_exists_and_not_empty "$HOME/.zsh/git-prompt.zsh"
 test_file_exists_and_not_empty "$HOME/.vim/init.vim"
 test_file_exists_and_not_empty "$HOME/bin/ack"
 
+info "Call neovim-install"
+neovim-install
+test_file_exists_and_not_empty "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
