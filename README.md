@@ -1,5 +1,7 @@
 # @sonph's .files
 
+[![travis-build-badge](https://img.shields.io/travis/sonph/dotfiles.svg)](https://travis-ci.org/sonph/dotfiles)
+
 ![screenshot](ss.png)
 
 ## Installation
