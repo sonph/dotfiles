@@ -11,7 +11,7 @@
 #   - script is invoked from .files
 
 TESTING_DIR=$(dirname $0)
-source "$TESTING_DIR/common.sh"
+source "$TESTING_DIR/../bin/common_utils.sh"
 
 DOCKER_CONTAINER_NAME='dotfiles_test_container'
 DOCKER_IMAGE_NAME='dotfiles_test_image'

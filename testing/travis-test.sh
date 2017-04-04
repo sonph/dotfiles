@@ -1,6 +1,6 @@
 #!/bin/bash
 TESTING_DIR=$(dirname $0)
-source "$TESTING_DIR/common.sh"
+source "$TESTING_DIR/../bin/common_utils.sh"
 
 wrapper() {
   # Run command and check stderr. Stderr is redirected to tee so we can check

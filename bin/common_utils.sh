@@ -1,5 +1,6 @@
 #!/bin/bash
 # Common functions for testing scripts.
+# TODO(sonph): maybe use include guards
 RED="$(tput setaf 1)"
 GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 4)"
