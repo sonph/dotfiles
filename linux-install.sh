@@ -170,7 +170,7 @@ neovim-install() {
   if common_bin_exists 'apt-get'; then
     if [ $(apt-cache search '^neovim$' | wc -l) -lt 1 ]; then
       add-apt-repository-install
-      $SUDO add-apt-repository ppa:neovim-ppa/stable
+      $SUDO add-apt-repository -y ppa:neovim-ppa/stable
       $SUDO apt-get update
     fi
   else
