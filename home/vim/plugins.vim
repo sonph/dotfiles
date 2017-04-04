@@ -410,13 +410,13 @@ endfor
 let g:lmap.t = {'name': 'Tab/'}
 call s:leader_bind('nnoremap', 't', 'm', '', 'Tabmerge', 'Tabs: Merge with next tab', 'tab-merge-next', 1)
 " Make this split into a new tab.
-call s:leader_bind('nnoremap', 't', 's', '', 'wincmd T', 'Tabs: Split into new tab', 'tab-split', 1)
-call s:leader_bind('nnoremap', 't', 'h', '', 'wincmd H', 'Tabs: Move split left', 'tab-split', 1)
-call s:leader_bind('nnoremap', 't', 'j', '', 'wincmd J', 'Tabs: Move split down', 'tab-split', 1)
-call s:leader_bind('nnoremap', 't', 'k', '', 'wincmd K', 'Tabs: Move split up', 'tab-split', 1)
-call s:leader_bind('nnoremap', 't', 'l', '', 'wincmd L', 'Tabs: Move split right', 'tab-split', 1)
-call s:leader_bind('nnoremap', 't', 'r', '', 'wincmd r', 'Tabs: Rotate downwards/rightwards', 'tab-split', 1)
-call s:leader_bind('nnoremap', 't', 'r', '', 'wincmd R', 'Tabs: Rotate upwards/leftwards', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 's', '', 'wincmd T', 'Tabs: Split into new tab (^wT)', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 'h', '', 'wincmd H', 'Tabs: Move split left (^wH)', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 'j', '', 'wincmd J', 'Tabs: Move split down (^wJ)', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 'k', '', 'wincmd K', 'Tabs: Move split up (^wK)', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 'l', '', 'wincmd L', 'Tabs: Move split right (^wL)', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 'r', '', 'wincmd r', 'Tabs: Rotate downwards/rightwards (^wr)', 'tab-split', 1)
+call s:leader_bind('nnoremap', 't', 'r', '', 'wincmd R', 'Tabs: Rotate upwards/leftwards (^wR)', 'tab-split', 1)
 
 call s:leader_bind('nnoremap', 'q', '', '', 'q', 'Vim: Quit', 'quit', 1)
 call s:leader_bind('nnoremap', 'Q', '', '', 'q!', 'Vim: Quit unsaved', 'quit-unsaved', 1)
