@@ -1,0 +1,1 @@
+Arpeggio inoremap py python

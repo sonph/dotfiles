@@ -76,12 +76,17 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('scrooloose/nerdcommenter')
 
   call dein#add('ap/vim-css-color')
+  call dein#add('kana/vim-arpeggio', {'lazy': 0})
+
 
   call dein#end()
   call dein#save_state()
 endif
-" }
 
+if dein#check_install()
+  call dein#install()
+endif
+" }
 
 function! s:maybe_add_denite_item(name, cmd)
   if exists('s:menus')
@@ -97,11 +102,19 @@ function! s:maybe_add_leader_guide_item(key, name, cmd)
 endfunction
 
 function! s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is_cmd)
-  " leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1)
-  " leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1)
+  " Args:
+  "     map: mapping mode (nmap, inoremap, etc.)
+  "     key, key2, key3: up to three keys in the sequences
+  "     value: command to be executed (<CR> automatically gets added if is_cmd)
+  "     denite_name: name in the denite menu
+  "     guide_name: short name for leader guide menu
+  "     is_cmd: 1 if command is a complete command, else 0 if user input is needed
+  " leader_bind('nnoremap', 'g', 'b', '', 'Gblame', 'Git: Blame', 'blame', 1, 1)
+  " leader_bind('nnoremap', 'g', 'g', 'n', 'GitGutterNextHunk', 'Git: Next Hunk', 'next-hunk', 1, 0)
   if a:is_cmd
     " If a:value is a complete command e.g. :Gblame<CR>
     let l:value = ':' . a:value . '<CR>'
+    " The underscore denotes the leader key (space).
     let l:denite_name = a:denite_name . ' (_' . a:key . a:key2 . a:key3 . ')'
     let l:denite_cmd = a:value
     let l:guide_name = a:guide_name
@@ -453,6 +466,23 @@ endfor
 " Workaround for neovim#2048 <C-h> mapping not working because it's
 " interpreted as <BS>
 nnoremap <BS> :TmuxNavigateLeft<CR>
+
+" kana/vim-arpeggio {
+call arpeggio#load()
+let g:arpeggio_timeoutlen=30
+
+" Common chords
+Arpeggio inoremap the the
+Arpeggio inoremap tru true
+Arpeggio inoremap fal false
+Arpeggio inoremap ret return<Space>
+Arpeggio inoremap df (
+Arpeggio inoremap jk )
+Arpeggio inoremap fg [
+Arpeggio inoremap hj ]
+Arpeggio inoremap FG {
+Arpeggio inoremap HJ }
+" }
 
 " Sort Denite user commands.
 if exists('s:menus')
