@@ -72,7 +72,7 @@ if dein#load_state('~/.vim/bundle')
   " Sublime text style multiple cursors.
   call dein#add('terryma/vim-multiple-cursors')
   " Fork of auto pairs (auto closing parentheses).
-  call dein#add('sonph/auto-pairs')
+  call dein#add('jiangmiao/auto-pairs')
   call dein#add('scrooloose/nerdcommenter')
 
   call dein#add('ap/vim-css-color')
