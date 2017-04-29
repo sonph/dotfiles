@@ -29,7 +29,7 @@ BIN_DIR="$HOME/bin"
 
 # TODO: sort all this stuff into sections.
 
-group-cli-install() {
+function group-cli-install() {
   common_install_pkg ttyrec apt-file software-properties-common lm-sensors
   common_install_pkg zsh tmux xcape htop nmon xbindkeys xbindkeys-config
   common_install_pkg ctags cmake autoconf
@@ -46,7 +46,7 @@ group-cli-install() {
   pipenv-install
 }
 
-group-gui-install() {
+function group-gui-install() {
   gnome-terminal-install
   tor-browser-install
   arc-theme-install
@@ -55,17 +55,17 @@ group-gui-install() {
   flux-install
 }
 
-group-security-install() {
+function group-security-install() {
   common_install_pkg nmap tor proxychains
   exploitdb-install
 }
 
-common_bin_exists() {
+function common_bin_exists() {
   command -v "$1" 2>&1 > /dev/null
   # By default return code is from the last command.
 }
 
-common_install_pkg() {
+function common_install_pkg() {
   if common_bin_exists 'apt-get'; then
     $SUDO apt-get install -y $@
   elif common_bin_exists 'yum'; then
@@ -76,11 +76,11 @@ common_install_pkg() {
   fi
 }
 
-err() {
+function err() {
   >&2 echo $@
 }
 
-exploitdb-install() {
+function exploitdb-install() {
   local URL='https://github.com/offensive-security/exploit-database'
   # test
   common_bin_exists searchsploit && return
@@ -93,11 +93,11 @@ exploitdb-install() {
   popd 2>&1 > /dev/null
 }
 
-curl-install() {
+function curl-install() {
   common_bin_exists 'curl' || common_install_pkg 'curl'
 }
 
-nvm-install() {
+function nvm-install() {
   # test
   common_bin_exists 'nvm' && return
   # deps
@@ -109,13 +109,13 @@ nvm-install() {
   [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 }
 
-npm-install() {
+function npm-install() {
   common_bin_exists 'npm' && return
   nvm-install
   nvm install --lts
 }
 
-diff-so-fancy-install() {
+function diff-so-fancy-install() {
   # test
   common_bin_exists 'diff-so-fancy' && return
   # deps
@@ -124,7 +124,7 @@ diff-so-fancy-install() {
   npm install -g diff-so-fancy
 }
 
-git-install() {
+function git-install() {
   # test
   common_bin_exists 'git' && return
   # deps
@@ -133,7 +133,7 @@ git-install() {
   common_install_pkg 'git'
 }
 
-python23-install() {
+function python23-install() {
   # test
   common_bin_exists 'python' && common_bin_exists 'python3' && return
   # install
@@ -141,7 +141,7 @@ python23-install() {
   common_install_pkg 'python' 'python3' 'python-dev' 'python3-dev'
 }
 
-pip23-install() {
+function pip23-install() {
   # test
   common_bin_exists 'pip' && common_bin_exists 'pip3' && return
   # deps
@@ -150,7 +150,7 @@ pip23-install() {
   common_install_pkg 'python-pip' 'python3-pip'
 }
 
-pipenv-install() {
+function pipenv-install() {
   local URL='https://github.com/kennethreitz/pipenv'
   # test
   common_bin_exists 'pipenv' && return
@@ -160,7 +160,7 @@ pipenv-install() {
   pip install 'pipenv'
 }
 
-neovim-install() {
+function neovim-install() {
   local URL='https://neovim.io/doc/'
   # test
   command -v nvim 2>&1 > /dev/null && return
@@ -197,14 +197,14 @@ neovim-install() {
   nvim -c ":call dein#recache_runtimepath()"
 }
 
-add-apt-repository-install() {
+function add-apt-repository-install() {
   # test
   common_bin_exists 'add-apt-repository' && return
   # install
   common_install_pkg 'software-properties-common'
 }
 
-gnome-terminal-install() {
+function gnome-terminal-install() {
   common_bin_exists || common_install_pkg 'gnome-terminal'
   pushd "$CODE_DIR" 2>&1 > /dev/null
   git clone 'https://github.com/sonph/onehalf'
@@ -216,22 +216,22 @@ gnome-terminal-install() {
   popd 2>&1 > /dev/null
 }
 
-searchsploit-update() {
+function searchsploit-update() {
   # update
   searchsploit -u
 }
 
-searchsploit-install() {
+function searchsploit-install() {
   # deps
   # xmllint for reading nmap xml output
   common_bin_exists 'xmllint' || common_install_pkg 'libxml2-utils'
 }
 
-nmap-update() {
+function nmap-update() {
   nmap --script-updatedb
 }
 
-tor-browser-install() {
+function tor-browser-install() {
   local URL="https://torproject.org/projects/torbrowser.html.en"
   tor-install
   common_install_pkg 'torbrowser-launcher'
@@ -239,13 +239,13 @@ tor-browser-install() {
   echo "If the launcher fails to download, visit $URL"
 }
 
-tor-install() {
+function tor-install() {
   common_bin_exists 'tor' || common_install_pkg 'tor'
   $SUDO systemctl start tor
   $SUDO systemctl enable tor
 }
 
-arc-theme-install() {
+function arc-theme-install() {
   local URL='https://github.com/horst3180/arc-theme'
   # test: TODO
   # install
@@ -271,7 +271,7 @@ arc-theme-install() {
   echo "Select Arc (Dark|Darker) theme in Appearance and Window Manager"
 }
 
-chromium-install() {
+function chromium-install() {
   # test
   common_bin_exists 'chromium' && return
   # install
@@ -284,7 +284,7 @@ chromium-install() {
 
 # reaver
 
-flux-install() {
+function flux-install() {
   local URL='https://github.com/xflux-gui/xflux-gui'
   # test
   common_bin_exists 'fluxgui' && return
@@ -313,7 +313,7 @@ flux-install() {
   # fi
 }
 
-gcloud-install() {
+function gcloud-install() {
   local URL='https://cloud.google.com/sdk/downloads'
   # test
   common_bin_exists 'gcloud' && return
@@ -321,7 +321,7 @@ gcloud-install() {
   curl https://sdk.cloud.google.com | bash
 }
 
-travis-install() {
+function travis-install() {
   local URL='https://github.com/travis-ci/travis.rb'
   # test
   common_bin_exists 'travis' && return
@@ -330,8 +330,7 @@ travis-install() {
   gem install travis --no-rdoc --no-ri
 }
 
-
-fonts-install() {
+function fonts-install() {
   local USR_FONTS_DIR='/usr/share/fonts/usrfonts'
   # test
   [[ -d "$USR_FONTS_DIR" && -e "$USR_FONTS_DIR/Monaco_Linux.ttf" ]] && return
@@ -348,7 +347,7 @@ fonts-install() {
   popd 2>&1 > /dev/null
 }
 
-dotfiles-install() {
+function dotfiles-install() {
   pushd "$DOTFILES_DIR" 2>&1 > /dev/null
   git submodule init && git submodule update
   popd 2>&1 > /dev/null
@@ -362,7 +361,7 @@ dotfiles-install() {
   fi
 }
 
-user-setup() {
+function user-setup() {
   common_bin_exists 'zsh' && chsh -s $(command -v zsh) $(whoami)
 }
 
