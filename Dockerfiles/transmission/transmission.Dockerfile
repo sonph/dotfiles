@@ -17,6 +17,8 @@ COPY transmission.sh /
 COPY settings.json /
 RUN chmod u+x /transmission.sh
 RUN /transmission.sh configure $password
+RUN mkdir /downloads
+RUN chown debian-transmission /downloads
 
 ENTRYPOINT /transmission.sh start
 
