@@ -411,6 +411,7 @@ vnoremap <leader>' c''<Esc>P
 call s:maybe_add_denite_item('Visual: Wrap ' . shellescape('') . '(nop)', '')
 call s:leader_bind('vnoremap', '"', '', '', 'c""<Esc>P', 'Visual: Wrap ""', 'wrap-""', 0)
 call s:leader_bind('vnoremap', '<', '', '', 'c<><Esc>P', 'Visual: Wrap <>', 'wrap-<>', 0)
+call s:leader_bind('vnoremap', '`', '', '', 'c``<Esc>P', 'Visual: Wrap ``', 'wrap-``', 0)
 
 " Tabs.
 " call s:leader_bind(map, key, key2, key3, value, denite_name, guide_name, is_cmd)

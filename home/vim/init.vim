@@ -96,12 +96,6 @@ if has("autocmd")
 endif
 " }
 
-" Language specific settings {
-autocmd filetype python setlocal expandtab shiftwidth=2 tabstop=2
-autocmd filetype markdown setlocal wrap
-autocmd filetype java setlocal colorcolumn=100
-" }
-
 if filereadable(expand('~/.vim/keymap.vim')) | source ~/.vim/keymap.vim | endif
 if filereadable(expand('~/.vim/plugins.vim')) | source ~/.vim/plugins.vim | endif
 if filereadable(expand('~/.vim/local.vim')) | source ~/.vim/local.vim | endif
