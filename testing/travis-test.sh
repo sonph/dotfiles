@@ -42,5 +42,8 @@ test_file_exists_and_not_empty "$HOME/.vim/init.vim"
 test_file_exists_and_not_empty "$HOME/bin/ack"
 
 info "Call neovim-install"
-neovim-install || exit 1
-test_file_exists_and_not_empty "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
+# neovim-install || exit 1
+# test_file_exists_and_not_empty "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
+
+info "Call group-cli-install"
+group-cli-install
