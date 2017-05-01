@@ -69,10 +69,8 @@ function common_bin_exists() {
 function common_install_pkg() {
   if common_bin_exists 'apt-get'; then
     $SUDO apt-get install -y $@
-  elif common_bin_exists 'yum'; then
-    $SUDO yum install $@
   else
-    fail 'Either apt-get or yum not found.'
+    fail 'Apt-get not found. Only apt-get is supported at the moment.'
     return 1
   fi
 }
@@ -168,7 +166,7 @@ function neovim_install() {
     if [ $(apt-cache search '^neovim$' | wc -l) -lt 1 ]; then
       add_apt_repository_install
       $SUDO add-apt-repository -y ppa:neovim-ppa/stable
-      $SUDO apt-get update
+      $SUDO apt-get update -q
     fi
   else
     fail 'Pkg manager other than apt-get is not yet supported'
@@ -303,8 +301,8 @@ function flux_install() {
     # common_bin_exists 'add-apt-repository' || common_install_pkg 'software-properties-common'
     # # TODO: not working!
     # $SUDO add-apt-repository ppa:nathan-renniewaldock/flux
-    # $SUDO apt-get update
-    # $SUDO apt-get install fluxgui
+    # $SUDO apt-get update -q
+    # common_install_pkg fluxgui
   # else
     # fail 'flux-install: Yum not supported'
   # fi
@@ -367,12 +365,7 @@ function docker_install() {
   # test
   common_bin_exists 'docker' && return
   # install
-  $SUDO apt-get install \
-      apt-transport-https \
-      ca-certificates \
-      curl \
-      gnupg2 \
-      software-properties-common
+  common_install_pkg apt-transport-https ca-certificates curl gnupg2 software-properties-common
   curl -fsSL "https://download.docker.com/linux/debian/gpg" | sudo apt-key add -
   if [[ $($SUDO apt-key fingerprint "0EBFCD88" | grep "9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88" | wc -l) -le 0 ]]; then
     fail "GPG key fingerprint is invalid or not found"
@@ -381,8 +374,8 @@ function docker_install() {
   fi
   $SUDO add-apt-repository \
       "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-  $SUDO apt-get update
-  $SUDO apt-get install docker-ce
+  $SUDO apt-get update -q
+  common_install_pkg docker-ce
   $SUDO docker run hello-world
 }
 
