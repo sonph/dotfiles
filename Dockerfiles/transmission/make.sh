@@ -62,7 +62,7 @@ function exec_bash() {
       /bin/bash
 }
 
-if [ $# -eq 0  ]; then
+if [ $# -eq 0 ]; then
   echo $(compgen -A function) | sed 's/\(fail\|info\|ok\) //g'
   exit 0
 fi
