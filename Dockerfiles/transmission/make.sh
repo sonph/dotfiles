@@ -7,7 +7,7 @@ CONTAINER_NAME='transmission_ctn'
 
 function build() {
   if [[ $# -lt 1 ]]; then
-    echo "Usage: ./make.sh build <password>"
+    info "Usage: ./make.sh build <password>"
     echo "Password is used to login to the transmission web interface."
     echo "Default username is 'transmission'"
     return 1
@@ -15,12 +15,11 @@ function build() {
   # This password is set at image build time and passed from
   # make.sh > Dockerfile (LABEL + RUN) > transmission.sh configure > settings.json
   local password="$1"
-  local tag=$(date "+%Y%m%d")
-  info "Building image: $IMAGE_NAME:$tag"
-  docker build ./ \
-      -t $IMAGE_NAME \
+  info "Building image: $IMAGE_NAME"
+  docker build \
+      -t "$IMAGE_NAME" \
       --build-arg password=$password \
-      -f transmission.Dockerfile && \
+      ./ && \
       info "Listing images" && \
       docker image ls
 }
@@ -37,6 +36,7 @@ function start() {
       -p 51413:51413 \
       -p 51413:51413/udp \
       $IMAGE_NAME
+  local status=$? && [[ $status -ne 0 ]] && return $status
   if command -v 2>&1 > /dev/null docker-machine; then
     info "Url: http://$(docker-machine ip):9091 (docker-machine)"
   else
