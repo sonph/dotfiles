@@ -7,6 +7,6 @@ GREEN="$(tput setaf 2)"
 BLUE="$(tput setaf 4)"
 RESET="$(tput sgr0)"
 info() { echo "[${BLUE}INFO${RESET}] $@"; }
-fail() { echo "[${RED}FAIL${RESET}] $@"; }
+fail() { >&2 echo "[${RED}FAIL${RESET}] $@"; }
 ok() { echo "[ ${GREEN}OK${RESET} ] $@"; }
 fi

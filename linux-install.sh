@@ -4,16 +4,17 @@
 # Assume Debian-based and XFCE.
 # ------------------------------------------------
 
+source bin/common_utils.sh
+
 if [ $(whoami) == 'root' ]; then
   SUDO=''
 else
   if command -v 2>&1 > /dev/null 'sudo'; then
     SUDO='sudo'
   else
-    err 'User is not root, yet sudo is not available'
+    fail 'User is not root, yet sudo is not available'
   fi
 fi
-
 
 DOTFILES_DIR="$HOME/.files"
 DOTFILES_FONT_DIR="$DOTFILES_DIR/fonts"
@@ -71,13 +72,9 @@ function common_install_pkg() {
   elif common_bin_exists 'yum'; then
     $SUDO yum install $@
   else
-    err 'Either apt-get or yum not found.'
+    fail 'Either apt-get or yum not found.'
     return 1
   fi
-}
-
-function err() {
-  >&2 echo $@
 }
 
 function exploitdb-install() {
@@ -174,7 +171,7 @@ function neovim-install() {
       $SUDO apt-get update
     fi
   else
-    err 'Pkg manager other than apt-get is not yet supported'
+    fail 'Pkg manager other than apt-get is not yet supported'
     return 1
   fi
   common_install_pkg 'neovim'
@@ -309,7 +306,7 @@ function flux-install() {
     # $SUDO apt-get update
     # $SUDO apt-get install fluxgui
   # else
-    # err 'flux-install: Yum not supported'
+    # fail 'flux-install: Yum not supported'
   # fi
 }
 
@@ -365,3 +362,32 @@ function user-setup() {
   common_bin_exists 'zsh' && chsh -s $(command -v zsh) $(whoami)
 }
 
+function docker-install() {
+  local URL='https://docs.docker.com/engine/installation/linux/debian/#install-using-the-repository'
+  # test
+  common_bin_exists 'docker' && return
+  # install
+  $SUDO apt-get install \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg2 \
+      software-properties-common
+  curl -fsSL "https://download.docker.com/linux/debian/gpg" | sudo apt-key add -
+  if [[ $($SUDO apt-key fingerprint "0EBFCD88" | grep "9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88" | wc -l) -le 0 ]]; then
+    fail "GPG key fingerprint is invalid or not found"
+    fail "See: $URL"
+    return 1
+  fi
+  $SUDO add-apt-repository \
+      "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+  $SUDO apt-get update
+  $SUDO apt-get install docker-ce
+  $SUDO docker run hello-world
+}
+
+if [ $# -eq 0 ]; then
+  echo $(compgen -A function) | sed 's/\(fail\|info\|ok\) //g'
+  exit 0
+fi
+$@

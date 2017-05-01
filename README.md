@@ -12,9 +12,8 @@ linux
 sudo apt-get update
 ping github.com
 git clone https://github.com/sonph/dotfiles ~/.files
-source ~/.files/linux-install.sh
-group-cli-install  # essential cli stuffs
-group-gui-install  # if using GUI
+~/.files/linux-install.sh group-cli-install  # essential cli stuffs
+~/.files/linux-install.sh group-gui-install  # gui stuffs
 ```
 
 mac
