@@ -12,8 +12,8 @@ source "$DOTFILES_DIR/linux-install.sh"
 
 common_bin_exists 'brew' && brew update
 
-group-cli-install() {
-  brew-install
+function group_cli_install() {
+  brew_install
   brew install \
       autoconf \
       automake \
@@ -36,11 +36,11 @@ group-cli-install() {
       # ffmpeg \
       # imagemagick \
       # youtube-dl \
-  dotfiles-install
+  dotfiles_install
 }
 
-group-gui-install() {
-  brew-cask-install
+function group_gui_install() {
+  brew_cask_install
   brew cask install \
       android-file-transfer \
       atom \
@@ -63,7 +63,7 @@ group-gui-install() {
       vlc
 }
 
-brew-install() {
+function brew_install() {
   local URL='https://brew.sh/'
   # test
   common_bin_exists 'brew' && return
@@ -72,22 +72,22 @@ brew-install() {
       "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }
 
-brew-cask-install() {
+function brew_cask_install() {
   local URL='https://caskroom.github.io/'
   # test
   brew cask --version 2>&1 > /dev/null && return
   # deps
-  brew-install
+  brew_install
   # install
   brew tap caskroom/cask
 }
 
-neovim-install() {
+function neovim_install() {
   local URL='https://neovim.io/doc/'
   # test
   command -v nvim 2>&1 > /dev/null && return
   # deps
-  brew-install
+  brew_install
   # pip
   # install
   brew install neovim/neovim/neovim
