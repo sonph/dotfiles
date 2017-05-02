@@ -420,6 +420,12 @@ call s:leader_bind('nnoremap', '<S-Tab>', '', '', 'tabp', 'Tab: Prev', 'tab-prev
 for i in range(1, 9)
   execute 'nnoremap <leader>' . i . ' ' . i . 'gt<CR>'
 endfor
+if has('nvim')
+  " Terminal emulator in neovim.
+  for i in range(1, 9)
+    execute 'tnoremap <leader>' . i . ' ' . i . '<C-\><C-n>gt<CR>'
+  endfor
+endif
 " Merge this tab and next tab.
 let g:lmap.t = {'name': 'Tab/'}
 call s:leader_bind('nnoremap', 't', 'm', '', 'Tabmerge', 'Tabs: Merge with next tab', 'tab-merge-next', 1)

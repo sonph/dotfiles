@@ -51,3 +51,20 @@ endfor
 silent !stty -ixon 2>&1 > /dev/null
 nnoremap <C-q> :qall<CR>
 
+if has('nvim')
+  " Terminal mappings. See :help terminal_emulator
+  tnoremap <C-w>n :new<Enter>
+  tnoremap <C-w><Tab> :tabn<CR>
+  tnoremap <C-W><S-Tab> :tabp<CR>
+  tnoremap <C-w>t :tabnew<CR>
+  for i in range(1, 9)
+    execute 'tnoremap <C-w>' . i . ' ' . i . 'gt<CR>'
+  endfor
+
+  tnoremap <Esc> <C-\><C-n>
+
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+endif
