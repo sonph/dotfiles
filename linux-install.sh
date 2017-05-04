@@ -379,6 +379,18 @@ function docker_install() {
   $SUDO docker run hello-world
 }
 
+function pylint_install() {
+  local URL='https://www.pylint.org/#install'
+  common_bin_exists 'pylint' && return
+  common_install_pkg pylint
+}
+
+function shellcheck_install() {
+  local URL='https://github.com/koalaman/shellcheck#installing'
+  common_bin_exists 'shellcheck' && return
+  common_install_pkg shellcheck
+}
+
 if [ $# -eq 0 ]; then
   echo $(compgen -A function) | sed 's/\(fail\|info\|ok\) //g'
   exit 0

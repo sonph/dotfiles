@@ -63,6 +63,11 @@ function group_gui_install() {
       vlc
 }
 
+# Use brew instead of apt-get on mac.
+function common_install_pkg() {
+  brew_install && brew install "$@"
+}
+
 function brew_install() {
   local URL='https://brew.sh/'
   # test
