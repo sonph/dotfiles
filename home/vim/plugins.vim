@@ -78,6 +78,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('ap/vim-css-color')
   call dein#add('kana/vim-arpeggio', {'lazy': 0})
 
+  call dein#add('scrooloose/syntastic')
 
   call dein#end()
   call dein#save_state()
@@ -489,6 +490,11 @@ Arpeggio inoremap fg [
 Arpeggio inoremap hj ]
 Arpeggio inoremap FG {
 Arpeggio inoremap HJ }
+" }
+
+" scrooloose/syntastic {
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 " }
 
 " Sort Denite user commands.
