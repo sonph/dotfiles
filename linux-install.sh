@@ -6,10 +6,10 @@
 
 source bin/common_utils.sh
 
-if [ $(whoami) == 'root' ]; then
+if [ "$(whoami)" == 'root' ]; then
   SUDO=''
 else
-  if command -v 2>&1 > /dev/null 'sudo'; then
+  if command -v > /dev/null 'sudo' 2>&1; then
     SUDO='sudo'
   else
     fail 'User is not root, yet sudo is not available'
@@ -62,13 +62,13 @@ function group_security_install() {
 }
 
 function common_bin_exists() {
-  command -v "$1" 2>&1 > /dev/null
+  command -v "$1" > /dev/null 2>&1
   # By default return code is from the last command.
 }
 
 function common_install_pkg() {
   if common_bin_exists 'apt-get'; then
-    $SUDO apt-get install -y $@
+    $SUDO apt-get install -y "$@"
   else
     fail 'Apt-get not found. Only apt-get is supported at the moment.'
     return 1
@@ -76,16 +76,15 @@ function common_install_pkg() {
 }
 
 function exploitdb_install() {
-  local URL='https://github.com/offensive-security/exploit-database'
-  # test
+  readonly local url='https://github.com/offensive-security/exploit-database'
   common_bin_exists searchsploit && return
   # deps
   git_install
   # install
-  pushd $CODE_DIR 2>&1 > /dev/null
-  git clone "$URL" exploitdb
+  pushd "$CODE_DIR" > /dev/null 2>&1
+  git clone "$url" exploitdb
   ln -s "$CODE_DIR/exploitdb/searchsploit" "$BIN_DIR/searchsploit"
-  popd 2>&1 > /dev/null
+  popd > /dev/null 2>&1
 }
 
 function curl_install() {
@@ -93,7 +92,6 @@ function curl_install() {
 }
 
 function nvm_install() {
-  # test
   common_bin_exists 'nvm' && return
   # deps
   curl_install
@@ -111,7 +109,6 @@ function npm_install() {
 }
 
 function diff_so_fancy_install() {
-  # test
   common_bin_exists 'diff-so-fancy' && return
   # deps
   npm_install
@@ -120,7 +117,6 @@ function diff_so_fancy_install() {
 }
 
 function git_install() {
-  # test
   common_bin_exists 'git' && return
   # deps
   diff_so_fancy_install;
@@ -129,7 +125,6 @@ function git_install() {
 }
 
 function python23_install() {
-  # test
   common_bin_exists 'python' && common_bin_exists 'python3' && return
   # install
   # For yum: python*-devel
@@ -137,7 +132,6 @@ function python23_install() {
 }
 
 function pip23_install() {
-  # test
   common_bin_exists 'pip' && common_bin_exists 'pip3' && return
   # deps
   python23_install
@@ -146,7 +140,7 @@ function pip23_install() {
 }
 
 function pipenv_install() {
-  local URL='https://github.com/kennethreitz/pipenv'
+  readonly local url='https://github.com/kennethreitz/pipenv'
   # test
   common_bin_exists 'pipenv' && return
   # deps
@@ -156,14 +150,13 @@ function pipenv_install() {
 }
 
 function neovim_install() {
-  local URL='https://neovim.io/doc/'
-  # test
-  command -v nvim 2>&1 > /dev/null && return
+  readonly local url='https://neovim.io/doc/'
+  command -v nvim > /dev/null 2>&1 && return
   # deps
   pip23_install; git_install
   # install
   if common_bin_exists 'apt-get'; then
-    if [ $(apt-cache search '^neovim$' | wc -l) -lt 1 ]; then
+    if [ "$(apt-cache search '^neovim$' | wc -l)" -lt 1 ]; then
       add_apt_repository_install
       $SUDO add-apt-repository -y ppa:neovim-ppa/stable
       $SUDO apt-get update -q
@@ -185,15 +178,14 @@ function neovim_install() {
   local VIM_DEIN_REPOS_DIR="$VIM_DIR/bundle/repos"
   local VIM_SHOUGO_DIR="$VIM_DEIN_REPOS_DIR/github.com/Shougo"
   mkdir -p "$VIM_SHOUGO_DIR"
-  pushd 2>&1 > /dev/null "$VIM_SHOUGO_DIR"
+  pushd > /dev/null "$VIM_SHOUGO_DIR" 2>&1
   git clone https://github.com/Shougo/dein.vim
-  popd 2>&1 > /dev/null
+  popd > /dev/null 2>&1
   nvim -c ":call dein#install()"
   nvim -c ":call dein#recache_runtimepath()"
 }
 
 function add_apt_repository_install() {
-  # test
   common_bin_exists 'add-apt-repository' && return
   # install
   common_install_pkg 'software-properties-common'
@@ -201,14 +193,14 @@ function add_apt_repository_install() {
 
 function gnome_terminal_install() {
   common_bin_exists || common_install_pkg 'gnome-terminal'
-  pushd "$CODE_DIR" 2>&1 > /dev/null
+  pushd "$CODE_DIR" > /dev/null 2>&1
   git clone 'https://github.com/sonph/onehalf'
   # TODO: resolve shell exits problem on sourcing
   echo "Run 'source onehalf/gnome-terminal/onehalfdark.sh' in another shell"
   echo "Run 'source onehalf/gnome-terminal/onehalflight.sh' in another shell"
   # source onehalf/gnome-terminal/onehalfdark.sh
   # source onehalf/gnome-terminal/onehalflight.sh
-  popd 2>&1 > /dev/null
+  popd > /dev/null 2>&1
 }
 
 function searchsploit_update() {
@@ -227,11 +219,11 @@ function nmap_update() {
 }
 
 function tor_browser_install() {
-  local URL="https://torproject.org/projects/torbrowser.html.en"
+  readonly local url="https://torproject.org/projects/torbrowser.html.en"
   tor_install
   common_install_pkg 'torbrowser-launcher'
   torbrowser-launcher
-  echo "If the launcher fails to download, visit $URL"
+  echo "If the launcher fails to download, visit $url"
 }
 
 function tor_install() {
@@ -241,7 +233,7 @@ function tor_install() {
 }
 
 function arc_theme_install() {
-  local URL='https://github.com/horst3180/arc-theme'
+  readonly local url='https://github.com/horst3180/arc-theme'
   # test: TODO
   # install
   if [[ $# -eq 0 ]]; then
@@ -253,13 +245,13 @@ function arc_theme_install() {
     common_install_pkg autoconf automake pkg-config libgtk-3-dev \
         gnome-themes-standard gtk2-engines-murrine
     git_install
-    pushd "$CODE" 2>&1 > /dev/null
-    git clone "$URL"
-    pushd "$CODE/arc-theme" 2>&1 > /dev/null
-    ./autogen.sh --prefix=/usr --disable-transparency $@
+    pushd "$CODE" > /dev/null 2>&1
+    git clone "$url"
+    pushd "$CODE/arc-theme" > /dev/null 2>&1
+    ./autogen.sh --prefix=/usr --disable-transparency "$@"
     $SUDO make install
-    popd 2>&1 > /dev/null
-    popd 2>&1 > /dev/null
+    popd > /dev/null 2>&1
+    popd > /dev/null 2>&1
   fi
 
   common_bin_exists 'xfce4-settings-manager' && xfce4-settings-manager
@@ -267,7 +259,6 @@ function arc_theme_install() {
 }
 
 function chromium_install() {
-  # test
   common_bin_exists 'chromium' && return
   # install
   common_install_pkg 'chromium'
@@ -280,7 +271,7 @@ function chromium_install() {
 # reaver
 
 function flux_install() {
-  local URL='https://github.com/xflux-gui/xflux-gui'
+  readonly local url='https://github.com/xflux-gui/xflux-gui'
   # test
   common_bin_exists 'fluxgui' && return
   # deps
@@ -288,15 +279,15 @@ function flux_install() {
   # install
   common_install_pkg python-appindicator python-xdg python-pexpect \
       python-gconf python-gtk2 python-glade2 libxxf86vm1
-  pushd /tmp 2>&1 > /dev/null
-  git clone "$URL"
+  pushd /tmp > /dev/null 2>&1
+  git clone "$url"
   cd xflux-gui
   python download-xflux.py
   $SUDO python setup.py install
-  popd 2>&1 > /dev/null
-  echo 'To start flux, run `fluxgui`'
+  popd > /dev/null 2>&1
+  echo 'To start flux, run "fluxgui"'
 
-  # local URL='https://launchpad.net/~nathan-renniewaldock/+archive/ubuntu/flux'
+  # readonly local url='https://launchpad.net/~nathan-renniewaldock/+archive/ubuntu/flux'
   # if common_bin_exists 'apt-get'; then
     # common_bin_exists 'add-apt-repository' || common_install_pkg 'software-properties-common'
     # # TODO: not working!
@@ -309,16 +300,14 @@ function flux_install() {
 }
 
 function gcloud_install() {
-  local URL='https://cloud.google.com/sdk/downloads'
-  # test
+  readonly local url='https://cloud.google.com/sdk/downloads'
   common_bin_exists 'gcloud' && return
   # install
   curl https://sdk.cloud.google.com | bash
 }
 
 function travis_install() {
-  local URL='https://github.com/travis-ci/travis.rb'
-  # test
+  readonly local url='https://github.com/travis-ci/travis.rb'
   common_bin_exists 'travis' && return
   # install
   # TODO: verify if we need gem dependency and $SUDO?
@@ -326,26 +315,26 @@ function travis_install() {
 }
 
 function fonts_install() {
-  local USR_FONTS_DIR='/usr/share/fonts/usrfonts'
+  local usr_fonts_dir='/usr/share/fonts/usrfonts'
   # test
-  [[ -d "$USR_FONTS_DIR" && -e "$USR_FONTS_DIR/Monaco_Linux.ttf" ]] && return
+  [[ -d "$usr_fonts_dir" && -e "$usr_fonts_dir/Monaco_Linux.ttf" ]] && return
   # install
   common_bin_exists 'fc-cache' || common_install_pkg 'fontconfig'
-  pushd "$DOTFILES_FONT_DIR" 2>&1 > /dev/null
+  pushd "$DOTFILES_FONT_DIR" > /dev/null 2>&1
   tar zxvf mac_fonts.tar.gz
-  $SUDO mv fonts "$USR_FONTS_DIR"
+  $SUDO mv fonts "$usr_fonts_dir"
 
-  $SUDO cp Menlo-Regular.ttf "$USR_FONTS_DIR"
-  $SUDO cp source-code-pro/*.ttf "$USR_FONTS_DIR"
+  $SUDO cp Menlo-Regular.ttf "$usr_fonts_dir"
+  $SUDO cp source-code-pro/*.ttf "$usr_fonts_dir"
 
   $SUDO fc-cache -f -v
-  popd 2>&1 > /dev/null
+  popd > /dev/null 2>&1
 }
 
 function dotfiles_install() {
-  pushd "$DOTFILES_DIR" 2>&1 > /dev/null
+  pushd "$DOTFILES_DIR" > /dev/null 2>&1
   git submodule init && git submodule update
-  popd 2>&1 > /dev/null
+  popd > /dev/null 2>&1
   if [[ ! -e "$HOME/bin" ]]; then
     ln -s "$DOTFILES_DIR/bin" "$HOME/bin"
   fi
@@ -357,19 +346,19 @@ function dotfiles_install() {
 }
 
 function user_setup() {
-  common_bin_exists 'zsh' && chsh -s $(command -v zsh) $(whoami)
+  common_bin_exists 'zsh' && chsh -s "$(command -v zsh)" "$(whoami)"
 }
 
 function docker_install() {
-  local URL='https://docs.docker.com/engine/installation/linux/debian/#install-using-the-repository'
+  readonly local url='https://docs.docker.com/engine/installation/linux/debian/#install-using-the-repository'
   # test
   common_bin_exists 'docker' && return
   # install
   common_install_pkg apt-transport-https ca-certificates curl gnupg2 software-properties-common
   curl -fsSL "https://download.docker.com/linux/debian/gpg" | sudo apt-key add -
-  if [[ $($SUDO apt-key fingerprint "0EBFCD88" | grep "9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88" | wc -l) -le 0 ]]; then
+  if [[ $($SUDO apt-key fingerprint "0EBFCD88" | grep -c "9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88") -le 0 ]]; then
     fail "GPG key fingerprint is invalid or not found"
-    fail "See: $URL"
+    fail "See: $url"
     return 1
   fi
   $SUDO add-apt-repository \
@@ -392,7 +381,7 @@ function shellcheck_install() {
 }
 
 if [ $# -eq 0 ]; then
-  echo $(compgen -A function) | sed 's/\(fail\|info\|ok\) //g'
+  compgen -A function | grep -Ev '^(fail|info|ok)'
   exit 0
 fi
-$@
+"$@"

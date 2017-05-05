@@ -10,7 +10,7 @@
 #   - dotfiles is cloned to ~/.files
 #   - script is invoked from .files
 
-TESTING_DIR=$(dirname $0)
+TESTING_DIR="$(dirname "$0")"
 source "$TESTING_DIR/../bin/common_utils.sh"
 
 DOCKER_CONTAINER_NAME='dotfiles_test_ctn'
@@ -24,11 +24,11 @@ function build() {
 }
 
 function test() {
-  if [ $(docker image ls | grep -i $DOCKER_IMAGE_NAME | wc -l) -lt 1 ]; then
+  if [[ "$(docker image ls | grep -ic "$DOCKER_IMAGE_NAME")" -lt 1 ]]; then
     info "Building test image"
     docker_build
   fi
-  if [ $(docker container ls -a | grep $DOCKER_CONTAINER_NAME | wc -l) -ge 1 ]; then
+  if [[ "$(docker container ls -a | grep -c "$DOCKER_CONTAINER_NAME")" -ge 1 ]]; then
     info "Stopping container "
     docker container stop $DOCKER_CONTAINER_NAME
     info "Removing container "
@@ -45,8 +45,8 @@ function test() {
 }
 
 if [ $# -eq 0  ]; then
-  echo $(compgen -A function) | sed 's/\(fail\|info\|ok\) //g'
+  compgen -A function | grep -Ev '^(fail|info|ok)'
   exit 0
 fi
-$@
+"$@"
 

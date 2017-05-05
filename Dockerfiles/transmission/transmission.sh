@@ -33,4 +33,4 @@ function start() {
   tail -f $SETTINGS_FILE
 }
 
-$@
+"$@"

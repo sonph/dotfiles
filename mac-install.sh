@@ -78,9 +78,9 @@ function brew_install() {
 }
 
 function brew_cask_install() {
-  local URL='https://caskroom.github.io/'
+  readonly local url='https://caskroom.github.io/'
   # test
-  brew cask --version 2>&1 > /dev/null && return
+  brew cask --version > /dev/null 2>&1 && return
   # deps
   brew_install
   # install
@@ -88,9 +88,9 @@ function brew_cask_install() {
 }
 
 function neovim_install() {
-  local URL='https://neovim.io/doc/'
+  readonly local url='https://neovim.io/doc/'
   # test
-  command -v nvim 2>&1 > /dev/null && return
+  command -v nvim > /dev/null 2>&1 && return
   # deps
   brew_install
   # pip

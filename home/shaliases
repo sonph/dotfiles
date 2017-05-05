@@ -45,6 +45,8 @@ alias gstash='git stash'
 alias dk='docker'
 alias dki='docker image'
 alias dkc='docker container'
+alias dkm='docker-machine'
+alias dkm-refresh-env='docker-machine env >| /tmp/ZSHRC_DOCKER_MACHINE_ENV_CACHE && source /tmp/ZSHRC_DOCKER_MACHINE_ENV_CACHE'
 
 # Mac OS specific aliases
 if [ "$(uname -s)" = "Darwin" ]; then
