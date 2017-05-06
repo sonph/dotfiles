@@ -70,7 +70,7 @@ function common_install_pkg() {
   if common_bin_exists 'apt-get'; then
     $SUDO apt-get install -y "$@"
   else
-    fail 'Apt-get not found. Only apt-get is supported at the moment.'
+    fail 'Apt-get not found (only apt-get is supported at the moment).'
     return 1
   fi
 }
@@ -369,19 +369,27 @@ function docker_install() {
 }
 
 function pylint_install() {
-  local URL='https://www.pylint.org/#install'
+  local url='https://www.pylint.org/#install'
   common_bin_exists 'pylint' && return
   common_install_pkg pylint
 }
 
 function shellcheck_install() {
-  local URL='https://github.com/koalaman/shellcheck#installing'
+  local url='https://github.com/koalaman/shellcheck#installing'
   common_bin_exists 'shellcheck' && return
   common_install_pkg shellcheck
 }
 
-if [ $# -eq 0 ]; then
-  compgen -A function | grep -Ev '^(fail|info|ok)'
-  exit 0
+function tig_install() {
+  common_bin_exists 'tig' && return
+  common_install_pkg tig
+}
+
+# If SOURCE_AS_LIBRARY is defined, then don't execute the functions.
+if [[ -z "$SOURCE_AS_LIBRARY" ]]; then
+  if [ $# -eq 0 ]; then
+    compgen -A function | grep -Ev '^(fail|info|ok)'
+    exit 0
+  fi
+  "$@"
 fi
-"$@"

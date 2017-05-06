@@ -8,6 +8,7 @@ DOTFILES_DIR="$HOME/.files"
 # Source functions for all the common cross platform stuff. Alternatively we can
 # split those into a common file, but since this script won't be called as
 # often, we'll just keep linux-install the main script and source it.
+SOURCE_AS_LIBRARY='true'
 source "$DOTFILES_DIR/linux-install.sh"
 
 common_bin_exists 'brew' && brew update
@@ -69,7 +70,7 @@ function common_install_pkg() {
 }
 
 function brew_install() {
-  local URL='https://brew.sh/'
+  local url='https://brew.sh/'
   # test
   common_bin_exists 'brew' && return
   # install
@@ -100,4 +101,14 @@ function neovim_install() {
   pip3 install neovim
 }
 
+function pylint_install() {
+  pip23_install
+  pip install pylint
+}
+
 # TODO: convert stuff from the Makefile.
+if [ $# -eq 0 ]; then
+  compgen -A function | grep -Ev '^(fail|info|ok)'
+  exit 0
+fi
+"$@"
