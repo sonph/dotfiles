@@ -12,7 +12,8 @@ RUN apt-get update && \
     apt-get install -y transmission-cli transmission-daemon && \
     rm -rf /var/lib/apt/lists/*
 COPY transmission.sh settings.json /
-RUN chmod u+x /transmission.sh && \
+# Need to run sync to avoid 'text file busy' trying to execute it right after chmod.
+RUN chmod u+x /transmission.sh && sync && \
     /transmission.sh configure $password
 RUN mkdir /downloads && \
     chown debian-transmission /downloads
