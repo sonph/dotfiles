@@ -4,7 +4,10 @@ source common_utils.sh
 alias rm="rm -iv"
 alias mv="mv -iv"
 alias cp="cp -iv"
-set -o noclobber    # File redirection > does not overwrite existing file.
+
+# Prevent the file redirection > from overwrite existing file. Use >|
+# explicitly.
+set -o noclobber
 
 alias ls='ls --color=auto'
 alias ll="ls -alrtF --color"
@@ -22,6 +25,7 @@ alias cl='clear'
 alias cls='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
+alias watch='watch --color'
 
 alias g='git'
 alias ga='git add'
@@ -62,7 +66,7 @@ fi
 
 alias grep='grep --color=auto'
 
-command -v nvim 2>&1 > /dev/null && alias vim="nvim"
+command -v nvim > /dev/null 2>&1 && alias vim="nvim"
 alias pythonserver='python2 -m SimpleHTTPServer'
 
 set_env() {
@@ -71,16 +75,16 @@ set_env() {
     echo "Usage: $0 NAME VALUE"
     echo "Example: $0 BSSID 01:23:34:56:78:9A"
   else
-    local VAR="$1"
-    local VALUE="$2"
-    if [[ -z "$VAR" || -z "$VALUE" ]]; then
+    local key="$1"
+    local value="$2"
+    if [[ -z "$key" || -z "$value" ]]; then
       fail "\$1 and \$2 must not be empty. Invoke without arguments to see usage."
       return 1
     fi
-    local TMUX_SESSION=$(tmux display-message -p '#S')
-    FILE="$HOME/.shexports.$TMUX_SESSION"
-    [[ ! -e "$FILE" ]] && touch "$FILE"
-    echo "export $VAR=\"$VALUE\"" >> "$FILE"
+    local tmux_session=$(tmux display-message -p '#S')
+    local file="$HOME/.shexports.$tmux_session"
+    [[ ! -e "$file" ]] && touch "$file"
+    echo "export $key=\"$value\"" >> "$file"
     get_env
   fi
 }
@@ -88,12 +92,11 @@ set_env() {
 get_env() {
   if [[ "$1" = '-h' || "$1" = '--help' ]]; then
     echo 'Re-source persistent environment variables'
-    echo "Usage: $0" else TMUX_SESSION=$(tmux display-message -p '#S')
+    echo "Usage: $0"
   else
-    DEFAULT_FILE="$HOME/.shexports.default"
-    [[ -e "$DEFAULT_FILE" ]] && source "$DEFAULT_FILE"
-    FILE="$HOME/.shexports.$TMUX_SESSION"
-    [[ -e "$FILE" ]] && source "$FILE"
+    local tmux_session=$(tmux display-message -p '#S')
+    local file="$HOME/.shexports.$tmux_session"
+    [[ -e "$file" ]] && source "$file"
   fi
 }
 
@@ -102,14 +105,9 @@ show_env() {
     echo 'Show tmux session persistent environment variables'
     echo "Usage: $0"
   else
-    TMUX_SESSION=$(tmux display-message -p '#S')
-    FILE="$HOME/.shexports.$TMUX_SESSION"
-    less "$FILE"
+    local tmux_session=$(tmux display-message -p '#S')
+    less "$HOME/.shexports.$tmux_session"
   fi
-}
-
-ls_env() {
-  show_env $@
 }
 
 get_env

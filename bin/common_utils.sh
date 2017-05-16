@@ -12,5 +12,5 @@ info() { echo "[${BLUE}INFO${RESET}] $@"; }
 ok() { echo "[ ${GREEN}OK${RESET} ] $@"; }
 warn() { echo "[${YELLOW}WARN${RESET}] $@" >&2; }
 fail() { echo "[${RED}FAIL${RESET}] $@" >&2; }
-log_and_exec() { echo "[${PURPLE}EXEC${RESET}] $@"; eval "$@"; }
+log_and_exec() { echo "[${PURPLE}EXEC${RESET}] $@"; $@; }
 fi
