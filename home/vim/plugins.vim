@@ -78,7 +78,8 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('ap/vim-css-color')
   call dein#add('kana/vim-arpeggio', {'lazy': 0})
 
-  call dein#add('scrooloose/syntastic')
+  " call dein#add('scrooloose/syntastic')
+  call dein#add('w0rp/ale')
 
   call dein#end()
   call dein#save_state()
