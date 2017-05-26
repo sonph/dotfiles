@@ -4,6 +4,7 @@ let mapleader=' '
 nnoremap ; :
 
 noremap <C-c> <Esc>
+inoremap <C-c> <Esc>
 
 " In soft wrap mode, gj goes to the next display line and not logical line.
 nnoremap j gj

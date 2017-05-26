@@ -29,6 +29,8 @@ set backspace=indent,eol,start
 
 " Line numbering.
 set number relativenumber
+autocmd InsertEnter * :setlocal norelativenumber
+autocmd InsertLeave * :setlocal relativenumber
 
 " Column/row highlight.
 try | set colorcolumn=81,121 | catch | set colorcolumn=121 | endtry
