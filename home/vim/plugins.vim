@@ -318,9 +318,26 @@ let g:airline_mode_map = {
 let g:lmap.v = {'name': 'View/'}
 
 " scrooloose/nerdtree
+
+" Function that executes either NERDTreeFind or NERDTreeToggle so we can
+" open/close nerdtree using the same keybinding. Because:
+" 1) Binding to NERDTreeToggle allows us to open/close NERDTree with the same
+" key binding, but it doens't show the current file when open.
+" 2) Binding to NERDTreeFind doesn't allow us to close it with the same command.
+function! s:NERDTreeFindOrToggle()
+  if g:nerd_tree_find
+    NERDTreeFind
+    let g:nerd_tree_find = 0
+  else
+    NERDTreeToggle
+    let g:nerd_tree_find = 1
+  endif
+endfunction
+let g:nerd_tree_find = 1
+call s:leader_bind('nnoremap', 'v', 'n', '', 'call <SID>NERDTreeFindOrToggle()', 'View: Nerdtree', 'nerdtree', 1)
+
 " <C-w>0 to focus nerdtree (like sublime)
 nnoremap <C-w>0 :NERDTreeFocus
-call s:leader_bind('nnoremap', 'v', 'n', '', 'NERDTreeToggle', 'View: Nerdtree', 'nerdtree', 1)
 
 
 " majutsushi/tagbar
