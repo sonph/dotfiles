@@ -88,6 +88,8 @@ autocmd GUIEnter * set visualbell t_vb=
 
 set autoread                            " Automatically reload file when changed from outside
 
+command! ReSource :source ~/.vim/init.vim
+
 " w!! to save file with sudo.
 cmap w!! w !sudo tee % > /dev/null
 

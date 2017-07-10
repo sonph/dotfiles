@@ -228,8 +228,14 @@ if has("python3")
         \ ['plugins.vim', '~/.vim/plugins.vim'],
         \ ]
   call denite#custom#var('menu', 'menus', s:menus)
-
   call denite#custom#option('default', 'prompt', 'λ:')
+
+  " Use cpsm matching and sublime-style sorting.
+  call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
+  call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
+
+  " Do not sort lines.
+  call denite#custom#source('line', 'sorters', [])
 
   " If we're in a git repo, use `git ls-files`. See doc for example.
   " git ls-files ignores files in .gitignore, symlinks, etc.
