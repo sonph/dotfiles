@@ -76,7 +76,6 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('scrooloose/nerdcommenter')
 
   call dein#add('ap/vim-css-color')
-  call dein#add('kana/vim-arpeggio', {'lazy': 0})
 
   " call dein#add('scrooloose/syntastic')
   call dein#add('w0rp/ale')
@@ -499,22 +498,6 @@ endfor
 " interpreted as <BS>
 nnoremap <BS> :TmuxNavigateLeft<CR>
 
-" kana/vim-arpeggio {
-call arpeggio#load()
-let g:arpeggio_timeoutlen=30
-
-" Common chords
-Arpeggio inoremap the the
-Arpeggio inoremap tru true
-Arpeggio inoremap fal false
-Arpeggio inoremap ret return<Space>
-Arpeggio inoremap df (
-Arpeggio inoremap jk )
-Arpeggio inoremap fg [
-Arpeggio inoremap hj ]
-Arpeggio inoremap FG {
-Arpeggio inoremap HJ }
-" }
 
 " scrooloose/syntastic {
 let g:syntastic_check_on_open = 1
