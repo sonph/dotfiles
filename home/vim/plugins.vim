@@ -498,6 +498,9 @@ endfor
 " interpreted as <BS>
 nnoremap <BS> :TmuxNavigateLeft<CR>
 
+" w0rp/ale {
+let g:ale_sh_shellcheck_options = '-x'
+" }
 
 " scrooloose/syntastic {
 let g:syntastic_check_on_open = 1
