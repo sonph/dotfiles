@@ -201,7 +201,7 @@ if [ -f "$HOME/.files/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME
 # Docker-machine: if there is one active running docker-machine, then set the
 # environment variables for docker. Docker-machine commands are pretty slow
 # so we cache the content in a /tmp file.
-if [ "$(uname)" == "Darwin" ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
   ZSHRC_DOCKER_MACHINE_ENV_CACHE='/tmp/ZSHRC_DOCKER_MACHINE_ENV_CACHE'
   if [ -e "$ZSHRC_DOCKER_MACHINE_ENV_CACHE" ]; then
     eval "$(cat $ZSHRC_DOCKER_MACHINE_ENV_CACHE)"

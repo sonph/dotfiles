@@ -38,6 +38,29 @@ function download_audio_playlist() {
       "$playlist"
 }
 
+function download_audio() {
+  local url="$1"
+  info "MAKE SURE url is accessible through the url (public or unlisted)"
+  if [[ -z "$url" || "$url" == "--help" ]]; then
+    fail "Must provide a video url"
+    echo "Usage: youtube-dl.sh download_audio \"https://youtube.com/watch?v=...\" [output_dir]"
+    return 1
+  fi
+  info "Url: $url"
+  local output_dir=${2:-$(mktemp -d youtube-dl.sh.XXXX)}
+  info "Output dir: $output_dir"
+
+  update
+  pushd "$output_dir"
+  youtube-dl \
+      --extract-audio \
+      --audio-format mp3 \
+      --audio-quality 2 \
+      --add-metadata \
+      "$url"
+  # audio-quality: 0 (best) to 9 (worst); default 5
+}
+
 function install_mac() {
   # Youtube-dl can use either avconv or ffmpeg.
   # --prefer-avconv or --prefer-ffmpeg
