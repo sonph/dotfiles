@@ -175,6 +175,14 @@ source $HOME/.shexports
 source $HOME/.shaliases
 [[ -e $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
+# Multi keyword reverse search
+# https://github.com/zdharma/history-search-multi-word
+if [[ -e $ZSH_DIR/history-search-multi-word/history-search-multi-word.plugin.zsh ]]; then
+  source $ZSH_DIR/history-search-multi-word/history-search-multi-word.plugin.zsh
+else
+  >&2 echo "Failed to source zsh plugin history-search-multi-word. Make sure submodules are initialized"
+fi
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm

@@ -7,3 +7,6 @@
 [submodule "home/tmux/tmux-sessionist"]
 	path = home/tmux/tmux-sessionist
 	url = https://github.com/tmux-plugins/tmux-sessionist
+[submodule "home/zsh/history-search-multi-word"]
+	path = home/zsh/history-search-multi-word
+	url = https://github.com/zdharma/history-search-multi-word
