@@ -33,7 +33,7 @@ autocmd InsertEnter * :setlocal norelativenumber
 autocmd InsertLeave * :setlocal relativenumber
 
 " Column/row highlight.
-try | set colorcolumn=81,121 | catch | set colorcolumn=121 | endtry
+let &colorcolumn=join([81, 101] + range(121,999), ",")
 set cursorline
 " Only highlight current line for active window.
 " see http://vim.wikia.com/wiki/Highlight_current_line
