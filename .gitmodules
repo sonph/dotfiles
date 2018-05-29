@@ -10,3 +10,6 @@
 [submodule "home/zsh/history-search-multi-word"]
 	path = home/zsh/history-search-multi-word
 	url = https://github.com/zdharma/history-search-multi-word
+[submodule "home/zsh/zsh-autosuggestions"]
+	path = home/zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
