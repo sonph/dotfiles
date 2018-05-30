@@ -17,5 +17,26 @@
 [core]
   pager = diff-so-fancy | less --tabs=2 -RFX
   autocrlf = input
+[alias]
+  a = add
+  ap = add -p
+  br = branch
+  cl = clone
+  co = checkout
+  c = commit
+  d = diff
+  dt = difftool
+  dc = diff --cached
+  lgraph = log --graph --pretty=format:\"%Cblue%h %d%Creset - %s - %Cred%an%Creset - %Cgreen%ar\"
+  lgraphlong = log --graph --pretty=format:\"%Cblue%h %d%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD\"
+  l = log
+  pl = pull
+  plom = pull origin master
+  ps = push
+  psom = push origin master
+  rs = reset
+  rsh = reset HEAD
+  s = status
+  sts = stash
 [include]
   path = ~/.gitconfig.local
