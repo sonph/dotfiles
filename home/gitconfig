@@ -31,9 +31,7 @@
   lgraphlong = log --graph --pretty=format:\"%Cblue%h %d%Creset - %s - %Cred%an (%ae)%Creset - %Cgreen%cD\"
   l = log
   pl = pull
-  plom = pull origin master
   ps = push
-  psom = push origin master
   rs = reset
   rsh = reset HEAD
   s = status
