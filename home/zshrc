@@ -160,9 +160,12 @@ source $ZSH_DIR/z/z.sh
 # Browser-like auto complete from history. See
 # https://github.com/zsh-users/zsh-autosuggestions
 source $ZSH_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+# TODO: Figure out how to make it work with bright black.
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=red'
 
 # Press Enter on an empty buffer (no command) triggers the clear command.
 source $ZSH_DIR/enter-to-clear.zsh
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS=($ZSH_AUTOSUGGEST_CLEAR_WIDGETS enter-to-clear)
 
 source $ZSH_DIR/bell.zsh
 
