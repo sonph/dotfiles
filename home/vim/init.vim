@@ -88,8 +88,6 @@ autocmd GUIEnter * set visualbell t_vb=
 
 set autoread                            " Automatically reload file when changed from outside
 
-set diffopt+=vertical                   " Add vertical diff option.
-
 command! ReSource :source ~/.vim/init.vim
 
 " w!! to save file with sudo.
