@@ -126,6 +126,10 @@ if has('python3')
   set tabline=%!PyTabline()
 endif
 
+" Move tabs to the end for new, single buffers (exclude splits). Also works with
+" NERDTree.
+autocmd BufNew * tabmove $
+
 " make sure this is the last line
 filetype plugin indent on
 
