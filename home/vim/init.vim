@@ -88,6 +88,8 @@ autocmd GUIEnter * set visualbell t_vb=
 
 set autoread                            " Automatically reload file when changed from outside
 
+set diffopt+=vertical                   " Add vertical diff option.
+
 command! ReSource :source ~/.vim/init.vim
 
 " w!! to save file with sudo.
@@ -117,12 +119,14 @@ hi MatchParen gui=inverse cterm=inverse
 " }
 
 " TODO(sonph): convert this into a vim plugin.
-set showtabline=2
-function! PyTabline()
-  py3file ~/.vim/tabline.py
-  return g:pytabline
-endfunction
-set tabline=%!PyTabline()
+if has('python3')
+  set showtabline=2
+  function! PyTabline()
+    py3file ~/.vim/tabline.py
+    return g:pytabline
+  endfunction
+  set tabline=%!PyTabline()
+endif
 
 " make sure this is the last line
 filetype plugin indent on

@@ -51,6 +51,7 @@ function download_audio() {
   info "Output dir: $output_dir"
 
   update
+  [[ ! -e "$output_dir" ]] && mkdir "$output_dir"
   pushd "$output_dir"
   youtube-dl \
       --extract-audio \

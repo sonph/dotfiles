@@ -3,3 +3,5 @@ home/vim/local.vim
 home/vim/.netrwhist
 home/zsh/history
 home/*.local
+*.pyc
+.DS_Store
