@@ -27,3 +27,11 @@ ln -s $PWD/vscode/settings.json ~/Library/Application\ Support/Code/User/setting
 rm ~/Library/Application\ Support/Code/User/keybindings.json
 ln -s $PWD/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 ```
+
+### Karabiner
+
+```
+mkdir -p ~/.config/karabiner
+rm ~/.config/karabiner/karabiner.json
+ln -s $PWD/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+```
