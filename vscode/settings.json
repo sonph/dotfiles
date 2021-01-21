@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "onehalf-light",
+    "files.eol": "\n",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "[git-commit]": {
+        "editor.rulers": [
+            50
+        ]
+    },
+    "[python]": {
+        "editor.rulers": [
+            80
+        ]
+    },
+    "[java]": {
+        "editor.rulers": [
+            100
+        ]
+    }
+}
