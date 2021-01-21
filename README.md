@@ -6,14 +6,13 @@
 
 ## Installation
 
-linux
+Linux
 
 ```
 sudo apt-get update
-ping github.com
-git clone https://github.com/sonph/dotfiles ~/.files
-~/.files/linux-install.sh group-cli-install  # essential cli stuffs
-~/.files/linux-install.sh group-gui-install  # gui stuffs
+mkdir -p ~/code
+git clone --depth 3 https://github.com/sonph/dotfiles ~/code/dotfiles
+bash ~/code/dotfiles/linux-install.sh group-cli-install  # essential cli stuffs
 ```
 
 ### VSCode
