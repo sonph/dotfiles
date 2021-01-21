@@ -1,9 +1,0 @@
-#!/bin/bash
-
-which cygpath > /dev/null 2>&1  # executing in cygwin?
-
-if [[ $? -eq 0 ]]; then
-    exec java -jar $(cygpath -w $HOME/bin/javarepl.jar) "$@"
-else
-    exec java -jar $HOME/bin/javarepl.jar "$@"
-fi
