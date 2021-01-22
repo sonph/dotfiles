@@ -1,6 +1,10 @@
 {
     "workbench.colorTheme": "onehalf-light",
     "files.eol": "\n",
+    // Cursor position does not change when clicking to focus on VSCode window.
+    "window.clickThroughInactive": false,
+    "editor.fontFamily": "Fira Mono",
+    "editor.fontSize": 12,
     "editor.rulers": [
         80,
         120

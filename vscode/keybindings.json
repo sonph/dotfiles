@@ -1,5 +1,6 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
+    // Ctrl+a/ctrl+e to go to begin/end of line.
     {
         "key": "ctrl+a",
         "command": "-cursorLineStart",
@@ -20,6 +21,7 @@
         "command": "-cursorLineEnd",
         "when": "textInputFocus"
     },
+    // Cmd+num to go to respective tab.
     {
         "key": "cmd+1",
         "command": "workbench.action.openEditorAtIndex1"
@@ -56,6 +58,7 @@
         "key": "cmd+9",
         "command": "workbench.action.lastEditorInGroup"
     },
+    // Ctrl(+shift)+tab to go to next/prev tab.
     {
         "key": "ctrl+tab",
         "command": "workbench.action.nextEditorInGroup"
@@ -82,12 +85,94 @@
         "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
         "when": "inEditorsPicker && inQuickOpen"
     },
+    // Cmd+shift+f to replace.
     {
-        "key": "cmd+k alt+cmd+right",
-        "command": "-workbench.action.nextEditorInGroup"
+        "key": "shift+cmd+f",
+        "command": "-workbench.view.search",
+        "when": "!searchViewletVisible"
     },
     {
-        "key": "cmd+k alt+cmd+left",
-        "command": "-workbench.action.previousEditorInGroup"
+        "key": "shift+cmd+f",
+        "command": "-workbench.action.findInFiles"
+    },
+    {
+        "key": "shift+cmd+f",
+        "command": "editor.action.startFindReplaceAction",
+        "when": "editorFocus || editorIsOpen"
+    },
+    {
+        "key": "alt+cmd+f",
+        "command": "-editor.action.startFindReplaceAction",
+        "when": "editorFocus || editorIsOpen"
+    },
+    // Split editor panes.
+    {
+        "key": "ctrl+w v",
+        "command": "workbench.action.splitEditor"
+    },
+    {
+        "key": "ctrl+w s",
+        "command": "workbench.action.splitEditorOrthogonal"
+    },
+    {
+        "key": "ctrl+shift+j",
+        "command": "workbench.action.splitEditorDown",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+h",
+        "command": "workbench.action.splitEditorLeft",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.splitEditorRight",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+k",
+        "command": "workbench.action.splitEditorUp",
+        "when": "editorFocus"
+    },
+    // Navigate editor panes.
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.focusLeftGroup",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.focusRightGroup",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.focusBelowGroup",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-extension.vim_ctrl+j",
+        "when": "editorTextFocus && vim.active && vim.use<C-j> && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-editor.action.joinLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.focusAboveGroup",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "-extension.vim_ctrl+k",
+        "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "-deleteAllRight",
+        "when": "textInputFocus && !editorReadonly"
     }
 ]
