@@ -3,8 +3,11 @@
     "files.eol": "\n",
     // Cursor position does not change when clicking to focus on VSCode window.
     "window.clickThroughInactive": false,
-    "editor.fontFamily": "Fira Mono",
+    "editor.scrollBeyondLastLine": false,
+    "editor.fontFamily": "Fira Code Retina",
     "editor.fontSize": 12,
+	"editor.semanticHighlighting.enabled": true,
+    "editor.renderIndentGuides": true,
     "editor.rulers": [
         80,
         120
@@ -23,5 +26,120 @@
         "editor.rulers": [
             100
         ]
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.colorCustomizations": {
+        "[onehalf-light]": {
+            // References:
+            // VSCode element list: https://code.visualstudio.com/api/references/theme-color#scrollbar-control
+            // Spacegray theme: https://github.com/kkga/spacegray/blob/master/Spacegray%20Light.sublime-theme
+            // "panel.background": "#fafafa",
+            // 1. Panels.
+            // 1.a. Side bar.
+            "sideBar.background": "#e6e9f0",
+            "sideBar.foreground": "#919399",
+            "sideBarTitle.foreground": "#383a42",
+            "sideBarSectionHeader.background": "#e6e9f0",
+            "sideBarSectionHeader.foreground": "#383a42",
+            "sideBarSectionHeader.border": "#0000",  // transparent
+            // 1.b. Lists and trees.
+            // "list.activeSelectionBackground": "#c0c5ce",
+            // TODO(sonph): Update these 3 colors.
+            "list.focusBackground": "#f00",
+            "list.focusForeground": "#fafafa",
+            // "list.inactiveFocusBackground": "#00f",
+            "list.activeSelectionBackground": "#c0c5ce",
+            "list.activeSelectionForeground": "#fafafa",
+            "list.inactiveSelectionBackground": "#c0c5ce",
+            "list.inactiveSelectionForeground": "#fafafa",
+            "list.hoverBackground": "#0000",  // transparent
+            "list.hoverForeground": "#383a42",
+            // 1.c. Editor groups (splits) & tabs.
+            "editorGroupHeader.noTabsBackground": "#dfe1e8",
+            "editorGroupHeader.tabsBackground": "#dfe1e8",
+            // "tab.activeBackground": "#eff1f5",
+            "tab.activeBackground": "#fafafa",
+            "tab.activeForeground": "#383a42",
+            "tab.inactiveBackground": "#dfe1e8",
+            "tab.border": "#0000", // transparent
+            // 1.d. Scrollbar.
+            // #c0c5ce at 70% opacity (b3) against #fafafa background.
+            // x = (target color - 0.3 * 250) / 0.7
+            "scrollbarSlider.activeBackground": "#a7aebbb3",
+            "scrollbarSlider.background": "#a7aebbb3",
+            "scrollbarSlider.hoverBackground": "#a7aebbb3",
+            // 1.e. Status bar.
+            "statusBar.background": "#dfe1e8",
+            "statusBar.foreground": "#919399",
+            // 2. Editor elements.
+            // 2.a. Main editor.
+            "editor.foreground": "#383a42",
+            "editor.background": "#fafafa",
+            "editorCursor.foreground": "#383a42",
+            // TODO(sonph): Check cursor background in vim mode not reflected
+            "editorCursor.background": "#c7d4feb3",
+            // Vertical indent guide lines, visible when editor.renderIndentGuides = true (default).
+            "editorWhitespace.foreground": "#dddddd",
+            "editor.lineHighlightBackground": "#f0f0f0",
+            // 2.b. Gutter.
+            "editorGutter.background": "#fafafa",
+            "editorLineNumber.foreground": "#d4d4d4",
+            "editorLineNumber.activeForeground": "#a0a1a7",
+            // 2.c. Selection, find & replace.
+            "editor.selectionBackground": "#c7d4fe",
+            "editor.selectionHighlightBackground": "#c7d4fe44",
+            "editor.inactiveSelectionBackground": "#c7d4fe44",
+            "editor.wordHighlightBackground": "#c7d4fe44",
+            // Current match.
+            "editor.findMatchBackground": "#ffe78a",
+            // TODO(sonph): Border of current match is thicker than other potential matches.
+            // Adjust the border width to be the same.
+            "editor.findMatchBorder": "#3339",
+            // Other matches.
+            "editor.findMatchHighlightBackground": "#0000",  // transparent
+            "editor.findMatchHighlightBorder": "#333a",
+            // 3. Terminal colors.
+            "terminal.foreground": "#383a42",
+            "terminal.background": "#fafafa",
+            "terminal.ansiBlack": "#383a42",
+            "terminal.ansiRed": "#e45649",
+            "terminal.ansiGreen": "#50a14f",
+            "terminal.ansiYellow": "#c18401",
+            "terminal.ansiBlue": "#0184bc",
+            "terminal.ansiMagenta": "#a626a4",
+            "terminal.ansiCyan": "#0997b3",
+            "terminal.ansiWhite": "#fafafa",
+            // TODO(sonph): Update bright colors.
+            "terminal.ansiBrightBlack": "#383a42",
+            "terminal.ansiBrightRed": "#e45649",
+            "terminal.ansiBrightGreen": "#50a14f",
+            "terminal.ansiBrightYellow": "#c18401",
+            "terminal.ansiBrightBlue": "#0184bc",
+            "terminal.ansiBrightMagenta": "#a626a4",
+            "terminal.ansiBrightCyan": "#0997b3",
+            "terminal.ansiBrightWhite": "#fafafa",
+        },
+        "[onehalf-dark]": {
+            "terminal.foreground": "#dcdfe4",
+            "terminal.background": "#282c34",
+            "terminal.ansiBlack": "#282c34",
+            "terminal.ansiRed": "#e06c75",
+            "terminal.ansiGreen": "#98c379",
+            "terminal.ansiYellow": "#e5c07b",
+            "terminal.ansiBlue": "#61afef",
+            "terminal.ansiMagenta": "#c678dd",
+            "terminal.ansiCyan": "#56b6c2",
+            "terminal.ansiWhite": "#dcdfe4",
+            // TODO(sonph): Update bright colors.
+            "terminal.ansiBrightBlack": "#282c34",
+            "terminal.ansiBrightRed": "#e06c75",
+            "terminal.ansiBrightGreen": "#98c379",
+            "terminal.ansiBrightYellow": "#e5c07b",
+            "terminal.ansiBrightBlue": "#61afef",
+            "terminal.ansiBrightMagenta": "#c678dd",
+            "terminal.ansiBrightCyan": "#56b6c2",
+            "terminal.ansiBrightWhite": "#dcdfe4"
+        }
     }
 }
