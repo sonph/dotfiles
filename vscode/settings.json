@@ -1,4 +1,5 @@
 {
+    // "editor.renderWhitespace": "all",
     "workbench.colorTheme": "onehalf-light",
     "files.eol": "\n",
     // Cursor position does not change when clicking to focus on VSCode window.
@@ -104,15 +105,25 @@
             "scrollbarSlider.hoverBackground": "#a7aebbb3",
             // 1.h. Title bar.
             "titleBar.border": "#d8dbe3",
+            // 1.j. Menu bar.
+            "menu.background": "#ff0000",
+            "menu.border": "#00f",
             // 2. Editor elements.
             // 2.a. Main editor.
             "editor.foreground": "#383a42",
             "editor.background": "#fafafa",
             // Note: color of block cursor is actually editorCursor.foreground.
-            "editorCursor.foreground": "#b8c9ff",
+            "editorCursor.foreground": "#a6bbff",
+            // White space characters, rendered when "editor.renderWhitespace": "all"
+            "editorWhitespace.foreground": "#ddd",
             // Vertical indent guide lines, visible when editor.renderIndentGuides = true (default).
-            "editorWhitespace.foreground": "#dddddd",
+            "editorIndentGuide.background": "#ddd",
+            "editorIndentGuide.activeBackground": "#ddd",
+            "editorRuler.foreground": "#ddd",
             "editor.lineHighlightBackground": "#f0f0f0",
+            "editorBracketMatch.background": "#c7d4fe",
+            "editorBracketMatch.border": "#0000",
+            "editor.foldBackground": "#c7d4fe44",
             // 2.b. Gutter.
             "editorLineNumber.foreground": "#d4d4d4",
             "editorLineNumber.activeForeground": "#a0a1a7",
@@ -121,6 +132,7 @@
             "editor.selectionBackground": "#c7d4fe",
             "editor.selectionHighlightBackground": "#c7d4fe44",
             "editor.inactiveSelectionBackground": "#c7d4fe44",
+            "minimap.selectionHighlight": "#c7d4fe",
             "editor.wordHighlightBackground": "#c7d4fe44",
             // Current match.
             "editor.findMatchBackground": "#ffe78a",
@@ -130,6 +142,7 @@
             // Other matches.
             "editor.findMatchHighlightBackground": "#0000",  // transparent
             "editor.findMatchHighlightBorder": "#3339",
+            "minimap.findMatchHighlight": "#ffe78a",
             // 2.d. Editor widgets.
             "editorWidget.foreground": "#383a42",
             "editorWidget.background": "#e6e9f0",
@@ -164,7 +177,7 @@
             "terminal.ansiBrightCyan": "#0997b3",
             "terminal.ansiBrightWhite": "#fafafa",
             "terminal.selectionBackground": "#c7d4fe",
-            "terminalCursor.background": "#c7d4feb3",
+            "terminalCursor.foreground": "#a6bbff",
             // 4. Git
             // TODO(sonph): Configure these colors.
             "gitDecoration.addedResourceForeground": "#50a14f",
