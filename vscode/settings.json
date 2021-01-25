@@ -3,6 +3,7 @@
     "files.eol": "\n",
     // Cursor position does not change when clicking to focus on VSCode window.
     "window.clickThroughInactive": false,
+    "vim.easymotion": true,
     "editor.scrollBeyondLastLine": false,
     "editor.fontFamily": "Fira Code Retina",
     "editor.fontSize": 12,
@@ -101,9 +102,8 @@
             // 2.a. Main editor.
             "editor.foreground": "#383a42",
             "editor.background": "#fafafa",
-            // "editorCursor.foreground": "#383a42",
-            // TODO(sonph): Check cursor background in vim mode not reflected
-            "editorCursor.background": "#c7d4feb3",
+            // Note: color of block cursor is actually editorCursor.foreground.
+            "editorCursor.foreground": "#b8c9ff",
             // Vertical indent guide lines, visible when editor.renderIndentGuides = true (default).
             "editorWhitespace.foreground": "#dddddd",
             "editor.lineHighlightBackground": "#f0f0f0",
