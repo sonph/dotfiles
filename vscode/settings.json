@@ -146,7 +146,8 @@
             "editor.findMatchBackground": "#ffe78a",
             // TODO(sonph): Border of current match is thicker than other potential matches.
             // Adjust the border width to be the same.
-            "editor.findMatchBorder": "#3339",
+            // "editor.findMatchBorder": "#3339",
+            "editor.findMatchBorder": "#0000",
             // Other matches.
             "editor.findMatchHighlightBackground": "#0000",  // transparent
             "editor.findMatchHighlightBorder": "#3339",
@@ -236,5 +237,6 @@
         }
     },
     "terminal.integrated.shell.osx": "/bin/ksh",
-    "workbench.sideBar.location": "left"
+    "workbench.sideBar.location": "left",
+    "workbench.startupEditor": "newUntitledFile"
 }
