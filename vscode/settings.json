@@ -42,11 +42,11 @@
             "activityBar.foreground": "#383a42",
             "activityBar.background": "#dfe1e8",
             "activityBar.border": "#d8dbe3",
-            "activityBar.inactiveForeground": "#919399",
+            "activityBar.inactiveForeground": "#797a80",
             // "activityBar.activeBorder": "#0000",
             // "activityBar.activeBackground": "#c0c5ce",
             // 1.b. Side bar.
-            "sideBar.foreground": "#919399",
+            "sideBar.foreground": "#797a80",
             "sideBar.background": "#e6e9f0",
             "sideBar.border": "#d8dbe3",
             "sideBarTitle.foreground": "#383a42",
@@ -82,19 +82,19 @@
             // Relevant: https://github.com/microsoft/vscode/issues/91699
             // Consider using CSS: div#workbench.parts.panel>div.content
             // "panelTitle.activeBackground": "#fafafa",
-            "panelTitle.inactiveForeground": "#919399",
+            "panelTitle.inactiveForeground": "#797a80",
             //"panelSectionHeader.foreground": "#0f0",
             //"panelSectionHeader.background": "#f00",
             "panelSectionHeader.border": "#d8dbe3",
             // 1.f. Status bar.
-            "statusBar.foreground": "#919399",
+            "statusBar.foreground": "#797a80",
             "statusBar.background": "#dfe1e8",
             "statusBar.border": "#d8dbe3",
-            "statusBar.noFolderForeground": "#919399",
+            "statusBar.noFolderForeground": "#797a80",
             "statusBar.noFolderBackground": "#dfe1e8",
             // TODO(sonph): Consider setting debugging background yellow?
             // "statusBar.debuggingBackground": "#e5c07b",
-            "statusBar.debuggingForeground": "#919399",
+            "statusBar.debuggingForeground": "#797a80",
             "statusBar.debuggingBackground": "#dfe1e8",
             "statusBarItem.hoverBackground": "#fafafa",
             // 1.g. Scrollbar.
@@ -106,8 +106,15 @@
             // 1.h. Title bar.
             "titleBar.border": "#d8dbe3",
             // 1.j. Menu bar.
+            "menubar.selectionForeground": "#f00",
             "menu.background": "#ff0000",
             "menu.border": "#00f",
+            // 1.k. Quick picker & inputs (cmd palette, go to symbols, etc.)
+            "quickInput.foreground": "#797a80",
+            "quickInput.background": "#e6e9f0",
+            // Border & text for groupings (recently used vs alphabetical list)
+            "pickerGroup.foreground": "#0079d0",
+            "pickerGroup.border": "#ddd",
             // 2. Editor elements.
             // 2.a. Main editor.
             "editor.foreground": "#383a42",
@@ -125,8 +132,8 @@
             "editorBracketMatch.border": "#0000",
             "editor.foldBackground": "#c7d4fe44",
             // 2.b. Gutter.
-            "editorLineNumber.foreground": "#d4d4d4",
-            "editorLineNumber.activeForeground": "#a0a1a7",
+            "editorLineNumber.foreground": "#ccc",
+            "editorLineNumber.activeForeground": "#797a80",
             "editorGutter.background": "#fafafa",
             // 2.c. Selection, find & replace.
             "editor.selectionBackground": "#c7d4fe",
@@ -144,15 +151,15 @@
             "editor.findMatchHighlightBorder": "#3339",
             "minimap.findMatchHighlight": "#ffe78a",
             // 2.d. Editor widgets.
-            "editorWidget.foreground": "#383a42",
+            "editorWidget.foreground": "#797a80",
             "editorWidget.background": "#e6e9f0",
             // Suggestion box.
-            "editorSuggestWidget.foreground": "#919399",
+            "editorSuggestWidget.foreground": "#797a80",
             "editorSuggestWidget.background": "#e6e9f0",
             "editorSuggestWidget.border": "#d8dbe3",
             "editorSuggestWidget.selectedBackground": "#c0c5ce",
             // Hover box (for errors, warnings, etc.).
-            "editorHoverWidget.foreground": "#919399",
+            "editorHoverWidget.foreground": "#797a80",
             "editorHoverWidget.background": "#e6e9f0",
             "editorHoverWidget.border": "#d8dbe3",
             "editorHoverWidget.statusBarBackground": "#dfe1e8",
@@ -212,5 +219,6 @@
             "terminal.ansiBrightWhite": "#dcdfe4"
         }
     },
-    "terminal.integrated.shell.osx": "/bin/ksh"
+    "terminal.integrated.shell.osx": "/bin/ksh",
+    "workbench.sideBar.location": "left"
 }
