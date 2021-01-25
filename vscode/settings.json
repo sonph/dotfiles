@@ -195,7 +195,13 @@
             "gitDecoration.untrackedResourceForeground": "#0184bc",
             // "gitDecoration.ignoredResourceForeground": "#",
             "gitDecoration.conflictingResourceForeground": "#c18401",
-            "gitDecoration.submoduleResourceForeground": "#a626a4"
+            "gitDecoration.submoduleResourceForeground": "#a626a4",
+            // 5. Welcome page.
+            "welcomePage.background": "#fafafa",
+            "welcomePage.buttonBackground": "#e6e9f0",
+            "welcomePage.buttonHoverBackground": "#c0c5ce",
+            // Editor background color on interactive playground.
+            "walkThrough.embeddedEditorBackground": "#f5f5f5"
         },
         "[onehalf-dark]": {
             "terminal.foreground": "#dcdfe4",
