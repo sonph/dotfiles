@@ -134,6 +134,7 @@
             // 2.b. Gutter.
             "editorLineNumber.foreground": "#ccc",
             "editorLineNumber.activeForeground": "#797a80",
+            // See git section for added/modified/deleted section colors.
             "editorGutter.background": "#fafafa",
             // 2.c. Selection, find & replace.
             "editor.selectionBackground": "#c7d4fe",
@@ -186,6 +187,7 @@
             "terminal.selectionBackground": "#c7d4fe",
             "terminalCursor.foreground": "#a6bbff",
             // 4. Git
+            // Side bar filename colors.
             // TODO(sonph): Configure these colors.
             "gitDecoration.addedResourceForeground": "#50a14f",
             "gitDecoration.modifiedResourceForeground": "#c18401",
@@ -196,6 +198,14 @@
             // "gitDecoration.ignoredResourceForeground": "#",
             "gitDecoration.conflictingResourceForeground": "#c18401",
             "gitDecoration.submoduleResourceForeground": "#a626a4",
+            // Editor gutter.
+            "editorGutter.addedBackground": "#98c379",
+            "editorGutter.modifiedBackground": "#e5c07b",
+            "editorGutter.deletedBackground": "#e06c75",
+            // Ruler underneath vertical scroll bar.
+            "editorOverviewRuler.addedForeground": "#98c379",
+            "editorOverviewRuler.modifiedForeground": "#e5c07b",
+            "editorOverviewRuler.deletedForeground": "#e06c75",
             // 5. Welcome page.
             "welcomePage.background": "#fafafa",
             "welcomePage.buttonBackground": "#e6e9f0",
