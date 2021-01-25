@@ -115,6 +115,16 @@
             // Border & text for groupings (recently used vs alphabetical list)
             "pickerGroup.foreground": "#0079d0",
             "pickerGroup.border": "#ddd",
+            // 1.l. Notifications.
+            "notificationToast.border": "#ddd",
+            "notifications.foreground": "#797a80",
+            "notifications.background": "#e6e9f0",
+            "notificationCenter.border": "#ddd",
+            "notificationCenterHeader.foreground": "#797a80",
+            "notificationCenterHeader.background": "#e6e9f0",
+            "notificationsInfoIcon.foreground": "#0184bc",
+            "notificationsWarningIcon.foreground": "#e5c07b",
+            "notificationsErrorIcon.foreground": "#e06c75",
             // 2. Editor elements.
             // 2.a. Main editor.
             "editor.foreground": "#383a42",
