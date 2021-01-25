@@ -36,17 +36,22 @@
             // Spacegray theme: https://github.com/kkga/spacegray/blob/master/Spacegray%20Light.sublime-theme
             // "panel.background": "#fafafa",
             // 1. Panels.
-            // 1.a. Side bar.
+            // 1.a. Activity bar
+            "activityBar.background": "#dfe1e8",
+            "activityBar.foreground": "#383a42",
+            "activityBar.inactiveForeground": "#919399",
+            // "activityBar.activeBorder": "#0000",
+            // "activityBar.activeBackground": "#c0c5ce",
+            // 1.b. Side bar.
             "sideBar.background": "#e6e9f0",
             "sideBar.foreground": "#919399",
             "sideBarTitle.foreground": "#383a42",
             "sideBarSectionHeader.background": "#e6e9f0",
             "sideBarSectionHeader.foreground": "#383a42",
             "sideBarSectionHeader.border": "#0000",  // transparent
-            // 1.b. Lists and trees.
+            // 1.c. Lists and trees.
             // "list.activeSelectionBackground": "#c0c5ce",
-            // TODO(sonph): Update these 3 colors.
-            "list.focusBackground": "#f00",
+            "list.focusBackground": "#c0c5ce",
             "list.focusForeground": "#fafafa",
             // "list.inactiveFocusBackground": "#00f",
             "list.activeSelectionBackground": "#c0c5ce",
@@ -55,7 +60,7 @@
             "list.inactiveSelectionForeground": "#fafafa",
             "list.hoverBackground": "#0000",  // transparent
             "list.hoverForeground": "#383a42",
-            // 1.c. Editor groups (splits) & tabs.
+            // 1.d. Editor groups (splits) & tabs.
             "editorGroupHeader.noTabsBackground": "#dfe1e8",
             "editorGroupHeader.tabsBackground": "#dfe1e8",
             // "tab.activeBackground": "#eff1f5",
@@ -63,20 +68,40 @@
             "tab.activeForeground": "#383a42",
             "tab.inactiveBackground": "#dfe1e8",
             "tab.border": "#0000", // transparent
-            // 1.d. Scrollbar.
+            // 1.e. Panels (output, terminal, debug console, etc.)
+            "panel.background": "#dfe1e8",
+            "panel.border": "#0000",
+            "panelTitle.activeBorder": "#0000",
+            "panelTitle.activeForeground": "#383a42",
+            // TODO(sonph): When panelTitle.activeBackground becomes a thing, style it similar to tabs.
+            // Relevant: https://github.com/microsoft/vscode/issues/91699
+            // Consider using CSS: div#workbench.parts.panel>div.content
+            // "panelTitle.activeBackground": "#fafafa",
+            "panelTitle.inactiveForeground": "#919399",
+            "panelSectionHeader.background": "#f00",
+            "panelSectionHeader.foreground": "#0f0",
+            "panelSectionHeader.border": "#00f",
+            // 1.f. Status bar.
+            "statusBar.background": "#dfe1e8",
+            "statusBar.foreground": "#919399",
+            "statusBar.noFolderBackground": "#dfe1e8",
+            "statusBar.noFolderForeground": "#919399",
+            // TODO(sonph): Consider setting debugging background yellow?
+            // "statusBar.debuggingBackground": "#e5c07b",
+            "statusBar.debuggingBackground": "#dfe1e8",
+            "statusBar.debuggingForeground": "#919399",
+            "statusBarItem.hoverBackground": "#fafafa",
+            // 1.g. Scrollbar.
             // #c0c5ce at 70% opacity (b3) against #fafafa background.
             // x = (target color - 0.3 * 250) / 0.7
             "scrollbarSlider.activeBackground": "#a7aebbb3",
             "scrollbarSlider.background": "#a7aebbb3",
             "scrollbarSlider.hoverBackground": "#a7aebbb3",
-            // 1.e. Status bar.
-            "statusBar.background": "#dfe1e8",
-            "statusBar.foreground": "#919399",
             // 2. Editor elements.
             // 2.a. Main editor.
             "editor.foreground": "#383a42",
             "editor.background": "#fafafa",
-            "editorCursor.foreground": "#383a42",
+            // "editorCursor.foreground": "#383a42",
             // TODO(sonph): Check cursor background in vim mode not reflected
             "editorCursor.background": "#c7d4feb3",
             // Vertical indent guide lines, visible when editor.renderIndentGuides = true (default).
@@ -119,6 +144,19 @@
             "terminal.ansiBrightMagenta": "#a626a4",
             "terminal.ansiBrightCyan": "#0997b3",
             "terminal.ansiBrightWhite": "#fafafa",
+            "terminal.selectionBackground": "#c7d4fe",
+            "terminalCursor.background": "#c7d4feb3",
+            // 4. Git
+            // TODO(sonph): Configure these colors.
+            "gitDecoration.addedResourceForeground": "#50a14f",
+            "gitDecoration.modifiedResourceForeground": "#c18401",
+            "gitDecoration.stageModifiedResourceForeground": "#c18401",
+            "gitDecoration.deletedResourceForeground": "#e45649",
+            "gitDecoration.stageDeletedResourceForeground": "#e45649",
+            "gitDecoration.untrackedResourceForeground": "#0184bc",
+            // "gitDecoration.ignoredResourceForeground": "#",
+            "gitDecoration.conflictingResourceForeground": "#c18401",
+            "gitDecoration.submoduleResourceForeground": "#a626a4"
         },
         "[onehalf-dark]": {
             "terminal.foreground": "#dcdfe4",
@@ -141,5 +179,6 @@
             "terminal.ansiBrightCyan": "#56b6c2",
             "terminal.ansiBrightWhite": "#dcdfe4"
         }
-    }
+    },
+    "terminal.integrated.shell.osx": "/bin/ksh"
 }
