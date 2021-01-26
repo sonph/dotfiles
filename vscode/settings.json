@@ -78,7 +78,7 @@
             // 1.e. Panels (output, terminal, debug console, etc.)
             "panel.background": "#dfe1e8",
             "panel.border": "#d8dbe3",
-            "panelTitle.activeBorder": "#d8dbe3",
+            "panelTitle.activeBorder": "#dfe1e8", // underline same as background
             "panelTitle.activeForeground": "#383a42",
             // TODO(sonph): When panelTitle.activeBackground becomes a thing, style it similar to tabs.
             // Relevant: https://github.com/microsoft/vscode/issues/91699
