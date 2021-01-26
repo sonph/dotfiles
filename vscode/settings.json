@@ -67,11 +67,11 @@
             // 1.c. Lists and trees.
             // "list.activeSelectionBackground": "#c0c5ce",
             "list.focusBackground": "#c0c5ce",
-            "list.focusForeground": "#fafafa",
+            "list.focusForeground": "#383a42",
             // "list.inactiveFocusBackground": "#00f",
-            "list.activeSelectionForeground": "#fafafa",
+            "list.activeSelectionForeground": "#383a42",
             "list.activeSelectionBackground": "#c0c5ce",
-            "list.inactiveSelectionForeground": "#fafafa",
+            "list.inactiveSelectionForeground": "#383a42",
             "list.inactiveSelectionBackground": "#c0c5ce",
             "list.hoverBackground": "#0000",  // transparent
             "list.hoverForeground": "#383a42",
@@ -185,13 +185,13 @@
             "editorWidget.background": "#e6e9f0",
             // Suggestion box.
             "editorSuggestWidget.foreground": "#797a80",
-            "editorSuggestWidget.background": "#e6e9f0",
+            "editorSuggestWidget.background": "#fafafa",
             "editorSuggestWidget.border": "#d8dbe3",
-            "editorSuggestWidget.selectedBackground": "#c0c5ce",
+            "editorSuggestWidget.selectedBackground": "#dfe1e8",
             // Hover box (for errors, warnings, etc.).
             "editorHoverWidget.foreground": "#797a80",
-            "editorHoverWidget.background": "#e6e9f0",
-            "editorHoverWidget.border": "#d8dbe3",
+            "editorHoverWidget.background": "#f5f5f5",
+            "editorHoverWidget.border": "#c0c5ce",
             "editorHoverWidget.statusBarBackground": "#dfe1e8",
             // 3. Terminal colors.
             "terminal.foreground": "#383a42",
