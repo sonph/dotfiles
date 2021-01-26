@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+hello world
+some text here
+current HEAD changes
+=======
+bye world
+some text here
+incoming changes from another branch
+>>>>>>> master
