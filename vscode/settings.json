@@ -5,6 +5,15 @@
     "window.clickThroughInactive": false,
     "editor.fontFamily": "Fira Mono",
     "editor.fontSize": 12,
+    "editor.tabSize": 2,
+    "files.associations": {
+        ".*/BUILD": "starlark",
+        ".*/METADATA": "starlark",
+        ".*/WORKSPACE": "starlark",
+        "*.gss": "css"
+      },
+    "bazel.executable": "blaze",
+    "workbench.settings.enableNaturalLanguageSearch": false, // natural language search provided by a Microsoft online service.
     "editor.rulers": [
         80,
         120
