@@ -112,6 +112,8 @@
             // 1.k. Quick picker & inputs (cmd palette, go to symbols, etc.)
             "quickInput.foreground": "#797a80",
             "quickInput.background": "#e6e9f0",
+            // If quick input has a title e.g. cmd+o
+            "quickInputTitle.background": "#dfe1e8",
             // Border & text for groupings (recently used vs alphabetical list)
             "pickerGroup.foreground": "#0079d0",
             "pickerGroup.border": "#ddd",
