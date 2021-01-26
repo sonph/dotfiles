@@ -98,7 +98,11 @@
             // "statusBar.debuggingBackground": "#e5c07b",
             "statusBar.debuggingForeground": "#797a80",
             "statusBar.debuggingBackground": "#dfe1e8",
-            "statusBarItem.hoverBackground": "#fafafa",
+            "statusBarItem.hoverBackground": "#c0c5ce",
+            // Remote indicator when connecting to remote ssh hosts using remote development extensions.
+            "statusBarItem.remoteForeground": "#fafafa",
+            "statusBarItem.remoteBackground": "#0079d0",
+            "statusBarItem.errorForeground": "#e06c75",
             // 1.g. Scrollbar.
             // #c0c5ce at 70% opacity (b3) against #fafafa background.
             // x = (target color - 0.3 * 250) / 0.7
