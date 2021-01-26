@@ -235,6 +235,26 @@
             "editorOverviewRuler.addedForeground": "#98c379",
             "editorOverviewRuler.modifiedForeground": "#e5c07b",
             "editorOverviewRuler.deletedForeground": "#e06c75",
+            // Merge.
+            "merge.border": "#0000",
+            /*
+            // Default values.
+            "merge.currentHeaderBackground": "#9de1d4",
+            "merge.currentContentBackground": "#d5f0eb",
+            "editorOverviewRuler.currentContentForeground": "#d5f0eb",
+            "merge.incomingHeaderBackground": "#9dd0fd",
+            "merge.incomingContentBackground": "#d5e9fb",
+            "editorOverviewRuler.incomingContentForeground": "#d5e9fb",
+            */
+            "merge.currentHeaderBackground": "#90c5f0",
+            "merge.currentContentBackground": "#cce0f0",
+            "editorOverviewRuler.currentContentForeground": "#cce0f0",
+            "merge.incomingHeaderBackground": "#b4db9c",
+            "merge.incomingContentBackground": "#d8f2c7",
+            "editorOverviewRuler.incomingContentForeground": "#d8f2c7",
+            "merge.commonHeaderBackground": "#ffec8f",
+            "merge.commonContentBackground": "#fff7d1",
+            "editorOverviewRuler.commonContentForeground": "#fff7d1",
             // 5. Welcome page.
             "welcomePage.background": "#fafafa",
             "welcomePage.buttonBackground": "#e6e9f0",
