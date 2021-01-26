@@ -38,6 +38,8 @@
             // Spacegray theme: https://github.com/kkga/spacegray/blob/master/Spacegray%20Light.sublime-theme
             // "panel.background": "#fafafa",
             // 1. Panels.
+            // 1.0. Base
+            "focusBorder": "#ddd",
             // 1.a. Activity bar
             "activityBar.foreground": "#383a42",
             "activityBar.background": "#dfe1e8",
@@ -121,9 +123,10 @@
             "notificationToast.border": "#ddd",
             "notifications.foreground": "#797a80",
             "notifications.background": "#e6e9f0",
+            "notifications.border": "#d8dbe3",
             "notificationCenter.border": "#ddd",
             "notificationCenterHeader.foreground": "#797a80",
-            "notificationCenterHeader.background": "#e6e9f0",
+            "notificationCenterHeader.background": "#dfe1e8",
             "notificationsInfoIcon.foreground": "#0184bc",
             "notificationsWarningIcon.foreground": "#e5c07b",
             "notificationsErrorIcon.foreground": "#e06c75",
