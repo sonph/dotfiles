@@ -161,10 +161,12 @@
             "editorGutter.background": "#fafafa",
             // 2.c. Selection, find & replace.
             "editor.selectionBackground": "#c7d4fe",
-            "editor.selectionHighlightBackground": "#c7d4fe44",
-            "editor.inactiveSelectionBackground": "#c7d4fe44",
+            "editor.selectionHighlightBackground": "#c7d4fe55",
+            "editor.selectionHighlightBorder": "#fff0",
+            "editor.inactiveSelectionBackground": "#c7d4fe55",
             "minimap.selectionHighlight": "#c7d4fe",
-            "editor.wordHighlightBackground": "#c7d4fe44",
+            "editor.wordHighlightBackground": "#c7d4fe",
+            "editor.wordHighlightBorder": "#fff0",
             // Current match.
             "editor.findMatchBackground": "#ffe78a",
             // TODO(sonph): Border of current match is thicker than other potential matches.
