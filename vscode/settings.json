@@ -65,7 +65,6 @@
             "sideBarSectionHeader.background": "#e6e9f0",
             "sideBarSectionHeader.border": "#0000",  // transparent
             // 1.c. Lists and trees.
-            // "list.activeSelectionBackground": "#c0c5ce",
             "list.focusBackground": "#c0c5ce",
             "list.focusForeground": "#383a42",
             // "list.inactiveFocusBackground": "#00f",
@@ -85,17 +84,13 @@
             "tab.inactiveBackground": "#dfe1e8",
             "tab.border": "#0000", // transparent
             // 1.e. Panels (output, terminal, debug console, etc.)
-            "panel.background": "#dfe1e8",
+            "panel.background": "#fafafa",
             "panel.border": "#d8dbe3",
-            "panelTitle.activeBorder": "#dfe1e8", // underline same as background
+            "panelTitle.activeBorder": "#0000",
             "panelTitle.activeForeground": "#383a42",
-            // TODO(sonph): When panelTitle.activeBackground becomes a thing, style it similar to tabs.
-            // Relevant: https://github.com/microsoft/vscode/issues/91699
-            // Consider using CSS: div#workbench.parts.panel>div.content
-            // "panelTitle.activeBackground": "#fafafa",
             "panelTitle.inactiveForeground": "#797a80",
-            //"panelSectionHeader.foreground": "#0f0",
-            //"panelSectionHeader.background": "#f00",
+            // "panelSectionHeader.foreground": "#0f0",
+            // "panelSectionHeader.background": "#f00",
             "panelSectionHeader.border": "#d8dbe3",
             // 1.f. Status bar.
             "statusBar.foreground": "#797a80",
